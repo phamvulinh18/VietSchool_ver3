@@ -1,0 +1,402 @@
+[
+  {
+    "question": "Văn minh là khái niệm:",
+    "A": "Thiên về giá trị tinh thần và chỉ trình độ phát triển.",
+    "B": "Thiên về giá trị vật chất - kỹ thuật và chỉ trình độ phát triển.",
+    "C": "Thiên về giá trị tinh thần và có bề dày lịch sử.",
+    "D": "Thiên về giá trị vật chất và có bề dày lịch sử.",
+    "correct": "B"
+  },
+  {
+    "question": "“Đại đoàn kết dân tộc là đường lối chiến lược của cách mạng Việt Nam, là động lực và nguồn lực to lớn xây dựng và bảo vệ Tổ quốc”, được trích trong văn kiện:",
+    "A": "Đại hội Đảng lần thứ IX.",
+    "B": "Đại hội Đảng lần thứ XII.",
+    "C": "Đại hội Đảng lần thứ X.",
+    "D": "Đại hội Đảng lần thứ XI.",
+    "correct": "B"
+  },
+  {
+    "question": "Đối với Hồ Chí Minh để nghiên cứu, kế thừa và phát triển lý luận cách mạng Việt Nam phải xuất phát từ:",
+    "A": "Thực tiễn cách mạng Việt Nam.",
+    "B": "Thực tiễn cách mạng phương Đông và phương Tây.",
+    "C": "Thực tiễn cách mạng.",
+    "D": "Thực tiễn thế giới.",
+    "correct": "A"
+  },
+  {
+    "question": "“Đảng Cộng Sản Việt Nam là sự kết hợp của chủ nghĩa Mác – Lênin với phong trào công nhân và […]”. Điền vào chỗ trống đúng theo Hồ Chí Minh.",
+    "A": "Phong trào nông dân.",
+    "B": "Phong trào dân chủ.",
+    "C": "Tầng lớp trí thức.",
+    "D": "Phong trào yêu nước.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, trong mỗi con người bao giờ cũng có:",
+    "A": "Tốt – xấu, thiện – ác.",
+    "B": "Ưu điểm và nhược điểm.",
+    "C": "Không tốt, không xấu.",
+    "D": "Tốt – xấu, đúng – sai.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Giải phóng dân tộc, giải phóng giai cấp, giải phóng con người thống nhất nhau là tư tưởng cách mạng [...]”.",
+    "A": "An toàn nhất.",
+    "B": "Triệt để nhất.",
+    "C": "Phù hợp nhất.",
+    "D": "Thông minh nhất.",
+    "correct": "B"
+  },
+  {
+    "question": "Câu nói nào sau đây là của Hồ Chí Minh?",
+    "A": "Học không biết chán, dạy không biết mỏi.",
+    "B": "Học vì ngày mai lập nghiệp.",
+    "C": "Học, học nữa, học mãi.",
+    "D": "Việc học không bao giờ cùng, còn sống còn phải học.",
+    "correct": "D"
+  },
+  {
+    "question": "“Mọi việc thành hay bại, chủ chốt là do cán bộ có thấm nhuần đạo đức cách mạng, hay là không”, câu nói của Hồ Chí Minh viết trong thời gian nào?",
+    "A": "Năm 1955.",
+    "B": "Năm 1969.",
+    "C": "Năm 1947.",
+    "D": "Năm 1958.",
+    "correct": "A"
+  },
+  {
+    "question": "Đâu là phạm trù cơ bản của đạo đức?",
+    "A": "Lẽ sống, thiện ác.",
+    "B": "Lẽ sống, hạnh phúc, trách nhiệm.",
+    "C": "Lẽ sống, thiện ác, hạnh phúc, trách nhiệm, lương tâm.",
+    "D": "Lẽ sống, thiện ác, hạnh phúc.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Để tranh thủ sự giúp đỡ của các nước XHCN trong đấu tranh cách mạng, cần coi trọng nhân tố nào?",
+    "A": "Có sự lãnh đạo đúng đắn của Đảng Cộng sản.",
+    "B": "Đường lối đấu tranh theo cách mạng vô sản.",
+    "C": "Tự lực cánh sinh, dựa vào sức mình là chính.",
+    "D": "Có đường lối đấu tranh độc lập, tự chủ",
+    "correct": "C"
+  },
+   {
+    "question": "Theo luật Việt Nam qui định, công dân có quyền ứng cử vào đại biểu Quốc hội khi:",
+    "A": "Đủ 18 tuổi.",
+    "B": "Đủ 21 tuổi.",
+    "C": "Đủ 19 tuổi.",
+    "D": "Đủ 20 tuổi.",
+    "correct": "B"
+  },
+  {
+    "question": "Các cuộc cách mạng đấu tranh chống Pháp trong giai đoạn cuối thế kỷ XIX đầu thế kỷ XX có đặc điểm chung là gì?",
+    "A": "Theo con đường phong kiến.",
+    "B": "Không đến nơi đến chốn.",
+    "C": "Theo con đường dân chủ tư sản.",
+    "D": "Tất cả đều thất bại.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, các lĩnh vực chính của văn hóa là:",
+    "A": "Văn hóa giáo dục.",
+    "B": "Văn hóa văn nghệ.",
+    "C": "Văn hoá du lịch.",
+    "D": "Văn hóa đời sống.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, chủ thể của khối đại đoàn kết dân tộc là gì?",
+    "A": "Toàn bộ những con người Việt Nam cụ thể sinh sống tại trong nước.",
+    "B": "Toàn bộ những con người Việt Nam sinh sống trong nước và nước ngoài.",
+    "C": "Con người Việt Nam cụ thể và tập hợp đông đảo quần chúng nhân dân.",
+    "D": "Toàn bộ những con người Việt Nam cụ thể sinh sống tại nước ngoài.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, chuẩn mực đạo đức cách mạng là:",
+    "A": "Trung với nước, hiếu với dân.",
+    "B": "Yêu thương con người, sống có tình có nghĩa.",
+    "C": "Sẵn sàng chiến đấu, hy sinh vì Tổ quốc.",
+    "D": "Cần, kiệm, liêm, chính, chí công vô tư.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, chức năng cơ bản của văn hóa là:",
+    "A": "Bồi dưỡng tư tưởng đúng đắn và tình cảm cao đẹp của con người.",
+    "B": "Bồi dưỡng lý luận chính trị, rèn luyện tác phong công tác, tư duy tự chủ.",
+    "C": "Bồi dưỡng những phẩm chất tốt đẹp, hướng con người đến chân, thiện, mỹ.",
+    "D": "Mở rộng hiểu biết của con người, nâng cao dân trí, xoá mù chữ cho dân.",
+    "correct": "B"
+  },
+  {
+    "question": "Trong Nghị quyết 24C/18.6.5 của khoá họp 24 Đại Hội đồng UNESCO, Hồ Chí Minh được ghi nhận là:",
+    "A": "Anh hùng giải phóng dân tộc của Việt Nam, Nhà văn hoá lớn của thế giới.",
+    "B": "Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất Việt Nam.",
+    "C": "Anh hùng cứu nước của dân tộc Việt Nam và Danh nhân văn hóa thế giới.",
+    "D": "Anh hùng giải phóng của dân tộc và là Nhà văn hóa lớn của thế giới.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, nền văn hóa mà chúng ta xây dựng phải có:",
+    "A": "Tính tiên tiến.",
+    "B": "Tính đại chúng.",
+    "C": "Tính dân tộc.",
+    "D": "Tính khoa học.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Văn hóa phải […] cho quốc dân đi”.",
+    "A": "Dẫn đường.",
+    "B": "Dẫn lối.",
+    "C": "Chỉ đường.",
+    "D": "Soi đường.",
+    "correct": "D"
+  },
+  {
+    "question": "Động lực chủ đạo của sự phát triển đất nước ta hiện nay là gì?",
+    "A": "Sự ủng hộ quốc tế.",
+    "B": "Đại đoàn kết dân tộc.",
+    "C": "Khoa học công nghệ.",
+    "D": "Nguồn vốn đầu tư.",
+    "correct": "B"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Làm cách mệnh rồi thì quyền trao cho […] chớ để trong tay một bọn ít người”.",
+    "A": "Giai cấp công nhân.",
+    "B": "Dân chúng số nhiều.",
+    "C": "Quần chúng nhân dân.",
+    "D": "Người dân lao động.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, nguyên tắc cơ bản nhất tổ chức và sinh hoạt Đảng là gì?",
+    "A": "Thiểu số phục tùng đa số.",
+    "B": "Cấp dưới phục tùng cấp trên.",
+    "C": "Tập trung dân chủ.",
+    "D": "Tự phê bình và phê bình.",
+    "correct": "C"
+  },
+  {
+    "question": "Đặc trưng nào cho phép phân biệt văn hóa như một hiện tượng xã hội do con người tạo ra với các giá trị tự nhiên do thiên nhiên tạo ra?",
+    "A": "Tính lịch sử.",
+    "B": "Tính hệ thống.",
+    "C": "Tính giá trị.",
+    "D": "Tính nhân sinh.",
+    "correct": "D"
+  },
+  {
+    "question": "Đặc trưng cốt lõi nhất trong tư tưởng đạo đức của Hồ Chí Minh là gì?",
+    "A": "Lòng yêu thương người.",
+    "B": "Chủ nghĩa nhân đạo chiến đấu.",
+    "C": "Lòng yêu nước, thương dân.",
+    "D": "Sự quan tâm đến con người.",
+    "correct": "B"
+  },
+  {
+    "question": "\"Tự do cho đồng bào tôi, độc lập cho tổ quốc tôi, đây là tất cả những điều tôi muốn; đây là tất cả những điều tôi hiểu\". Câu nói được trích trong tác phẩm nào của Hồ Chí Minh?",
+    "A": "Đời sống mới.",
+    "B": "Phát biểu với kiều bào ở Pháp.",
+    "C": "Tuyên ngôn độc lập.",
+    "D": "Những mẩu chuyện về đời hoạt động của Hồ Chủ tịch.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, trong CNTB nhà nước dưới chế độ dân chủ mới có những yếu tố nào?",
+    "A": "Quan hệ sản xuất cũ chiếm vai trò chủ đạo.",
+    "B": "Chủ nghĩa xã hội.",
+    "C": "Cả chủ nghĩa tư bản, cả chủ nghĩa xã hội.",
+    "D": "Chủ nghĩa tư bản.",
+    "correct": "B"
+  },
+  {
+    "question": "“Tất cả các dân tộc trên thế giới đều sinh ra bình đẳng, dân tộc nào cũng có quyền sống, quyền sung sướng và quyền tự do”. Câu này được trích từ:",
+    "A": "Tuyên ngôn độc lập nước Mỹ 1776.",
+    "B": "Tuyên ngôn Đảng Lao động.",
+    "C": "Tuyên ngôn dân quyền và nhân quyền.",
+    "D": "Tuyên ngôn Đảng Cộng sản.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, tính đại chúng của nền văn hóa được thể hiện ở chỗ:",
+    "A": "Nền văn hóa ấy phải phục vụ cho nhân dân và do nhân dân xây dựng nên.",
+    "B": "Đó là một nền văn hóa rộng lớn, phổ cập đến tất cả mọi người trong xã hội.",
+    "C": "Đó là một nền văn hóa đa dạng cùng với sự đa dạng của các dân tộc anh em.",
+    "D": "Nền văn hóa ấy vượt ra khỏi biên giới quốc gia, vươn tầm khu vực và thế giới.",
+    "correct": "A"
+  },
+  {
+    "question": "Vở kịch “Con Rồng tre” được Nguyễn Ái Quốc viết nhân dịp vua Khải Định sang Pháp vào thời gian nào?",
+    "A": "Tháng 07 năm 1920.",
+    "B": "Tháng 07 năm 1927.",
+    "C": "Tháng 05 năm 1922.",
+    "D": "Tháng 05 năm 1925.",
+    "correct": "C"
+  },
+  {
+    "question": "Nguyễn Tất Thành tham dự Đại hội lần thứ 18 của Đảng Xã hội Pháp tại Tours (từ 25 đến 30/12/1920) với tư cách là:",
+    "A": "Đại biểu duy nhất của các nước thuộc địa Đông Dương.",
+    "B": "Đại biểu đầu tiên là người Việt Nam tham dự một Đại hội.",
+    "C": "Đại biểu duy nhất của các nước thuộc địa châu Á.",
+    "D": "Đại biểu duy nhất cho Đảng xã hội Pháp tại Paris",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, yêu cầu cơ bản nhất để xây dựng nhà nước pháp quyền có hiệu lực pháp lý mạnh mẽ là gì?",
+    "A": "Nhà nước phải chịu sự lãnh đạo của Đảng Cộng sản Việt Nam.",
+    "B": "Đẩy mạnh quan hệ quốc tế, tuân thủ hệ thống pháp luật quốc tế.",
+    "C": "Nhà nước phải quản lý đất nước bằng Hiến pháp và pháp luật.",
+    "D": "Nhà nước phải chịu sự kiểm tra, giám sát chặt chẽ của nhân dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Cống hiến của Hồ Chí Minh trong lĩnh vực văn hoá được thể hiện:",
+    "A": "Xây dựng con người mới.",
+    "B": "Xây dựng nền văn hoá mới Việt Nam.",
+    "C": "Sáng tạo văn hoá văn nghệ.",
+    "D": "Xác lập hệ thống quan điểm về văn hoá.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, nội dung tiếp thu văn hoá nhân loại là:",
+    "A": "Toàn diện, có hệ thống, tất cả các mặt, tất cả các khía cạnh.",
+    "B": "Chắt lọc tinh hoa văn hoá nhân loại, bài trừ cái cũ, tiếp thu cái mới.",
+    "C": "Toàn diện gồm Đông, Tây, kim, cổ, tất cả các mặt, các khía cạnh.",
+    "D": "Toàn diện, có chọn lọc, tất cả các mặt, tất cả các khía cạnh.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, trong xây dựng đường lối chính trị, Đảng cần:",
+    "A": "Dựa trên cơ sở lý luận của chủ nghĩa Mác – Lênin.",
+    "B": "Là đội tiên phong dũng cảm, là bộ tham mưu sáng suốt.",
+    "C": "Vận dụng kinh nghiệm vào điều kiện cụ thể của đất nước.",
+    "D": "Phát huy tài năng của các nhà nghiên cứu lý luận giỏi.",
+    "correct": "D"
+  },
+  {
+    "question": "Người khởi xướng và lãnh đạo phong trào Đông kinh nghĩa thục (1907) là:",
+    "A": "Phan Chu Trinh.",
+    "B": "Phan Bội Châu.",
+    "C": "Lương Văn Can.",
+    "D": "Nguyễn Thái Học.",
+    "correct": "C"
+  },
+  {
+    "question": "Bầu cử các đại biểu Quốc hội và Hội đồng Nhân dân các cấp vào các cơ quan quyền lực nhà nước thuộc loại hình dân chủ:",
+    "A": "Trực tiếp và gián tiếp.",
+    "B": "Dân chủ gián tiếp.",
+    "C": "Tự do tập trung.",
+    "D": "Dân chủ trực tiếp.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, mục tiêu, lý tưởng của Đảng Cộng sản Việt Nam là:",
+    "A": "Phụng sự tổ quốc, phục vụ nhân dân.",
+    "B": "Phục vụ lợi ích của giai cấp vô sản.",
+    "C": "Phục vụ lợi ích của giai cấp công nhân.",
+    "D": "Xây dựng đất nước giàu mạnh.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Quan điểm của Hồ Chí Minh về nguyên tắc xây dựng đạo đức cách mạng:",
+    "A": "Nói đi đôi với làm, nêu gương về đạo đức.",
+    "B": "Tạo thành phong trào quần chúng rộng rãi.",
+    "C": "Xây đi đôi với chống.",
+    "D": "Tu dưỡng đạo đức suốt đời.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Truyền thống gia đình ông Nguyễn Sinh Sắc là gì?",
+    "A": "Gia đình cần cù, chăm chỉ, ham học hỏi, ham sáng tạo, có ý chí phấn đấu vươn lên làm quan.",
+    "B": "Gia đình nhà nho yêu nước, hiếu học, giàu truyền thống cách mạng và ý chí phấn đấu vươn lên rất cao.",
+    "C": "Gia đình nề nếp, tuân theo chuẩn mực dạo đức xã hội, ham học hỏi, có ý chí phấn đấu vươn lên rất cao.",
+    "D": "Gia đình cần cù, chăm chỉ, truyền thống làm nông nghiệp, có ý chí phấn đấu vươn lên làm giàu.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, để thực hiện đại đoàn kết thì đối với những đồng bào lạc lối lầm đường, ta phải:",
+    "A": "Có lòng khoan dung đối với họ.",
+    "B": "Kiên quyết loại ra khối đại đoàn kết.",
+    "C": "Giáo dục để họ biết sửa chữa sai lầm.",
+    "D": "Lấy tình thân ái mà cảm hoá họ.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo giáo trình Tư tưởng Hồ Chí Minh, nguyên tắc phân phối chủ yếu trong CNXH là gì?",
+    "A": "Làm theo năng lực, hưởng theo nhu cầu.",
+    "B": "Làm theo năng lực, hưởng theo đóng góp.",
+    "C": "Làm theo năng lực, hưởng theo lao động.",
+    "D": "Phân phối bình quân cho tất cả mọi người.",
+    "correct": "C"
+  },
+  {
+    "question": "Chủ nghĩa dân tộc trong tư tưởng Hồ Chí Minh là chủ nghĩa dân tộc:",
+    "A": "Trong sáng.",
+    "B": "Chân chính.",
+    "C": "Cực đoan, hẹp hòi.",
+    "D": "Sô vanh nước lớn.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là của giai cấp công nhân, đồng thời là của nhân dân lao động và cả dân tộc Việt Nam, là xác định:",
+    "A": "Vị thế cầm quyền của Đảng.",
+    "B": "Bản chất cách mạng của Đảng.",
+    "C": "Nội dung ra đời của Đảng.",
+    "D": "Nhiệm vụ lịch sử của Đảng.",
+    "correct": "B"
+  },
+  {
+    "question": "Dưới góc nhìn và phân tích của các nhà nghiên cứu, Hồ Chí Minh có chiều cao và cân nặng bao nhiêu?",
+    "A": "Cao 1,5 m; Nặng 45 kg.",
+    "B": "Cao 1,5 m; Nặng 55 kg.",
+    "C": "Cao 1,52 m; Nặng 45,5 kg.",
+    "D": "Cao 1,55 m; Nặng 46 kg.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, chế độ chính trị mà chúng ta xây dựng là chế độ do:",
+    "A": "Giai cấp công nhân và nhân dân lao động làm chủ.",
+    "B": "Giai cấp nông dân và các tầng lớp nhân dân làm chủ.",
+    "C": "Giai cấp công nhân và giai cấp nông dân làm chủ.",
+    "D": "Đảng Cộng sản của giai cấp công nhân làm chủ.",
+    "correct": "A"
+  },
+  {
+    "question": "Quan niệm thiện, ác được hình thành từ đâu?",
+    "A": "Từ những quan hệ kinh tế, xã hội, giai cấp con người.",
+    "B": "Từ quan hệ kinh tế, xã hội.",
+    "C": "Từ giai cấp con người.",
+    "D": "Từ quan hệ kinh tế.",
+    "correct": "A"
+  },
+  {
+    "question": "Vai trò lãnh đạo của giai cấp công nhân trong cách mạng Việt Nam được quyết định bởi:",
+    "A": "Ý muốn của Đảng Cộng sản.",
+    "B": "Đặc tính cuả giai cấp công nhân.",
+    "C": "Số lượng giai cấp công nhân.",
+    "D": "Ý muốn của giai cấp công nhân",
+    "correct": "B"
+  },
+  {
+    "question": "Báo Le Paria (Người Cùng khổ) do Nguyễn Ái Quốc đồng sáng lập, ra số đầu tiên vào ngày nào?",
+    "A": "30/12/1920.",
+    "B": "16/08/1923.",
+    "C": "10/05/1921.",
+    "D": "01/04/1922.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh sáng lập “Hội Việt Nam cách mạng thanh niên” vào thời gian nào?",
+    "A": "Tháng 06/1925.",
+    "B": "Tháng 08/1929.",
+    "C": "Tháng 05/1926.",
+    "D": "Tháng 06/1927.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Bản chất con người theo tư tưởng Hồ Chí Minh là gì?",
+    "A": "Tổng hợp các quan hệ xã hội từ rộng đến hẹp.",
+    "B": "Tổng hoà các mối quan hệ trong xã hội.",
+    "C": "Sản phẩm của sự tiến hóa tự nhiên.",
+    "D": "Sự thống nhất cả hai măt tự nhiên và xã hội.",
+    "correct": "A"
+  }
+]

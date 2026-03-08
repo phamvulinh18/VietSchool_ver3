@@ -1,0 +1,402 @@
+[
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Hồ Chí Minh đề cập đến đạo đức trong mối quan hệ giữa:",
+    "A": "Con người với con người.",
+    "B": "Con người với xã hội.",
+    "C": "Con người với việc làm.",
+    "D": "Con người với thói quen.",
+    "correct": "D"
+  },
+  {
+    "question": "Nguyễn ái Quốc viết câu mở đầu: “Dân ta phải biết sử ta. Cho tường gốc tích nước nhà Việt Nam”, vào thời gian nào?",
+    "A": "Năm 1925.",
+    "B": "Năm 1941.",
+    "C": "Năm 1930.",
+    "D": "Năm 1943.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn phương án trả lời đúng với tư tưởng Hồ Chí Minh:",
+    "A": "Từ 1890 - 1911: Thời kỳ nghiên cứu, khảo sát thực tế, đến với chủ nghia Mác – Lênin.",
+    "B": "Từ 1921 - 1930: Thời kỳ nghiên cứu, khảo sát thực tế, đến với chủ nghia Mác – Lênin.",
+    "C": "Từ 1911 - 1920: Thời kỳ hình thành tư tưởng yêu nước, chí hướng cứu nước.",
+    "D": "Từ 1921 - 1930: Thời kỳ hình thành nội dung cơ bản tư tưởng cách mạng Việt Nam.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, đối với sự nghiệp cách mạng, đại đoàn kết là:",
+    "A": "Yêu cầu khách quan.",
+    "B": "Yêu cầu của công nhân.",
+    "C": "Yêu cầu chủ quan.",
+    "D": "Yêu cầu của nông dân.",
+    "correct": "A"
+  },
+  {
+    "question": "\"Đoàn kết là một truyền thống cực kỳ quý báu của Đảng ta, của dân ta. Các đồng chí từ trung ương đến các chi bộ cần phải giữ gìn sự đoàn kết nhất trí của Đảng…\", luận điểm này được trích trong tác phầm nào của Bác?",
+    "A": "Đạo đức cách mạng.",
+    "B": "Di chúc.",
+    "C": "Sửa đổi lối làm việc.",
+    "D": "Thường thức chính trị.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Trong quá trình lãnh đạo nhà nước, Hồ Chí Minh nhắc nhở cần phải đề phòng và khắc phục những tiêu cực:",
+    "A": "Kiêu ngạo, đặc quyền, đặc lợi.",
+    "B": "Bệnh chạy theo thành tích.",
+    "C": "Tư túng, chia rẽ, bè phái.",
+    "D": "Tham ô, lãng phí, quan liêu.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Trong tư tưởng Hồ Chí Minh, đại đoàn kết dân tộc là:",
+    "A": "Nhiệm vụ và trách nhiệm hàng đầu của cách mạng.",
+    "B": "Mục tiêu của cách mạng, trách nhiệm của Đảng.",
+    "C": "Mục tiêu, nhiệm vụ hàng đầu của cách mạng, của dân tộc.",
+    "D": "Nhiệm vụ quan trọng nhất của cách mạng dân tộc.",
+    "correct": "C"
+  },
+  {
+    "question": "Hồ Chí Minh đánh giá thực tế phong trào cách mạng ở Mỹ và Pháp:",
+    "A": "Thành công triệt để.",
+    "B": "Thành công một nữa.",
+    "C": "Thành công không đến nơi.",
+    "D": "Chưa thực sự thành công.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là nhân tố quyết định hàng đầu thắng lợi cách mạng Việt Nam, là xác định:",
+    "A": "Vai trò lãnh đạo của Đảng.",
+    "B": "Nhiệm vụ lịch sử của Đảng.",
+    "C": "Vị thế cầm quyền của Đảng.",
+    "D": "Bản chất của Đảng cầm quyền.",
+    "correct": "A"
+  },
+  {
+    "question": "Cuốn Đường kách mệnh được xuất bản đầu tiên ở đâu? Thời gian nào?",
+    "A": "Quảng Châu – Trung Quốc, năm 1927.",
+    "B": "Bắc pó – Việt Nam, năm 1927.",
+    "C": "Hương Cảng – Trung Quốc năm 1927.",
+    "D": "Quảng Châu – Trung Quốc, năm 1925.",
+    "correct": "A"
+  },
+  {
+    "question": "Mối quan hệ giữa nội lực và ngoại lực trong thời kỳ quá độ lên CNXH theo quan điểm của Hồ Chí Minh là gì?",
+    "A": "Nội lực là quan trọng nhất, không cần ngoại lực.",
+    "B": "Nội lực là chính, ngoại lực là quan trọng.",
+    "C": "Ngoại lực trong thời kì đầu là cần thiết.",
+    "D": "Nội lực và ngoại lực quan trọng như nhau",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, chủ nghĩa cộng sản ra đời dễ dàng hơn ở đâu?",
+    "A": "Châu Á, phương Đông.",
+    "B": "Châu Âu, Tây Âu.",
+    "C": "Châu Á, phương Tây Nam.",
+    "D": "Châu Âu, Đông Âu.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, mối quan hệ giữa văn hoá với các lĩnh vực khác là gì?",
+    "A": "Văn hoá là một trong bốn lĩnh vực đời sống: chính trị, kinh tế, văn hoá, xã hội.",
+    "B": "Văn hoá là một mặt trận, cùng góp phần thắng lợi mặt trận chính trị, kinh tế, xã hội.",
+    "C": "Văn hoá với các lĩnh vực chính trị, kinh tế, xã hội có sự tác động qua lại lẫn nhau.",
+    "D": "Văn hoá không thể đứng ngoài mà phải đứng trong chính trị, kinh tế, xã hội.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án đúng theo tư tưởng Hồ Chí Minh về lý luận và thực tiễn:",
+    "A": "Lý luận là sự tổng kết thực tiễn, được phản ánh vào trong bộ não của con người.",
+    "B": "Thực tiễn và lý luận luôn đi với nhau, nếu lý luận và thực tiễn không giống với thì phải điều chỉnh thực tiễn trước.",
+    "C": "Thực tiễn là sự tổng kết lý thuyết, được phản ánh thành lý luận vào trong bộ não của con người.",
+    "D": "Thực tiễn không có lý luận như nhắm mắt mà đi, lý luận không đem ra thực hành thì giống như cái hòm đựng đầy sách.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Nhà nước của dân theo tư tưởng Hồ Chí Minh nghĩa là:",
+    "A": "Chăm lo mọi mặt đời sống người lao động và các tầng lớp nhân dân.",
+    "B": "Đại biểu của Nhà nước do nhân dân trực tiếp hoặc gián tiếp bầu ra.",
+    "C": "Mọi quyền lực trong nhà nước và trong xã hội đều thuộc về nhân dân.",
+    "D": "Mọi công việc của nhà nước để dân có quyền biểu quyết để quyết định.",
+    "correct": "C"
+  },
+  {
+    "question": "“Trước hết phải có Đảng cách mệnh để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với dân tộc bị áp bức và vô sản giai cấp mọi nơi”. Câu được trích trong:",
+    "A": "Tác phẩm “Con Rồng tre”.",
+    "B": "Tác phẩm “Sửa đổi lối làm việc”.",
+    "C": "Tác phẩm “Đường kách mệnh”.",
+    "D": "Tác phẩm “Bản án chế độ thực dân Pháp”.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, nguyên tắc cơ bản nhất trong đoàn kết quốc tế là gì?",
+    "A": "Đoàn kết trên cơ sở không dùng vũ lực và đe doạ dùng vũ lực.",
+    "B": "Đoàn kết trên cơ sở thống nhất mục tiêu và lợi ích, có lý, có tình.",
+    "C": "Đoàn kết trên cơ sở hợp tác đa phương và các bên cùng có lợi.",
+    "D": "Đoàn kết trên cơ sở đảm bảo sự bình đẳng quốc gia; có đi, có lại.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, nguy cơ lớn nhất của một đảng cầm quyền là gì?",
+    "A": "Diễn biến hòa bình của các thế lực thù địch bên trong và bên ngoài.",
+    "B": "Tụt hậu về nhận thức sự thay đổi trong thời đại khoa học, công nghệ.",
+    "C": "Đi lệch định hướng, mục tiêu đã đề ra khi xây dựng chủ nghĩa xã hội.",
+    "D": "Sai lầm về đường lối và sự suy thoái đạo đức của cán bộ, đảng viên.",
+    "correct": "D"
+  },
+  {
+    "question": "Để mô tả mối quan hệ giữa cách mạng giải phóng dân và cách mạng vô sản, Hồ Chí Minh sử dụng hình tượng:",
+    "A": "Hai cánh của một con chim.",
+    "B": "Con bạch tuộc.",
+    "C": "Con đĩa có hai vòi.",
+    "D": "Hai con chim đại bàng.",
+    "correct": "A"
+  },
+  {
+    "question": "Lý do nào sau đây giúp cho tư tưởng Hồ Chí Minh về đoàn kết trở thành di sản văn hoá thế giới?",
+    "A": "Đoàn là một lực lượng vô địch của chúng ta để khắc phục khó khăn.",
+    "B": "Đoàn kết tạo ra sức mạnh, tạo ra lực lượng để xây dựng đất nước.",
+    "C": "Đoàn kết là nhu cầu, nguyện vọng sống của tất cả mọi người.",
+    "D": "Đoàn kết là sức mạnh, đoàn kết là then chốt của mọi thành công.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc là sự nghiệp của:",
+    "A": "Đảng Cộng sản Việt Nam.",
+    "B": "Công nhân và nông dân.",
+    "C": "Giai cấp công nhân.",
+    "D": "Quần chúng nhân dân.",
+    "correct": "D"
+  },
+  {
+    "question": "“Ỷ Pháp cầu tiến bộ chẳng khác nào xin giặc rủ lòng thương” là câu Nguyễn Ái Quốc nhận xét về chủ trương cứu nước của ai?",
+    "A": "Phan Bội Châu.",
+    "B": "Phan Chu Trinh.",
+    "C": "Hoàng Hoa Thám.",
+    "D": "Nguyễn Thái Học.",
+    "correct": "B"
+  },
+  {
+    "question": "Cách mạng giải phóng dân tộc trong thời đại mới phải do Đảng của ai lãnh đạo?",
+    "A": "Giai cấp vô sản bần cùng.",
+    "B": "Tầng lớp trí thức.",
+    "C": "Giai cấp công nhân.",
+    "D": "Giai cấp nông dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Cần phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn […]”.",
+    "A": "Tính mạng của mình.",
+    "B": "Con mắt của mình.",
+    "C": "Nhân cách của mình.",
+    "D": "Con ngươi mắt mình.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Từ cuối năm 1911 đến 1917, khi quay lại tàu làm việc Hồ Chí Minh đã đi qua những đâu?",
+    "A": "Châu Á; Châu Phi; Châu Âu; Châu Mỹ.",
+    "B": "Châu Á; Châu Phi; Châu Âu.",
+    "C": "Châu Á; Châu Phi; Châu Mỹ.",
+    "D": "Châu Phi; Nam Mỹ; Hoa kỳ.",
+    "correct": "A"
+  },
+  {
+    "question": "Nhận định nào sau đây nói lên mối quan hệ giữa pháp luật và đạo đức?",
+    "A": "Đạo đức là pháp luật tối đa, pháp luật là đạo đức tối thiểu.",
+    "B": "Pháp luật là đạo đức tối đa, đạo đức là pháp luật tối thiểu.",
+    "C": "Pháp luật được thực hiện bằng cưỡng chế, đạo đức được thực hiện bằng tự giác.",
+    "D": "Pháp luật và đạo đức tồn tại song song, đều có vai trò quan trọng",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh tiếp cận văn hoá nghĩa hẹp hơn, có nghĩa là:",
+    "A": "Tổng hợp mọi phương thức sản xuất của con người.",
+    "B": "Sản phẩm, công cụ sinh hoạt cụ thể của người dân.",
+    "C": "Các trường học, số người đi học, biết đọc, biết viết.",
+    "D": "Đời sống tính thần của xã hội, thuộc cơ sở hạ tầng.",
+    "correct": "C"
+  },
+  {
+    "question": "Pháp bắt đầu tiến công xâm lược Việt Nam vào thời gian nào? Ở đâu?",
+    "A": "Năm 1885, tại cảng Đà Nẵng.",
+    "B": "Năm 1858, tại đồn An Hải - Sơn Trà - Quảng nam Đà nẵng.",
+    "C": "Năm 1858, tại cảng Đà Nẵng.",
+    "D": "Năm 1860, tại Sơn Trà - Quảng nam Đà nẵng.",
+    "correct": "B"
+  },
+  {
+    "question": "Câu nói: “Ai cũng tham lợi, thì nước sẽ nguy”, là của ai?",
+    "A": "Tất Đạt Đa.",
+    "B": "Lão Tử.",
+    "C": "Mạnh tử.",
+    "D": "Khổng Tử.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Sức mạnh đoàn kết quốc tế trong tư tưởng Hồ Chí Minh, bao gồm:",
+    "A": "Liên minh chiến đấu giữa lao động ở thuộc địa với lao động ở chính quốc.",
+    "B": "Liên minh giữa nhân dân thế giới về mục tiêu phản đối chiến tranh phi nghĩa.",
+    "C": "Sức mạnh của giai cấp vô sản, cách mạng vô sản và Đảng Cộng sản.",
+    "D": "Sức mạnh của ba dòng thác cách mạng và tiến bộ khoa học công nghệ.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, kẻ thù hung ác nhất của chủ nghĩa xã hội là gì?",
+    "A": "Chủ nghĩa cá nhân.",
+    "B": "Lạm dụng chức quyền.",
+    "C": "Tham ô, lãng phí.",
+    "D": "Các thế lực phản động.",
+    "correct": "A"
+  },
+  {
+    "question": "Một nhà nước pháp quyền có hiệu lực pháp lý mạnh mẽ theo Hồ Chí Minh phải là:",
+    "A": "Một nhà nước được công nhận bằng hiến pháp và pháp luật của dân.",
+    "B": "Một nhà nước mà quyền lực thuộc về nhân dân, do dân và vì nhân dân.",
+    "C": "Một nhà nước không có tiêu cực, không có đặc quyền, đặc lợi, cá nhân.",
+    "D": "Một nhà nước thống nhất, có chủ quyền quốc gia trên vùng, lãnh thổ.",
+    "correct": "A"
+  },
+  {
+    "question": "Nguyễn Ái Quốc nhận được lời mời tham dự Quốc tế III tại Moscow vào thời gian nào?",
+    "A": "Tháng 12 năm 1920.",
+    "B": "Tháng 06 năm 1923.",
+    "C": "Tháng 02 năm 1921.",
+    "D": "Tháng 12 năm 1922.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Toàn quốc đồng bào hãy đứng dậy […] mà tự giải phóng cho ta”.",
+    "A": "Dựa vào sự đoàn kết.",
+    "B": "Dựa vào sự giúp đỡ quốc tế.",
+    "C": "Đem sức ta.",
+    "D": "Dưới sự lãnh đạo của Đảng.",
+    "correct": "C"
+  },
+  {
+    "question": "Trong khối đại đoàn kết dân tộc, vì sao phải đặc biệt chú trọng yếu tố “hạt nhân”?",
+    "A": "Vì đó là cơ sở phát huy cho sự đoàn kết.",
+    "B": "Vì đó là điều kiện cho sự đoàn kết ngoài xã hội.",
+    "C": "Vì đó là điều kiện cho thành công của đoàn kết.",
+    "D": "Vì đó là mong muốn của đại đa số người dân.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc phải đi theo con đường:",
+    "A": "Con đường cách mạng dân chủ tư sản.",
+    "B": "Con đường cách mạng vô sản.",
+    "C": "Con đường cách mạng tư sản.",
+    "D": "Con đường cách mạng phong kiến.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc thuộc địa muốn giành được thắng lợi triệt để phải:",
+    "A": "Dựa vào sự thắng lợi của cách mạng vô sản ở chính quốc.",
+    "B": "Dựa trên phương pháp cách mạng của chủ nghĩa Mác – Lênin.",
+    "C": "Thực hiện bằng con đường bạo lực cách mạng.",
+    "D": "Kết hợp đấu tranh quân sự với đấu tranh ngoại giao.",
+    "correct": "C"
+  },
+  {
+    "question": "Quá trình hình thành và phát triển tư tưởng Hồ Chí Minh trải qua mấy giai đoạn và giai đoạn nào quan trọng nhất?",
+    "A": "Ba giai đoạn, giai đoạn từ khi sinh ra đến trước 05/06/1911 là quan trọng nhất.",
+    "B": "Sáu giai đoạn, giai đoạn từ cuối 1920 đến 03/02/1930 là quan trọng nhất.",
+    "C": "Bốn giai đoạn, giai đoạn từ khi sinh ra đến trước 05/06/1911 là quan trọng nhất.",
+    "D": "Năm giai đoạn, giai đoạn từ cuối 1920 đến 03/02/1930 là quan trọng nhất.",
+    "correct": "D"
+  },
+  {
+    "question": "Trong môn học tư tưởng Hồ Chí Minh nêu bao nhiêu phương pháp nghiên cứu?",
+    "A": "Ba phương pháp.",
+    "B": "Sáu phương pháp.",
+    "C": "Bốn phương pháp.",
+    "D": "Năm phương pháp.",
+    "correct": "A"
+  },
+  {
+    "question": "Trong quan điểm toàn diện và hệ thống, Hồ Chí Minh xem xét cách mạng Việt Nam trong:",
+    "A": "Quan hệ với cách mạng giải phóng dân tộc.",
+    "B": "Quan hệ với cách mạng giải phóng dân tộc và giai cấp.",
+    "C": "Quan hệ tổng thể với cách mạng thế giới.",
+    "D": "Quan hệ với cách mạng giải phóng giai cấp.",
+    "correct": "C"
+  },
+  {
+    "question": "Nội dung bản sắc văn hoá dân tộc được nhìn nhận qua hai lớp quan hệ, đó là:",
+    "A": "Tinh thần yêu nước, thương dân và tinh thần quốc tế trong sáng.",
+    "B": "Tinh thần yêu nước và tinh thần dũng cảm, hy sinh vì độc lập dân tộc.",
+    "C": "Lòng yêu nước, thương nòi và tinh thần độc lập, tự tôn dân tộc.",
+    "D": "Tinh thần yêu nước, thương dân và tinh thần tự lập, tự ti dân tộc.",
+    "correct": "C"
+  },
+  {
+    "question": "Giai đoạn vượt qua thử thách, giữ vững đường lối, phương pháp cách mạng Việt Nam của Hồ Chí Minh được tính từ:",
+    "A": "Từ khi sinh ra đến trước 05/06/1911.",
+    "B": "Từ năm 1931 đến năm 1945.",
+    "C": "Từ năm 1911 đến năm 1920.",
+    "D": "Từ năm 1921 đến năm 1930.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, để phát huy sức mạnh cá nhân người lao động, cần phải tác động vào:",
+    "A": "Nhu cầu và lợi ích của con người.",
+    "B": "Nguyện vọng và mong muốn của họ.",
+    "C": "Động lực chính trị, tinh thần của con người.",
+    "D": "Sở thích của cá nhân của con người.",
+    "correct": "A"
+  },
+  {
+    "question": "Nhà Nguyễn ký hiệp ước với Pháp biến Việt Nam chính thức thành thuộc địa vào năm bao nhiêu?",
+    "A": "Hiệp ước Patonot năm 1884.",
+    "B": "Hiệp ước Unclos năm 1992.",
+    "C": "Hiệp ước Patonot năm 1883.",
+    "D": "Hiệp ước thuộc địa năm 1884.",
+    "correct": "A"
+  },
+  {
+    "question": "Câu nói: “Người mà không liêm, không bằng súc vật”, là của ai?",
+    "A": "Hồ Chí Minh.",
+    "B": "Lão Tử.",
+    "C": "Mạnh tử.",
+    "D": "Khổng Tử.",
+    "correct": "D"
+  },
+  {
+    "question": "Quan điểm của Hồ Chí Minh về văn hoá theo nghĩa hẹp bắt đầu tính từ thời gian nào?",
+    "A": "Sau Cách mạng Tháng Tám năm 1945.",
+    "B": "Sau Cách mạng thành công năm 1975.",
+    "C": "Sau Cách mạng thành công năm 1954.",
+    "D": "Sau khi Nhật vào Đông Dương, 1943.",
+    "correct": "A"
+  },
+  {
+    "question": "\"Toàn quốc đồng bào hãy đứng dậy […] mà tự giải phóng cho ta\". Chọn phương án đúng nhất điền vào […].",
+    "A": "Dựa vào sự giúp đỡ quốc tế.",
+    "B": "Dựa vào sự đoàn kết toàn dân.",
+    "C": "Dưới sự lãnh đạo của Đảng.",
+    "D": "Đem sức ta.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh mối quan hệ giữa vấn đề dân tộc và vấn đề giai cấp ở các nước thuộc địa là:",
+    "A": "Giải phóng dân tộc và giải phóng giai cấp cần được tiến hành song song.",
+    "B": "Giải phóng giai cấp là tiền đề để giải phóng dân tộc.",
+    "C": "Giải phóng dân tộc không liên quan đến giải phóng giai cấp.",
+    "D": "Giải phóng dân tộc là tiền đề để giải phóng giai cấp.",
+    "correct": "D"
+  },
+  {
+    "question": "Ngày 28/1/1946, Chủ tịch Hồ Chí Minh viết: \"Người đời không phải thánh thần, không ai tránh khỏi khuyết điểm. Chúng ta không sợ khuyết điểm, nhưng chỉ sợ không biết kiên quyết sửa nó đi\". Bài báo đó có tên gọi là gì?",
+    "A": "Lời xin lỗi đồng bào.",
+    "B": "Lời căn dặn cán bộ tuyên truyền.",
+    "C": "Tự phê bình.",
+    "D": "Lời khuyên công nhân, viên chức",
+    "correct": "C"
+  },
+  {
+    "question": "Nguyễn Tất Thành dạy học ở trường Dục Thanh trong khoảng thời gian từ:",
+    "A": "Từ 09/1908 đến 09/1909.",
+    "B": "Từ 09/1910 đến 02/1911.",
+    "C": "Từ 11/1908 đến 02/1909.",
+    "D": "Từ 09/1909 đến 02/1910.",
+    "correct": "B"
+  }
+]

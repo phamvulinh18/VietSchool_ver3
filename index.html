@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="description" content="VietSchool - Ứng dụng luyện trắc nghiệm trực tuyến">
+  <title>VietSchool</title>
+  <link rel="icon" type="image/png" href="https://mona.media/wp-content/uploads/2024/01/favicon-2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --card: #fff;
+      --text: #1a1a2e;
+      --text2: #555;
+      --primary: #46bbdf;
+      --primary-dark: #2fa8ce;
+      --primary-light: rgba(70, 187, 223, .12);
+      --accent: #00cec9;
+      --success: #00b894;
+      --danger: #e17055;
+      --warning: #fdcb6e;
+      --border: #e0e0e0;
+      --shadow: 0 2px 12px rgba(0, 0, 0, .08);
+      --radius: 14px;
+      --nav-h: 60px;
+      --bottom-h: 64px;
+      --font: 'Inter', system-ui, sans-serif
+    }
+
+    [data-theme=dark] {
+      --bg: #0f0f1a;
+      --card: #1a1a2e;
+      --text: #e0e0e0;
+      --text2: #aaa;
+      --border: #2a2a3e;
+      --shadow: 0 2px 12px rgba(0, 0, 0, .3);
+      --primary-light: rgba(70, 187, 223, .2)
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background .3s, color .3s;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font-family: var(--font);
+      font-size: 16px
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none
+    }
+
+    /* NAV */
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-h);
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      transition: background .3s
+    }
+
+    .topnav .logo {
+      display: flex;
+      align-items: center
+    }
+
+    .topnav .logo img {
+      height: 36px;
+      width: auto
+    }
+
+    .topnav .nav-links {
+      display: flex;
+      gap: 8px
+    }
+
+    .topnav .nav-links a {
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-weight: 500;
+      color: var(--text2);
+      transition: .2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center
+    }
+
+    .topnav .nav-links a:hover,
+    .topnav .nav-links a.active {
+      background: var(--primary-light);
+      color: var(--primary)
+    }
+
+    .topnav .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text);
+      min-width: 44px;
+      min-height: 44px
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--text);
+      transition: .2s
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      background: var(--primary-light)
+    }
+
+    /* DRAWER */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--card);
+      z-index: 201;
+      transition: left .3s;
+      padding: 20px;
+      display: flex;
+      flex-direction: column
+    }
+
+    .drawer.open {
+      left: 0
+    }
+
+    .drawer .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px
+    }
+
+    .drawer .drawer-header .logo {
+      display: flex;
+      align-items: center
+    }
+
+    .drawer .drawer-header .logo img {
+      height: 30px;
+      width: auto
+    }
+
+    .drawer .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+      min-width: 44px;
+      min-height: 44px
+    }
+
+    .drawer nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      color: var(--text);
+      font-weight: 500;
+      transition: .2s;
+      min-height: 48px
+    }
+
+    .drawer nav a:hover,
+    .drawer nav a.active {
+      background: var(--primary-light);
+      color: var(--primary)
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--bottom-h);
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom)
+    }
+
+    .bottom-nav-inner {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: space-around
+    }
+
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: .65rem;
+      color: var(--text2);
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: .2s;
+      min-width: 44px;
+      min-height: 44px;
+      text-decoration: none
+    }
+
+    .bottom-nav a .icon {
+      font-size: 1.3rem
+    }
+
+    .bottom-nav a.active {
+      color: var(--primary)
+    }
+
+    /* MAIN */
+    .main {
+      margin-top: var(--nav-h);
+      padding: 20px 24px 40px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn .3s
+    }
+
+    .page.active {
+      display: block
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* BANNER */
+    .banner {
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe, #00cec9);
+      border-radius: var(--radius);
+      padding: 48px 36px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, .1) 0%, transparent 60%);
+      animation: pulse 4s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.1)
+      }
+    }
+
+    .banner h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px
+    }
+
+    .banner p {
+      font-size: 1rem;
+      opacity: .9;
+      margin-bottom: 24px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      min-height: 48px;
+      min-width: 44px;
+      font-size: .95rem
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, .4)
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--primary)
+    }
+
+    .btn-white:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, .15)
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text)
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary)
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff
+    }
+
+    .btn-block {
+      width: 100%
+    }
+
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px
+    }
+
+    .stat-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: .2s
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow)
+    }
+
+    .stat-card .stat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px
+    }
+
+    .stat-card .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary)
+    }
+
+    .stat-card .stat-label {
+      font-size: .8rem;
+      color: var(--text2);
+      margin-top: 4px
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow)
+    }
+
+    .card .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      font-weight: 700
+    }
+
+    .card p {
+      color: var(--text2);
+      font-size: .85rem;
+      line-height: 1.5
+    }
+
+    .card .card-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      font-size: .78rem;
+      color: var(--text2)
+    }
+
+    .card .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    /* CONFIG */
+    .config-container {
+      max-width: 560px;
+      margin: 0 auto
+    }
+
+    .config-container h2 {
+      margin-bottom: 20px;
+      font-size: 1.4rem
+    }
+
+    .form-group {
+      margin-bottom: 20px
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: .9rem
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .pill {
+      padding: 10px 20px;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: .2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: .9rem
+    }
+
+    .pill:hover {
+      border-color: var(--primary)
+    }
+
+    .pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary)
+    }
+
+    .pill input {
+      display: none
+    }
+
+    /* QUIZ */
+    .quiz-layout {
+      display: flex;
+      gap: 24px
+    }
+
+    .quiz-main {
+      flex: 1;
+      min-width: 0
+    }
+
+    .quiz-sidebar {
+      width: 280px;
+      flex-shrink: 0
+    }
+
+    .quiz-sidebar-inner {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px)
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      margin-bottom: 16px;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 3px;
+      transition: width .3s
+    }
+
+    .timer-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin-bottom: 16px
+    }
+
+    .timer-box .time {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums
+    }
+
+    .timer-box .time.danger {
+      color: var(--danger)
+    }
+
+    .q-number-grid {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid var(--border)
+    }
+
+    .q-number-grid h4 {
+      font-size: .85rem;
+      margin-bottom: 12px;
+      color: var(--text2)
+    }
+
+    .q-numbers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .q-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .q-num:hover {
+      border-color: var(--primary)
+    }
+
+    .q-num.answered {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success)
+    }
+
+    .q-num.flagged {
+      background: var(--warning);
+      color: #333;
+      border-color: var(--warning)
+    }
+
+    .q-num.current {
+      border: 2px solid var(--primary);
+      color: var(--primary)
+    }
+
+    .question-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px
+    }
+
+    .question-card .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px
+    }
+
+    .question-card .q-label {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: .9rem
+    }
+
+    .question-card .q-flag {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      min-width: 44px;
+      min-height: 44px
+    }
+
+    .question-card .q-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 20px
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .2s;
+      min-height: 56px;
+      font-size: 1rem
+    }
+
+    .option:hover {
+      border-color: var(--primary);
+      background: var(--primary-light)
+    }
+
+    .option.selected {
+      border-color: var(--primary);
+      background: var(--primary-light)
+    }
+
+    .option.correct {
+      border-color: var(--success);
+      background: rgba(0, 184, 148, .1)
+    }
+
+    .option.wrong {
+      border-color: var(--danger);
+      background: rgba(225, 112, 85, .1)
+    }
+
+    .option .opt-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .85rem;
+      flex-shrink: 0
+    }
+
+    .option.selected .opt-letter {
+      background: var(--primary);
+      color: #fff
+    }
+
+    .option.correct .opt-letter {
+      background: var(--success);
+      color: #fff
+    }
+
+    .option.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 12px
+    }
+
+    .quiz-actions .btn {
+      flex: 1
+    }
+
+    /* RESULTS */
+    .result-container {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto
+    }
+
+    .score-circle {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 24px
+    }
+
+    .score-circle svg {
+      transform: rotate(-90deg)
+    }
+
+    .score-circle .score-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center
+    }
+
+    .score-circle .score-value {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--primary)
+    }
+
+    .score-circle .score-label {
+      font-size: .8rem;
+      color: var(--text2)
+    }
+
+    .grade-badge {
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 24px
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px
+    }
+
+    .result-stat {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border)
+    }
+
+    .result-stat .rs-value {
+      font-size: 1.3rem;
+      font-weight: 800
+    }
+
+    .result-stat .rs-label {
+      font-size: .75rem;
+      color: var(--text2);
+      margin-top: 4px
+    }
+
+    .review-list {
+      text-align: left;
+      margin-top: 24px
+    }
+
+    .review-item {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px
+    }
+
+    .review-item .ri-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px
+    }
+
+    .review-item .ri-status {
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px
+    }
+
+    .review-item .ri-status.correct {
+      background: rgba(0, 184, 148, .15);
+      color: var(--success)
+    }
+
+    .review-item .ri-status.wrong {
+      background: rgba(225, 112, 85, .15);
+      color: var(--danger)
+    }
+
+    .review-item .ri-status.skipped {
+      background: rgba(0, 0, 0, .08);
+      color: var(--text2)
+    }
+
+    .review-item .explanation {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--primary-light);
+      border-radius: 10px;
+      font-size: .88rem;
+      line-height: 1.6
+    }
+
+    /* BANK */
+    .bank-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 1rem;
+      min-height: 48px
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary)
+    }
+
+    .filter-select {
+      padding: 12px 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--text);
+      min-height: 48px;
+      min-width: 160px
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary)
+    }
+
+    .bank-list .card {
+      margin-bottom: 12px;
+      cursor: default
+    }
+
+    .bank-list .card .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .modal-overlay.open {
+      display: flex
+    }
+
+    .modal {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative
+    }
+
+    .modal .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text);
+      min-width: 44px;
+      min-height: 44px
+    }
+
+    .modal h2 {
+      margin-bottom: 20px;
+      padding-right: 40px
+    }
+
+    .modal .form-group input,
+    .modal .form-group textarea,
+    .modal .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      min-height: 48px
+    }
+
+    .modal .form-group textarea {
+      min-height: 80px;
+      resize: vertical
+    }
+
+    .modal .form-group input:focus,
+    .modal .form-group textarea:focus,
+    .modal .form-group select:focus {
+      outline: none;
+      border-color: var(--primary)
+    }
+
+    /* HISTORY */
+    .chart-container {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      height: 260px
+    }
+
+    .history-list .card {
+      padding: 18px;
+      margin-bottom: 12px;
+      cursor: default
+    }
+
+    .history-list .card .h-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .history-list .card .h-score {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary)
+    }
+
+    /* SETTINGS */
+    .settings-list {
+      max-width: 600px;
+      margin: 0 auto
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      min-height: 56px
+    }
+
+    .setting-item label {
+      font-weight: 500
+    }
+
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 28px;
+      cursor: pointer
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0
+    }
+
+    .switch .slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 14px;
+      transition: .3s
+    }
+
+    .switch .slider::before {
+      content: '';
+      position: absolute;
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .3s
+    }
+
+    .switch input:checked+.slider {
+      background: var(--primary)
+    }
+
+    .switch input:checked+.slider::before {
+      transform: translateX(22px)
+    }
+
+    select.setting-select {
+      padding: 8px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--text);
+      min-height: 44px;
+      font-size: .95rem
+    }
+
+    /* MOBILE */
+    @media(max-width:767px) {
+      .topnav .nav-links {
+        display: none
+      }
+
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+
+      .bottom-nav {
+        display: block
+      }
+
+      .main {
+        margin-bottom: calc(var(--bottom-h) + env(safe-area-inset-bottom));
+        padding: 16px
+      }
+
+      .banner {
+        padding: 32px 20px
+      }
+
+      .banner h1 {
+        font-size: 1.5rem
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr
+      }
+
+      .quiz-layout {
+        flex-direction: column
+      }
+
+      .quiz-sidebar {
+        width: 100%;
+        order: -1
+      }
+
+      .quiz-sidebar-inner {
+        position: static
+      }
+
+      .q-numbers-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 6px;
+        padding-bottom: 8px;
+        flex-wrap: nowrap
+      }
+
+      .q-numbers-scroll .q-num {
+        flex-shrink: 0
+      }
+
+      .quiz-actions {
+        flex-direction: column
+      }
+
+      .result-stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .bank-header {
+        flex-direction: column
+      }
+
+      .modal {
+        border-radius: 0;
+        max-width: 100%;
+        max-height: 100%;
+        height: 100vh;
+        padding: 20px
+      }
+
+      .config-container {
+        max-width: 100%
+      }
+
+      .btn-mobile-full {
+        width: 100%
+      }
+    }
+
+    @media(min-width:768px) and (max-width:1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .result-stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text2)
+    }
+
+    .empty-state .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 12px
+    }
+
+    /* GIF BANNER */
+    .gif-banner {
+      margin-bottom: 24px
+    }
+
+    .gif-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .12)
+    }
+
+    .gif-img {
+      display: block;
+      width: 100%;
+      max-height: 448px;
+      object-fit: cover;
+      border-radius: 20px
+    }
+
+    .gif-shine {
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .18), transparent);
+      z-index: 3;
+      animation: gif-shine 3s infinite
+    }
+
+    @keyframes gif-shine {
+      0% {
+        left: -75%
+      }
+
+      100% {
+        left: 125%
+      }
+    }
+
+    /* ICON COLORS */
+    .fa-house {
+      color: #22c55e
+    }
+
+    .fa-book,
+    .fa-book-open {
+      color: #f97316
+    }
+
+    .fa-chart-column {
+      color: #a855f7
+    }
+
+    .fa-gear {
+      color: #64b5d9
+    }
+
+    .fa-moon {
+      color: #818cf8
+    }
+
+    .fa-sun {
+      color: #f59e0b
+    }
+
+    .fa-rocket {
+      color: #f97316
+    }
+
+    .fa-bullseye {
+      color: #ef4444
+    }
+
+    .fa-clipboard-list {
+      color: #46bbdf
+    }
+
+    .fa-floppy-disk {
+      color: #22c55e
+    }
+
+    .fa-plus {
+      color: #22c55e
+    }
+
+    .fa-trash {
+      color: #ef4444
+    }
+
+    .fa-rotate {
+      color: #64b5d9
+    }
+
+    .fa-volume-high {
+      color: #f97316
+    }
+
+    .fa-mobile-screen {
+      color: #a855f7
+    }
+
+    .fa-font {
+      color: #46bbdf
+    }
+
+    .fa-shuffle {
+      color: #22c55e
+    }
+
+    .fa-xmark {
+      color: #ef4444
+    }
+
+    .fa-flag {
+      color: #f97316
+    }
+
+    .fa-star {
+      color: #f59e0b
+    }
+
+    .fa-circle-check {
+      color: #22c55e
+    }
+
+    .fa-circle-xmark {
+      color: #ef4444
+    }
+
+    .fa-circle-info {
+      color: #46bbdf
+    }
+
+    .fa-triangle-exclamation {
+      color: #f59e0b
+    }
+
+    /* Bottom nav icon colors - inherit when not active, colored when active */
+    .bottom-nav a .fa-house {
+      color: var(--text2)
+    }
+
+    .bottom-nav a .fa-book {
+      color: var(--text2)
+    }
+
+    .bottom-nav a .fa-chart-column {
+      color: var(--text2)
+    }
+
+    .bottom-nav a .fa-gear {
+      color: var(--text2)
+    }
+
+    .bottom-nav a.active .fa-house {
+      color: #22c55e;
+      filter: drop-shadow(0 0 6px #22c55e88)
+    }
+
+    .bottom-nav a.active .fa-book {
+      color: #f97316;
+      filter: drop-shadow(0 0 6px #f9731688)
+    }
+
+    .bottom-nav a.active .fa-chart-column {
+      color: #a855f7;
+      filter: drop-shadow(0 0 6px #a855f788)
+    }
+
+    .bottom-nav a.active .fa-gear {
+      color: #64b5d9;
+      filter: drop-shadow(0 0 6px #64b5d988)
+    }
+
+    /* CUSTOM DIALOG */
+    .dlg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s
+    }
+
+    .dlg-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .dlg-box {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 32px 28px 24px;
+      max-width: 360px;
+      width: calc(100% - 40px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+      transform: translateY(20px) scale(.96);
+      transition: transform .25s, opacity .25s;
+      opacity: 0;
+      text-align: center
+    }
+
+    .dlg-overlay.open .dlg-box {
+      transform: translateY(0) scale(1);
+      opacity: 1
+    }
+
+    .dlg-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 16px
+    }
+
+    .dlg-icon.info {
+      background: rgba(70, 187, 223, .15);
+      color: var(--primary)
+    }
+
+    .dlg-icon.warn {
+      background: rgba(225, 112, 85, .12);
+      color: var(--danger)
+    }
+
+    .dlg-icon.success {
+      background: rgba(0, 184, 148, .12);
+      color: var(--success)
+    }
+
+    .dlg-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px
+    }
+
+    .dlg-msg {
+      font-size: .9rem;
+      color: var(--text2);
+      line-height: 1.55;
+      margin-bottom: 24px
+    }
+
+    .dlg-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center
+    }
+
+    .dlg-btns button {
+      min-width: 100px;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: .2s
+    }
+
+    .dlg-btn-ok {
+      background: var(--primary);
+      color: #fff
+    }
+
+    .dlg-btn-ok:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px)
+    }
+
+    .dlg-btn-cancel {
+      background: var(--bg);
+      color: var(--text2);
+      border: 1.5px solid var(--border) !important
+    }
+
+    .dlg-btn-cancel:hover {
+      border-color: var(--primary) !important;
+      color: var(--primary)
+    }
+
+    /* LOGIN */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    #login-overlay.hidden {
+      display: none
+    }
+
+    .login-box {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 28px;
+      padding: 48px 36px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, .10)
+    }
+
+    .login-logo {
+      margin-bottom: 8px
+    }
+
+    .login-logo img {
+      height: 56px;
+      object-fit: contain
+    }
+
+    .login-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+      letter-spacing: -.5px
+    }
+
+    .login-sub {
+      font-size: .9rem;
+      color: #888;
+      margin-bottom: 32px
+    }
+
+    .login-label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #555;
+      text-align: left;
+      margin-bottom: 8px;
+      letter-spacing: .5px;
+      text-transform: uppercase
+    }
+
+    .login-input-wrap {
+      position: relative;
+      margin-bottom: 24px
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 16px 52px 16px 18px;
+      border-radius: 14px;
+      border: 1.5px solid #e0e0e0;
+      background: #f7f8fa;
+      color: #1a1a2e;
+      font-size: 1.05rem;
+      font-family: var(--font);
+      letter-spacing: 2px;
+      outline: none;
+      transition: .2s;
+      text-transform: uppercase
+    }
+
+    .login-input::placeholder {
+      color: #bbb;
+      letter-spacing: 1px;
+      text-transform: none
+    }
+
+    .login-input:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(70, 187, 223, .15)
+    }
+
+    .login-eye {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      transition: .2s
+    }
+
+    .login-eye:hover {
+      color: var(--primary)
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+      font-family: var(--font);
+      letter-spacing: .5px
+    }
+
+    .login-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(70, 187, 223, .35)
+    }
+
+    .login-btn:active {
+      transform: translateY(0)
+    }
+
+    .login-error {
+      background: rgba(225, 112, 85, .1);
+      border: 1px solid rgba(225, 112, 85, .3);
+      color: #e17055;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: .88rem;
+      margin-bottom: 20px;
+      display: none
+    }
+
+    .login-error.show {
+      display: block
+    }
+
+    .login-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 28px
+    }
+
+    .login-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e0e0e0
+    }
+
+    .login-dot.active {
+      background: var(--primary)
+    }
+
+    .login-warn {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: .82rem;
+      color: #b7791f;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+      line-height: 1.45
+    }
+
+    .login-warn i {
+      font-size: 1rem;
+      color: #f59e0b;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .login-locked {
+      background: #fff0f0;
+      border: 1px solid #fca5a5;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: .88rem;
+      color: #b91c1c;
+      margin-bottom: 20px;
+      display: none;
+      text-align: left;
+      line-height: 1.5
+    }
+
+    .login-locked.show {
+      display: block
+    }
+
+    .login-locked strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .95rem
+    }
+
+    /* LEADERBOARD */
+    .lb-section {
+      margin-top: 36px
+    }
+
+    .lb-section h2 {
+      margin-bottom: 16px
+    }
+
+    .lb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px
+    }
+
+    @media(max-width:767px) {
+      .lb-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .lb-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden
+    }
+
+    .lb-card-head {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .lb-card-head .lb-icon {
+      font-size: 1.4rem
+    }
+
+    .lb-card-head h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      flex: 1
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: .2s
+    }
+
+    .lb-row:last-child {
+      border-bottom: none
+    }
+
+    .lb-row:hover {
+      background: var(--primary-light)
+    }
+
+    .lb-rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .85rem;
+      flex-shrink: 0;
+      background: var(--border);
+      color: var(--text2)
+    }
+
+    .lb-rank.gold {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #fff
+    }
+
+    .lb-rank.silver {
+      background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+      color: #fff
+    }
+
+    .lb-rank.bronze {
+      background: linear-gradient(135deg, #cd7c2f, #e8975a);
+      color: #fff
+    }
+
+    .lb-code {
+      flex: 1;
+      font-weight: 600;
+      font-size: .9rem;
+      font-family: monospace;
+      color: var(--primary)
+    }
+
+    .lb-val {
+      font-size: .85rem;
+      color: var(--text2);
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    .lb-empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--text2);
+      font-size: .88rem
+    }
+
+    .lb-loading {
+      padding: 24px;
+      text-align: center;
+      color: var(--text2)
+    }
+
+    /* PROFILE */
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+      cursor: pointer
+    }
+
+    .profile-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      background: var(--border)
+    }
+
+    .profile-avatar-edit {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .2)
+    }
+
+    .profile-name-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--input-bg, #f7f8fa);
+      font-size: 1rem;
+      font-family: var(--font);
+      color: var(--text);
+      text-align: center;
+      outline: none;
+      transition: .2s
+    }
+
+    .profile-name-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(70, 187, 223, .15)
+    }
+
+    .profile-save-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 32px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: .25s;
+      width: 100%
+    }
+
+    .profile-save-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px)
+    }
+
+    /* TEST MODE BANNER */
+    .test-banner {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9000;
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2)
+    }
+    .test-banner.show { display: block }
+    body.test-mode { padding-top: 44px }
+
+    .profile-avatar-preview {
+      font-size: .75rem;
+      color: var(--text2);
+      margin-top: -8px
+    }
+
+    /* AVATAR GUIDE ACCORDION */
+    .avatar-guide {
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .avatar-guide-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--font);
+      text-align: left;
+      transition: .2s
+    }
+    .avatar-guide-toggle:hover { border-color: var(--primary) }
+    .avatar-guide-toggle .ag-arrow { margin-left:auto; transition:.25s; }
+    .avatar-guide-toggle.open .ag-arrow { transform: rotate(180deg) }
+    .avatar-guide-body {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 16px 18px;
+      font-size: .85rem;
+      line-height: 1.7;
+      color: var(--text2)
+    }
+    .avatar-guide-body.open { display: block }
+    .avatar-guide-body ol { padding-left: 18px; margin: 8px 0 0 }
+    .avatar-guide-body li { margin-bottom: 6px }
+    .avatar-guide-body a { color: var(--primary); text-decoration: underline }
+    .avatar-guide-body .ag-tip {
+      background: rgba(70,187,223,.1);
+      border-left: 3px solid var(--primary);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 10px;
+      font-size: .82rem
+    }
+    .avatar-guide-body img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      margin: 10px 0 6px;
+      object-fit: contain
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TEST MODE BANNER -->
+  <div id="test-banner" class="test-banner">
+    🔒 CHẾ ĐỘ XEM THử — Bạn đang dùng mã TEST. Không thể làm bài hay thẩm định chức năng.
+  </div>
+  <!-- LOGIN OVERLAY -->
+  <div id="login-overlay">
+    <div class="login-box">
+      <div class="login-logo"><img src="img/logochu2.2.png" alt="VietSchool"></div>
+      <div class="login-title">VietSchool Quiz</div>
+      <div class="login-sub">Nhập mã truy cập để vào hệ thống</div>
+      <div class="login-warn"><i class="fas fa-triangle-exclamation"></i><span>Không chia sẻ mã của bạn cho người khác.
+          Mã được phát hiện dùng trên <strong>2 thiết bị</strong> sẽ bị <strong>khóa vĩnh viễn</strong>.</span></div>
+      <div class="login-error" id="login-error"><i class="fas fa-circle-xmark"></i> Mã không hợp lệ. Vui lòng kiểm tra
+        lại!</div>
+      <div class="login-locked" id="login-locked">
+        <strong>🔒 Mã đã bị khóa vĩnh viễn!</strong>
+        Phát hiện mã này được dùng trên quá nhiều thiết bị. Liên hệ quản trị viên để được hỗ trợ.
+      </div>
+      <label class="login-label">Mã truy cập</label>
+      <div class="login-input-wrap">
+        <input type="password" id="login-code" class="login-input" placeholder="Nhập mã của bạn..." maxlength="12"
+          autocomplete="off">
+        <button class="login-eye" onclick="toggleLoginEye()" id="login-eye-btn"><i class="fas fa-eye"
+            id="login-eye-icon"></i></button>
+      </div>
+      <button class="login-btn" onclick="doLogin()"><i class="fas fa-unlock-keyhole"></i> Vào Học Ngay</button>
+      <div class="login-dots">
+        <div class="login-dot active"></div>
+        <div class="login-dot"></div>
+        <div class="login-dot"></div>
+      </div>
+    </div>
+  </div>
+  <!-- TOP NAV -->
+  <header class="topnav">
+    <span class="logo"><img src="img/logochu2.2.png" alt="VietSchool"></span>
+    <nav class="nav-links">
+      <a href="#" data-page="home" class="active">Trang Chủ</a>
+      <a href="#" data-page="bank">Ngân Hàng</a>
+      <a href="#" data-page="history">Lịch Sử</a>
+      <a href="#" data-page="settings">Cài Đặt</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Chế độ tối"><i class="fas fa-moon"></i></button>
+      <button class="hamburger" onclick="toggleDrawer()"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+  <!-- DRAWER -->
+  <div class="drawer-overlay" onclick="toggleDrawer()"></div>
+  <div class="drawer">
+    <div class="drawer-header"><span class="logo"><img src="img/logochu2.2.png" alt="VietSchool"></span><button
+        class="close-btn" onclick="toggleDrawer()"><i class="fas fa-xmark"></i></button></div>
+    <nav>
+      <a href="#" data-page="home" class="active" onclick="toggleDrawer()"><i class="fas fa-house"></i> Trang Chủ</a>
+      <a href="#" data-page="bank" onclick="toggleDrawer()"><i class="fas fa-book"></i> Ngân Hàng</a>
+      <a href="#" data-page="history" onclick="toggleDrawer()"><i class="fas fa-chart-column"></i> Lịch Sử</a>
+      <a href="#" data-page="settings" onclick="toggleDrawer()"><i class="fas fa-gear"></i> Cài Đặt</a>
+    </nav>
+  </div>
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <a href="#" data-page="home" class="active"><span class="icon"><i class="fas fa-house"></i></span>Trang Chủ</a>
+      <a href="#" data-page="bank"><span class="icon"><i class="fas fa-book"></i></span>Ngân Hàng</a>
+      <a href="#" data-page="history"><span class="icon"><i class="fas fa-chart-column"></i></span>Lịch Sử</a>
+      <a href="#" data-page="settings"><span class="icon"><i class="fas fa-gear"></i></span>Cài Đặt</a>
+    </div>
+  </div>
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <!-- HOME -->
+    <div id="page-home" class="page active">
+      <!-- GIF BANNER -->
+      <div class="gif-banner">
+        <div class="gif-frame">
+          <img
+            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2Z5ZGZrbm5wYzMwMzN2d2FmZmE3c3h5cjNoeW1xZ2FtcjU1Z3JkZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/eLv7gJpxqiQtbNNQUe/giphy.gif"
+            alt="Quiz Animation" class="gif-img">
+          <div class="gif-shine"></div>
+        </div>
+      </div>
+      <!-- LEADERBOARD -->
+      <div class="lb-section" style="margin-top:0">
+        <h2><i class="fas fa-trophy" style="color:#f59e0b"></i> Bảng Xếp Hạng</h2>
+        <div class="lb-grid" style="margin-bottom: 40px;">
+          <!-- TOP LÀM NHIỀU NHẤT -->
+          <div class="lb-card">
+            <div class="lb-card-head">
+              <span class="lb-icon">🔥</span>
+              <h3>Làm Nhiều Nhất</h3>
+              <span style="font-size:.75rem;color:var(--text2)">Số bài</span>
+            </div>
+            <div id="lb-active">
+              <div class="lb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            </div>
+          </div>
+          <!-- TOP ĐIỂM CAO NHẤT -->
+          <div class="lb-card">
+            <div class="lb-card-head">
+              <span class="lb-icon">⭐</span>
+              <h3>Điểm Trung Bình Cao</h3>
+              <span style="font-size:.75rem;color:var(--text2)">TB%</span>
+            </div>
+            <div id="lb-score">
+              <div class="lb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="stats-grid" id="home-stats"></div>
+      <h2 style="margin-bottom:16px"><i class="fas fa-clipboard-list"></i> Bộ Đề Luyện Thi</h2>
+      <div class="card-grid" id="quiz-list"></div>
+    </div>
+    <!-- CONFIG -->
+    <div id="page-config" class="page">
+      <div class="config-container">
+        <button class="btn btn-outline" onclick="showPage('home')" style="margin-bottom:20px">← Quay lại</button>
+        <h2 id="config-title">Cấu Hình Bài Thi</h2>
+        <div class="form-group"><label>Số câu hỏi</label>
+          <div class="pill-group" id="config-count"></div>
+        </div>
+        <div class="form-group"><label>Thời gian (phút)</label>
+          <div class="pill-group" id="config-time"></div>
+        </div>
+        <div class="form-group"><label>Chế độ</label>
+          <div class="pill-group" id="config-mode"></div>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="startQuiz()" style="margin-top:12px"><i
+            class="fas fa-rocket"></i> Bắt Đầu Làm Bài</button>
+      </div>
+    </div>
+    <!-- QUIZ -->
+    <div id="page-quiz" class="page">
+      <div class="progress-bar">
+        <div class="progress-fill" id="quiz-progress"></div>
+      </div>
+      <div class="quiz-layout">
+        <div class="quiz-main">
+          <div class="question-card" id="question-card"></div>
+          <div class="quiz-actions" id="quiz-actions"></div>
+        </div>
+        <div class="quiz-sidebar">
+          <div class="quiz-sidebar-inner">
+            <div class="timer-box">
+              <div class="time" id="quiz-timer">00:00</div>
+              <div style="font-size:.8rem;color:var(--text2);margin-top:4px">Thời gian còn lại</div>
+            </div>
+            <div class="q-number-grid">
+              <h4>Bảng câu hỏi</h4>
+              <div id="q-numbers"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- RESULT -->
+    <div id="page-result" class="page">
+      <div class="result-container" id="result-content"></div>
+    </div>
+    <!-- BANK -->
+    <div id="page-bank" class="page">
+      <div
+        style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+        <h2><i class="fas fa-book"></i> Ngân Hàng Câu Hỏi</h2><button class="btn btn-primary" onclick="openAddQ()"><i
+            class="fas fa-plus"></i> Thêm Câu Hỏi</button>
+      </div>
+      <div class="bank-header"><input class="search-input" id="bank-search" placeholder="Tìm kiếm câu hỏi..."
+          oninput="renderBank()"><select class="filter-select" id="bank-filter" onchange="renderBank()">
+          <option value="">Tất cả bộ đề</option>
+        </select></div>
+      <div class="bank-list" id="bank-list"></div>
+    </div>
+    <!-- HISTORY -->
+    <div id="page-history" class="page">
+      <h2 style="margin-bottom:20px"><i class="fas fa-chart-column"></i> Lịch Sử & Thống Kê</h2>
+      <div class="chart-container"><canvas id="history-chart"></canvas></div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+    <!-- SETTINGS -->
+    <div id="page-settings" class="page">
+      <h2 style="margin-bottom:20px"><i class="fas fa-gear"></i> Cài Đặt</h2>
+
+      <!-- HỒ SƠ CÁ NHÂN -->
+      <h3 style="margin-bottom:12px;font-size:.95rem;color:var(--text2)"><i class="fas fa-user-circle"></i> Hồ SƠ Cá
+        Nhân</h3>
+      <div class="profile-card">
+        <div class="profile-avatar-wrap" onclick="document.getElementById('avatar-input').click()" title="Đổi ảnh">
+          <img id="profile-avatar-img" class="profile-avatar" src="" alt="Avatar"
+            onerror="this.src='https://ui-avatars.com/api/?name=User&background=46bbdf&color=fff&size=128'">
+          <div class="profile-avatar-edit"><i class="fas fa-camera"></i></div>
+        </div>
+        <div class="profile-avatar-preview">Nhấn vào ảnh để chọn từ thiết bị</div>
+        <input type="file" id="avatar-input" accept="image/*" style="display:none" onchange="previewAvatar(event)">
+        <input type="text" id="profile-name-input" class="profile-name-input" placeholder="Nhập tên của bạn..."
+          maxlength="30">
+        <div style="width:100%;position:relative">
+          <input type="url" id="profile-avatar-url" class="profile-name-input"
+            placeholder="🔗 Dán link ảnh đại diện (https://...)" oninput="previewAvatarUrl(this.value)">
+        </div>
+        <button class="profile-save-btn" onclick="saveProfile()"><i class="fas fa-floppy-disk"></i> Lưu hồ sƠ</button>
+      </div>
+
+      <!-- HƯỚNG DẪN UPLOAD AVATAR -->
+      <div class="avatar-guide">
+        <button class="avatar-guide-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+          <i class="fas fa-circle-question" style="color:var(--primary)"></i>
+          Hướng dẫn upload ảnh đại diện nếu bị lỗi
+          <i class="fas fa-chevron-down ag-arrow"></i>
+        </button>
+        <div class="avatar-guide-body">
+          <strong>📌 Dùng Imgur (miễn phí, nhanh)</strong>
+          <ol>
+            <li>Truy cập <a href="https://upanhlaylink.com/" target="_blank">upanhlaylink.com</a></li>
+            <li>Kéo ảnh vào hoặc nhấn <strong>choose photo</strong></li>
+            <li>Sau khi upload, lướt xuống bên dưới → <strong>Copy image address</strong></li>
+            <img src="./img/data.png" alt="">
+            <li>Dán link vào ô “🔗 Dán link ảnh...” phía trên</li>
+          </ol>
+          <div class="ag-tip">⚠️ Link phải kết thúc bằng đuôi ảnh (.jpg .png .webp .gif) mới hiển thị được.</div>
+
+       
+        </div>
+      </div>
+
+      <div class="settings-list">
+        <div class="setting-item"><label><i class="fas fa-moon"></i> Chế độ tối</label><label class="switch"><input
+              type="checkbox" id="set-dark" onchange="toggleTheme()"><span class="slider"></span></label></div>
+        <div class="setting-item"><label><i class="fas fa-volume-high"></i> Âm thanh</label><label class="switch"><input
+              type="checkbox" id="set-sound" checked onchange="saveSetting()"><span class="slider"></span></label></div>
+        <div class="setting-item"><label><i class="fas fa-mobile-screen"></i> Rung phản hồi</label><label
+            class="switch"><input type="checkbox" id="set-vibrate" checked onchange="saveSetting()"><span
+              class="slider"></span></label></div>
+        <div class="setting-item"><label><i class="fas fa-font"></i> Cỡ chữ</label><select class="setting-select"
+            id="set-fontsize" onchange="saveSetting()">
+            <option value="normal">Bình thường</option>
+            <option value="large">Lớn</option>
+            <option value="xlarge">Rất lớn</option>
+          </select></div>
+        <div class="setting-item"><label><i class="fas fa-shuffle"></i> Trộn câu hỏi</label><label class="switch"><input
+              type="checkbox" id="set-shuffle" checked onchange="saveSetting()"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item"><label><i class="fas fa-trash"></i> Xóa lịch sử</label><button class="btn btn-danger"
+            onclick="clearHistory()">Xóa tất cả</button></div>
+        <div class="setting-item"><label><i class="fas fa-rotate"></i> Khôi phục dữ liệu mẫu</label><button
+            class="btn btn-outline" onclick="resetData()">Khôi phục</button></div>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL -->
+  <div class="modal-overlay" id="q-modal">
+    <div class="modal"><button class="modal-close" onclick="closeModal()"><i class="fas fa-xmark"></i></button>
+      <h2 id="modal-title">Thêm Câu Hỏi</h2>
+      <div class="form-group"><label>Bộ đề</label><select id="m-quiz" class="filter-select" style="width:100%"></select>
+      </div>
+      <div class="form-group"><label>Câu hỏi</label><textarea id="m-question" rows="3"
+          placeholder="Nhập nội dung câu hỏi..."></textarea></div>
+      <div class="form-group"><label>Đáp án A</label><input id="m-a" placeholder="Nhập đáp án A"></div>
+      <div class="form-group"><label>Đáp án B</label><input id="m-b" placeholder="Nhập đáp án B"></div>
+      <div class="form-group"><label>Đáp án C</label><input id="m-c" placeholder="Nhập đáp án C"></div>
+      <div class="form-group"><label>Đáp án D</label><input id="m-d" placeholder="Nhập đáp án D"></div>
+      <div class="form-group"><label>Đáp án đúng</label><select id="m-correct" class="filter-select" style="width:100%">
+          <option value="0">A</option>
+          <option value="1">B</option>
+          <option value="2">C</option>
+          <option value="3">D</option>
+        </select></div>
+      <div class="form-group"><label>Giải thích</label><textarea id="m-explain" rows="2"
+          placeholder="Giải thích đáp án..."></textarea></div>
+      <button class="btn btn-primary btn-block" onclick="saveQuestion()"><i class="fas fa-floppy-disk"></i> Lưu Câu
+        Hỏi</button>
+    </div>
+  </div>
+
+  <!-- CUSTOM DIALOG -->
+  <div class="dlg-overlay" id="dlg-overlay">
+    <div class="dlg-box">
+      <div id="dlg-icon" class="dlg-icon"></div>
+      <div id="dlg-title" class="dlg-title"></div>
+      <div id="dlg-msg" class="dlg-msg"></div>
+      <div id="dlg-btns" class="dlg-btns"></div>
+    </div>
+  </div>
+
+  <script>
+    const TTHCM_QUIZZES = [{ "id": "tthcm1", "name": "TTHCM Câu 1-50", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 1 đến 50", "questions": [{ "q": "Văn minh là khái niệm:", "opts": ["Thiên về giá trị tinh thần và chỉ trình độ phát triển.", "Thiên về giá trị vật chất - kỹ thuật và chỉ trình độ phát triển.", "Thiên về giá trị tinh thần và có bề dày lịch sử.", "Thiên về giá trị vật chất và có bề dày lịch sử."], "ans": 1, "exp": "Đáp án đúng: B. Thiên về giá trị vật chất - kỹ thuật và chỉ trình độ phát triển." }, { "q": "“Đại đoàn kết dân tộc là đường lối chiến lược của cách mạng Việt Nam, là động lực và nguồn lực to lớn xây dựng và bảo vệ Tổ quốc”, được trích trong văn kiện:", "opts": ["Đại hội Đảng lần thứ IX.", "Đại hội Đảng lần thứ XII.", "Đại hội Đảng lần thứ X.", "Đại hội Đảng lần thứ XI."], "ans": 1, "exp": "Đáp án đúng: B. Đại hội Đảng lần thứ XII." }, { "q": "Đối với Hồ Chí Minh để nghiên cứu, kế thừa và phát triển lý luận cách mạng Việt Nam phải xuất phát từ:", "opts": ["Thực tiễn cách mạng Việt Nam.", "Thực tiễn cách mạng phương Đông và phương Tây.", "Thực tiễn cách mạng.", "Thực tiễn thế giới."], "ans": 0, "exp": "Đáp án đúng: A. Thực tiễn cách mạng Việt Nam." }, { "q": "“Đảng Cộng Sản Việt Nam là sự kết hợp của chủ nghĩa Mác – Lênin với phong trào công nhân và […]”. Điền vào chỗ trống đúng theo Hồ Chí Minh.", "opts": ["Phong trào nông dân.", "Phong trào dân chủ.", "Tầng lớp trí thức.", "Phong trào yêu nước."], "ans": 3, "exp": "Đáp án đúng: D. Phong trào yêu nước." }, { "q": "Theo tư tưởng Hồ Chí Minh, trong mỗi con người bao giờ cũng có:", "opts": ["Tốt – xấu, thiện – ác.", "Ưu điểm và nhược điểm.", "Không tốt, không xấu.", "Tốt – xấu, đúng – sai."], "ans": 0, "exp": "Đáp án đúng: A. Tốt – xấu, thiện – ác." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Giải phóng dân tộc, giải phóng giai cấp, giải phóng con người thống nhất nhau là tư tưởng cách mạng [...]”.", "opts": ["An toàn nhất.", "Triệt để nhất.", "Phù hợp nhất.", "Thông minh nhất."], "ans": 1, "exp": "Đáp án đúng: B. Triệt để nhất." }, { "q": "Câu nói nào sau đây là của Hồ Chí Minh?", "opts": ["Học không biết chán, dạy không biết mỏi.", "Học vì ngày mai lập nghiệp.", "Học, học nữa, học mãi.", "Việc học không bao giờ cùng, còn sống còn phải học."], "ans": 3, "exp": "Đáp án đúng: D. Việc học không bao giờ cùng, còn sống còn phải học." }, { "q": "“Mọi việc thành hay bại, chủ chốt là do cán bộ có thấm nhuần đạo đức cách mạng, hay là không”, câu nói của Hồ Chí Minh viết trong thời gian nào?", "opts": ["Năm 1955.", "Năm 1969.", "Năm 1947.", "Năm 1958."], "ans": 0, "exp": "Đáp án đúng: A. Năm 1955." }, { "q": "Đâu là phạm trù cơ bản của đạo đức?", "opts": ["Lẽ sống, thiện ác.", "Lẽ sống, hạnh phúc, trách nhiệm.", "Lẽ sống, thiện ác, hạnh phúc, trách nhiệm, lương tâm.", "Lẽ sống, thiện ác, hạnh phúc."], "ans": 2, "exp": "Đáp án đúng: C. Lẽ sống, thiện ác, hạnh phúc, trách nhiệm, lương tâm." }, { "q": "Chọn đáp án đúng nhất. Để tranh thủ sự giúp đỡ của các nước XHCN trong đấu tranh cách mạng, cần coi trọng nhân tố nào?", "opts": ["Có sự lãnh đạo đúng đắn của Đảng Cộng sản.", "Đường lối đấu tranh theo cách mạng vô sản.", "Tự lực cánh sinh, dựa vào sức mình là chính.", "Có đường lối đấu tranh độc lập, tự chủ"], "ans": 2, "exp": "Đáp án đúng: C. Tự lực cánh sinh, dựa vào sức mình là chính." }, { "q": "Theo luật Việt Nam qui định, công dân có quyền ứng cử vào đại biểu Quốc hội khi:", "opts": ["Đủ 18 tuổi.", "Đủ 21 tuổi.", "Đủ 19 tuổi.", "Đủ 20 tuổi."], "ans": 1, "exp": "Đáp án đúng: B. Đủ 21 tuổi." }, { "q": "Các cuộc cách mạng đấu tranh chống Pháp trong giai đoạn cuối thế kỷ XIX đầu thế kỷ XX có đặc điểm chung là gì?", "opts": ["Theo con đường phong kiến.", "Không đến nơi đến chốn.", "Theo con đường dân chủ tư sản.", "Tất cả đều thất bại."], "ans": 3, "exp": "Đáp án đúng: D. Tất cả đều thất bại." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, các lĩnh vực chính của văn hóa là:", "opts": ["Văn hóa giáo dục.", "Văn hóa văn nghệ.", "Văn hoá du lịch.", "Văn hóa đời sống."], "ans": 2, "exp": "Đáp án đúng: C. Văn hoá du lịch." }, { "q": "Theo Hồ Chí Minh, chủ thể của khối đại đoàn kết dân tộc là gì?", "opts": ["Toàn bộ những con người Việt Nam cụ thể sinh sống tại trong nước.", "Toàn bộ những con người Việt Nam sinh sống trong nước và nước ngoài.", "Con người Việt Nam cụ thể và tập hợp đông đảo quần chúng nhân dân.", "Toàn bộ những con người Việt Nam cụ thể sinh sống tại nước ngoài."], "ans": 2, "exp": "Đáp án đúng: C. Con người Việt Nam cụ thể và tập hợp đông đảo quần chúng nhân dân." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, chuẩn mực đạo đức cách mạng là:", "opts": ["Trung với nước, hiếu với dân.", "Yêu thương con người, sống có tình có nghĩa.", "Sẵn sàng chiến đấu, hy sinh vì Tổ quốc.", "Cần, kiệm, liêm, chính, chí công vô tư."], "ans": 2, "exp": "Đáp án đúng: C. Sẵn sàng chiến đấu, hy sinh vì Tổ quốc." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, chức năng cơ bản của văn hóa là:", "opts": ["Bồi dưỡng tư tưởng đúng đắn và tình cảm cao đẹp của con người.", "Bồi dưỡng lý luận chính trị, rèn luyện tác phong công tác, tư duy tự chủ.", "Bồi dưỡng những phẩm chất tốt đẹp, hướng con người đến chân, thiện, mỹ.", "Mở rộng hiểu biết của con người, nâng cao dân trí, xoá mù chữ cho dân."], "ans": 1, "exp": "Đáp án đúng: B. Bồi dưỡng lý luận chính trị, rèn luyện tác phong công tác, tư duy tự chủ." }, { "q": "Trong Nghị quyết 24C/18.6.5 của khoá họp 24 Đại Hội đồng UNESCO, Hồ Chí Minh được ghi nhận là:", "opts": ["Anh hùng giải phóng dân tộc của Việt Nam, Nhà văn hoá lớn của thế giới.", "Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất Việt Nam.", "Anh hùng cứu nước của dân tộc Việt Nam và Danh nhân văn hóa thế giới.", "Anh hùng giải phóng của dân tộc và là Nhà văn hóa lớn của thế giới."], "ans": 1, "exp": "Đáp án đúng: B. Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất Việt Nam." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, nền văn hóa mà chúng ta xây dựng phải có:", "opts": ["Tính tiên tiến.", "Tính đại chúng.", "Tính dân tộc.", "Tính khoa học."], "ans": 0, "exp": "Đáp án đúng: A. Tính tiên tiến." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Văn hóa phải […] cho quốc dân đi”.", "opts": ["Dẫn đường.", "Dẫn lối.", "Chỉ đường.", "Soi đường."], "ans": 3, "exp": "Đáp án đúng: D. Soi đường." }, { "q": "Động lực chủ đạo của sự phát triển đất nước ta hiện nay là gì?", "opts": ["Sự ủng hộ quốc tế.", "Đại đoàn kết dân tộc.", "Khoa học công nghệ.", "Nguồn vốn đầu tư."], "ans": 1, "exp": "Đáp án đúng: B. Đại đoàn kết dân tộc." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Làm cách mệnh rồi thì quyền trao cho […] chớ để trong tay một bọn ít người”.", "opts": ["Giai cấp công nhân.", "Dân chúng số nhiều.", "Quần chúng nhân dân.", "Người dân lao động."], "ans": 1, "exp": "Đáp án đúng: B. Dân chúng số nhiều." }, { "q": "Theo Hồ Chí Minh, nguyên tắc cơ bản nhất tổ chức và sinh hoạt Đảng là gì?", "opts": ["Thiểu số phục tùng đa số.", "Cấp dưới phục tùng cấp trên.", "Tập trung dân chủ.", "Tự phê bình và phê bình."], "ans": 2, "exp": "Đáp án đúng: C. Tập trung dân chủ." }, { "q": "Đặc trưng nào cho phép phân biệt văn hóa như một hiện tượng xã hội do con người tạo ra với các giá trị tự nhiên do thiên nhiên tạo ra?", "opts": ["Tính lịch sử.", "Tính hệ thống.", "Tính giá trị.", "Tính nhân sinh."], "ans": 3, "exp": "Đáp án đúng: D. Tính nhân sinh." }, { "q": "Đặc trưng cốt lõi nhất trong tư tưởng đạo đức của Hồ Chí Minh là gì?", "opts": ["Lòng yêu thương người.", "Chủ nghĩa nhân đạo chiến đấu.", "Lòng yêu nước, thương dân.", "Sự quan tâm đến con người."], "ans": 1, "exp": "Đáp án đúng: B. Chủ nghĩa nhân đạo chiến đấu." }, { "q": "\"Tự do cho đồng bào tôi, độc lập cho tổ quốc tôi, đây là tất cả những điều tôi muốn; đây là tất cả những điều tôi hiểu\". Câu nói được trích trong tác phẩm nào của Hồ Chí Minh?", "opts": ["Đời sống mới.", "Phát biểu với kiều bào ở Pháp.", "Tuyên ngôn độc lập.", "Những mẩu chuyện về đời hoạt động của Hồ Chủ tịch."], "ans": 3, "exp": "Đáp án đúng: D. Những mẩu chuyện về đời hoạt động của Hồ Chủ tịch." }, { "q": "Theo Hồ Chí Minh, trong CNTB nhà nước dưới chế độ dân chủ mới có những yếu tố nào?", "opts": ["Quan hệ sản xuất cũ chiếm vai trò chủ đạo.", "Chủ nghĩa xã hội.", "Cả chủ nghĩa tư bản, cả chủ nghĩa xã hội.", "Chủ nghĩa tư bản."], "ans": 1, "exp": "Đáp án đúng: B. Chủ nghĩa xã hội." }, { "q": "“Tất cả các dân tộc trên thế giới đều sinh ra bình đẳng, dân tộc nào cũng có quyền sống, quyền sung sướng và quyền tự do”. Câu này được trích từ:", "opts": ["Tuyên ngôn độc lập nước Mỹ 1776.", "Tuyên ngôn Đảng Lao động.", "Tuyên ngôn dân quyền và nhân quyền.", "Tuyên ngôn Đảng Cộng sản."], "ans": 0, "exp": "Đáp án đúng: A. Tuyên ngôn độc lập nước Mỹ 1776." }, { "q": "Theo tư tưởng Hồ Chí Minh, tính đại chúng của nền văn hóa được thể hiện ở chỗ:", "opts": ["Nền văn hóa ấy phải phục vụ cho nhân dân và do nhân dân xây dựng nên.", "Đó là một nền văn hóa rộng lớn, phổ cập đến tất cả mọi người trong xã hội.", "Đó là một nền văn hóa đa dạng cùng với sự đa dạng của các dân tộc anh em.", "Nền văn hóa ấy vượt ra khỏi biên giới quốc gia, vươn tầm khu vực và thế giới."], "ans": 0, "exp": "Đáp án đúng: A. Nền văn hóa ấy phải phục vụ cho nhân dân và do nhân dân xây dựng nên." }, { "q": "Vở kịch “Con Rồng tre” được Nguyễn Ái Quốc viết nhân dịp vua Khải Định sang Pháp vào thời gian nào?", "opts": ["Tháng 07 năm 1920.", "Tháng 07 năm 1927.", "Tháng 05 năm 1922.", "Tháng 05 năm 1925."], "ans": 2, "exp": "Đáp án đúng: C. Tháng 05 năm 1922." }, { "q": "Nguyễn Tất Thành tham dự Đại hội lần thứ 18 của Đảng Xã hội Pháp tại Tours (từ 25 đến 30/12/1920) với tư cách là:", "opts": ["Đại biểu duy nhất của các nước thuộc địa Đông Dương.", "Đại biểu đầu tiên là người Việt Nam tham dự một Đại hội.", "Đại biểu duy nhất của các nước thuộc địa châu Á.", "Đại biểu duy nhất cho Đảng xã hội Pháp tại Paris"], "ans": 0, "exp": "Đáp án đúng: A. Đại biểu duy nhất của các nước thuộc địa Đông Dương." }, { "q": "Theo Hồ Chí Minh, yêu cầu cơ bản nhất để xây dựng nhà nước pháp quyền có hiệu lực pháp lý mạnh mẽ là gì?", "opts": ["Nhà nước phải chịu sự lãnh đạo của Đảng Cộng sản Việt Nam.", "Đẩy mạnh quan hệ quốc tế, tuân thủ hệ thống pháp luật quốc tế.", "Nhà nước phải quản lý đất nước bằng Hiến pháp và pháp luật.", "Nhà nước phải chịu sự kiểm tra, giám sát chặt chẽ của nhân dân."], "ans": 2, "exp": "Đáp án đúng: C. Nhà nước phải quản lý đất nước bằng Hiến pháp và pháp luật." }, { "q": "Chọn đáp án KHÔNG đúng. Cống hiến của Hồ Chí Minh trong lĩnh vực văn hoá được thể hiện:", "opts": ["Xây dựng con người mới.", "Xây dựng nền văn hoá mới Việt Nam.", "Sáng tạo văn hoá văn nghệ.", "Xác lập hệ thống quan điểm về văn hoá."], "ans": 0, "exp": "Đáp án đúng: A. Xây dựng con người mới." }, { "q": "Theo Hồ Chí Minh, nội dung tiếp thu văn hoá nhân loại là:", "opts": ["Toàn diện, có hệ thống, tất cả các mặt, tất cả các khía cạnh.", "Chắt lọc tinh hoa văn hoá nhân loại, bài trừ cái cũ, tiếp thu cái mới.", "Toàn diện gồm Đông, Tây, kim, cổ, tất cả các mặt, các khía cạnh.", "Toàn diện, có chọn lọc, tất cả các mặt, tất cả các khía cạnh."], "ans": 2, "exp": "Đáp án đúng: C. Toàn diện gồm Đông, Tây, kim, cổ, tất cả các mặt, các khía cạnh." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, trong xây dựng đường lối chính trị, Đảng cần:", "opts": ["Dựa trên cơ sở lý luận của chủ nghĩa Mác – Lênin.", "Là đội tiên phong dũng cảm, là bộ tham mưu sáng suốt.", "Vận dụng kinh nghiệm vào điều kiện cụ thể của đất nước.", "Phát huy tài năng của các nhà nghiên cứu lý luận giỏi."], "ans": 3, "exp": "Đáp án đúng: D. Phát huy tài năng của các nhà nghiên cứu lý luận giỏi." }, { "q": "Người khởi xướng và lãnh đạo phong trào Đông kinh nghĩa thục (1907) là:", "opts": ["Phan Chu Trinh.", "Phan Bội Châu.", "Lương Văn Can.", "Nguyễn Thái Học."], "ans": 2, "exp": "Đáp án đúng: C. Lương Văn Can." }, { "q": "Bầu cử các đại biểu Quốc hội và Hội đồng Nhân dân các cấp vào các cơ quan quyền lực nhà nước thuộc loại hình dân chủ:", "opts": ["Trực tiếp và gián tiếp.", "Dân chủ gián tiếp.", "Tự do tập trung.", "Dân chủ trực tiếp."], "ans": 3, "exp": "Đáp án đúng: D. Dân chủ trực tiếp." }, { "q": "Theo Hồ Chí Minh, mục tiêu, lý tưởng của Đảng Cộng sản Việt Nam là:", "opts": ["Phụng sự tổ quốc, phục vụ nhân dân.", "Phục vụ lợi ích của giai cấp vô sản.", "Phục vụ lợi ích của giai cấp công nhân.", "Xây dựng đất nước giàu mạnh."], "ans": 0, "exp": "Đáp án đúng: A. Phụng sự tổ quốc, phục vụ nhân dân." }, { "q": "Chọn đáp án KHÔNG đúng. Quan điểm của Hồ Chí Minh về nguyên tắc xây dựng đạo đức cách mạng:", "opts": ["Nói đi đôi với làm, nêu gương về đạo đức.", "Tạo thành phong trào quần chúng rộng rãi.", "Xây đi đôi với chống.", "Tu dưỡng đạo đức suốt đời."], "ans": 1, "exp": "Đáp án đúng: B. Tạo thành phong trào quần chúng rộng rãi." }, { "q": "Chọn đáp án đúng nhất. Truyền thống gia đình ông Nguyễn Sinh Sắc là gì?", "opts": ["Gia đình cần cù, chăm chỉ, ham học hỏi, ham sáng tạo, có ý chí phấn đấu vươn lên làm quan.", "Gia đình nhà nho yêu nước, hiếu học, giàu truyền thống cách mạng và ý chí phấn đấu vươn lên rất cao.", "Gia đình nề nếp, tuân theo chuẩn mực dạo đức xã hội, ham học hỏi, có ý chí phấn đấu vươn lên rất cao.", "Gia đình cần cù, chăm chỉ, truyền thống làm nông nghiệp, có ý chí phấn đấu vươn lên làm giàu."], "ans": 1, "exp": "Đáp án đúng: B. Gia đình nhà nho yêu nước, hiếu học, giàu truyền thống cách mạng và ý chí phấn đấu vươn lên rất cao." }, { "q": "Theo Hồ Chí Minh, để thực hiện đại đoàn kết thì đối với những đồng bào lạc lối lầm đường, ta phải:", "opts": ["Có lòng khoan dung đối với họ.", "Kiên quyết loại ra khối đại đoàn kết.", "Giáo dục để họ biết sửa chữa sai lầm.", "Lấy tình thân ái mà cảm hoá họ."], "ans": 3, "exp": "Đáp án đúng: D. Lấy tình thân ái mà cảm hoá họ." }, { "q": "Theo giáo trình Tư tưởng Hồ Chí Minh, nguyên tắc phân phối chủ yếu trong CNXH là gì?", "opts": ["Làm theo năng lực, hưởng theo nhu cầu.", "Làm theo năng lực, hưởng theo đóng góp.", "Làm theo năng lực, hưởng theo lao động.", "Phân phối bình quân cho tất cả mọi người."], "ans": 2, "exp": "Đáp án đúng: C. Làm theo năng lực, hưởng theo lao động." }, { "q": "Chủ nghĩa dân tộc trong tư tưởng Hồ Chí Minh là chủ nghĩa dân tộc:", "opts": ["Trong sáng.", "Chân chính.", "Cực đoan, hẹp hòi.", "Sô vanh nước lớn."], "ans": 1, "exp": "Đáp án đúng: B. Chân chính." }, { "q": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là của giai cấp công nhân, đồng thời là của nhân dân lao động và cả dân tộc Việt Nam, là xác định:", "opts": ["Vị thế cầm quyền của Đảng.", "Bản chất cách mạng của Đảng.", "Nội dung ra đời của Đảng.", "Nhiệm vụ lịch sử của Đảng."], "ans": 1, "exp": "Đáp án đúng: B. Bản chất cách mạng của Đảng." }, { "q": "Dưới góc nhìn và phân tích của các nhà nghiên cứu, Hồ Chí Minh có chiều cao và cân nặng bao nhiêu?", "opts": ["Cao 1,5 m; Nặng 45 kg.", "Cao 1,5 m; Nặng 55 kg.", "Cao 1,52 m; Nặng 45,5 kg.", "Cao 1,55 m; Nặng 46 kg."], "ans": 0, "exp": "Đáp án đúng: A. Cao 1,5 m; Nặng 45 kg." }, { "q": "Theo Hồ Chí Minh, chế độ chính trị mà chúng ta xây dựng là chế độ do:", "opts": ["Giai cấp công nhân và nhân dân lao động làm chủ.", "Giai cấp nông dân và các tầng lớp nhân dân làm chủ.", "Giai cấp công nhân và giai cấp nông dân làm chủ.", "Đảng Cộng sản của giai cấp công nhân làm chủ."], "ans": 0, "exp": "Đáp án đúng: A. Giai cấp công nhân và nhân dân lao động làm chủ." }, { "q": "Quan niệm thiện, ác được hình thành từ đâu?", "opts": ["Từ những quan hệ kinh tế, xã hội, giai cấp con người.", "Từ quan hệ kinh tế, xã hội.", "Từ giai cấp con người.", "Từ quan hệ kinh tế."], "ans": 0, "exp": "Đáp án đúng: A. Từ những quan hệ kinh tế, xã hội, giai cấp con người." }, { "q": "Vai trò lãnh đạo của giai cấp công nhân trong cách mạng Việt Nam được quyết định bởi:", "opts": ["Ý muốn của Đảng Cộng sản.", "Đặc tính cuả giai cấp công nhân.", "Số lượng giai cấp công nhân.", "Ý muốn của giai cấp công nhân"], "ans": 1, "exp": "Đáp án đúng: B. Đặc tính cuả giai cấp công nhân." }, { "q": "Báo Le Paria (Người Cùng khổ) do Nguyễn Ái Quốc đồng sáng lập, ra số đầu tiên vào ngày nào?", "opts": ["30/12/1920.", "16/08/1923.", "10/05/1921.", "01/04/1922."], "ans": 3, "exp": "Đáp án đúng: D. 01/04/1922." }, { "q": "Hồ Chí Minh sáng lập “Hội Việt Nam cách mạng thanh niên” vào thời gian nào?", "opts": ["Tháng 06/1925.", "Tháng 08/1929.", "Tháng 05/1926.", "Tháng 06/1927."], "ans": 0, "exp": "Đáp án đúng: A. Tháng 06/1925." }, { "q": "Chọn đáp án đúng nhất. Bản chất con người theo tư tưởng Hồ Chí Minh là gì?", "opts": ["Tổng hợp các quan hệ xã hội từ rộng đến hẹp.", "Tổng hoà các mối quan hệ trong xã hội.", "Sản phẩm của sự tiến hóa tự nhiên.", "Sự thống nhất cả hai măt tự nhiên và xã hội."], "ans": 0, "exp": "Đáp án đúng: A. Tổng hợp các quan hệ xã hội từ rộng đến hẹp." }] }, { "id": "tthcm101", "name": "TTHCM Câu 101-150", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 101 đến 150", "questions": [{ "q": "Quốc tế Cộng sản trên thế giới ra đời thời gian nào?", "opts": ["02/03/1919.", "03/02/1930.", "03/02/1919.", "16/07/1920."], "ans": 0, "exp": "Đáp án đúng: A. 02/03/1919." }, { "q": "Chọn đáp án đúng nhất theo tư tưởng Hồ Chí Minh về nguyên tắc ngoại giao:", "opts": ["Phải cứng rắn về nguyên tắc, nhân nhượng về lợi ích.", "Dĩ bất biến, ứng vạn biến.", "Vừa cứng rắn về nguyên tắc, vừa mềm dẻo về sách lược.", "Phải mềm dẻo về sách lược, có thể nhân nhượng về lợi ích."], "ans": 2, "exp": "Đáp án đúng: C. Vừa cứng rắn về nguyên tắc, vừa mềm dẻo về sách lược." }, { "q": "Vấn đề dân tộc độc lập trong tư tưởng Hồ Chí Minh là vấn đề dân tộc:", "opts": ["Phong kiến.", "Độc lập.", "Thuộc địa.", "Tư sản."], "ans": 2, "exp": "Đáp án đúng: C. Thuộc địa." }, { "q": "Ngày thành lập Bộ ngoại giao của Viêt Nam là:", "opts": ["28/08/1945.", "07/05/1954.", "02/09/1945.", "03/02/19930."], "ans": 0, "exp": "Đáp án đúng: A. 28/08/1945." }, { "q": "Hồ Chí Minh được UNESCO ra quyết định công nhận vào thời gian nào?", "opts": ["Ngày 30/4/1987 đến 01/5/1987.", "Ngày 20/11/1987 đến 22/12/1987.", "Ngày 19/5/1987 đến 20/6/1987.", "Ngày 20/10/1987 đến 20/11/1987."], "ans": 3, "exp": "Đáp án đúng: D. Ngày 20/10/1987 đến 20/11/1987." }, { "q": "Theo Hồ Chí Minh, ưu điểm lớn nhất của chủ nghĩa tam dân của Tôn Trung Sơn đối với nước ta là:", "opts": ["Giúp người dân Việt Nam chống phong kiến.", "Đem lại độc lập, tự do cho người dân Việt Nam.", "Chính sách phù hợp với điều kiện của nước ta.", "Giúp người dân Việt Nam đấu tranh vì tự do."], "ans": 2, "exp": "Đáp án đúng: C. Chính sách phù hợp với điều kiện của nước ta." }, { "q": "Nguyễn Tất Thành tham gia vào Đảng Xã hội Pháp thời gian nào?", "opts": ["Tháng 10 năm 1917.", "Tháng 02 năm 1920.", "Tháng 12 năm 1918.", "Tháng 02 năm 1919."], "ans": 3, "exp": "Đáp án đúng: D. Tháng 02 năm 1919." }, { "q": "Để chỉ chủ nghĩa tư bản, Hồ Chí Minh sử dụng hình tượng nào?", "opts": ["Con bạch tuộc.", "Con chim đại bàng.", "Con đĩa hai vòi.", "Hai cánh của con chim."], "ans": 2, "exp": "Đáp án đúng: C. Con đĩa hai vòi." }, { "q": "Theo Hồ Chí Minh, đặc trưng kinh tế nổi bật nhất của CNXH là:", "opts": ["Nhân dân lao động làm chủ", "Sở hữu xã hội về tư liệu sản xuất.", "Khoa học - Kỹ thuật phát triển.", "Cơ cấu Công - Nông nghiệp hợp lý."], "ans": 1, "exp": "Đáp án đúng: B. Sở hữu xã hội về tư liệu sản xuất." }, { "q": "“Một dân tộc không tự lực cánh sinh mà cứ ngồi chờ dân tộc khác giúp đỡ thì không xứng đáng được độc lập”. Câu nói Hồ Chí Minh trong:", "opts": ["Kháng chiến chống phong kiến.", "Kháng chiến chống đế quốc Mỹ.", "Kháng chiến chống thực dân.", "Kháng chiến chống thực dân Pháp"], "ans": 3, "exp": "Đáp án đúng: D. Kháng chiến chống thực dân Pháp" }, { "q": "Đối với Hồ Chí Minh, đại đoàn kết không chỉ là khẩu hiệu chiến lược mà còn là:", "opts": ["Mục tiêu lâu dài của cách mạng.", "Thực tiễn đấu tranh của cách mạng.", "Nhiệm vụ trường tồn của cách mạng.", "Đích đến cuối cùng của cách mạng."], "ans": 0, "exp": "Đáp án đúng: A. Mục tiêu lâu dài của cách mạng." }, { "q": "Trong môn học tư tưởng Hồ Chí Minh nêu bao nhiêu cơ sở phương pháp luận nghiên cứu?", "opts": ["Bốn phương pháp luận.", "Bảy phương pháp luận.", "Năm phương pháp luận.", "Sáu phương pháp luận."], "ans": 2, "exp": "Đáp án đúng: C. Năm phương pháp luận." }, { "q": "Phương pháp luận Hồ Chí Minh cho rằng: con người phải luôn luôn thích nghi với mọi hoàn cảnh, muốn thích nghi con người cần:", "opts": ["Phải luôn luôn học tập mở rộng tri thức của bản thân về xã hội.", "Phải học tập để thích nghi với hoàn cảnh mới.", "Phải luôn luôn học tập mở rộng tri thức khám phá về bản thân, về xã hội.", "Phải luôn luôn tự đổi mới để phát triển."], "ans": 3, "exp": "Đáp án đúng: D. Phải luôn luôn tự đổi mới để phát triển." }, { "q": "Đạo đức nghề nghiệp là gì?", "opts": ["Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực.", "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực trong hoạt động nghề nghiệp do cơ quan, tổ chức có thẩm quyền quy định.", "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực trong hoạt động nghề nghiệp do tổ chức có thẩm quyền quy định.", "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức trong hoạt động nghề nghiệp do cơ quan, tổ chức có thẩm quyền quy định."], "ans": 1, "exp": "Đáp án đúng: B. Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực trong hoạt động nghề nghiệp do cơ quan, tổ chức có thẩm quyền quy định." }, { "q": "Chọn đáp án KHÔNG đúng. Mặt trận dân tộc thống nhất được hợp nhất từ các tổ chức:", "opts": ["Mặt trận Tổ quốc Việt Nam.", "Liên minh các lực lượng Dân tộc Dân chủ và Hòa bình Việt Nam.", "Mặt trận Dân tộc Giải phóng miền Nam Việt Nam.", "Mặt trận Việt Nam Độc lập Đồng minh."], "ans": 3, "exp": "Đáp án đúng: D. Mặt trận Việt Nam Độc lập Đồng minh." }, { "q": "Hồ Chí Minh lần đầu tiên đưa ra khái niệm về văn hoá theo nghĩa rộng vào thời gian nào? Ở đâu?", "opts": ["Tháng 07/1925, trong cuốn “Đường kách mệnh” tại Trung Quốc.", "Tháng 08/1943, trong nhà tù của Tưởng Giới Thạch tại Trung Quốc.", "Tháng 02/1930, trong “Cương lĩnh chính trị Đảng” tại Trung Quốc.", "Tháng 06/1931, trong nhà tù của thực dân Anh tại Hồng Kông."], "ans": 1, "exp": "Đáp án đúng: B. Tháng 08/1943, trong nhà tù của Tưởng Giới Thạch tại Trung Quốc." }, { "q": "\"Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa… song nhân dân Việt Nam quyết không sợ, không có gì quí hơn độc lập tự do\". Câu nói được trích trong tác phẩm nào của Hồ Chí Minh?", "opts": ["Lời kêu gọi toàn quốc kháng chiến, ngày 19/12/1946.", "Lời kêu gọi, ngày 17/7/1966.", "Di chúc, năm 1969.", "Thư chúc Tết, năm 1968."], "ans": 1, "exp": "Đáp án đúng: B. Lời kêu gọi, ngày 17/7/1966." }, { "q": "Hồ Chí Minh là người đấu tranh đòi quyền độc lập cho:", "opts": ["Dân tộc thuộc địa các nước đang bị áp bức trên thế giới.", "Tất cả các quốc gia, tộc người và dân tộc trên thế giới.", "Dân tộc thuộc địa các nước đang bị áp bức ở phương Đông.", "Dân tộc Việt Nam và tất cả các dân tộc bị áp bức trên thế giới."], "ans": 3, "exp": "Đáp án đúng: D. Dân tộc Việt Nam và tất cả các dân tộc bị áp bức trên thế giới." }, { "q": "Theo Hồ Chí Minh, biện pháp nào là quan trọng nhất trong xây dựng CNXH?", "opts": ["Tranh thủ tối đa sự giúp đỡ, viện trợ quốc tế.", "Kết hợp xây dựng và bảo vệ đất nước.", "Huy động các nguồn lực sẵn có trong nhân dân.", "Kết hợp cải tạo xã hội cũ với xây dựng xã hội mới."], "ans": 1, "exp": "Đáp án đúng: B. Kết hợp xây dựng và bảo vệ đất nước." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, kẻ thù cần phải đánh đổ trong cách mạng giải phóng là gì?", "opts": ["Đế quốc, thực dân và tay sai của chúng.", "Chủ nghĩa cá nhân.", "Chủ nghĩa tư bản, chủ nghĩa đế quốc.", "Nghèo nàn, dốt nát, lạc hậu"], "ans": 1, "exp": "Đáp án đúng: B. Chủ nghĩa cá nhân." }, { "q": "Khi học trường Quốc tế Lênin, Hồ Chí Minh đã lấy bí danh là gì?", "opts": ["Victor Lebon.", "Polopxki.", "Lin.", "Nilopxki."], "ans": 2, "exp": "Đáp án đúng: C. Lin." }, { "q": "“Mục đích của Đảng Lao động Việt Nam có thể gộp trong tám chữ…”, Hồ Chí Minh tuyên bố này trong sự kiện nào? Thời gian nào?", "opts": ["Kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/02/1930.", "Lời kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/03/1951.", "Kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 07/02/1930.", "Lời mở đầu buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/03/1951."], "ans": 3, "exp": "Đáp án đúng: D. Lời mở đầu buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/03/1951." }, { "q": "Tư tưởng Hồ Chí Minh về Đảng Cộng sản được hình thành trên cơ sở nào?", "opts": ["Lý luận của chủ nghĩa Mác – Lênin.", "Lý luận khoa học và thực tiễn cách mạng.", "Thực tiễn cách mạng đấu tranh trong nước.", "Thực tiễn cách mạng đấu tranh thế giới."], "ans": 0, "exp": "Đáp án đúng: A. Lý luận của chủ nghĩa Mác – Lênin." }, { "q": "Trong tư tưởng Lão giáo khuyên con người cần phải có đầy đủ tri thức. Người cần có đầy đủ tri thức là ai?", "opts": ["Toàn bộ người dân.", "Người thuộc tầng lớp thượng lưu.", "Người thuộc tầng lớp cai trị.", "Người thuộc tầng lớp trí thức giả."], "ans": 2, "exp": "Đáp án đúng: C. Người thuộc tầng lớp cai trị." }, { "q": "Theo Hồ Chí Minh, vì sao giai cấp nông dân không thể lãnh đạo được cách mạng Việt Nam?", "opts": ["Lực lượng đông nhưng không có tiền đề tư tưởng, lý luận cách mạng triệt để.", "Không có tư tưởng độc lập, không đại diện cho phương thức sản xuất tiên tiến.", "Không có chính đảng, không thực hiện được đoàn kết giai cấp, tầng lớp khác.", "Không có phương tiện tổ chức chiến tranh hiện đại, không có đường lối đúng."], "ans": 1, "exp": "Đáp án đúng: B. Không có tư tưởng độc lập, không đại diện cho phương thức sản xuất tiên tiến." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Việc gì có lợi cho […], ta phải hết sức làm;việc gì có hại cho […], ta phải hết sức tránh”.", "opts": ["Nhà nước.", "Công dân.", "Dân.", "Đảng."], "ans": 2, "exp": "Đáp án đúng: C. Dân." }, { "q": "Trong tư tưởng Hồ Chí Minh, đại đoàn kết dân tộc là:", "opts": ["Đoàn kết giai cấp công nhân – nông dân – lao động trí óc.", "Đoàn kết toàn bộ các tộc người trên một lãnh thổ.", "Đoàn kết công – nông và các tầng lớp khác trong xã hội.", "Đoàn kết giai cấp công nhân – nông dân."], "ans": 2, "exp": "Đáp án đúng: C. Đoàn kết công – nông và các tầng lớp khác trong xã hội." }, { "q": "Theo Hồ Chí Minh, thực chất của giải phóng giai cấp là:", "opts": ["Tiêu diệt cá nhân những con người thuộc giai cấp bóc lột.", "Xóa bỏ giai cấp bóc lột với tư cách là giai cấp thống trị xã hội.", "Thay thế giai cấp thống trị này bằng giai cấp thống trị khác.", "Giải phóng giai cấp vô sản trên toàn thế giới."], "ans": 1, "exp": "Đáp án đúng: B. Xóa bỏ giai cấp bóc lột với tư cách là giai cấp thống trị xã hội." }, { "q": "Chọn đáp án đúng nhất. Con tàu mà Hồ Chí Minh thực hiện chuyến đi của mình tên gì, của nước nào?", "opts": ["Latouche-Tréville của Pháp.", "Latouche-Tréville của Mỹ.", "Latouche-Tréville của Anh.", "Amiral Latouche-Tréville của Pháp."], "ans": 3, "exp": "Đáp án đúng: D. Amiral Latouche-Tréville của Pháp." }, { "q": "Chọn đáp án ĐÚNG nhất với tư tưởng Hồ Chí Minh:", "opts": ["Cách mạng giải phóng dân tộc giành thắng lợi đồng thời với thắng lợi cách mạng vô sản ở chính quốc.", "Thắng lợi của cách mạng vô sản ở chính quốc là tiền đề, cách mạng giải phóng dân tộc ở thuộc địa là hệ quả.", "Thắng lợi của cách mạng vô sản ở thuộc địa phải phụ thuộc vào thắng lợi của cách mạng vô sản ở chính quốc.", "Cách mạng giải phóng dân tộc có khả năng nổ ra và giành được thắng lợi trước cách mạng vô sản ở chính quốc."], "ans": 3, "exp": "Đáp án đúng: D. Cách mạng giải phóng dân tộc có khả năng nổ ra và giành được thắng lợi trước cách mạng vô sản ở chính quốc." }, { "q": "Cơ chế vận hành của hệ thống chính trị nước ta là:", "opts": ["Đảng lãnh đạo, nhà nước quản lý, nhân dân làm chủ.", "Nhà nước làm chủ, Đảng lãnh đạo, nhân dân quản lý.", "Đảng và nhà nước lãnh đạo, quản lý, nhân dân làm chủ.", "Nhà nước lãnh đạo, Đảng quản lý, nhân dân làm chủ."], "ans": 0, "exp": "Đáp án đúng: A. Đảng lãnh đạo, nhà nước quản lý, nhân dân làm chủ." }, { "q": "Chọn đáp án đúng nhất. Sức mạnh thời đại trong đoàn kết quốc tế là gì?", "opts": ["Sức mạnh của phong trào cách mạng thế giới.", "Sức mạnh của cách mạng cải cách nền dân chủ thế giới.", "Sức mạnh của phong trào vì hoà bình, độc lập dân tộc.", "Sức mạnh của cách mạng khoa học công nghệ 4.0."], "ans": 0, "exp": "Đáp án đúng: A. Sức mạnh của phong trào cách mạng thế giới." }, { "q": "Chọn đáp án KHÔNG đúng. Thực chất của vấn đề dân tộc độc lập trong tư tưởng Hồ Chí Minh là:", "opts": ["Đấu tranh giải phóng dân tộc.", "Xây dựng nhà nước của dân, do dân, vì dân.", "Thành lập nhà nước dân tộc độc lập.", "Đòi quyền bình đẳng giữa các dân tộc."], "ans": 3, "exp": "Đáp án đúng: D. Đòi quyền bình đẳng giữa các dân tộc." }, { "q": "\"Đảng có vững thì cách mệnh mới thành công, cũng như người cầm lái có vững thuyền mới chạy\". Luận điểm này được trích trong tác phẩm nào của Bác?", "opts": ["Bản án chế độ thực dân Pháp.", "Đường Kách mệnh.", "Chánh cương vắn tắt của Đảng.", "Thường thức chính trị."], "ans": 1, "exp": "Đáp án đúng: B. Đường Kách mệnh." }, { "q": "Xây dựng nhà nước pháp quyền, của dân, do dân và vì dân ở nước ta hiện nay cần phải:", "opts": ["Xây dựng hệ thống luật pháp hoàn chỉnh và phân quyền rõ ràng.", "Đưa luật pháp triển khai đầy đủ vào đời sống nhân dân.", "Tăng cường sự lãnh đạo của Đảng Cộng sản Việt Nam.", "Dân chủ hoá tổ chức và hoạt động của bộ máy Nhà nước."], "ans": 0, "exp": "Đáp án đúng: A. Xây dựng hệ thống luật pháp hoàn chỉnh và phân quyền rõ ràng." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh. Trong đoàn kết quốc tế, “Muốn người ta giúp cho thì trước hết mình phải […]”.", "opts": ["Giúp người ta trước.", "Kêu gọi sự giúp đỡ.", "Tự cố gắng đứng dậy.", "Tự giúp lấy mình đã."], "ans": 3, "exp": "Đáp án đúng: D. Tự giúp lấy mình đã." }, { "q": "Mặt trận Việt Nam độc lập đồng minh (Việt Minh) được thành lập vào thời gian nào?", "opts": ["Ngày 19/05/1940.", "Ngày 19/05/1945.", "Ngày 19/05/1941.", "Ngày 19/05/1942."], "ans": 2, "exp": "Đáp án đúng: C. Ngày 19/05/1941." }, { "q": "Người khởi xướng và lãnh đạo phong trào Đông Du (1905 -1909) là ai?", "opts": ["Phan Chu Trinh.", "Phan Bội Châu.", "Lương Văn Can.", "Nguyễn Thái Học."], "ans": 1, "exp": "Đáp án đúng: B. Phan Bội Châu." }, { "q": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc muốn giành được thắng lợi cần phải:", "opts": ["Dựa vào sự thắng lợi của cách mạng vô sản ở chính quốc.", "Được tiến hành chủ động và sáng tạo.", "Dựa vào sự thắng lợi của cách mạng ở các nước thuộc địa khác.", "Dựa vào sự giúp đỡ của các nước xã hội chủ nghĩa."], "ans": 1, "exp": "Đáp án đúng: B. Được tiến hành chủ động và sáng tạo." }, { "q": "Tư tưởng Hồ Chí Minh KHÔNG bắt nguồn từ:", "opts": ["Giá trị truyền thống tốt đẹp của dân tộc Việt Nam.", "Giá trị tinh hoa văn hoá của nhân loại.", "Giá trị tinh hoa văn hoá của phương Đông.", "Yêu cầu của cách mạng giải phóng thuộc địa."], "ans": 3, "exp": "Đáp án đúng: D. Yêu cầu của cách mạng giải phóng thuộc địa." }, { "q": "Chọn đáp đúng nhất theo Hồ Chí Minh. \"Kiệm\" nghĩa là:", "opts": ["Tiết kiệm của cải.", "Tiết kiệm cho nhân dân.", "Keo kiệt.", "Không lãng phí."], "ans": 0, "exp": "Đáp án đúng: A. Tiết kiệm của cải." }, { "q": "Truyền thống văn hoá dân tộc giữ vị trí hàng đầu hình thành nên tư tưởng Hồ Chí Minh là:", "opts": ["Truyền thống đoàn kết.", "Truyền thống hiếu học.", "Truyền thống cần cù, sáng tạo.", "Truyền thống yêu nước."], "ans": 3, "exp": "Đáp án đúng: D. Truyền thống yêu nước." }, { "q": "Chọn đáp án đúng nhất. Theo Hồ Chí Minh, đời sống mới bao gồm những mặt nào?", "opts": ["Đạo đức mới, nếp sống mới và cách sống mới.", "Đạo đức mới, lối sống mới, nếp sống mới.", "Đạo đức mới và lối sống mới; cách sống mới.", "Nếp sống mới, lối sống mới và tư tưởng mới."], "ans": 1, "exp": "Đáp án đúng: B. Đạo đức mới, lối sống mới, nếp sống mới." }, { "q": "Theo tư tưởng Hồ Chí Minh, cán bộ nhà nước là gì của nhân nhân?", "opts": ["Người làm công.", "Người phục vụ.", "Công bộc.", "Người quản lý."], "ans": 2, "exp": "Đáp án đúng: C. Công bộc." }, { "q": "Khái niệm tư tưởng Hồ Chí Minh được bổ sung và hoàn thiện tại:", "opts": ["Đại hội đại biển toàn quốc lần thứ VII của Đảng.", "Đại hội đại biển toàn quốc lần thứ XI của Đảng.", "Đại hội đại biển toàn quốc lần thứ IX của Đảng.", "Đại hội đại biển toàn quốc lần thứ X của Đảng."], "ans": 1, "exp": "Đáp án đúng: B. Đại hội đại biển toàn quốc lần thứ XI của Đảng." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Tôi chỉ có một ham muốn, ham muốn tột bậc, là làm sao cho nước ta được […]”.", "opts": ["Nhanh chóng độc lập.", "Hoàn toàn độc lập.", "Thắng lợi nhanh chóng.", "Hoàn toàn giải phóng."], "ans": 1, "exp": "Đáp án đúng: B. Hoàn toàn độc lập." }, { "q": "Hạnh phúc đích thực của con người là gì?", "opts": ["Sống và hoạt động để tạo ra giá trị vật chất.", "Sống và hoạt động để tạo ra giá trị vật chất, tinh thần nhằm thoả mãn nhu cầu cá nhân.", "Sống và hoạt động để tạo ra giá trị tinh thần.", "Sống và hoạt động để tạo ra giá trị vật chất, tinh thần nhằm thoả mãn nhu cầu xã hội."], "ans": 1, "exp": "Đáp án đúng: B. Sống và hoạt động để tạo ra giá trị vật chất, tinh thần nhằm thoả mãn nhu cầu cá nhân." }, { "q": "Đánh giá về cách mạng Tháng Mười Nga 1917, Hồ Chí Minh xác định:", "opts": ["Cách mạng triệt để.", "Cách mạng thành công một nữa.", "Cách mạng đến nơi.", "Cách mạng thành công."], "ans": 0, "exp": "Đáp án đúng: A. Cách mạng triệt để." }, { "q": "Theo Hồ Chí Minh, trong quan hệ với quần chúng nhân dân, Đảng cần làm gì?", "opts": ["Luôn luôn lắng nghe quần chúng.", "Lắng nghe và thực hiện theo yêu cầu của quần chúng.", "Không theo đuôi quần chúng.", "Thực hiện theo yêu cầu của nhân dân."], "ans": 2, "exp": "Đáp án đúng: C. Không theo đuôi quần chúng." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Đảng có vững, [...] mới thành công, cũng như người cầm lái có vững thì […]”.", "opts": ["Cách mệnh; thuyền có thể chạy.", "Cách mệnh; thuyền mới chạy.", "Cách mạng; thuyền có thể chạy.", "Cách mạng; thuyền mới chạy"], "ans": 1, "exp": "Đáp án đúng: B. Cách mệnh; thuyền mới chạy." }] }, { "id": "tthcm151", "name": "TTHCM Câu 151-200", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 151 đến 200", "questions": [{ "q": "Ý thức đạo đức thể hiện qua những tiêu chí nào?", "opts": ["Ý thức, trách nhiệm và lý trí.", "Khách quan và chủ quan.", "Thái độ, quan điểm và quan niệm sống.", "Thái độ, quan niệm sống và trách nhiệm."], "ans": 2, "exp": "Đáp án đúng: C. Thái độ, quan điểm và quan niệm sống." }, { "q": "Trong xây dựng CNXH, Hồ Chí Minh chủ trương đối xử với giai cấp tư sản dân tộc như thế nào?", "opts": ["Xóa bỏ quyền sở hữu về tư liệu sản xuất của họ.", "Đánh đổ họ với tư cách là giai cấp bóc lột.", "Không xóa bỏ quyền sở hữu về tư liệu sản xuất của họ.", "Có hình thức hợp tác phù hợp."], "ans": 2, "exp": "Đáp án đúng: C. Không xóa bỏ quyền sở hữu về tư liệu sản xuất của họ." }, { "q": "Xác định lẽ sống để làm gì?", "opts": ["Chọn cho mình lý do để sống.", "Chọn cho mình nghề nghiệp.", "Chọn cho mình ý nghĩa của cuộc sống.", "Chọn cho mình hướng đi."], "ans": 2, "exp": "Đáp án đúng: C. Chọn cho mình ý nghĩa của cuộc sống." }, { "q": "Câu nói “Dù phải đốt cháy cả dãy Trường Sơn cũng phải giành cho được độc lập” của Hồ Chí Minh vào thời gian nào?", "opts": ["Tháng 05/1941.", "Tháng 08/1945.", "Tháng 08/1942.", "Tháng 12/1944."], "ans": 1, "exp": "Đáp án đúng: B. Tháng 08/1945." }, { "q": "Chọn đáp án đúng nhất. Theo Hồ Chí Minh, đạo đức là:", "opts": ["Gốc của người cách mạng.", "Phẩm chất của Đảng viên.", "Gốc rễ của con người.", "Yêu cầu của người cách mạng."], "ans": 0, "exp": "Đáp án đúng: A. Gốc của người cách mạng." }, { "q": "Theo Hồ Chí Minh, vai trò lãnh đạo của Đảng đối với Nhà nước được quy định bởi:", "opts": ["Hiến pháp.", "Ý chí giai cấp công nhân.", "Mong muốn nhân dân.", "Điều lệ Đảng."], "ans": 0, "exp": "Đáp án đúng: A. Hiến pháp." }, { "q": "Chọn đáp án đúng nhất. Lý do chính của việc Nguyễn Ái Quốc đến Pháp là gì?", "opts": ["Muốn dược thấy tư tưởng nhân quyền và dân quyền được thực hiện như thế nào tại Pháp và tại Việt Nam.", "Vì mong muốn một nền giáo dục tốt hơn ở Pháp và không nhìn thấy được cơ hội tài chính ở Việt Nam vào thời kì đó.", "Để vận động nhân dân Pháp ủng hộ cách mạng Việt Nam.", "Vì nguồn gốc mọi đau khổ của nhân dân Việt Nam là ở tại “chính quốc”."], "ans": 2, "exp": "Đáp án đúng: C. Để vận động nhân dân Pháp ủng hộ cách mạng Việt Nam." }, { "q": "Theo Hồ Chí Minh, lực lượng làm nền tảng cho khối đại đoàn kết dân tộc là gì?", "opts": ["Công nhân, nông dân, lao động trí óc.", "Giai cấp công nhân, giai cấp vô sản.", "Công nhân, nông dân, trí thức cao.", "Học trò, nhà buôn, tư sản nhân dân."], "ans": 0, "exp": "Đáp án đúng: A. Công nhân, nông dân, lao động trí óc." }, { "q": "Người khởi xướng và lãnh đạo phong trào Duy Tân (1906 -1908) là:", "opts": ["Phan Chu Trinh.", "Phan Bội Châu.", "Lương Văn Can.", "Nguyễn Thái Học."], "ans": 0, "exp": "Đáp án đúng: A. Phan Chu Trinh." }, { "q": "Luận điểm “Đạo đức cách mạng không phải ở trên trời sa xuống. Nó do đấu tranh, rèn luyện bền bỉ hàng ngày mà phát triển và cũng cố…”, của ai?", "opts": ["Trường Chinh.", "Lê Duẩn.", "V.I Lênin.", "Hồ Chí Minh"], "ans": 3, "exp": "Đáp án đúng: D. Hồ Chí Minh" }, { "q": "Chọn luận điểm đúng với tư tưởng Hồ Chí Minh:", "opts": ["Muốn tiến lên CNXH thì phải phát triển văn hóa và kinh tế.", "Muốn tiến lên CNXH thì phải phát triển văn hóa.", "Muốn tiến lên CNXH thì phải phát triển kinh tế và văn hóa.", "Muốn tiến lên CNXH thì phải phát triển kinh tế."], "ans": 2, "exp": "Đáp án đúng: C. Muốn tiến lên CNXH thì phải phát triển kinh tế và văn hóa." }, { "q": "Mục tiêu của tư tưởng Hồ Chí Minh là gì?", "opts": ["Giải phóng giai cấp.", "Giải phóng giai cấp, giải phóng con người.", "Giải phóng dân tộc thuộc địa.", "Giải phóng dân tộc, giải phóng giai cấp, giải phóng con người."], "ans": 3, "exp": "Đáp án đúng: D. Giải phóng dân tộc, giải phóng giai cấp, giải phóng con người." }, { "q": "Hồ Chí Minh học tập được gì quan trọng ở chủ nghĩa Mác- Lênin?", "opts": ["Học thuộc các luận điểm lí luận.", "Phương pháp làm việc biện chứng.", "Học tập phương thức triển khai kế hoạch.", "Vận dụng các luận điểm vào thực tế."], "ans": 1, "exp": "Đáp án đúng: B. Phương pháp làm việc biện chứng." }, { "q": "Hồ Chí Minh nói: “Tôi cố gắng là học trò nhỏ của các vị ấy”. Các vị ấy là ai?", "opts": ["Khổng Tử; Đạt Ma; Mác; Lênin.", "Lão Tử; Khổng Tử; Mác; Lênin.", "Khổng Tử; Giêxu; Mác; Tôn Dật Tiên.", "Mạnh Tử; Lão Tử; Khổng Tử; Mác."], "ans": 2, "exp": "Đáp án đúng: C. Khổng Tử; Giêxu; Mác; Tôn Dật Tiên." }, { "q": "Chức năng nào của văn hóa giúp xã hội định hướng các chuẩn mực và làm động lực cho sự phát triển?", "opts": ["Chức năng tổ chức.", "Chức năng giáo dục.", "Chức năng điều chỉnh xã hội.", "Chức năng giao tiếp."], "ans": 2, "exp": "Đáp án đúng: C. Chức năng điều chỉnh xã hội." }, { "q": "Chọn đáp án đúng nhất. Theo Hồ Chí Minh, nhà nước vì dân là nhà nước:", "opts": ["Phục vụ quần chúng nhân dân lao động.", "Chăm lo mọi mặt đời sống cho nhân dân.", "Do quần chúng nhân dân lao động làm chủ.", "Tất cả đều vì lợi ích của nhân dân."], "ans": 3, "exp": "Đáp án đúng: D. Tất cả đều vì lợi ích của nhân dân." }, { "q": "\"Thắng lợi tuy lớn nhưng mới là bắt đầu. Chúng ta không nên vì thắng mà kiêu, không nên chủ quan khinh địch. Chúng ta kiên quyết kháng chiến để tranh lại độc lập, thống nhất, dân chủ, hòa bình\". Đoạn trích trong thư khen ngợi của Hồ Chí Minh gửi cho bộ đội và đồng bào Tây Bắc sau nhiến thắng nào?", "opts": ["Chiến thắng Hòa Bình.", "Chiến thắng Tây Bắc.", "Chiến thắng Điện Biên Phủ.", "Chiến thắng Biên giới."], "ans": 2, "exp": "Đáp án đúng: C. Chiến thắng Điện Biên Phủ." }, { "q": "Trong khối đại đoàn kết toàn dân tộc, dân là chỗ dựa vững chắc đồng thời là:", "opts": ["Nhân tố quyết định sức mạnh khối đại đoàn kết.", "Nguồn sức mạnh vô địch của khối đại đoàn kết.", "Nhân tố quan trọng của khối đại đoàn kết.", "Cội nguồn sức mạnh của khối đại đoàn kết."], "ans": 1, "exp": "Đáp án đúng: B. Nguồn sức mạnh vô địch của khối đại đoàn kết." }, { "q": "Các luồng tư tưởng dân chủ tư sản, tư tưởng Mac- Lênin được truyền vào Việt Nam vào giai đoạn văn hóa nào?", "opts": ["Giai đoạn văn hóa thời kì Bắc thuộc.", "Giai đoạn văn hóa hiện đại.", "Giai đoạn văn hóa Đại Việt.", "Giai đoạn văn hóa thời kì Pháp thuộc."], "ans": 3, "exp": "Đáp án đúng: D. Giai đoạn văn hóa thời kì Pháp thuộc." }, { "q": "Theo Hồ Chí Minh, nhân dân lao động làm chủ nhà nước dẫn đến hệ quả là:", "opts": ["Nhân dân có quyền bãi miễn Nhà nước.", "Nhân dân có quyền phê bình Nhà nước.", "Nhân dân có quyền quản lý Nhà nước.", "Nhân dân có quyền kiểm soát Nhà nước"], "ans": 3, "exp": "Đáp án đúng: D. Nhân dân có quyền kiểm soát Nhà nước" }, { "q": "Cơ sở khách quan quyết định đến sự hình thành tư tưởng Hồ Chí Minh là:", "opts": ["Tinh hoa văn hóa dân tộc.", "Chủ nghĩa tam dân.", "Tinh hoa văn hoá nhân loại.", "Chủ nghĩa Mác – Lênin."], "ans": 3, "exp": "Đáp án đúng: D. Chủ nghĩa Mác – Lênin." }, { "q": "Chức năng điều chỉnh xã hội tương ứng với đặc trưng nào của văn hóa?", "opts": ["Tính lịch sử.", "Tính hệ thống.", "Tính giá trị.", "Tính nhân sinh."], "ans": 2, "exp": "Đáp án đúng: C. Tính giá trị." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Tất cả các cơ quan nhà nước đều phải dựa vào […], liên hệ chặt chẽ với […], lắng nghe ý kiến và chịu sự kiểm soát của […]”.", "opts": ["Công dân.", "Nhân dân.", "Quốc hội.", "Chính phủ."], "ans": 1, "exp": "Đáp án đúng: B. Nhân dân." }, { "q": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc là sự nghiệp đoàn kết của:", "opts": ["Toàn dân, trên cơ sở liên minh công – nông.", "Nhân dân các nước thuộc địa trên thế giới.", "Giai cấp vô sản, nông dân và tầng lớp trí thức.", "Công nhân, nông dân và tầng lớp trí thức."], "ans": 0, "exp": "Đáp án đúng: A. Toàn dân, trên cơ sở liên minh công – nông." }, { "q": "Hồ Chí minh thường nêu và phân tích 5 đức tính chủ yếu nào của người cách mạng?", "opts": ["Nhân - Nghĩa - Trí - Dũng - Liêm.", "Nhân - Nghĩa - Lễ - Trí - Tín.", "Cần - Kiệm - Liêm - Chính - Dũng.", "Nhân - Nghĩa - Trí - Dũng - Tín."], "ans": 0, "exp": "Đáp án đúng: A. Nhân - Nghĩa - Trí - Dũng - Liêm." }, { "q": "\"Muốn người ta giúp cho thì trước hết mình phải tự giúp lấy mình đã\". Luận điểm trên được trích trong tác phẩm nào của Bác?", "opts": ["Đường Kách mệnh.", "Bản án chế độ thực dân Pháp.", "Chánh cương vắn tắt của Đảng.", "Tuyên ngôn độc lập."], "ans": 0, "exp": "Đáp án đúng: A. Đường Kách mệnh." }, { "q": "Pháp luật được hình thành trên cơ sở nào?", "opts": ["Các quan hệ chính trị - đạo đức.", "Các quan điểm chính trị và kinh tế.", "Các quan hệ kinh tế - xã hội.", "Các quy tắc xử sự trong đời sống xã hội."], "ans": 3, "exp": "Đáp án đúng: D. Các quy tắc xử sự trong đời sống xã hội." }, { "q": "Theo Hồ Chí Minh, mỗi bước phát triển của kinh tế, chính trị, xã hội đều có:", "opts": ["Sự soi đường của văn hoá.", "Sự khai sáng của văn hoá.", "Sự soi sáng của văn hoá.", "Sự đóng góp của văn hoá."], "ans": 0, "exp": "Đáp án đúng: A. Sự soi đường của văn hoá." }, { "q": "“Mọi việc thành hay bại, chủ chốt là do cán bộ có thấm nhuần đạo đức cách mạng, hay là không”, câu nói của Hồ Chí Minh trích trong tác phẩm nào?", "opts": ["Sửa đổi lối làm việc.", "Người cán bộ cách mạng.", "Đạo đức cách mạng.", "Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân."], "ans": 0, "exp": "Đáp án đúng: A. Sửa đổi lối làm việc." }, { "q": "Chọn đáp án đúng nhất theo tư tưởng Hồ Chí Minh về Nhà nước Việt Nam?", "opts": ["Mang bản chất giai cấp công nhân.", "Mang tính dân tộc.", "Có tính dân tộc và tính nhân dân sâu sắc.", "Có sự thống nhất bản chất giai cấp công nhân với tính nhân dân và tính dân tộc."], "ans": 0, "exp": "Đáp án đúng: A. Mang bản chất giai cấp công nhân." }, { "q": "Các quy tắc, chuẩn mực đạo đức luôn biến đổi theo:", "opts": ["Sự vận động.", "Sự vận động và phát triển của con người.", "Sự phát triển của xã hội.", "Đời sống con người."], "ans": 1, "exp": "Đáp án đúng: B. Sự vận động và phát triển của con người." }, { "q": "Cơ quan ngôn luận của tổ chức Việt Nam Thanh niên cách mạng đồng chí Hội là tờ báo tên là gì?", "opts": ["Báo Người cùng khổ.", "Báo Người cùng khổ.", "Báo Thanh niên.", "Báo Đời sống, xã hội."], "ans": 2, "exp": "Đáp án đúng: C. Báo Thanh niên." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh: \"Chống […] và bệnh quan liêu cũng quan trọng và cần thiết như việc đánh giặc trên mặt trận\".", "opts": ["Tham ô, lãng phí.", "Lãng phí, bè phái.", "Tham nhũng, lãng phí.", "Phá hoại của công."], "ans": 0, "exp": "Đáp án đúng: A. Tham ô, lãng phí." }, { "q": "Hồ Chí Minh có bao nhiêu cách tiếp cận chủ yếu về văn hoá?", "opts": ["Hai cách: Theo nghĩa rộng; Theo nghĩa hẹp.", "Năm cách: Theo nghĩa rộng; Theo nghĩa hẹp; Theo nghĩa hẹp hơn; Theo phương thức phát triển của công cụ sản xuất; Theo phương thức sử dụng công cụ sinh hoạt.", "Ba cách: Theo nghĩa rộng; Theo nghĩa hẹp; Theo nghĩa hẹp hơn.", "Bốn cách: Theo nghĩa rộng; Theo nghĩa hẹp; Theo nghĩa hẹp hơn; Theo phương thức sử dụng công cụ sinh hoạt."], "ans": 3, "exp": "Đáp án đúng: D. Bốn cách: Theo nghĩa rộng; Theo nghĩa hẹp; Theo nghĩa hẹp hơn; Theo phương thức sử dụng công cụ sinh hoạt." }, { "q": "Nguyễn Ái Quốc tán thành Quốc tế III, tham gia thành lập Đảng Cộng sản Pháp vào thời gian nào?", "opts": ["Tháng 02 năm 1919.", "Tháng 02 năm 1921.", "Tháng 12 năm 1919.", "Tháng 12 năm 1920."], "ans": 3, "exp": "Đáp án đúng: D. Tháng 12 năm 1920." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Nước ta là nước […], nghĩa là nhà nước do nhân dân […]”.", "opts": ["Vô sản; Quản lý.", "Vì dân; Kiểm soát.", "Dân chủ; Làm chủ.", "Dân chủ; Quản lý."], "ans": 2, "exp": "Đáp án đúng: C. Dân chủ; Làm chủ." }, { "q": "Trong tư tưởng Hồ Chí Minh, nhiệm vụ hàng đầu, trên hết, trước hết của cách mạng Việt Nam là gì?", "opts": ["Giải phóng giai cấp công nhân.", "Người cày phải có ruộng.", "Giải phóng dân tộc.", "Giải phóng con người"], "ans": 2, "exp": "Đáp án đúng: C. Giải phóng dân tộc." }, { "q": "Triều đình nhà Nguyễn thực hiện chính sách gì trong giai đoạn cuối thế kỷ XIX đầu thế kỷ XX?", "opts": ["Chính sách mở cửa giao thương.", "Chính sách hiệp thương với Pháp.", "Chính sách bế quan toả cảng.", "Chính sách mậu dịch quốc doanh."], "ans": 2, "exp": "Đáp án đúng: C. Chính sách bế quan toả cảng." }, { "q": "\"Việc gì có lợi cho dân, ta phải hết sức làm. Việc gì có hại cho dân, ta phải hết sức tránh\"… Được trích trong tác phẩm nào của Bác?", "opts": ["Thư gửi các đồng chí Tỉnh nhà.", "Thư gửi các đồng chí Bắc bộ.", "Thư gửi Ủy ban nhân dân các Kỳ, Tỉnh, Huyện và Làng.", "Lời kêu gọi toàn quốc kháng chiến."], "ans": 2, "exp": "Đáp án đúng: C. Thư gửi Ủy ban nhân dân các Kỳ, Tỉnh, Huyện và Làng." }, { "q": "Chọn đáp án đúng nhất. Theo Hồ Chí Minh, đại đoàn kết toàn dân tộc chỉ có sức mạnh khi được tập hợp, tổ chức thành:", "opts": ["Mặt trận dân tộc thống nhất.", "Mặt trận nhân dân thống nhất.", "Mặt trận tổ quốc Việt Nam.", "Mặt trận dân chủ Đông"], "ans": 0, "exp": "Đáp án đúng: A. Mặt trận dân tộc thống nhất." }, { "q": "\"Cũng như ngọc càng mài càng sáng, vàng càng luyện càng trong\". Luận điểm này được Hồ Chí Minh viết vào thời gian nào?", "opts": ["17/12/1958.", "17/12/1967.", "17/12/1959.", "17/12/1969."], "ans": 0, "exp": "Đáp án đúng: A. 17/12/1958." }, { "q": "\"Toàn thể dân tộc Việt Nam quyết đem […] để giữ vững quyền tự do, độc lập ấy\". Điền vào chỗ trống đúng với tư tưởng HCM.", "opts": ["Tất cả tinh thần và lực lượng.", "Lực lượng quần chúng được huy động.", "Toàn bộ sức lực.", "Tất cả tinh thần và lực lượng, tính mạng và của cải."], "ans": 3, "exp": "Đáp án đúng: D. Tất cả tinh thần và lực lượng, tính mạng và của cải." }, { "q": "Theo Hồ Chí Minh, đoàn kết quốc tế có vai trò như thế nào đối với thắng lợi của cách mạng?", "opts": ["Là vấn đề chiến lược quyết định sự thắng lợi.", "Là vấn đề mang tính quyết định.", "Là vấn đề vừa quan trọng vừa quyết định.", "Là vấn đề mang tính quan trọng."], "ans": 2, "exp": "Đáp án đúng: C. Là vấn đề vừa quan trọng vừa quyết định." }, { "q": "Sức mạnh dân tộc trong tư tưởng Hồ Chí Minh KHÔNG bao gồm:", "opts": ["Chủ nghĩa yêu nước Việt Nam.", "Tài nguyên thiên nhiên.", "Tinh thần đoàn kết, ý thức tự lực tự cường.", "Văn hóa truyền thống Việt Nam."], "ans": 1, "exp": "Đáp án đúng: B. Tài nguyên thiên nhiên." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Rằng đây bốn bể một nhà, […] đều là anh em”.", "opts": ["Bốn phương vô sản.", "Lao động thế giới.", "Đông Tây Nam Bắc.", "Vàng Đen Trắng Đỏ."], "ans": 3, "exp": "Đáp án đúng: D. Vàng Đen Trắng Đỏ." }, { "q": "Mặt trận dân tộc thống nhất được hợp nhất vào thời gian nào?", "opts": ["Ngày 20/12/1960.", "Ngày 22/12/1944.", "Ngày 04/02/1977.", "Ngày 12/12/1986."], "ans": 2, "exp": "Đáp án đúng: C. Ngày 04/02/1977." }, { "q": "Chọn đáp đúng nhất theo Hồ Chí Minh. \"Cần\" nghĩa là:", "opts": ["Cần cù, chăm chỉ, ham học hỏi.", "Chăm chỉ, siêng năng, nhiệt tình công việc, ham học hỏi.", "Cần cù, chăm chỉ, chăm học, chăm làm.", "Cần cù, chăm chỉ, năng động, sáng tạo, làm việc có kế hoạch."], "ans": 3, "exp": "Đáp án đúng: D. Cần cù, chăm chỉ, năng động, sáng tạo, làm việc có kế hoạch." }, { "q": "Theo Hồ Chí Minh, mục đích của Đảng Lao động Việt Nam có thể gộp trong tám chữ, đó là:", "opts": ["Thành công, thành công, đại thành công.", "Đoàn kết toàn dân, quyết tâm thắng lợi.", "Đoàn kết nhất trí, xây dựng thành công.", "Đoàn kết toàn dân, phụng sự tổ quốc."], "ans": 3, "exp": "Đáp án đúng: D. Đoàn kết toàn dân, phụng sự tổ quốc." }, { "q": "Hệ tư tưởng có tính quyết định đến sự hình thành lối sống của Hồ Chí Minh là:", "opts": ["Tư tưởng Lão giáo.", "Tư tưởng Phật giáo.", "Tư tưởng Nho giáo.", "Chủ nghĩa Mác – Lênin."], "ans": 0, "exp": "Đáp án đúng: A. Tư tưởng Lão giáo." }, { "q": "Trong tư tưởng Hồ Chí Minh, giải phóng con người trước hết là:", "opts": ["Giải phóng giai cấp công nhân.", "Giải phóng giai cấp vô sản.", "Giải phóng giai cấp nông dân.", "Giải phóng quần chúng lao động"], "ans": 3, "exp": "Đáp án đúng: D. Giải phóng quần chúng lao động" }] }, { "id": "tthcm201", "name": "TTHCM Câu 201-250", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 201 đến 250", "questions": [{ "q": "Yếu tố nào là một động lực lớn trong cuộc đấu tranh giải phóng dân tộc ở các nước thuộc địa?", "opts": ["Chủ nghĩa dân tộc.", "Chủ nghĩa cộng sản.", "Chủ nghĩa yêu nước.", "Chủ nghĩa xã hội."], "ans": 2, "exp": "Đáp án đúng: C. Chủ nghĩa yêu nước." }, { "q": "Mục tiêu của chức năng giáo dục là gì?", "opts": ["Hoàn thiện nhân cách con người.", "Trở thành người có ích cho xã hội.", "Nâng cao học thức.", "Giúp con người vươn đến CHÂN – THIỆN – MỸ."], "ans": 3, "exp": "Đáp án đúng: D. Giúp con người vươn đến CHÂN – THIỆN – MỸ." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Mục đích phê bình cốt để […], giúp nhau tiến bộ”.", "opts": ["Giúp nhau sữa chữa.", "Giúp nhau cải tạo.", "Sửa chữa sai lầm.", "Chỉ ra khuyết điểm."], "ans": 0, "exp": "Đáp án đúng: A. Giúp nhau sữa chữa." }, { "q": "Chọn đáp án KHÔNG đúng. Giải phóng dân tộc theo tư tưởng Hồ Chí Minh là:", "opts": ["Đánh đổ ách áp bức, thống trị của đế quốc thực dân giành độc lập dân tộc.", "Lựa chọn con đường phát triển của dân tộc phù hợp với xu thế của thời đại.", "Đánh đổ địa chủ phong kiến đem lại ruộng đất cho nhân dân.", "Hình thành nhà nước dân tộc độc lập của dân, do dân, vì dân."], "ans": 2, "exp": "Đáp án đúng: C. Đánh đổ địa chủ phong kiến đem lại ruộng đất cho nhân dân." }, { "q": "Hồ Chí Minh nhận nhiệm vụ quốc tế đầu tiên của Quốc tế III là ở đâu? Nhiệm vụ gì?", "opts": ["Quảng Châu – Trung Quốc, giúp thành lập các tổ chức cộng sản.", "Hương Cảng – Trung Quốc, giúp thành lập các tổ chức cộng sản.", "Quảng Đông – Trung Quốc, giúp thành lập các tổ chức cộng sản.", "Quảng Tây – Trung Quốc, giúp thành lập các tổ chức cộng sản."], "ans": 0, "exp": "Đáp án đúng: A. Quảng Châu – Trung Quốc, giúp thành lập các tổ chức cộng sản." }, { "q": "Khi làm việc tại New York, Hồ Chí Minh đã thấy được điều quan trọng ảnh hưởng đến tư tưởng của Người là gì?", "opts": ["Nhiều dân tộc nhập cư cùng sinh sống với nhau, đoàn kết giúp nhau cùng phát triển.", "Những người dân nhập cư mặc nhiên được hưởng những quyền hợp pháp mà người Việt Nam phải đi xin của Pháp.", "Không có sự phân biệt chủng tộc ở đây, Vàng, Đỏ, Trắng, Đen đều là anh em.", "Một khu phố ngự trị bởi người dân nhập cư."], "ans": 1, "exp": "Đáp án đúng: B. Những người dân nhập cư mặc nhiên được hưởng những quyền hợp pháp mà người Việt Nam phải đi xin của Pháp." }, { "q": "Theo Hồ Chí Minh, muốn xây dựng CNXH trước hết cần phải có:", "opts": ["Khoa học - kỹ thuật tiên tiến.", "Văn hóa đậm đà bản sắc dân tộc.", "Nền kinh tế phát triển cao.", "Con người xã hội chủ nghĩa."], "ans": 3, "exp": "Đáp án đúng: D. Con người xã hội chủ nghĩa." }, { "q": "Đảng Cộng sản Việt Nam trở thành Đảng cầm quyền ở Việt Nam từ thời gian nào?", "opts": ["Ngày 03/02/1930.", "Ngày 30/04/1975.", "Ngày 24/02/1930.", "Ngày 06/01/1946."], "ans": 3, "exp": "Đáp án đúng: D. Ngày 06/01/1946." }, { "q": "Yếu tố KHÔNG nằm trong cơ cấu Mặt trận Dân tộc thống nhất là gì?", "opts": ["Đảng Cộng sản Việt Nam.", "Nhà nước xã hội chủ nghĩa.", "Các tổ chức chính trị - xã hội.", "Đoàn Thanh niên Cộng sản Hồ Chí Minh."], "ans": 1, "exp": "Đáp án đúng: B. Nhà nước xã hội chủ nghĩa." }, { "q": "Theo Hồ Chí Minh độc lập, tự do là:", "opts": ["Quyền thiêng liêng, bất khả xâm phạm của tất cả các dân tộc.", "Quyền tự quyết của tất cả các dân tộc trên thế giới.", "Quyền thiêng liêng của tất cả các dân tộc trên thế giới.", "Quyền bất khả xâm phạm của tất cả các dân tộc trên thế giới."], "ans": 0, "exp": "Đáp án đúng: A. Quyền thiêng liêng, bất khả xâm phạm của tất cả các dân tộc." }, { "q": "Cơ sở thế giới quan và phương pháp luận của tư tưởng Hồ Chí Minh là:", "opts": ["Chủ nghĩa yêu nước.", "Tinh hoa văn hoá người Việt Nam.", "Tinh hoa văn hóa nhân loại.", "Chủ nghĩa Mác – Lênin."], "ans": 3, "exp": "Đáp án đúng: D. Chủ nghĩa Mác – Lênin." }, { "q": "Chọn đáp án KHÔNG đúng. Nguyên tắc xây dựng Đảng Cộng sản Việt Nam theo tư tưởng Hồ Chí Minh là:", "opts": ["Thiểu số phục tùng đa số.", "Kỷ luật nghiêm minh, tự giác.", "Đoàn kết, thống nhất trong Đảng.", "Tự phê bình và phê bình."], "ans": 0, "exp": "Đáp án đúng: A. Thiểu số phục tùng đa số." }, { "q": "“Công nông là gốc của cách mệnh, còn học trò, nhà buôn nhỏ, điền chủ nhỏ là bầu bạn cách mệnh của công nông” được Nguyễn Ái Quốc đưa ra để xác định:", "opts": ["Phương pháp cách mạng.", "Vai trò của đoàn kết.", "Nhiệm vụ của cách mạng.", "Lực lượng cách mạng."], "ans": 3, "exp": "Đáp án đúng: D. Lực lượng cách mạng." }, { "q": "Tinh thần quốc tế trong sáng trong tư tưởng đạo đức của Hồ Chí Minh đã tạo ra một kiểu quan hệ quốc tế mới, đó là:", "opts": ["Đa phương hoá, đa dạng hoá các quan hệ hữu nghị, hợp tác với nhau cùng phát triển.", "Giải quyết tranh chấp, đối đầu bằng hội nghị hiệp thương song phương, đa phương.", "Chủ nghĩa yêu nước chân chính kết hợp nhuần nhuyễn với chủ nghĩa quốc tế vô sản.", "Đối thoại thay cho đối đầu, nhằm kiến tạo một nền văn hoá hoà bình cho nhân loại."], "ans": 3, "exp": "Đáp án đúng: D. Đối thoại thay cho đối đầu, nhằm kiến tạo một nền văn hoá hoà bình cho nhân loại." }, { "q": "“Đảng phải đặc biệt coi trọng việc tổ chức học tập một cách có hệ thống tư tưởng, đạo đức tác phong của Hồ Chí Minh trong toàn Đảng” được nhấn mạnh trong văn kiện tại:", "opts": ["Đại hội đại biển toàn quốc lần thứ II của Đảng.", "Đại hội đại biển toàn quốc lần thứ XI của Đảng.", "Đại hội đại biển toàn quốc lần thứ IV của Đảng.", "Đại hội đại biển toàn quốc lần thứ V của Đảng."], "ans": 3, "exp": "Đáp án đúng: D. Đại hội đại biển toàn quốc lần thứ V của Đảng." }, { "q": "Hồ Chí Minh tiếp thu tư tưởng văn hoá phương Đông chủ yếu từ đâu?", "opts": ["Nho giáo và Phật giáo.", "Chủ nghĩa Mác – Lênin.", "Nho giáo và Thiên Chúa giáo.", "Phật giáo và Thiên Chúa giáo."], "ans": 0, "exp": "Đáp án đúng: A. Nho giáo và Phật giáo." }, { "q": "Chọn đáp án KHÔNG đúng. Nguyên tắc xây dựng và hoạt động của Mặt trận Dân tộc thống nhất là:", "opts": ["Lấy lợi ích tối cao của giai cấp công nhân, giai cấp vô sản làm mục tiêu phấn đấu.", "Đoàn kết lâu dài, chặt chẽ, đoàn kết thực sự, chân thành, thân ái giúp đỡ nhau tiến bộ.", "Xây dựng trên nền tảng liên minh công – nông – trí, dưới sự lãnh đạo của Đảng.", "Xuất phát từ mục tiêu vì nước, vì dân; hoạt động theo nguyên tắc hiệp thương dân chủ."], "ans": 0, "exp": "Đáp án đúng: A. Lấy lợi ích tối cao của giai cấp công nhân, giai cấp vô sản làm mục tiêu phấn đấu." }, { "q": "Theo tư tưởng Hồ Chí Minh, ai là người chủ tương lai của nước nhà?", "opts": ["Công nhân.", "Thanh niên.", "Thiếu niên.", "Nhi đồng."], "ans": 1, "exp": "Đáp án đúng: B. Thanh niên." }, { "q": "“Đưa hổ cửa trước, rước beo cửa sau” là câu đánh giá của ai?", "opts": ["Phan Chu Trinh.", "Phan Bội Châu.", "Hồ Chí Minh.", "Hoàng Hoa Thám"], "ans": 2, "exp": "Đáp án đúng: C. Hồ Chí Minh." }, { "q": "Chọn đáp án KHÔNG đúng. Cơ sở hình thành tư tưởng đại đoàn kết dân tộc của Hồ Chí Minh là:", "opts": ["Truyền thống đoàn kết nhân ái, tinh thần gắn kết cộng đồng dân tộc Việt Nam.", "Thực tiễn thành công và thất bại của phong trào cách mạng Việt Nam và thế giới.", "Thực tiễn thất bại của phong trào cách mạng ở các nước phương Đông.", "Quan điểm của chủ nghĩa Mác –Lênin về vai trò của quần chúng nhân dân."], "ans": 2, "exp": "Đáp án đúng: C. Thực tiễn thất bại của phong trào cách mạng ở các nước phương Đông." }, { "q": "Theo Hồ Chí Minh, nền tảng tư tưởng của Đảng phải dựa trên:", "opts": ["Nguyên tắc tự phê bình và phê bình.", "Đại đoàn kết dân tộc.", "Nguyên tắc tập trung dân chủ.", "Chủ nghĩa Mác – Lênin."], "ans": 3, "exp": "Đáp án đúng: D. Chủ nghĩa Mác – Lênin." }, { "q": "Trong khối đại đoàn kết dân tộc, đặc biệt chú trọng yếu tố hạt nhân là gì?", "opts": ["Sự đoàn kết, thống nhất trong sáng.", "Sự đoàn kết, nhất trí trong nhân dân.", "Sự thống nhất, đồng sức, đồng lòng.", "Sự đoàn kết và thống nhất trong Đảng."], "ans": 3, "exp": "Đáp án đúng: D. Sự đoàn kết và thống nhất trong Đảng." }, { "q": "Chọn đáp án KHÔNG đúng. Độc lập dân tộc trong tư tưởng Hồ Chí Minh phải:", "opts": ["Gắn liền với độc lập của các dân tộc thuộc địa.", "Gắn liền với thống nhất và toàn vẹn lãnh thổ.", "Gắn liền với tự do, hạnh phúc của nhân dân.", "Độc lập thật sự, hoàn toàn và triệt để."], "ans": 0, "exp": "Đáp án đúng: A. Gắn liền với độc lập của các dân tộc thuộc địa." }, { "q": "Theo tư tưởng Hồ Chí Minh, nếu lý luận và thực tiễn không thống nhất với nhau cần phải điều chỉnh một yếu tố thì trước hết phải điều chỉnh yếu tố nào?", "opts": ["Điều chỉnh cả lý luận và thực tiễn.", "Điều chỉnh lý luận trước.", "Điều chỉnh thực tiễn trước.", "Thực hành phải nhắm theo lý luận."], "ans": 1, "exp": "Đáp án đúng: B. Điều chỉnh lý luận trước." }, { "q": "Phương thức xây dựng khối đại đoàn kết dân tộc là làm tốt công tác vận động quần chúng. Đây là phương thức công tác:", "opts": ["Tuyên giáo.", "Tuyên truyền.", "Dân vận.", "Tuyên vận."], "ans": 1, "exp": "Đáp án đúng: B. Tuyên truyền." }, { "q": "Chuẩn mực xã hội là gì?", "opts": ["Quy tắc (tường minh/ hàm ẩn) nhằm xác định kiểu hành vi nào là được chấp nhận trong một xã hội/cộng đồng/nhóm.", "Quy tắc ứng xử chung của xã hội.", "Chuẩn mực đạo đức trong đời sống.", "Những hành vi được chấp nhận."], "ans": 0, "exp": "Đáp án đúng: A. Quy tắc (tường minh/ hàm ẩn) nhằm xác định kiểu hành vi nào là được chấp nhận trong một xã hội/cộng đồng/nhóm." }, { "q": "Tư tưởng cốt lõi trong tư tưởng Hồ Chí Minh về cách mạng Việt Nam là gì?", "opts": ["Giải phóng dân tộc, giải phóng giai cấp.", "Độc lập dân tộc gắn liền với chủ nghĩa xã hội.", "Giải phóng dân tộc, giải phóng con người.", "Kết hợp sức mạnh dân tộc với sức mạnh thời đại."], "ans": 1, "exp": "Đáp án đúng: B. Độc lập dân tộc gắn liền với chủ nghĩa xã hội." }, { "q": "Sau khi lên tàu đi tìm đường cứu nước Hồ Chí Minh đến nước nào đầu tiên? Thời gian nào?", "opts": ["Nước Pháp, ngày 05/06/1911.", "Nam phi, ngày 25/06/1911.", "Nước Pháp, ngày 06/07/1911.", "Châu Phi, ngày 06/07/1911."], "ans": 2, "exp": "Đáp án đúng: C. Nước Pháp, ngày 06/07/1911." }, { "q": "\"Người cách mạng phải học suốt đời, học lý luận, học quần chúng, học thực tế. Người không học thì như đi ban đêm không đèn, không gậy, dễ vấp té, có phải thế không?\". Đây là Hồ Chí Minh căn dặn ai?", "opts": ["Nguyễn Thị Thập.", "Nguyễn Thị Định.", "Tạ Thị Kiều.", "Nguyễn Thị Chiến."], "ans": 1, "exp": "Đáp án đúng: B. Nguyễn Thị Định." }, { "q": "Mâu thuẫn cơ bản và chủ yếu ở Việt Nam đầu thế kỷ XX là mâu thuẫn giữa:", "opts": ["Giai cấp nông dân với giai cấp địa chủ phong kiến, tư sản Việt Nam và tư sản Pháp.", "Giai cấp công nhân và nông dân với đế quốc phong kiến và chính quyền thực dân.", "Giai cấp công nhân với giai cấp tư sản Pháp và tay sai của chúng.", "Dân tộc Việt Nam với đế quốc xâm lược và tay sai của chúng."], "ans": 3, "exp": "Đáp án đúng: D. Dân tộc Việt Nam với đế quốc xâm lược và tay sai của chúng." }, { "q": "Chọn đáp án KHÔNG đúng. Điều kiện để xây dựng khối đại đoàn kết toàn dân tộc:", "opts": ["Phải có lòng yêu thương con người, sống có hoài bão.", "Phải có niềm tin vào nhân dân.", "Phải kế thừa truyền thống yêu nước, nhân nghĩa, đoàn kết.", "Phải có lòng khoan dung, độ lượng với con người."], "ans": 0, "exp": "Đáp án đúng: A. Phải có lòng yêu thương con người, sống có hoài bão." }, { "q": "Chọn đáp án đúng nhất. Hồ Chí Minh ra đi tìm đường cứu nước vào thời gian nào? Ở đâu?", "opts": ["Năm 1911; Thành phố Hồ Chí Minh.", "Ngày 05/06/1911; Bến cảng Nhà rồng – Hương cảng.", "Ngày 05/06/1911; Bến cảng Nhà rồng - Sài gòn.", "Ngày 05/06/1911; Thành phố Sài gòn."], "ans": 2, "exp": "Đáp án đúng: C. Ngày 05/06/1911; Bến cảng Nhà rồng - Sài gòn." }, { "q": "Chọn đáp án KHÔNG đúng. Con đường cách mạng cuối thế kỷ XIX đầu thế kỷ XX ở Việt Nam:", "opts": ["Cách mạng Phong kiến.", "Cải cách dân chủ tư sản.", "Cách mạng dân chủ tư sản.", "Cách mạng vô sản."], "ans": 3, "exp": "Đáp án đúng: D. Cách mạng vô sản." }, { "q": "Hồ Chí Minh lấy tên là Nguyễn ái Quốc khi đang ở đâu? Thời gian nào?", "opts": ["Ở Paris - Pháp, năm 1919.", "Ở Boston - Mỹ, năm 1917.", "Ở Pháp, năm 1920.", "Ở Paris - Pháp, năm 1920."], "ans": 0, "exp": "Đáp án đúng: A. Ở Paris - Pháp, năm 1919." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Chế độ ta là chế độ dân chủ, nghĩa là […] làm chủ”.", "opts": ["Công nhân.", "Công- Nông.", "Công dân.", "Nhân dân."], "ans": 3, "exp": "Đáp án đúng: D. Nhân dân." }, { "q": "Chọn đáp án đúng nhất. Con người theo quan niệm của Hồ Chí Minh là:", "opts": ["Vốn quý nhất, nhân tố quan trọng đến thành công của cách mạng.", "Nguồn vốn vô giá của xã hội, là động lực của cách mạng.", "Vốn quý nhất, nhân tố quyết định thành công của cách mạng.", "Vốn quý của cách mạng, là nguồn vốn quý giá của xã hội."], "ans": 2, "exp": "Đáp án đúng: C. Vốn quý nhất, nhân tố quyết định thành công của cách mạng." }, { "q": "Theo Hồ Chí Minh, cách mạng bạo lực là đấu tranh:", "opts": ["Kết hợp chính trị quần chúng với vũ trang nhân dân.", "Kết hợp đấu tranh quân sự với đấu tranh ngoại giao.", "Kết hợp chính trị quần chúng với đấu tranh ngoại giao.", "Kết hợp vũ trang nhân dân với mặt trận ngoại giao."], "ans": 1, "exp": "Đáp án đúng: B. Kết hợp đấu tranh quân sự với đấu tranh ngoại giao." }, { "q": "Luận điểm sáng tạo của Hồ Chí minh về con đường cách mạng Việt Nam được hình thành về cơ bản vào năm nào?", "opts": ["Năm 1920.", "Năm 1930.", "Năm 1941.", "Năm 1925."], "ans": 1, "exp": "Đáp án đúng: B. Năm 1930." }, { "q": "Xét về tính giá trị, sự khác nhau giữa văn hóa và văn minh là:", "opts": ["Văn hóa gắn với phương Đông nông nghiệp, văn minh gắn với phương tây đô thị.", "Văn hóa mang tính dân tộc còn văn minh mang tính quốc tế.", "Văn minh có trình độ phát triển còn văn hóa có bề dày lịch sử.", "Văn minh thiên về vật chất - kỹ thuật còn văn hóa thiên về vật chất tinh thần."], "ans": 3, "exp": "Đáp án đúng: D. Văn minh thiên về vật chất - kỹ thuật còn văn hóa thiên về vật chất tinh thần." }, { "q": "Từ sau Cách mạng tháng Tám năm 1945, văn hóa được Hồ Chí Minh xác định là:", "opts": ["Tổng hợp mọi phương thức sản xuất của con người.", "Các trường học, số người đi học, biết đọc, biết viết.", "Đời sống tinh thần của xã hội, thuộc về kiến trúc thượng tầng.", "Đời sống vật chất của xã hội, thuộc về cơ sở hạ tầng."], "ans": 2, "exp": "Đáp án đúng: C. Đời sống tinh thần của xã hội, thuộc về kiến trúc thượng tầng." }, { "q": "Nguyễn Ái Quốc đã thành lập Hội Việt Nam cách mạng thanh niên tại đâu?", "opts": ["Quảng Châu (Trung Quốc).", "Cao Bằng (Việt Nam).", "Hương Cảng (Trung Quốc).", "Thượng Hải (Trung Quốc)."], "ans": 0, "exp": "Đáp án đúng: A. Quảng Châu (Trung Quốc)." }, { "q": "Chọn đáp án KHÔNG đúng. Ý nghĩa học tập môn học Tư tưởng Hồ Chí Minh:", "opts": ["Góp phần nâng cao năng lực tư duy lý luận.", "Xây dựng bản lĩnh cách mạng, đấu tranh chống giặc ngoại xâm.", "Giáo dục và thực hành đạo đức cách mạng, củng cố niềm tin vào khoa học, bồi dưỡng lòng yêu nước.", "Xây dựng, rèn luyện phương pháp và phong cách công tác."], "ans": 1, "exp": "Đáp án đúng: B. Xây dựng bản lĩnh cách mạng, đấu tranh chống giặc ngoại xâm." }, { "q": "Hành vi đạo đức gắn với:", "opts": ["Ý thức trách nhiệm.", "Lòng nhân đạo.", "Lý trí.", "Ý thức đạo đức."], "ans": 3, "exp": "Đáp án đúng: D. Ý thức đạo đức." }, { "q": "\"Cũng như ngọc càng mài càng sáng, vàng càng luyện càng trong\". Luận điểm này được trích trong tác phẩm nào của Bác?", "opts": ["Đường Kách mệnh.", "Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân.", "Liên Xô vĩ đại.", "Đạo đức cách mạng."], "ans": 3, "exp": "Đáp án đúng: D. Đạo đức cách mạng." }, { "q": "Cuốn “Đường kách mệnh” của Nguyễn Ái Quốc được tái xuất bản tại:", "opts": ["Pháp.", "Trung Quốc.", "Việt Nam.", "Liên Xô."], "ans": 2, "exp": "Đáp án đúng: C. Việt Nam." }, { "q": "“Toàn Đảng hãy ra sức học tập đường lối chính trị, tác phong và đạo đức cách mạng của Hồ Chủ tịch…” được viết trong văn kiện tại:", "opts": ["Đại hội đại biển toàn quốc lần thứ II của Đảng.", "Đại hội đại biển toàn quốc lần thứ XI của Đảng.", "Đại hội đại biển toàn quốc lần thứ IV của Đảng.", "Đại hội đại biển toàn quốc lần thứ V của Đảng."], "ans": 0, "exp": "Đáp án đúng: A. Đại hội đại biển toàn quốc lần thứ II của Đảng." }, { "q": "Trong tư tưởng Hồ Chí Minh, bạo lực cách mạng luôn thống nhất với:", "opts": ["Tư tưởng đấu tranh ngoại giao.", "Tư tưởng cách mạng không ngừng.", "Tư tưởng đấu tranh hoà bình.", "Tư tưởng nhân đạo hòa bình."], "ans": 3, "exp": "Đáp án đúng: D. Tư tưởng nhân đạo hòa bình." }, { "q": "Nguyễn Ái Quốc nhận nhiệm vụ quốc tế đầu tiên của Quốc tế III, lấy tên là gì?", "opts": ["Lin.", "Hồ Chí Minh.", "Lý Thuỵ.", "Nguyễn Ba."], "ans": 2, "exp": "Đáp án đúng: C. Lý Thuỵ." }, { "q": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, muốn tăng cường đoàn kết quốc tế, các đảng cộng sản trên thế giới phải:", "opts": ["Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa cơ hội.", "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa sôvanh.", "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa xét lại.", "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa vị kỷ dân tộc."], "ans": 2, "exp": "Đáp án đúng: C. Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa xét lại." }, { "q": "Nguyễn Ái Quốc đọc “Sơ thảo lần thứ nhất vấn đề dân tộc và thuộc địa” vào thời gian nào? Ở đâu?", "opts": ["Tháng 07/1920 tại Moscow.", "Tháng 07/1920 tại London.", "Tháng 07/1920 tại Paris.", "Tháng 02/1917 tại New York."], "ans": 2, "exp": "Đáp án đúng: C. Tháng 07/1920 tại Paris." }] }, { "id": "tthcm251", "name": "TTHCM Câu 251-300", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 251 đến 300", "questions": [{ "q": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là sản phẩm của sự kết hợp của 3 yếu tố, là xác định:", "opts": ["Nhiệm vụ lịch sử của Đảng.", "Bản chất ra đời của Đảng.", "Nguồn gốc ra đời của Đảng.", "Tiêu chuẩn ra đời của Đảng."], "ans": 2, "exp": "Đáp án đúng: C. Nguồn gốc ra đời của Đảng." }, { "q": "Theo Hồ Chí Minh, sử dụng bạo lực cách mạng là để:", "opts": ["Lật đổ chế độ cũ, xây dựng chế độ mới.", "Tiêu diệt các lực lượng phản cách mạng, lật đổ chính quyền phản động và tay sai.", "Xây dựng và bảo vệ chính quyền; xây dựng chế độ mới.", "Giành chính quyền và giữ chính quyền."], "ans": 3, "exp": "Đáp án đúng: D. Giành chính quyền và giữ chính quyền." }, { "q": "Tiêu chí của đạo đức là gì?", "opts": ["Ý thức đạo đức – Hành vi đạo đức – Quan hệ đạo đức.", "Hiểu đạo đức – Hành vi đạo đức – Quan hệ đạo đức.", "Nhận thức đạo đức – Hành vi đạo đức – Quan hệ đạo đức.", "Có đạo đức – Hành vi đạo đức – Quan hệ đạo đức."], "ans": 0, "exp": "Đáp án đúng: A. Ý thức đạo đức – Hành vi đạo đức – Quan hệ đạo đức." }, { "q": "Xã hội chỉ phát triển bền vững khi các quy tắc, chuẩn mực đạo đức trong xã hội đó luôn được:", "opts": ["Tạo điều kiện để phát triển thuận lợi.", "Thúc đẩy nhanh chóng để phát triển.", "Tôn trọng củng cố và phát triển.", "Phát triển mạnh mẽ."], "ans": 2, "exp": "Đáp án đúng: C. Tôn trọng củng cố và phát triển." }, { "q": "Theo Hồ Chí Minh, ưu điểm lớn nhất của học thuyết Khổng Tử là gì?", "opts": ["Tinh thần hiếu học.", "Sự tu dưỡng đạo đức cá nhân.", "Quản lý xã hội bằng đạo đức.", "Tinh thần lễ nghĩa."], "ans": 1, "exp": "Đáp án đúng: B. Sự tu dưỡng đạo đức cá nhân." }, { "q": "Theo tư tưởng Hồ Chí Minh, mọi việc thành công hay thất bại là do:", "opts": ["Đường lối lãnh đạo đúng hay sai.", "Đường lối đúng hay sai.", "Cán bộ tốt hay kém.", "Công tác hoạch định cán bộ."], "ans": 2, "exp": "Đáp án đúng: C. Cán bộ tốt hay kém." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Nông dân giàu thì nước ta giàu, […] thịnh thì nước ta thịnh”.", "opts": ["Công nghiệp.", "Du lịch.", "Nông nghiệp.", "Thương nghiệp."], "ans": 2, "exp": "Đáp án đúng: C. Nông nghiệp." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Năm ngón tay cũng có […]. Nhưng đều hợp nhau nơi bàn tay”.", "opts": ["Ngón ngắn, ngón dài.", "Ngắn, dài không đều.", "Ngón vắn, ngón dài.", "Dài, ngắn khác nhau."], "ans": 2, "exp": "Đáp án đúng: C. Ngón vắn, ngón dài." }, { "q": "Người thầy giáo đầu tiên của Nguyễn Sinh Cung là ai?", "opts": ["Vương Thúc Quý.", "Nguyễn Sinh Sắc.", "Lê Văn Miến.", "Phan Bội Châu."], "ans": 1, "exp": "Đáp án đúng: B. Nguyễn Sinh Sắc." }, { "q": "Hoạt động đấu tranh đầu tiên của Hồ Chí Minh là gì?", "opts": ["Cùng đoàn biểu tình của nông dân ở Huế biểu tình chống chế độ tham nhũng và mức thuế cao.", "Phiên dịch ra tiếng pháp những đòi hỏi của cuộc biểu tình để các viên chức thực dân có thể đọc nó.", "Cùng học sinh trường Quốc học Huế biểu tình chống chế độ tham nhũng và mức thuế cao.", "Phiên dịch ra tiếng anh những đòi hỏi của cuộc biểu tình để các viên chức thực dân có thể đọc nó."], "ans": 1, "exp": "Đáp án đúng: B. Phiên dịch ra tiếng pháp những đòi hỏi của cuộc biểu tình để các viên chức thực dân có thể đọc nó." }, { "q": "Theo Hồ Chí Minh, khát vọng lớn nhất của dân tộc thuộc địa là gì?", "opts": ["Ruộng đất cho dân cày.", "Quyền bình đẳng.", "Hòa bình và ruộng đất.", "Độc lập và tự do."], "ans": 3, "exp": "Đáp án đúng: D. Độc lập và tự do." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Người cách mạng phải có [...] thì mới gánh được nặng và đi được xa”.", "opts": ["Trí tuệ và tài năng.", "Tài năng và đạo đức.", "Đạo đức cách mạng.", "Phương pháp cách mạng."], "ans": 2, "exp": "Đáp án đúng: C. Đạo đức cách mạng." }, { "q": "Điểm đặc sắc nhất trong tư tưởng Hồ Chí Minh về nhà nước pháp quyền là gì?", "opts": ["Coi trọng pháp luật trong quản lý xã hội, đặc biệt trong phát triển kinh tế.", "Đảm bảo tính nghiêm minh và hiệu lực của pháp luật trong quản lý xã hội.", "Đề cao đạo đức trong quản lý xã hội, đề cao tư tưởng nhân đạo hoà bình.", "Kết hợp nhuần nhuyễn cả pháp luật và đạo đức trong quản lý xã hội."], "ans": 3, "exp": "Đáp án đúng: D. Kết hợp nhuần nhuyễn cả pháp luật và đạo đức trong quản lý xã hội." }, { "q": "Chủ trương trong quan hệ quốc tế của Việt Nam hiện nay là:", "opts": ["Việt Nam sẵn sàng là bạn, là đối tác tin cậy của các nước trong cộng đồng quốc tế.", "Việt Nam sẵn sàng là bạn tin cậy của các nước trong cộng đồng quốc tế.", "Việt Nam sẵn sàng là bạn của các nước trong cộng đồng quốc tế.", "Việt Nam muốn là bạn, là đối tác của các nước trong cộng đồng quốc tế."], "ans": 0, "exp": "Đáp án đúng: A. Việt Nam sẵn sàng là bạn, là đối tác tin cậy của các nước trong cộng đồng quốc tế." }, { "q": "Theo Ph. Ănghen, để có sự bình đẳng, đoàn kết thật sự, chặt chẽ và lâu dài giữa các dân tộc; cần phải làm gì?", "opts": ["Phải đoàn kết với các nước vô sản, đoàn kết với Quốc tế Cộng sản", "Phải tự vươn lên thành giai cấp dân tộc, phải tự mình trở thành dân tộc.", "Phải giành lấy chính quyền.", "Xóa bỏ nguồn gốc sinh ra bất bình đẳng, áp bức dân tộc."], "ans": 3, "exp": "Đáp án đúng: D. Xóa bỏ nguồn gốc sinh ra bất bình đẳng, áp bức dân tộc." }, { "q": "Nguyễn ái Quốc viết câu mở đầu: “Dân ta phải biết sử ta. Cho tường gốc tích nước nhà Việt Nam”, trong tác phẩm nào?", "opts": ["Bài ca du kích.", "Lịch sử nước nhà.", "Đường kách mệnh.", "Lịch sử nước ta."], "ans": 3, "exp": "Đáp án đúng: D. Lịch sử nước ta." }, { "q": "Chọn đáp án KHÔNG đúng. Nhà nước do dân theo tư tưởng Hồ Chí Minh là:", "opts": ["Đại biểu của nhà nước do dân lựa chọn, phải liên hệ chặt chẽ với dân.", "Dân có quyền làm những gì mà pháp luật không cấm và đạo đức cho phép.", "Dân ủng hộ, giúp đỡ, đóng thuế để nhà nước chi tiêu, hoạt động.", "Dân kiểm soát, giám sát, bãi miễn nếu đại biểu không làm tròn sự ủy thác của dân."], "ans": 1, "exp": "Đáp án đúng: B. Dân có quyền làm những gì mà pháp luật không cấm và đạo đức cho phép." }, { "q": "Sau khi học trường Quốc tế Lênin, Hồ Chí Minh đã viết thư muốn ngỏ ý cống hiến cho Quốc tế Cộng sản. Lá thư được viết vào thời gian nào?", "opts": ["Tháng 01/1938.", "Tháng 12/1939.", "Tháng 06/1938.", "Tháng 10/1938."], "ans": 0, "exp": "Đáp án đúng: A. Tháng 01/1938." }, { "q": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam lấy chủ nghĩa Mác – Lênin “làm cốt”, nghĩa là:", "opts": ["Lấy chủ nghĩa Mác – Lênin làm nền tảng tư tưởng, kim chỉ nam cho hành động.", "Căn cứ hoàn toàn vào chủ nghĩa Mác – Lênin mới lãnh đạo cách mạng thắng lợi.", "Lấy chủ nghĩa Mác – Lênin làm chủ trương, đường lối, chính sách cho hành động.", "Dựa vào chủ nghĩa Mác – Lênin để xây dựng học thuyết, quan điểm của Đảng."], "ans": 0, "exp": "Đáp án đúng: A. Lấy chủ nghĩa Mác – Lênin làm nền tảng tư tưởng, kim chỉ nam cho hành động." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Toàn thể dân tộc Việt Nam quyết đem […] để giữ vững quyền tự do, độc lập ấy”.", "opts": ["Tất cả tinh thần và lực lượng, tính mạng và của cải.", "Toàn bộ sinh mệnh và quyết tâm cao nhất.", "Tất cả tinh thần và lực lượng đang có và sẽ có.", "Toàn bộ sức lực và của cải, tinh thần và lực lượng."], "ans": 0, "exp": "Đáp án đúng: A. Tất cả tinh thần và lực lượng, tính mạng và của cải." }, { "q": "Chọn đáp án KHÔNG đúng. Sức mạnh của dân tộc Việt Nam là:", "opts": ["Chủ nghĩa yêu nước.", "Đa dạng tộc người.", "Ý thức tự lực, tự cường.", "Tinh thần đoàn kết."], "ans": 1, "exp": "Đáp án đúng: B. Đa dạng tộc người." }, { "q": "Lênin coi phong trào giải phóng dân tộc là gì?", "opts": ["Một bộ phận của cách mạng vô sản thế giới.", "Cơ sở của quyền tự do, dân chủ chân chính.", "Một bộ phận của vấn đề giai cấp.", "Kim chỉ nam cho các dân tộc bị áp bức trên thế giới."], "ans": 0, "exp": "Đáp án đúng: A. Một bộ phận của cách mạng vô sản thế giới." }, { "q": "Theo Hồ Chí Minh, ưu điểm lớn nhất của tôn giáo GiêSu là gì?", "opts": ["Đức hy sinh.", "Lòng từ bi bác ái.", "Lòng cao thượng.", "Lòng nhân ái cao cả."], "ans": 3, "exp": "Đáp án đúng: D. Lòng nhân ái cao cả." }, { "q": "Theo Hồ Chí Minh, mục đích tiếp thu của văn hoá nhân loại là để:", "opts": ["Làm giàu cho văn hoá Việt Nam, xây dựng nó phù hợp với tinh thần dân chủ.", "Mở rộng giá trị cho văn hoá Việt Nam, tiếp thu chọn lọc những nét tiến bộ mới.", "Làm giàu cho Việt Nam, xây dựng nền văn hoá phù hợp với tinh thần dân chủ.", "Làm giàu cho văn hoá Việt Nam, xây dựng nó phù hợp với tinh thần cách mạng."], "ans": 0, "exp": "Đáp án đúng: A. Làm giàu cho văn hoá Việt Nam, xây dựng nó phù hợp với tinh thần dân chủ." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Việt Nam muốn làm bạn với […], không gây thù oán với một ai”.", "opts": ["Mọi nước dân chủ.", "Các nước phát triển cao.", "Tất cả các nước dân chủ.", "Các nước xã hội chủ nghĩa."], "ans": 0, "exp": "Đáp án đúng: A. Mọi nước dân chủ." }, { "q": "Nhận định: \"Đạo đức là pháp luật tối đa, pháp luật là đạo đức tối thiểu\", muốn đề cập đến điều gì?", "opts": ["Phạm vi điều chỉnh của pháp luật rộng hơn.", "Tính quyết định của đạo đức đối với pháp luật.", "Phạm vi điều chỉnh của đạo đức rộng hơn.", "Tính phụ thuộc của đạo đức đối với pháp luật."], "ans": 2, "exp": "Đáp án đúng: C. Phạm vi điều chỉnh của đạo đức rộng hơn." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Chính sách ngoại giao của Chính phủ thì chỉ có một điều tức là thân thiện với […] trên thế giới để giữ gìn hòa bình”.", "opts": ["Các nước xã hội chủ nghĩa.", "Tất cả các nước dân chủ.", "Các nước cộng sản chủ nghĩa.", "Mọi nước dân chủ."], "ans": 1, "exp": "Đáp án đúng: B. Tất cả các nước dân chủ." }, { "q": "Vấn đề dân tộc trong tư tưởng Hồ Chí Minh là sự kết hợp nhuần nhuyễn giữa:", "opts": ["Vấn đề dân tộc và vấn đề giai cấp.", "Chủ nghĩa dân tộc và chủ nghía xã hội.", "Độc lập dân tộc với tự do, hạnh phúc.", "Chủ nghĩa yêu nước và chủ nghĩa quốc tế."], "ans": 3, "exp": "Đáp án đúng: D. Chủ nghĩa yêu nước và chủ nghĩa quốc tế." }, { "q": "Cuối thế kỷ XIX đầu thế kỷ XX ở thế giới, chủ nghĩa tư bản phát triển như thế nào?", "opts": ["Phát triển mạnh thành các mạng lưới xuyên quốc gia.", "Phát triển từ tự do cạnh tranh sang đế quốc chủ nghĩa.", "Phát triển thành các loại hình: cacten, xanhdica, congxoocxiom.", "Phát triển thành các tổ chức độc quyền nhà nước."], "ans": 1, "exp": "Đáp án đúng: B. Phát triển từ tự do cạnh tranh sang đế quốc chủ nghĩa." }, { "q": "Chọn câu trả lời đúng nhất với tư tưởng Hồ Chí Minh:", "opts": ["Đại đoàn kết dân tộc là vấn đề sách lược.", "Đại đoàn kết dân tộc là vấn đề sống còn.", "Đại đoàn kết dân tộc là thủ đoạn chính trị.", "Đại đoàn kết dân tộc là vấn đề chiến lược."], "ans": 3, "exp": "Đáp án đúng: D. Đại đoàn kết dân tộc là vấn đề chiến lược." }, { "q": "Trong câu nói: \"Dân chủ là khát vọng muôn đời của con người\". Hồ Chí Minh đã nêu lên quan điểm dân chủ có nghĩa là:", "opts": ["Dân là chủ.", "Dân làm chủ.", "Dân kiểm soát.", "Dân điều hành."], "ans": 0, "exp": "Đáp án đúng: A. Dân là chủ." }, { "q": "Chọn cụm từ đúng với tư tưởng Hồ Chí Minh: \"Nông dân giàu thì nước ta giàu, […] thịnh thì nước ta thịnh\"", "opts": ["Công nghiệp.", "Nhân tài.", "Thương nghiệp.", "Nông nghiệp."], "ans": 3, "exp": "Đáp án đúng: D. Nông nghiệp." }, { "q": "Tác phẩm “Bản án chế độ thực dân Pháp” của Nguyễn Ái Quốc được xuất bản lần đầu tiên vào năm nào?", "opts": ["Năm 1924.", "Năm 1930.", "Năm 1925.", "Năm 1927."], "ans": 2, "exp": "Đáp án đúng: C. Năm 1925." }, { "q": "Khẳng định: \"Nhà nước là một tổ chức quyền lực đặc biệt, nó là tổ chức bạo lực dùng để trấn áp một giai cấp nào đó\", là của ai?", "opts": ["Ănghen, Lênin.", "Ănghen, Hồ Chí Minh.", "Lênin, Hồ Chí Minh.", "C. Mác, Ănghen."], "ans": 2, "exp": "Đáp án đúng: C. Lênin, Hồ Chí Minh." }, { "q": "\"Đảng viên đi trước, làng nước theo sau\", câu nói trên của Hồ Chí Minh được trích trong tác phẩm nào?", "opts": ["Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân.", "Đạo đức cách mạng.", "Đường kách mệnh.", "Sửa đổi lối làm việc."], "ans": 0, "exp": "Đáp án đúng: A. Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân." }] }, { "id": "tthcm51", "name": "TTHCM Câu 51-100", "icon": "<i class=\"fas fa-book-open\"></i>", "desc": "Tư tưởng Hồ Chí Minh - Câu 51 đến 100", "questions": [{ "q": "Chọn đáp án KHÔNG đúng. Hồ Chí Minh đề cập đến đạo đức trong mối quan hệ giữa:", "opts": ["Con người với con người.", "Con người với xã hội.", "Con người với việc làm.", "Con người với thói quen."], "ans": 3, "exp": "Đáp án đúng: D. Con người với thói quen." }, { "q": "Nguyễn ái Quốc viết câu mở đầu: “Dân ta phải biết sử ta. Cho tường gốc tích nước nhà Việt Nam”, vào thời gian nào?", "opts": ["Năm 1925.", "Năm 1941.", "Năm 1930.", "Năm 1943."], "ans": 1, "exp": "Đáp án đúng: B. Năm 1941." }, { "q": "Chọn phương án trả lời đúng với tư tưởng Hồ Chí Minh:", "opts": ["Từ 1890 - 1911: Thời kỳ nghiên cứu, khảo sát thực tế, đến với chủ nghia Mác – Lênin.", "Từ 1921 - 1930: Thời kỳ nghiên cứu, khảo sát thực tế, đến với chủ nghia Mác – Lênin.", "Từ 1911 - 1920: Thời kỳ hình thành tư tưởng yêu nước, chí hướng cứu nước.", "Từ 1921 - 1930: Thời kỳ hình thành nội dung cơ bản tư tưởng cách mạng Việt Nam."], "ans": 3, "exp": "Đáp án đúng: D. Từ 1921 - 1930: Thời kỳ hình thành nội dung cơ bản tư tưởng cách mạng Việt Nam." }, { "q": "Theo Hồ Chí Minh, đối với sự nghiệp cách mạng, đại đoàn kết là:", "opts": ["Yêu cầu khách quan.", "Yêu cầu của công nhân.", "Yêu cầu chủ quan.", "Yêu cầu của nông dân."], "ans": 0, "exp": "Đáp án đúng: A. Yêu cầu khách quan." }, { "q": "\"Đoàn kết là một truyền thống cực kỳ quý báu của Đảng ta, của dân ta. Các đồng chí từ trung ương đến các chi bộ cần phải giữ gìn sự đoàn kết nhất trí của Đảng…\", luận điểm này được trích trong tác phầm nào của Bác?", "opts": ["Đạo đức cách mạng.", "Di chúc.", "Sửa đổi lối làm việc.", "Thường thức chính trị."], "ans": 1, "exp": "Đáp án đúng: B. Di chúc." }, { "q": "Chọn đáp án KHÔNG đúng. Trong quá trình lãnh đạo nhà nước, Hồ Chí Minh nhắc nhở cần phải đề phòng và khắc phục những tiêu cực:", "opts": ["Kiêu ngạo, đặc quyền, đặc lợi.", "Bệnh chạy theo thành tích.", "Tư túng, chia rẽ, bè phái.", "Tham ô, lãng phí, quan liêu."], "ans": 1, "exp": "Đáp án đúng: B. Bệnh chạy theo thành tích." }, { "q": "Chọn đáp án đúng nhất. Trong tư tưởng Hồ Chí Minh, đại đoàn kết dân tộc là:", "opts": ["Nhiệm vụ và trách nhiệm hàng đầu của cách mạng.", "Mục tiêu của cách mạng, trách nhiệm của Đảng.", "Mục tiêu, nhiệm vụ hàng đầu của cách mạng, của dân tộc.", "Nhiệm vụ quan trọng nhất của cách mạng dân tộc."], "ans": 2, "exp": "Đáp án đúng: C. Mục tiêu, nhiệm vụ hàng đầu của cách mạng, của dân tộc." }, { "q": "Hồ Chí Minh đánh giá thực tế phong trào cách mạng ở Mỹ và Pháp:", "opts": ["Thành công triệt để.", "Thành công một nữa.", "Thành công không đến nơi.", "Chưa thực sự thành công."], "ans": 2, "exp": "Đáp án đúng: C. Thành công không đến nơi." }, { "q": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là nhân tố quyết định hàng đầu thắng lợi cách mạng Việt Nam, là xác định:", "opts": ["Vai trò lãnh đạo của Đảng.", "Nhiệm vụ lịch sử của Đảng.", "Vị thế cầm quyền của Đảng.", "Bản chất của Đảng cầm quyền."], "ans": 0, "exp": "Đáp án đúng: A. Vai trò lãnh đạo của Đảng." }, { "q": "Cuốn Đường kách mệnh được xuất bản đầu tiên ở đâu? Thời gian nào?", "opts": ["Quảng Châu – Trung Quốc, năm 1927.", "Bắc pó – Việt Nam, năm 1927.", "Hương Cảng – Trung Quốc năm 1927.", "Quảng Châu – Trung Quốc, năm 1925."], "ans": 0, "exp": "Đáp án đúng: A. Quảng Châu – Trung Quốc, năm 1927." }, { "q": "Mối quan hệ giữa nội lực và ngoại lực trong thời kỳ quá độ lên CNXH theo quan điểm của Hồ Chí Minh là gì?", "opts": ["Nội lực là quan trọng nhất, không cần ngoại lực.", "Nội lực là chính, ngoại lực là quan trọng.", "Ngoại lực trong thời kì đầu là cần thiết.", "Nội lực và ngoại lực quan trọng như nhau"], "ans": 1, "exp": "Đáp án đúng: B. Nội lực là chính, ngoại lực là quan trọng." }, { "q": "Theo Hồ Chí Minh, chủ nghĩa cộng sản ra đời dễ dàng hơn ở đâu?", "opts": ["Châu Á, phương Đông.", "Châu Âu, Tây Âu.", "Châu Á, phương Tây Nam.", "Châu Âu, Đông Âu."], "ans": 0, "exp": "Đáp án đúng: A. Châu Á, phương Đông." }, { "q": "Theo Hồ Chí Minh, mối quan hệ giữa văn hoá với các lĩnh vực khác là gì?", "opts": ["Văn hoá là một trong bốn lĩnh vực đời sống: chính trị, kinh tế, văn hoá, xã hội.", "Văn hoá là một mặt trận, cùng góp phần thắng lợi mặt trận chính trị, kinh tế, xã hội.", "Văn hoá với các lĩnh vực chính trị, kinh tế, xã hội có sự tác động qua lại lẫn nhau.", "Văn hoá không thể đứng ngoài mà phải đứng trong chính trị, kinh tế, xã hội."], "ans": 3, "exp": "Đáp án đúng: D. Văn hoá không thể đứng ngoài mà phải đứng trong chính trị, kinh tế, xã hội." }, { "q": "Chọn đáp án đúng theo tư tưởng Hồ Chí Minh về lý luận và thực tiễn:", "opts": ["Lý luận là sự tổng kết thực tiễn, được phản ánh vào trong bộ não của con người.", "Thực tiễn và lý luận luôn đi với nhau, nếu lý luận và thực tiễn không giống với thì phải điều chỉnh thực tiễn trước.", "Thực tiễn là sự tổng kết lý thuyết, được phản ánh thành lý luận vào trong bộ não của con người.", "Thực tiễn không có lý luận như nhắm mắt mà đi, lý luận không đem ra thực hành thì giống như cái hòm đựng đầy sách."], "ans": 3, "exp": "Đáp án đúng: D. Thực tiễn không có lý luận như nhắm mắt mà đi, lý luận không đem ra thực hành thì giống như cái hòm đựng đầy sách." }, { "q": "Chọn đáp án đúng nhất. Nhà nước của dân theo tư tưởng Hồ Chí Minh nghĩa là:", "opts": ["Chăm lo mọi mặt đời sống người lao động và các tầng lớp nhân dân.", "Đại biểu của Nhà nước do nhân dân trực tiếp hoặc gián tiếp bầu ra.", "Mọi quyền lực trong nhà nước và trong xã hội đều thuộc về nhân dân.", "Mọi công việc của nhà nước để dân có quyền biểu quyết để quyết định."], "ans": 2, "exp": "Đáp án đúng: C. Mọi quyền lực trong nhà nước và trong xã hội đều thuộc về nhân dân." }, { "q": "“Trước hết phải có Đảng cách mệnh để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với dân tộc bị áp bức và vô sản giai cấp mọi nơi”. Câu được trích trong:", "opts": ["Tác phẩm “Con Rồng tre”.", "Tác phẩm “Sửa đổi lối làm việc”.", "Tác phẩm “Đường kách mệnh”.", "Tác phẩm “Bản án chế độ thực dân Pháp”."], "ans": 2, "exp": "Đáp án đúng: C. Tác phẩm “Đường kách mệnh”." }, { "q": "Theo Hồ Chí Minh, nguyên tắc cơ bản nhất trong đoàn kết quốc tế là gì?", "opts": ["Đoàn kết trên cơ sở không dùng vũ lực và đe doạ dùng vũ lực.", "Đoàn kết trên cơ sở thống nhất mục tiêu và lợi ích, có lý, có tình.", "Đoàn kết trên cơ sở hợp tác đa phương và các bên cùng có lợi.", "Đoàn kết trên cơ sở đảm bảo sự bình đẳng quốc gia; có đi, có lại."], "ans": 1, "exp": "Đáp án đúng: B. Đoàn kết trên cơ sở thống nhất mục tiêu và lợi ích, có lý, có tình." }, { "q": "Theo Hồ Chí Minh, nguy cơ lớn nhất của một đảng cầm quyền là gì?", "opts": ["Diễn biến hòa bình của các thế lực thù địch bên trong và bên ngoài.", "Tụt hậu về nhận thức sự thay đổi trong thời đại khoa học, công nghệ.", "Đi lệch định hướng, mục tiêu đã đề ra khi xây dựng chủ nghĩa xã hội.", "Sai lầm về đường lối và sự suy thoái đạo đức của cán bộ, đảng viên."], "ans": 3, "exp": "Đáp án đúng: D. Sai lầm về đường lối và sự suy thoái đạo đức của cán bộ, đảng viên." }, { "q": "Để mô tả mối quan hệ giữa cách mạng giải phóng dân và cách mạng vô sản, Hồ Chí Minh sử dụng hình tượng:", "opts": ["Hai cánh của một con chim.", "Con bạch tuộc.", "Con đĩa có hai vòi.", "Hai con chim đại bàng."], "ans": 0, "exp": "Đáp án đúng: A. Hai cánh của một con chim." }, { "q": "Lý do nào sau đây giúp cho tư tưởng Hồ Chí Minh về đoàn kết trở thành di sản văn hoá thế giới?", "opts": ["Đoàn là một lực lượng vô địch của chúng ta để khắc phục khó khăn.", "Đoàn kết tạo ra sức mạnh, tạo ra lực lượng để xây dựng đất nước.", "Đoàn kết là nhu cầu, nguyện vọng sống của tất cả mọi người.", "Đoàn kết là sức mạnh, đoàn kết là then chốt của mọi thành công."], "ans": 1, "exp": "Đáp án đúng: B. Đoàn kết tạo ra sức mạnh, tạo ra lực lượng để xây dựng đất nước." }, { "q": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc là sự nghiệp của:", "opts": ["Đảng Cộng sản Việt Nam.", "Công nhân và nông dân.", "Giai cấp công nhân.", "Quần chúng nhân dân."], "ans": 3, "exp": "Đáp án đúng: D. Quần chúng nhân dân." }, { "q": "“Ỷ Pháp cầu tiến bộ chẳng khác nào xin giặc rủ lòng thương” là câu Nguyễn Ái Quốc nhận xét về chủ trương cứu nước của ai?", "opts": ["Phan Bội Châu.", "Phan Chu Trinh.", "Hoàng Hoa Thám.", "Nguyễn Thái Học."], "ans": 1, "exp": "Đáp án đúng: B. Phan Chu Trinh." }, { "q": "Cách mạng giải phóng dân tộc trong thời đại mới phải do Đảng của ai lãnh đạo?", "opts": ["Giai cấp vô sản bần cùng.", "Tầng lớp trí thức.", "Giai cấp công nhân.", "Giai cấp nông dân."], "ans": 2, "exp": "Đáp án đúng: C. Giai cấp công nhân." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Cần phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn […]”.", "opts": ["Tính mạng của mình.", "Con mắt của mình.", "Nhân cách của mình.", "Con ngươi mắt mình."], "ans": 3, "exp": "Đáp án đúng: D. Con ngươi mắt mình." }, { "q": "Chọn đáp án đúng nhất. Từ cuối năm 1911 đến 1917, khi quay lại tàu làm việc Hồ Chí Minh đã đi qua những đâu?", "opts": ["Châu Á; Châu Phi; Châu Âu; Châu Mỹ.", "Châu Á; Châu Phi; Châu Âu.", "Châu Á; Châu Phi; Châu Mỹ.", "Châu Phi; Nam Mỹ; Hoa kỳ."], "ans": 0, "exp": "Đáp án đúng: A. Châu Á; Châu Phi; Châu Âu; Châu Mỹ." }, { "q": "Nhận định nào sau đây nói lên mối quan hệ giữa pháp luật và đạo đức?", "opts": ["Đạo đức là pháp luật tối đa, pháp luật là đạo đức tối thiểu.", "Pháp luật là đạo đức tối đa, đạo đức là pháp luật tối thiểu.", "Pháp luật được thực hiện bằng cưỡng chế, đạo đức được thực hiện bằng tự giác.", "Pháp luật và đạo đức tồn tại song song, đều có vai trò quan trọng"], "ans": 3, "exp": "Đáp án đúng: D. Pháp luật và đạo đức tồn tại song song, đều có vai trò quan trọng" }, { "q": "Hồ Chí Minh tiếp cận văn hoá nghĩa hẹp hơn, có nghĩa là:", "opts": ["Tổng hợp mọi phương thức sản xuất của con người.", "Sản phẩm, công cụ sinh hoạt cụ thể của người dân.", "Các trường học, số người đi học, biết đọc, biết viết.", "Đời sống tính thần của xã hội, thuộc cơ sở hạ tầng."], "ans": 2, "exp": "Đáp án đúng: C. Các trường học, số người đi học, biết đọc, biết viết." }, { "q": "Pháp bắt đầu tiến công xâm lược Việt Nam vào thời gian nào? Ở đâu?", "opts": ["Năm 1885, tại cảng Đà Nẵng.", "Năm 1858, tại đồn An Hải - Sơn Trà - Quảng nam Đà nẵng.", "Năm 1858, tại cảng Đà Nẵng.", "Năm 1860, tại Sơn Trà - Quảng nam Đà nẵng."], "ans": 1, "exp": "Đáp án đúng: B. Năm 1858, tại đồn An Hải - Sơn Trà - Quảng nam Đà nẵng." }, { "q": "Câu nói: “Ai cũng tham lợi, thì nước sẽ nguy”, là của ai?", "opts": ["Tất Đạt Đa.", "Lão Tử.", "Mạnh tử.", "Khổng Tử."], "ans": 3, "exp": "Đáp án đúng: D. Khổng Tử." }, { "q": "Chọn đáp án KHÔNG đúng. Sức mạnh đoàn kết quốc tế trong tư tưởng Hồ Chí Minh, bao gồm:", "opts": ["Liên minh chiến đấu giữa lao động ở thuộc địa với lao động ở chính quốc.", "Liên minh giữa nhân dân thế giới về mục tiêu phản đối chiến tranh phi nghĩa.", "Sức mạnh của giai cấp vô sản, cách mạng vô sản và Đảng Cộng sản.", "Sức mạnh của ba dòng thác cách mạng và tiến bộ khoa học công nghệ."], "ans": 1, "exp": "Đáp án đúng: B. Liên minh giữa nhân dân thế giới về mục tiêu phản đối chiến tranh phi nghĩa." }, { "q": "Theo Hồ Chí Minh, kẻ thù hung ác nhất của chủ nghĩa xã hội là gì?", "opts": ["Chủ nghĩa cá nhân.", "Lạm dụng chức quyền.", "Tham ô, lãng phí.", "Các thế lực phản động."], "ans": 0, "exp": "Đáp án đúng: A. Chủ nghĩa cá nhân." }, { "q": "Một nhà nước pháp quyền có hiệu lực pháp lý mạnh mẽ theo Hồ Chí Minh phải là:", "opts": ["Một nhà nước được công nhận bằng hiến pháp và pháp luật của dân.", "Một nhà nước mà quyền lực thuộc về nhân dân, do dân và vì nhân dân.", "Một nhà nước không có tiêu cực, không có đặc quyền, đặc lợi, cá nhân.", "Một nhà nước thống nhất, có chủ quyền quốc gia trên vùng, lãnh thổ."], "ans": 0, "exp": "Đáp án đúng: A. Một nhà nước được công nhận bằng hiến pháp và pháp luật của dân." }, { "q": "Nguyễn Ái Quốc nhận được lời mời tham dự Quốc tế III tại Moscow vào thời gian nào?", "opts": ["Tháng 12 năm 1920.", "Tháng 06 năm 1923.", "Tháng 02 năm 1921.", "Tháng 12 năm 1922."], "ans": 0, "exp": "Đáp án đúng: A. Tháng 12 năm 1920." }, { "q": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Toàn quốc đồng bào hãy đứng dậy […] mà tự giải phóng cho ta”.", "opts": ["Dựa vào sự đoàn kết.", "Dựa vào sự giúp đỡ quốc tế.", "Đem sức ta.", "Dưới sự lãnh đạo của Đảng."], "ans": 2, "exp": "Đáp án đúng: C. Đem sức ta." }, { "q": "Trong khối đại đoàn kết dân tộc, vì sao phải đặc biệt chú trọng yếu tố “hạt nhân”?", "opts": ["Vì đó là cơ sở phát huy cho sự đoàn kết.", "Vì đó là điều kiện cho sự đoàn kết ngoài xã hội.", "Vì đó là điều kiện cho thành công của đoàn kết.", "Vì đó là mong muốn của đại đa số người dân."], "ans": 1, "exp": "Đáp án đúng: B. Vì đó là điều kiện cho sự đoàn kết ngoài xã hội." }, { "q": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc phải đi theo con đường:", "opts": ["Con đường cách mạng dân chủ tư sản.", "Con đường cách mạng vô sản.", "Con đường cách mạng tư sản.", "Con đường cách mạng phong kiến."], "ans": 1, "exp": "Đáp án đúng: B. Con đường cách mạng vô sản." }, { "q": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc thuộc địa muốn giành được thắng lợi triệt để phải:", "opts": ["Dựa vào sự thắng lợi của cách mạng vô sản ở chính quốc.", "Dựa trên phương pháp cách mạng của chủ nghĩa Mác – Lênin.", "Thực hiện bằng con đường bạo lực cách mạng.", "Kết hợp đấu tranh quân sự với đấu tranh ngoại giao."], "ans": 2, "exp": "Đáp án đúng: C. Thực hiện bằng con đường bạo lực cách mạng." }, { "q": "Quá trình hình thành và phát triển tư tưởng Hồ Chí Minh trải qua mấy giai đoạn và giai đoạn nào quan trọng nhất?", "opts": ["Ba giai đoạn, giai đoạn từ khi sinh ra đến trước 05/06/1911 là quan trọng nhất.", "Sáu giai đoạn, giai đoạn từ cuối 1920 đến 03/02/1930 là quan trọng nhất.", "Bốn giai đoạn, giai đoạn từ khi sinh ra đến trước 05/06/1911 là quan trọng nhất.", "Năm giai đoạn, giai đoạn từ cuối 1920 đến 03/02/1930 là quan trọng nhất."], "ans": 3, "exp": "Đáp án đúng: D. Năm giai đoạn, giai đoạn từ cuối 1920 đến 03/02/1930 là quan trọng nhất." }, { "q": "Trong môn học tư tưởng Hồ Chí Minh nêu bao nhiêu phương pháp nghiên cứu?", "opts": ["Ba phương pháp.", "Sáu phương pháp.", "Bốn phương pháp.", "Năm phương pháp."], "ans": 0, "exp": "Đáp án đúng: A. Ba phương pháp." }, { "q": "Trong quan điểm toàn diện và hệ thống, Hồ Chí Minh xem xét cách mạng Việt Nam trong:", "opts": ["Quan hệ với cách mạng giải phóng dân tộc.", "Quan hệ với cách mạng giải phóng dân tộc và giai cấp.", "Quan hệ tổng thể với cách mạng thế giới.", "Quan hệ với cách mạng giải phóng giai cấp."], "ans": 2, "exp": "Đáp án đúng: C. Quan hệ tổng thể với cách mạng thế giới." }, { "q": "Nội dung bản sắc văn hoá dân tộc được nhìn nhận qua hai lớp quan hệ, đó là:", "opts": ["Tinh thần yêu nước, thương dân và tinh thần quốc tế trong sáng.", "Tinh thần yêu nước và tinh thần dũng cảm, hy sinh vì độc lập dân tộc.", "Lòng yêu nước, thương nòi và tinh thần độc lập, tự tôn dân tộc.", "Tinh thần yêu nước, thương dân và tinh thần tự lập, tự ti dân tộc."], "ans": 2, "exp": "Đáp án đúng: C. Lòng yêu nước, thương nòi và tinh thần độc lập, tự tôn dân tộc." }, { "q": "Giai đoạn vượt qua thử thách, giữ vững đường lối, phương pháp cách mạng Việt Nam của Hồ Chí Minh được tính từ:", "opts": ["Từ khi sinh ra đến trước 05/06/1911.", "Từ năm 1931 đến năm 1945.", "Từ năm 1911 đến năm 1920.", "Từ năm 1921 đến năm 1930."], "ans": 1, "exp": "Đáp án đúng: B. Từ năm 1931 đến năm 1945." }, { "q": "Theo Hồ Chí Minh, để phát huy sức mạnh cá nhân người lao động, cần phải tác động vào:", "opts": ["Nhu cầu và lợi ích của con người.", "Nguyện vọng và mong muốn của họ.", "Động lực chính trị, tinh thần của con người.", "Sở thích của cá nhân của con người."], "ans": 0, "exp": "Đáp án đúng: A. Nhu cầu và lợi ích của con người." }, { "q": "Nhà Nguyễn ký hiệp ước với Pháp biến Việt Nam chính thức thành thuộc địa vào năm bao nhiêu?", "opts": ["Hiệp ước Patonot năm 1884.", "Hiệp ước Unclos năm 1992.", "Hiệp ước Patonot năm 1883.", "Hiệp ước thuộc địa năm 1884."], "ans": 0, "exp": "Đáp án đúng: A. Hiệp ước Patonot năm 1884." }, { "q": "Câu nói: “Người mà không liêm, không bằng súc vật”, là của ai?", "opts": ["Hồ Chí Minh.", "Lão Tử.", "Mạnh tử.", "Khổng Tử."], "ans": 3, "exp": "Đáp án đúng: D. Khổng Tử." }, { "q": "Quan điểm của Hồ Chí Minh về văn hoá theo nghĩa hẹp bắt đầu tính từ thời gian nào?", "opts": ["Sau Cách mạng Tháng Tám năm 1945.", "Sau Cách mạng thành công năm 1975.", "Sau Cách mạng thành công năm 1954.", "Sau khi Nhật vào Đông Dương, 1943."], "ans": 0, "exp": "Đáp án đúng: A. Sau Cách mạng Tháng Tám năm 1945." }, { "q": "\"Toàn quốc đồng bào hãy đứng dậy […] mà tự giải phóng cho ta\". Chọn phương án đúng nhất điền vào […].", "opts": ["Dựa vào sự giúp đỡ quốc tế.", "Dựa vào sự đoàn kết toàn dân.", "Dưới sự lãnh đạo của Đảng.", "Đem sức ta."], "ans": 3, "exp": "Đáp án đúng: D. Đem sức ta." }, { "q": "Theo Hồ Chí Minh mối quan hệ giữa vấn đề dân tộc và vấn đề giai cấp ở các nước thuộc địa là:", "opts": ["Giải phóng dân tộc và giải phóng giai cấp cần được tiến hành song song.", "Giải phóng giai cấp là tiền đề để giải phóng dân tộc.", "Giải phóng dân tộc không liên quan đến giải phóng giai cấp.", "Giải phóng dân tộc là tiền đề để giải phóng giai cấp."], "ans": 3, "exp": "Đáp án đúng: D. Giải phóng dân tộc là tiền đề để giải phóng giai cấp." }, { "q": "Ngày 28/1/1946, Chủ tịch Hồ Chí Minh viết: \"Người đời không phải thánh thần, không ai tránh khỏi khuyết điểm. Chúng ta không sợ khuyết điểm, nhưng chỉ sợ không biết kiên quyết sửa nó đi\". Bài báo đó có tên gọi là gì?", "opts": ["Lời xin lỗi đồng bào.", "Lời căn dặn cán bộ tuyên truyền.", "Tự phê bình.", "Lời khuyên công nhân, viên chức"], "ans": 2, "exp": "Đáp án đúng: C. Tự phê bình." }, { "q": "Nguyễn Tất Thành dạy học ở trường Dục Thanh trong khoảng thời gian từ:", "opts": ["Từ 09/1908 đến 09/1909.", "Từ 09/1910 đến 02/1911.", "Từ 11/1908 đến 02/1909.", "Từ 09/1909 đến 02/1910."], "ans": 1, "exp": "Đáp án đúng: B. Từ 09/1910 đến 02/1911." }] }];
+  </script>
+  <script>
+    // ===== CUSTOM DIALOG =====
+    function _dlg(iconCls, iconHtml, title, msg, buttons) {
+      return new Promise(resolve => {
+        const o = document.getElementById('dlg-overlay');
+        document.getElementById('dlg-icon').className = 'dlg-icon ' + iconCls;
+        document.getElementById('dlg-icon').innerHTML = iconHtml;
+        document.getElementById('dlg-title').textContent = title;
+        document.getElementById('dlg-msg').textContent = msg;
+        document.getElementById('dlg-btns').innerHTML = buttons.map(b =>
+          `<button class="dlg-btn-${b.type}" data-val="${b.val}">${b.label}</button>`
+        ).join('');
+        o.classList.add('open');
+        document.getElementById('dlg-btns').querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => { o.classList.remove('open'); resolve(btn.dataset.val === 'true') }, { once: true });
+        });
+      });
+    }
+    function showAlert(msg, type = 'info', title = 'Thông báo') {
+      const icons = { info: '<i class="fas fa-circle-info"></i>', success: '<i class="fas fa-circle-check"></i>', warn: '<i class="fas fa-triangle-exclamation"></i>' };
+      return _dlg(type, icons[type] || icons.info, title, msg, [{ label: 'Đã hiểu', type: 'ok', val: 'true' }]);
+    }
+    function showConfirm(msg, title = 'Xác nhận', okLabel = 'Xác nhận', iconCls = 'warn') {
+      const icons = { warn: '<i class="fas fa-triangle-exclamation"></i>', info: '<i class="fas fa-circle-question"></i>' };
+      return _dlg(iconCls, icons[iconCls] || icons.warn, title, msg, [
+        { label: 'Hủy', type: 'cancel', val: 'false' },
+        { label: okLabel, type: 'ok', val: 'true' }
+      ]);
+    }
+    // ===== DEFAULT DATA =====
+    const DEFAULT_QUIZZES = [];
+
+    // ===== STATE =====
+    let quizzes, historyData, settings, currentQuiz = null, currentQIdx = 0, answers = [], flags = [], timer = null, timeLeft = 0, editQIdx = -1;
+
+    function getAllDefaultQuizzes() {
+      const all = JSON.parse(JSON.stringify(DEFAULT_QUIZZES));
+      if (typeof TTHCM_QUIZZES !== 'undefined') all.push(...JSON.parse(JSON.stringify(TTHCM_QUIZZES)));
+      return all;
+    }
+    function loadData() {
+      quizzes = JSON.parse(localStorage.getItem('qm_quizzes')) || null;
+      if (!quizzes) {
+        quizzes = getAllDefaultQuizzes();
+        localStorage.setItem('qm_quizzes', JSON.stringify(quizzes));
+      } else {
+        // Merge any new TTHCM quizzes not yet in localStorage
+        const allDef = getAllDefaultQuizzes();
+        const existIds = new Set(quizzes.map(q => q.id));
+        allDef.forEach(dq => { if (!existIds.has(dq.id)) quizzes.push(dq); });
+        saveQuizzes();
+      }
+      historyData = JSON.parse(localStorage.getItem('qm_history')) || [];
+      settings = JSON.parse(localStorage.getItem('qm_settings')) || { dark: false, sound: true, vibrate: true, fontSize: 'normal', shuffle: true };
+      applySettings();
+    }
+
+    function saveQuizzes() { localStorage.setItem('qm_quizzes', JSON.stringify(quizzes)) }
+    function saveHistory() { localStorage.setItem('qm_history', JSON.stringify(historyData)) }
+    function saveSetting() {
+      settings.sound = document.getElementById('set-sound').checked;
+      settings.vibrate = document.getElementById('set-vibrate').checked;
+      settings.fontSize = document.getElementById('set-fontsize').value;
+      settings.shuffle = document.getElementById('set-shuffle').checked;
+      localStorage.setItem('qm_settings', JSON.stringify(settings));
+      applySettings();
+    }
+    function applySettings() {
+      if (settings.dark) document.documentElement.setAttribute('data-theme', 'dark');
+      else document.documentElement.removeAttribute('data-theme');
+      document.getElementById('set-dark').checked = settings.dark;
+      document.getElementById('set-sound').checked = settings.sound;
+      document.getElementById('set-vibrate').checked = settings.vibrate;
+      document.getElementById('set-fontsize').value = settings.fontSize;
+      document.getElementById('set-shuffle').checked = settings.shuffle;
+      document.querySelector('.theme-toggle').innerHTML = settings.dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      const sz = { normal: '16px', large: '18px', xlarge: '20px' };
+      document.body.style.fontSize = sz[settings.fontSize] || '16px';
+    }
+    function toggleTheme() {
+      settings.dark = !settings.dark;
+      localStorage.setItem('qm_settings', JSON.stringify(settings));
+      applySettings();
+    }
+
+    // ===== NAVIGATION =====
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById('page-' + page);
+      if (el) el.classList.add('active');
+      document.querySelectorAll('[data-page]').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === page);
+      });
+      window.scrollTo(0, 0);
+      if (page === 'home') renderHome();
+      if (page === 'bank') renderBank();
+      if (page === 'history') renderHistory();
+    }
+    function toggleDrawer() {
+      document.querySelector('.drawer').classList.toggle('open');
+      document.querySelector('.drawer-overlay').classList.toggle('open');
+    }
+    document.querySelectorAll('[data-page]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page) });
+    });
+
+    // ===== HOME =====
+    function renderHome() {
+      const total = quizzes.reduce((s, q) => s + q.questions.length, 0);
+      const taken = historyData.length;
+      const avg = taken ? Math.round(historyData.reduce((s, h) => s + h.score, 0) / taken) : 0;
+      const best = taken ? Math.max(...historyData.map(h => h.score)) : 0;
+      document.getElementById('home-stats').innerHTML =
+        `<div class="stat-card"><div class="stat-icon"><i class="fas fa-pen-to-square"></i></div><div class="stat-value">${total}</div><div class="stat-label">Tổng câu hỏi</div></div>` +
+        `<div class="stat-card"><div class="stat-icon"><i class="fas fa-trophy"></i></div><div class="stat-value">${taken}</div><div class="stat-label">Lần thi</div></div>` +
+        `<div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-value">${avg}%</div><div class="stat-label">Điểm TB</div></div>` +
+        `<div class="stat-card"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-value">${best}%</div><div class="stat-label">Điểm cao nhất</div></div>`;
+      const sortedQuizzes = [...quizzes.map((qz, i) => ({ ...qz, _idx: i }))].sort((a, b) => {
+        const numA = parseInt((a.name.match(/\d+/) || [0])[0]) || 0;
+        const numB = parseInt((b.name.match(/\d+/) || [0])[0]) || 0;
+        return numA - numB;
+      });
+      document.getElementById('quiz-list').innerHTML = sortedQuizzes.map((qz) =>
+        `<div class="card" onclick="openConfig(${qz._idx})"><div class="card-icon">${qz.icon}</div><h3>${qz.name}</h3><p>${qz.desc}</p><div class="card-meta"><span><i class="fas fa-pen-to-square"></i> ${qz.questions.length} câu</span></div></div>`
+      ).join('');
+    }
+
+    // ===== CONFIG =====
+    let configQuizIdx = 0, configCount = 10, configTime = 15, configMode = 'practice';
+    function openConfig(idx) {
+      configQuizIdx = idx;
+      const qz = quizzes[idx];
+      document.getElementById('config-title').innerHTML = '<i class="fas fa-gear"></i> ' + qz.name;
+      const maxQ = qz.questions.length;
+      const counts = [5, 10, 15, 20].filter(n => n <= maxQ);
+      if (!counts.includes(maxQ)) counts.push(maxQ);
+      configCount = Math.min(configCount, maxQ);
+      document.getElementById('config-count').innerHTML = counts.map(n =>
+        `<label class="pill${n === configCount ? ' active' : ''}" onclick="pickPill(this,'count',${n})">${n} câu<input type="radio" name="count"></label>`
+      ).join('');
+      document.getElementById('config-time').innerHTML = [5, 10, 15, 20, 30].map(n =>
+        `<label class="pill${n === configTime ? ' active' : ''}" onclick="pickPill(this,'time',${n})">${n} phút<input type="radio" name="time"></label>`
+      ).join('');
+      document.getElementById('config-mode').innerHTML =
+        `<label class="pill${configMode === 'practice' ? ' active' : ''}" onclick="pickPill(this,'mode','practice')">Luyện tập<input type="radio" name="mode"></label>` +
+        `<label class="pill${configMode === 'exam' ? ' active' : ''}" onclick="pickPill(this,'mode','exam')">Thi thử<input type="radio" name="mode"></label>`;
+      showPage('config');
+    }
+    function pickPill(el, type, val) {
+      el.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      if (type === 'count') configCount = val;
+      if (type === 'time') configTime = val;
+      if (type === 'mode') configMode = val;
+    }
+
+    // ===== QUIZ ENGINE =====
+    function startQuiz() {
+      const qz = quizzes[configQuizIdx];
+      let qs = JSON.parse(JSON.stringify(qz.questions));
+      if (settings.shuffle) qs.sort(() => Math.random() - 0.5);
+      qs = qs.slice(0, configCount);
+      currentQuiz = { name: qz.name, icon: qz.icon, questions: qs, mode: configMode, startTime: Date.now() };
+      currentQIdx = 0; answers = new Array(qs.length).fill(-1); flags = new Array(qs.length).fill(false);
+      timeLeft = configTime * 60;
+      showPage('quiz'); renderQuiz(); startTimer();
+    }
+    function startTimer() {
+      clearInterval(timer);
+      renderTimer();
+      timer = setInterval(() => {
+        timeLeft--; renderTimer();
+        if (timeLeft <= 0) { clearInterval(timer); submitQuiz() }
+      }, 1000);
+    }
+    function renderTimer() {
+      const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+      const s = String(timeLeft % 60).padStart(2, '0');
+      const el = document.getElementById('quiz-timer');
+      el.textContent = m + ':' + s;
+      el.classList.toggle('danger', timeLeft < 60);
+    }
+    function renderQuiz() {
+      const qs = currentQuiz.questions; const q = qs[currentQIdx];
+      document.getElementById('quiz-progress').style.width = ((currentQIdx + 1) / qs.length * 100) + '%';
+      const letters = ['A', 'B', 'C', 'D'];
+      document.getElementById('question-card').innerHTML =
+        `<div class="q-header"><span class="q-label">Câu ${currentQIdx + 1}/${qs.length}</span><button class="q-flag" onclick="toggleFlag()" title="Đánh dấu">${flags[currentQIdx] ? '<i class="fas fa-flag" style="color:var(--danger)"></i>' : '<i class="far fa-flag"></i>'}</button></div>` +
+        `<div class="q-text">${q.q}</div><div class="options">${q.opts.map((o, i) =>
+          `<div class="option${answers[currentQIdx] === i ? ' selected' : ''}" onclick="pickAnswer(${i})"><span class="opt-letter">${letters[i]}</span><span>${o}</span></div>`
+        ).join('')}</div>`;
+      // question numbers
+      const isMobile = window.innerWidth < 768;
+      const numsHtml = qs.map((_, i) => {
+        let cls = 'q-num';
+        if (i === currentQIdx) cls += ' current';
+        if (answers[i] >= 0) cls += ' answered';
+        if (flags[i]) cls += ' flagged';
+        return `<div class="${cls}" onclick="goToQ(${i})">${i + 1}</div>`;
+      }).join('');
+      document.getElementById('q-numbers').innerHTML = isMobile ?
+        `<div class="q-numbers-scroll">${numsHtml}</div>` : `<div class="q-numbers">${numsHtml}</div>`;
+      // actions
+      document.getElementById('quiz-actions').innerHTML =
+        `<button class="btn btn-outline btn-mobile-full"${currentQIdx === 0 ? ' disabled' : ''} onclick="goToQ(${currentQIdx - 1})">← Câu Trước</button>` +
+        (currentQIdx < qs.length - 1 ?
+          `<button class="btn btn-primary btn-mobile-full" onclick="goToQ(${currentQIdx + 1})">Câu Tiếp →</button>` :
+          `<button class="btn btn-success btn-mobile-full" onclick="submitQuiz()"><i class="fas fa-paper-plane"></i> Nộp Bài</button>`);
+    }
+    function pickAnswer(i) { answers[currentQIdx] = i; renderQuiz() }
+    function toggleFlag() { flags[currentQIdx] = !flags[currentQIdx]; renderQuiz() }
+    function goToQ(i) { if (i >= 0 && i < currentQuiz.questions.length) { currentQIdx = i; renderQuiz() } }
+    function submitQuiz() {
+      showConfirm('Bạn có chắc muốn nộp bài?', 'Nộp Bài', 'Nộp ngay', 'info').then(ok => {
+        if (!ok) return;
+        _doSubmit();
+      });
+    }
+    function _doSubmit() {
+      clearInterval(timer);
+      const qs = currentQuiz.questions;
+      let correct = 0; qs.forEach((q, i) => { if (answers[i] === q.ans) correct++ });
+      const score = Math.round(correct / qs.length * 100);
+      const elapsed = Math.round((Date.now() - currentQuiz.startTime) / 1000);
+      let grade, gColor;
+      if (score >= 90) { grade = 'Xuất sắc'; gColor = '#00b894' }
+      else if (score >= 75) { grade = 'Giỏi'; gColor = '#00cec9' }
+      else if (score >= 60) { grade = 'Khá'; gColor = '#46bbdf' }
+      else if (score >= 45) { grade = 'Trung Bình'; gColor = '#fdcb6e' }
+      else { grade = 'Yếu'; gColor = '#e17055' }
+      // save history
+      historyData.unshift({ name: currentQuiz.name, icon: currentQuiz.icon, date: new Date().toISOString(), score, correct, total: qs.length, time: elapsed, grade });
+      saveHistory();
+      // Gửi kết quả lên Sheet để hiển thị leaderboard
+      submitQuizResult(currentQuiz.name, score, correct, qs.length);
+      // render result
+      const pct = score / 100; const circ = 2 * Math.PI * 78; const offset = circ * (1 - pct);
+      const skipped = answers.filter(a => a < 0).length;
+      let html = `<div class="score-circle"><svg width="180" height="180"><circle cx="90" cy="90" r="78" stroke="var(--border)" stroke-width="10" fill="none"/>` +
+        `<circle cx="90" cy="90" r="78" stroke="${gColor}" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="transition:stroke-dashoffset 1.5s ease"><animate attributeName="stroke-dashoffset" from="${circ}" to="${offset}" dur="1.5s" fill="freeze"/></circle></svg>` +
+        `<div class="score-text"><span class="score-value">${score}%</span><span class="score-label">Điểm số</span></div></div>` +
+        `<div class="grade-badge" style="background:${gColor}22;color:${gColor}">${grade}</div>` +
+        `<div class="result-stats">` +
+        `<div class="result-stat"><div class="rs-value" style="color:var(--success)">${correct}</div><div class="rs-label">Đúng</div></div>` +
+        `<div class="result-stat"><div class="rs-value" style="color:var(--danger)">${qs.length - correct - skipped}</div><div class="rs-label">Sai</div></div>` +
+        `<div class="result-stat"><div class="rs-value" style="color:var(--text2)">${skipped}</div><div class="rs-label">Bỏ qua</div></div>` +
+        `<div class="result-stat"><div class="rs-value">${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, '0')}</div><div class="rs-label">Thời gian</div></div></div>` +
+        `<h3 style="margin:20px 0 12px;text-align:left"><i class="fas fa-clipboard-list"></i> Chi tiết từng câu</h3><div class="review-list">`;
+      const letters = ['A', 'B', 'C', 'D'];
+      qs.forEach((q, i) => {
+        const isCorrect = answers[i] === q.ans; const isSkipped = answers[i] < 0;
+        const status = isSkipped ? 'skipped' : (isCorrect ? 'correct' : 'wrong');
+        const statusText = isSkipped ? 'Bỏ qua' : (isCorrect ? 'Đúng' : 'Sai');
+        html += `<div class="review-item"><div class="ri-header"><strong>Câu ${i + 1}</strong><span class="ri-status ${status}">${statusText}</span></div>` +
+          `<p style="margin-bottom:8px">${q.q}</p>` +
+          `<div class="options">${q.opts.map((o, j) => {
+            let cls = 'option';
+            if (j === q.ans) cls += ' correct';
+            else if (j === answers[i] && !isCorrect) cls += ' wrong';
+            return `<div class="${cls}" style="cursor:default"><span class="opt-letter">${letters[j]}</span><span>${o}</span></div>`;
+          }).join('')}</div>` +
+          `<div class="explanation"><i class="fas fa-lightbulb"></i> ${q.exp}</div></div>`;
+      });
+      html += `</div><div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">` +
+        `<button class="btn btn-primary btn-mobile-full" onclick="openConfig(${configQuizIdx})"><i class="fas fa-rotate-right"></i> Thi Lại</button>` +
+        `<button class="btn btn-outline btn-mobile-full" onclick="showPage('home')"><i class="fas fa-house"></i> Trang Chủ</button></div>`;
+      document.getElementById('result-content').innerHTML = html;
+      showPage('result');
+    }
+
+    // ===== BANK =====
+    function renderBank() {
+      const search = document.getElementById('bank-search').value.toLowerCase();
+      const filter = document.getElementById('bank-filter').value;
+      // populate filter
+      const sel = document.getElementById('bank-filter');
+      if (sel.options.length <= 1) {
+        quizzes.forEach(qz => { const o = document.createElement('option'); o.value = qz.id; o.textContent = qz.name; sel.appendChild(o) });
+      }
+      let html = ''; let count = 0;
+      quizzes.forEach((qz, qi) => {
+        if (filter && qz.id !== filter) return;
+        qz.questions.forEach((q, qj) => {
+          if (search && !q.q.toLowerCase().includes(search)) return;
+          count++;
+          const letters = ['A', 'B', 'C', 'D'];
+          html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><p style="margin-top:8px">${q.q}</p></div></div>` +
+            `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>` +
+            `<div class="card-actions"><button class="btn btn-outline" onclick="openEditQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-pen"></i> Sửa</button>` +
+            `<button class="btn btn-danger" onclick="deleteQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-trash"></i> Xóa</button></div></div>`;
+        });
+      });
+      if (!count) html = '<div class="empty-state"><div class="empty-icon"><i class="fas fa-inbox"></i></div><p>Không tìm thấy câu hỏi nào</p></div>';
+      document.getElementById('bank-list').innerHTML = html;
+    }
+    function openAddQ() {
+      editQIdx = -1;
+      document.getElementById('modal-title').textContent = 'Thêm Câu Hỏi Mới';
+      const mq = document.getElementById('m-quiz');
+      mq.innerHTML = quizzes.map((qz, i) => `<option value="${i}">${qz.icon} ${qz.name}</option>`).join('');
+      ['m-question', 'm-a', 'm-b', 'm-c', 'm-d', 'm-explain'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('m-correct').value = '0';
+      document.getElementById('q-modal').classList.add('open');
+    }
+    function openEditQ(qi, qj) {
+      editQIdx = { qi, qj };
+      document.getElementById('modal-title').textContent = 'Sửa Câu Hỏi';
+      const q = quizzes[qi].questions[qj];
+      const mq = document.getElementById('m-quiz');
+      mq.innerHTML = quizzes.map((qz, i) => `<option value="${i}"${i === qi ? ' selected' : ''}>${qz.icon} ${qz.name}</option>`).join('');
+      document.getElementById('m-question').value = q.q;
+      document.getElementById('m-a').value = q.opts[0];
+      document.getElementById('m-b').value = q.opts[1];
+      document.getElementById('m-c').value = q.opts[2];
+      document.getElementById('m-d').value = q.opts[3];
+      document.getElementById('m-correct').value = q.ans;
+      document.getElementById('m-explain').value = q.exp;
+      document.getElementById('q-modal').classList.add('open');
+    }
+    function closeModal() { document.getElementById('q-modal').classList.remove('open') }
+    function saveQuestion() {
+      const qi = parseInt(document.getElementById('m-quiz').value);
+      const q = {
+        q: document.getElementById('m-question').value.trim(),
+        opts: [document.getElementById('m-a').value.trim(), document.getElementById('m-b').value.trim(), document.getElementById('m-c').value.trim(), document.getElementById('m-d').value.trim()],
+        ans: parseInt(document.getElementById('m-correct').value),
+        exp: document.getElementById('m-explain').value.trim()
+      };
+      if (!q.q || q.opts.some(o => !o)) { alert('Vui lòng điền đầy đủ thông tin!'); return }
+      if (editQIdx !== -1 && editQIdx.qi !== undefined) {
+        quizzes[editQIdx.qi].questions.splice(editQIdx.qj, 1);
+        quizzes[qi].questions.push(q);
+      } else {
+        quizzes[qi].questions.push(q);
+      }
+      saveQuizzes(); closeModal(); renderBank();
+    }
+    function deleteQ(qi, qj) {
+      showConfirm('Xóa câu hỏi này?', 'Xóa Câu Hỏi', 'Xóa', 'warn').then(ok => {
+        if (!ok) return;
+        quizzes[qi].questions.splice(qj, 1); saveQuizzes(); renderBank();
+      });
+    }
+
+    // ===== HISTORY =====
+    let historyChart = null;
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (!historyData.length) {
+        list.innerHTML = '<div class="empty-state"><div class="empty-icon"><i class="fas fa-chart-column"></i></div><p>Chưa có lịch sử thi</p></div>';
+      } else {
+        list.innerHTML = historyData.map(h => {
+          const d = new Date(h.date);
+          const dateStr = d.toLocaleDateString('vi-VN') + ' ' + d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+          const mins = Math.floor(h.time / 60); const secs = h.time % 60;
+          let gc;
+          if (h.score >= 90) gc = '#00b894'; else if (h.score >= 75) gc = '#00cec9'; else if (h.score >= 60) gc = '#46bbdf'; else if (h.score >= 45) gc = '#fdcb6e'; else gc = '#e17055';
+          return `<div class="card"><div class="h-row"><div><strong>${h.icon} ${h.name}</strong><div style="font-size:.8rem;color:var(--text2);margin-top:4px"><i class="far fa-calendar"></i> ${dateStr} • <i class="far fa-clock"></i> ${mins}p${secs}s</div></div><div style="text-align:right"><div class="h-score">${h.score}%</div><span style="font-size:.75rem;padding:3px 10px;border-radius:50px;background:${gc}22;color:${gc};font-weight:600">${h.grade}</span></div></div><div style="margin-top:8px;font-size:.85rem;color:var(--text2)"><i class="fas fa-circle-check"></i> ${h.correct}/${h.total} câu đúng</div></div>`;
+        }).join('');
+      }
+      // chart
+      if (historyChart) { historyChart.destroy(); historyChart = null }
+      const canvas = document.getElementById('history-chart');
+      if (!historyData.length) return;
+      const last10 = historyData.slice(0, 10).reverse();
+      const isDark = settings.dark;
+      historyChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: last10.map((_, i) => 'Lần ' + (i + 1)),
+          datasets: [{ label: 'Điểm %', data: last10.map(h => h.score), borderColor: '#46bbdf', backgroundColor: 'rgba(70,187,223,0.1)', fill: true, tension: .4, pointRadius: 5, pointBackgroundColor: '#46bbdf' }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { min: 0, max: 100, ticks: { color: isDark ? '#aaa' : '#666' }, grid: { color: isDark ? '#2a2a3e' : '#eee' } },
+            x: { ticks: { color: isDark ? '#aaa' : '#666' }, grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    function clearHistory() {
+      showConfirm('Xóa toàn bộ lịch sử thi?', 'Xóa Lịch Sử', 'Xóa tất cả', 'warn').then(ok => {
+        if (!ok) return;
+        historyData = []; saveHistory(); renderHistory();
+        showAlert('Đã xóa lịch sử thành công!', 'success', 'Hoàn tất');
+      });
+    }
+    function resetData() {
+      showConfirm('Khôi phục dữ liệu mẫu ban đầu? Ngân hàng câu hỏi hiện tại sẽ bị ghi đè.', 'Khôi Phục Dữ Liệu', 'Khôi phục', 'warn').then(ok => {
+        if (!ok) return;
+        quizzes = getAllDefaultQuizzes();
+        saveQuizzes(); renderBank(); renderHome();
+        showAlert('Đã khôi phục dữ liệu mẫu!', 'success', 'Hoàn tất');
+      });
+    }
+    // ===== TEST MODE =====
+    function applyTestMode() {
+      // Wrap các hàm bị chặn
+      const _block = (fnName) => {
+        window[fnName] = () => showAlert('🔒 Chế độ XEM THử — Không thể sử dụng chức năng này.', 'warn', 'Chưa được phép');
+      };
+      _block('openAddQ');
+      _block('openEditQ');
+      _block('deleteQ');
+      _block('clearHistory');
+      _block('resetData');
+      _block('saveProfile');
+      _block('submitQuiz');  // không cho nộp bài
+      _block('_doSubmit');   // chặn cả khi hết giờ tự nộp
+      // Thêm nhãn TEST vào tất cả nút chức năng
+      document.querySelectorAll('.btn-primary, .btn-danger, .profile-save-btn').forEach(b => {
+        b.style.opacity = '0.45';
+        b.style.cursor  = 'not-allowed';
+      });
+    }
+
+    // ===== LOGIN SYSTEM =====
+    // 👉 Dán URL Google Apps Script vào đây sau khi deploy:
+    const SHEETS_API = 'https://script.google.com/macros/s/AKfycbz_2-I-_LocYIYf0ffAXreVU1er-u_6NyTc2t1vpQcq4IUtGojYMIAvyUxiWwgBxjsE3Q/exec';  // VD: 'https://script.google.com/macros/s/XXXX/exec'
+
+
+    const SESSION_KEY = 'vs_auth';
+    const SESSION_HOURS = 8;
+    function checkSession() {
+      const s = sessionStorage.getItem(SESSION_KEY);
+      if (!s) return false;
+      try { const d = JSON.parse(s); return Date.now() < d.exp; } catch (e) { return false; }
+    }
+    function _logToSheet(code) {
+      if (!SHEETS_API) return;
+      const url = SHEETS_API + '?action=activate&code=' + encodeURIComponent(code) + '&device=' + encodeURIComponent(navigator.userAgent.substring(0, 200));
+      fetch(url, { mode: 'no-cors' }).catch(() => { });
+    }
+    function _showLoginOverlay() {
+      const overlay = document.getElementById('login-overlay');
+      overlay.style.transition = 'opacity .4s';
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.classList.add('hidden'), 400);
+    }
+    function doLogin() {
+      const code = document.getElementById('login-code').value.trim().toUpperCase();
+      const err = document.getElementById('login-error');
+      const lck = document.getElementById('login-locked');
+      const btn = document.querySelector('.login-btn');
+      const inp = document.getElementById('login-code');
+
+      err.classList.remove('show');
+      lck.classList.remove('show');
+
+      if (!code) return;
+
+      // Gọi API để xác minh mã (mã lấy từ Google Sheet)
+      btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang xác minh...';
+      btn.disabled = true;
+
+      const _showErr = () => {
+        err.classList.add('show');
+        inp.style.borderColor = '#e17055';
+        inp.style.boxShadow = '0 0 0 4px rgba(225,112,85,.15)';
+        setTimeout(() => { err.classList.remove('show'); inp.style.borderColor = ''; inp.style.boxShadow = ''; }, 3000);
+      };
+      const _showLock = () => {
+        lck.classList.add('show');
+        inp.style.borderColor = '#ef4444';
+        inp.style.boxShadow = '0 0 0 4px rgba(239,68,68,.15)';
+      };
+      const _resetBtn = () => {
+        btn.innerHTML = '<i class="fas fa-unlock-keyhole"></i> Vào Học Ngay';
+        btn.disabled = false;
+      };
+      const _enter = () => {
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ code, exp: Date.now() + SESSION_HOURS * 3600000 }));
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang vào...';
+        setTimeout(_showLoginOverlay, 500);
+      };
+
+      // ―― Mã TEST — cho vào ngay, không cần API, chế độ chỉ xem ――
+      if (code === 'TEST') {
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ code: 'TEST', isTest: true, exp: Date.now() + SESSION_HOURS * 3600000 }));
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang vào...';
+        setTimeout(() => { _showLoginOverlay(); setTimeout(applyTestMode, 300); }, 500);
+        return;
+      }
+
+      if (!SHEETS_API) {
+        // Chưa cấu hình API → báo lỗi
+        err.querySelector ? err.textContent = '⚠️ Chưa cấu hình hệ thống. Liên hệ admin.' : null;
+        _showErr(); _resetBtn(); return;
+      }
+
+      const url = SHEETS_API
+        + '?code=' + encodeURIComponent(code)
+        + '&device=' + encodeURIComponent(navigator.userAgent.substring(0, 150));
+
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          if (data.ok) {
+            _enter();
+          } else if (data.locked) {
+            _showLock(); _resetBtn();
+          } else {
+            // Mã không tồn tại trong Sheet
+            _showErr(); _resetBtn();
+          }
+        })
+        .catch(() => {
+          // Lỗi mạng
+          err.textContent = '⚠️ Không thể kết nối. Vui lòng thử lại!';
+          _showErr(); _resetBtn();
+        });
+    }
+    function toggleLoginEye() {
+      const inp = document.getElementById('login-code');
+      const icon = document.getElementById('login-eye-icon');
+      if (inp.type === 'password') { inp.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+      else { inp.type = 'password'; icon.className = 'fas fa-eye'; }
+    }
+    document.getElementById('login-code').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+    if (checkSession()) {
+      document.getElementById('login-overlay').classList.add('hidden');
+      // Áp dụng TEST mode nếu cần
+      try {
+        const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '{}');
+        if (s.isTest) applyTestMode();
+      } catch(_) {}
+    }
+
+    // ===== LEADERBOARD =====
+    function fetchLeaderboard() {
+      if (!SHEETS_API) return;
+      fetch(SHEETS_API + '?action=leaderboard')
+        .then(r => r.json())
+        .then(d => {
+          if (!d.ok) return;
+          _renderLb('lb-active', d.mostActive, x => x.count + ' bài');
+          _renderLb('lb-score', d.topScore, x => x.avgScore + '%');
+        })
+        .catch(() => {
+          document.getElementById('lb-active').innerHTML = '<div class="lb-empty">Chưa có dữ liệu</div>';
+          document.getElementById('lb-score').innerHTML = '<div class="lb-empty">Chưa có dữ liệu</div>';
+        });
+    }
+    function _renderLb(elId, list, valFn) {
+      const el = document.getElementById(elId);
+      if (!list || !list.length) { el.innerHTML = '<div class="lb-empty">Chưa có dữ liệu</div>'; return; }
+      const rankClass = ['gold', 'silver', 'bronze'];
+      el.innerHTML = list.map((row, i) => {
+        const displayName = (row.name && row.name.trim()) ? row.name.trim() : 'Ẩn danh';
+        const avatarSeed  = (row.name && row.name.trim()) ? row.name.trim() : '?';
+        const avatarUrl   = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
+        return `<div class="lb-row">
+          <div class="lb-rank ${rankClass[i] || ''}">${i + 1}</div>
+          <img src="${row.avatarUrl || avatarUrl}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.src='${avatarUrl}'">
+          <div class="lb-code" style="font-family:inherit">${displayName}</div>
+          <div class="lb-val">${valFn(row)}</div>
+        </div>`;
+      }).join('');
+    }
+    function submitQuizResult(quizName, scorePercent, correct, total) {
+      const s = sessionStorage.getItem(SESSION_KEY);
+      if (!s || !SHEETS_API) return;
+      try {
+        const { code } = JSON.parse(s);
+        const prof = JSON.parse(localStorage.getItem('vs_profile') || '{}');
+        const displayName = prof.name || '';
+        const url = SHEETS_API
+          + '?action=submit'
+          + '&code=' + encodeURIComponent(code)
+          + '&name=' + encodeURIComponent(displayName)
+          + '&quiz=' + encodeURIComponent(quizName)
+          + '&score=' + Math.round(scorePercent)
+          + '&correct=' + correct
+          + '&total=' + total;
+        fetch(url).catch(() => { });
+      } catch (_) { }
+    }
+    // ===== PROFILE =====
+    function loadProfile() {
+      const p = JSON.parse(localStorage.getItem('vs_profile') || '{}');
+      const name = p.name || '';
+      const avatar = p.avatar || '';
+      // Settings form
+      const inp = document.getElementById('profile-name-input');
+      const img = document.getElementById('profile-avatar-img');
+      if (inp) inp.value = name;
+      if (img) img.src = avatar || _avatarUrl(name);
+      // Topnav badge
+      _applyProfileNav(name, avatar);
+    }
+    function previewAvatar(e) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('profile-avatar-img').src = ev.target.result;
+        // Xóa URL khi dùng file local
+        document.getElementById('profile-avatar-url').value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    function previewAvatarUrl(url) {
+      if (!url) return;
+      const img = document.getElementById('profile-avatar-img');
+      img.src = url; // preview ngay
+    }
+    function saveProfile() {
+      const name      = document.getElementById('profile-name-input').value.trim();
+      const avatarUrl = document.getElementById('profile-avatar-url').value.trim();
+      const avatarSrc = avatarUrl || document.getElementById('profile-avatar-img').src;
+      // Lưu localStorage (bao gồm cả base64 nếu có)
+      localStorage.setItem('vs_profile', JSON.stringify({ name, avatar: avatarSrc, avatarUrl }));
+      _applyProfileNav(name, avatarSrc);
+      // Gửi tên + avatar URL lên Google Sheet
+      const s = sessionStorage.getItem(SESSION_KEY);
+      if (s && SHEETS_API) {
+        try {
+          const { code } = JSON.parse(s);
+          const url = SHEETS_API + '?action=profile'
+            + '&code='      + encodeURIComponent(code)
+            + '&name='      + encodeURIComponent(name)
+            + '&avatarUrl=' + encodeURIComponent(avatarUrl);
+          fetch(url).catch(() => {});
+        } catch (_) {}
+      }
+      showAlert('Đã lưu hồ sơ lên hệ thống!', 'success', 'Thành công');
+    }
+    function _avatarUrl(name) {
+      const n = encodeURIComponent(name || 'U');
+      return `https://ui-avatars.com/api/?name=${n}&background=46bbdf&color=fff&size=128`;
+    }
+    function _applyProfileNav(name, avatar) {
+      let badge = document.getElementById('nav-profile-badge');
+      if (!badge) {
+        badge = document.createElement('div');
+        badge.id = 'nav-profile-badge';
+        badge.style.cssText = 'display:flex;align-items:center;gap:8px;cursor:pointer;';
+        badge.onclick = () => showPage('settings');
+        const navRight = document.querySelector('.nav-right');
+        if (navRight) navRight.insertBefore(badge, navRight.firstChild);
+      }
+      badge.innerHTML = `<img src="${avatar || _avatarUrl(name)}"
+        style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--primary)"
+        onerror="this.src='${_avatarUrl(name)}'">
+        ${name ? `<span style="font-size:.85rem;font-weight:600;color:var(--text);max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span>` : ''}`;
+    }
+
+    // ===== INIT =====
+    loadData(); renderHome(); fetchLeaderboard(); loadProfile();
+  </script>
+</body>
+
+</html>
