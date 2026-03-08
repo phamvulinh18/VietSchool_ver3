@@ -1,0 +1,402 @@
+[
+  {
+    "question": "Quốc tế Cộng sản trên thế giới ra đời thời gian nào?",
+    "A": "02/03/1919.",
+    "B": "03/02/1930.",
+    "C": "03/02/1919.",
+    "D": "16/07/1920.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất theo tư tưởng Hồ Chí Minh về nguyên tắc ngoại giao:",
+    "A": "Phải cứng rắn về nguyên tắc, nhân nhượng về lợi ích.",
+    "B": "Dĩ bất biến, ứng vạn biến.",
+    "C": "Vừa cứng rắn về nguyên tắc, vừa mềm dẻo về sách lược.",
+    "D": "Phải mềm dẻo về sách lược, có thể nhân nhượng về lợi ích.",
+    "correct": "C"
+  },
+  {
+    "question": "Vấn đề dân tộc độc lập trong tư tưởng Hồ Chí Minh là vấn đề dân tộc:",
+    "A": "Phong kiến.",
+    "B": "Độc lập.",
+    "C": "Thuộc địa.",
+    "D": "Tư sản.",
+    "correct": "C"
+  },
+  {
+    "question": "Ngày thành lập Bộ ngoại giao của Viêt Nam là:",
+    "A": "28/08/1945.",
+    "B": "07/05/1954.",
+    "C": "02/09/1945.",
+    "D": "03/02/19930.",
+    "correct": "A"
+  },
+  {
+    "question": "Hồ Chí Minh được UNESCO ra quyết định công nhận vào thời gian nào?",
+    "A": "Ngày 30/4/1987 đến 01/5/1987.",
+    "B": "Ngày 20/11/1987 đến 22/12/1987.",
+    "C": "Ngày 19/5/1987 đến 20/6/1987.",
+    "D": "Ngày 20/10/1987 đến 20/11/1987.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, ưu điểm lớn nhất của chủ nghĩa tam dân của Tôn Trung Sơn đối với nước ta là:",
+    "A": "Giúp người dân Việt Nam chống phong kiến.",
+    "B": "Đem lại độc lập, tự do cho người dân Việt Nam.",
+    "C": "Chính sách phù hợp với điều kiện của nước ta.",
+    "D": "Giúp người dân Việt Nam đấu tranh vì tự do.",
+    "correct": "C"
+  },
+  {
+    "question": "Nguyễn Tất Thành tham gia vào Đảng Xã hội Pháp thời gian nào?",
+    "A": "Tháng 10 năm 1917.",
+    "B": "Tháng 02 năm 1920.",
+    "C": "Tháng 12 năm 1918.",
+    "D": "Tháng 02 năm 1919.",
+    "correct": "D"
+  },
+  {
+    "question": "Để chỉ chủ nghĩa tư bản, Hồ Chí Minh sử dụng hình tượng nào?",
+    "A": "Con bạch tuộc.",
+    "B": "Con chim đại bàng.",
+    "C": "Con đĩa hai vòi.",
+    "D": "Hai cánh của con chim.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, đặc trưng kinh tế nổi bật nhất của CNXH là:",
+    "A": "Nhân dân lao động làm chủ",
+    "B": "Sở hữu xã hội về tư liệu sản xuất.",
+    "C": "Khoa học - Kỹ thuật phát triển.",
+    "D": "Cơ cấu Công - Nông nghiệp hợp lý.",
+    "correct": "B"
+  },
+  {
+    "question": "“Một dân tộc không tự lực cánh sinh mà cứ ngồi chờ dân tộc khác giúp đỡ thì không xứng đáng được độc lập”. Câu nói Hồ Chí Minh trong:",
+    "A": "Kháng chiến chống phong kiến.",
+    "B": "Kháng chiến chống đế quốc Mỹ.",
+    "C": "Kháng chiến chống thực dân.",
+    "D": "Kháng chiến chống thực dân Pháp",
+    "correct": "D"
+  },
+  {
+    "question": "Đối với Hồ Chí Minh, đại đoàn kết không chỉ là khẩu hiệu chiến lược mà còn là:",
+    "A": "Mục tiêu lâu dài của cách mạng.",
+    "B": "Thực tiễn đấu tranh của cách mạng.",
+    "C": "Nhiệm vụ trường tồn của cách mạng.",
+    "D": "Đích đến cuối cùng của cách mạng.",
+    "correct": "A"
+  },
+  {
+    "question": "Trong môn học tư tưởng Hồ Chí Minh nêu bao nhiêu cơ sở phương pháp luận nghiên cứu?",
+    "A": "Bốn phương pháp luận.",
+    "B": "Bảy phương pháp luận.",
+    "C": "Năm phương pháp luận.",
+    "D": "Sáu phương pháp luận.",
+    "correct": "C"
+  },
+  {
+    "question": "Phương pháp luận Hồ Chí Minh cho rằng: con người phải luôn luôn thích nghi với mọi hoàn cảnh, muốn thích nghi con người cần:",
+    "A": "Phải luôn luôn học tập mở rộng tri thức của bản thân về xã hội.",
+    "B": "Phải học tập để thích nghi với hoàn cảnh mới.",
+    "C": "Phải luôn luôn học tập mở rộng tri thức khám phá về bản thân, về xã hội.",
+    "D": "Phải luôn luôn tự đổi mới để phát triển.",
+    "correct": "D"
+  },
+  {
+    "question": "Đạo đức nghề nghiệp là gì?",
+    "A": "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực.",
+    "B": "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực trong hoạt động nghề nghiệp do cơ quan, tổ chức có thẩm quyền quy định.",
+    "C": "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức và hành vi phù hợp với đặc thù của từng lĩnh vực trong hoạt động nghề nghiệp do tổ chức có thẩm quyền quy định.",
+    "D": "Đạo đức nghề nghiệp là những chuẩn mực về nhận thức trong hoạt động nghề nghiệp do cơ quan, tổ chức có thẩm quyền quy định.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Mặt trận dân tộc thống nhất được hợp nhất từ các tổ chức:",
+    "A": "Mặt trận Tổ quốc Việt Nam.",
+    "B": "Liên minh các lực lượng Dân tộc Dân chủ và Hòa bình Việt Nam.",
+    "C": "Mặt trận Dân tộc Giải phóng miền Nam Việt Nam.",
+    "D": "Mặt trận Việt Nam Độc lập Đồng minh.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh lần đầu tiên đưa ra khái niệm về văn hoá theo nghĩa rộng vào thời gian nào? Ở đâu?",
+    "A": "Tháng 07/1925, trong cuốn “Đường kách mệnh” tại Trung Quốc.",
+    "B": "Tháng 08/1943, trong nhà tù của Tưởng Giới Thạch tại Trung Quốc.",
+    "C": "Tháng 02/1930, trong “Cương lĩnh chính trị Đảng” tại Trung Quốc.",
+    "D": "Tháng 06/1931, trong nhà tù của thực dân Anh tại Hồng Kông.",
+    "correct": "B"
+  },
+  {
+    "question": "\"Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa… song nhân dân Việt Nam quyết không sợ, không có gì quí hơn độc lập tự do\". Câu nói được trích trong tác phẩm nào của Hồ Chí Minh?",
+    "A": "Lời kêu gọi toàn quốc kháng chiến, ngày 19/12/1946.",
+    "B": "Lời kêu gọi, ngày 17/7/1966.",
+    "C": "Di chúc, năm 1969.",
+    "D": "Thư chúc Tết, năm 1968.",
+    "correct": "B"
+  },
+  {
+    "question": "Hồ Chí Minh là người đấu tranh đòi quyền độc lập cho:",
+    "A": "Dân tộc thuộc địa các nước đang bị áp bức trên thế giới.",
+    "B": "Tất cả các quốc gia, tộc người và dân tộc trên thế giới.",
+    "C": "Dân tộc thuộc địa các nước đang bị áp bức ở phương Đông.",
+    "D": "Dân tộc Việt Nam và tất cả các dân tộc bị áp bức trên thế giới.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, biện pháp nào là quan trọng nhất trong xây dựng CNXH?",
+    "A": "Tranh thủ tối đa sự giúp đỡ, viện trợ quốc tế.",
+    "B": "Kết hợp xây dựng và bảo vệ đất nước.",
+    "C": "Huy động các nguồn lực sẵn có trong nhân dân.",
+    "D": "Kết hợp cải tạo xã hội cũ với xây dựng xã hội mới.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, kẻ thù cần phải đánh đổ trong cách mạng giải phóng là gì?",
+    "A": "Đế quốc, thực dân và tay sai của chúng.",
+    "B": "Chủ nghĩa cá nhân.",
+    "C": "Chủ nghĩa tư bản, chủ nghĩa đế quốc.",
+    "D": "Nghèo nàn, dốt nát, lạc hậu",
+    "correct": "B"
+  },
+   {
+    "question": "Khi học trường Quốc tế Lênin, Hồ Chí Minh đã lấy bí danh là gì?",
+    "A": "Victor Lebon.",
+    "B": "Polopxki.",
+    "C": "Lin.",
+    "D": "Nilopxki.",
+    "correct": "C"
+  },
+  {
+    "question": "“Mục đích của Đảng Lao động Việt Nam có thể gộp trong tám chữ…”, Hồ Chí Minh tuyên bố này trong sự kiện nào? Thời gian nào?",
+    "A": "Kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/02/1930.",
+    "B": "Lời kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/03/1951.",
+    "C": "Kết thúc buổi ra mắt của Đảng Lao động Việt Nam, ngày 07/02/1930.",
+    "D": "Lời mở đầu buổi ra mắt của Đảng Lao động Việt Nam, ngày 03/03/1951.",
+    "correct": "D"
+  },
+  {
+    "question": "Tư tưởng Hồ Chí Minh về Đảng Cộng sản được hình thành trên cơ sở nào?",
+    "A": "Lý luận của chủ nghĩa Mác – Lênin.",
+    "B": "Lý luận khoa học và thực tiễn cách mạng.",
+    "C": "Thực tiễn cách mạng đấu tranh trong nước.",
+    "D": "Thực tiễn cách mạng đấu tranh thế giới.",
+    "correct": "A"
+  },
+  {
+    "question": "Trong tư tưởng Lão giáo khuyên con người cần phải có đầy đủ tri thức. Người cần có đầy đủ tri thức là ai?",
+    "A": "Toàn bộ người dân.",
+    "B": "Người thuộc tầng lớp thượng lưu.",
+    "C": "Người thuộc tầng lớp cai trị.",
+    "D": "Người thuộc tầng lớp trí thức giả.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, vì sao giai cấp nông dân không thể lãnh đạo được cách mạng Việt Nam?",
+    "A": "Lực lượng đông nhưng không có tiền đề tư tưởng, lý luận cách mạng triệt để.",
+    "B": "Không có tư tưởng độc lập, không đại diện cho phương thức sản xuất tiên tiến.",
+    "C": "Không có chính đảng, không thực hiện được đoàn kết giai cấp, tầng lớp khác.",
+    "D": "Không có phương tiện tổ chức chiến tranh hiện đại, không có đường lối đúng.",
+    "correct": "B"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Việc gì có lợi cho […], ta phải hết sức làm;việc gì có hại cho […], ta phải hết sức tránh”.",
+    "A": "Nhà nước.",
+    "B": "Công dân.",
+    "C": "Dân.",
+    "D": "Đảng.",
+    "correct": "C"
+  },
+  {
+    "question": "Trong tư tưởng Hồ Chí Minh, đại đoàn kết dân tộc là:",
+    "A": "Đoàn kết giai cấp công nhân – nông dân – lao động trí óc.",
+    "B": "Đoàn kết toàn bộ các tộc người trên một lãnh thổ.",
+    "C": "Đoàn kết công – nông và các tầng lớp khác trong xã hội.",
+    "D": "Đoàn kết giai cấp công nhân – nông dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, thực chất của giải phóng giai cấp là:",
+    "A": "Tiêu diệt cá nhân những con người thuộc giai cấp bóc lột.",
+    "B": "Xóa bỏ giai cấp bóc lột với tư cách là giai cấp thống trị xã hội.",
+    "C": "Thay thế giai cấp thống trị này bằng giai cấp thống trị khác.",
+    "D": "Giải phóng giai cấp vô sản trên toàn thế giới.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Con tàu mà Hồ Chí Minh thực hiện chuyến đi của mình tên gì, của nước nào?",
+    "A": "Latouche-Tréville của Pháp.",
+    "B": "Latouche-Tréville của Mỹ.",
+    "C": "Latouche-Tréville của Anh.",
+    "D": "Amiral Latouche-Tréville của Pháp.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án ĐÚNG nhất với tư tưởng Hồ Chí Minh:",
+    "A": "Cách mạng giải phóng dân tộc giành thắng lợi đồng thời với thắng lợi cách mạng vô sản ở chính quốc.",
+    "B": "Thắng lợi của cách mạng vô sản ở chính quốc là tiền đề, cách mạng giải phóng dân tộc ở thuộc địa là hệ quả.",
+    "C": "Thắng lợi của cách mạng vô sản ở thuộc địa phải phụ thuộc vào thắng lợi của cách mạng vô sản ở chính quốc.",
+    "D": "Cách mạng giải phóng dân tộc có khả năng nổ ra và giành được thắng lợi trước cách mạng vô sản ở chính quốc.",
+    "correct": "D"
+  },
+   {
+    "question": "Cơ chế vận hành của hệ thống chính trị nước ta là:",
+    "A": "Đảng lãnh đạo, nhà nước quản lý, nhân dân làm chủ.",
+    "B": "Nhà nước làm chủ, Đảng lãnh đạo, nhân dân quản lý.",
+    "C": "Đảng và nhà nước lãnh đạo, quản lý, nhân dân làm chủ.",
+    "D": "Nhà nước lãnh đạo, Đảng quản lý, nhân dân làm chủ.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Sức mạnh thời đại trong đoàn kết quốc tế là gì?",
+    "A": "Sức mạnh của phong trào cách mạng thế giới.",
+    "B": "Sức mạnh của cách mạng cải cách nền dân chủ thế giới.",
+    "C": "Sức mạnh của phong trào vì hoà bình, độc lập dân tộc.",
+    "D": "Sức mạnh của cách mạng khoa học công nghệ 4.0.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Thực chất của vấn đề dân tộc độc lập trong tư tưởng Hồ Chí Minh là:",
+    "A": "Đấu tranh giải phóng dân tộc.",
+    "B": "Xây dựng nhà nước của dân, do dân, vì dân.",
+    "C": "Thành lập nhà nước dân tộc độc lập.",
+    "D": "Đòi quyền bình đẳng giữa các dân tộc.",
+    "correct": "D"
+  },
+  {
+    "question": "\"Đảng có vững thì cách mệnh mới thành công, cũng như người cầm lái có vững thuyền mới chạy\". Luận điểm này được trích trong tác phẩm nào của Bác?",
+    "A": "Bản án chế độ thực dân Pháp.",
+    "B": "Đường Kách mệnh.",
+    "C": "Chánh cương vắn tắt của Đảng.",
+    "D": "Thường thức chính trị.",
+    "correct": "B"
+  },
+  {
+    "question": "Xây dựng nhà nước pháp quyền, của dân, do dân và vì dân ở nước ta hiện nay cần phải:",
+    "A": "Xây dựng hệ thống luật pháp hoàn chỉnh và phân quyền rõ ràng.",
+    "B": "Đưa luật pháp triển khai đầy đủ vào đời sống nhân dân.",
+    "C": "Tăng cường sự lãnh đạo của Đảng Cộng sản Việt Nam.",
+    "D": "Dân chủ hoá tổ chức và hoạt động của bộ máy Nhà nước.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh. Trong đoàn kết quốc tế, “Muốn người ta giúp cho thì trước hết mình phải […]”.",
+    "A": "Giúp người ta trước.",
+    "B": "Kêu gọi sự giúp đỡ.",
+    "C": "Tự cố gắng đứng dậy.",
+    "D": "Tự giúp lấy mình đã.",
+    "correct": "D"
+  },
+  {
+    "question": "Mặt trận Việt Nam độc lập đồng minh (Việt Minh) được thành lập vào thời gian nào?",
+    "A": "Ngày 19/05/1940.",
+    "B": "Ngày 19/05/1945.",
+    "C": "Ngày 19/05/1941.",
+    "D": "Ngày 19/05/1942.",
+    "correct": "C"
+  },
+  {
+    "question": "Người khởi xướng và lãnh đạo phong trào Đông Du (1905 -1909) là ai?",
+    "A": "Phan Chu Trinh.",
+    "B": "Phan Bội Châu.",
+    "C": "Lương Văn Can.",
+    "D": "Nguyễn Thái Học.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, cách mạng giải phóng dân tộc muốn giành được thắng lợi cần phải:",
+    "A": "Dựa vào sự thắng lợi của cách mạng vô sản ở chính quốc.",
+    "B": "Được tiến hành chủ động và sáng tạo.",
+    "C": "Dựa vào sự thắng lợi của cách mạng ở các nước thuộc địa khác.",
+    "D": "Dựa vào sự giúp đỡ của các nước xã hội chủ nghĩa.",
+    "correct": "B"
+  },
+  {
+    "question": "Tư tưởng Hồ Chí Minh KHÔNG bắt nguồn từ:",
+    "A": "Giá trị truyền thống tốt đẹp của dân tộc Việt Nam.",
+    "B": "Giá trị tinh hoa văn hoá của nhân loại.",
+    "C": "Giá trị tinh hoa văn hoá của phương Đông.",
+    "D": "Yêu cầu của cách mạng giải phóng thuộc địa.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp đúng nhất theo Hồ Chí Minh. \"Kiệm\" nghĩa là:",
+    "A": "Tiết kiệm của cải.",
+    "B": "Tiết kiệm cho nhân dân.",
+    "C": "Keo kiệt.",
+    "D": "Không lãng phí.",
+    "correct": "A"
+  },
+  {
+    "question": "Truyền thống văn hoá dân tộc giữ vị trí hàng đầu hình thành nên tư tưởng Hồ Chí Minh là:",
+    "A": "Truyền thống đoàn kết.",
+    "B": "Truyền thống hiếu học.",
+    "C": "Truyền thống cần cù, sáng tạo.",
+    "D": "Truyền thống yêu nước.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Theo Hồ Chí Minh, đời sống mới bao gồm những mặt nào?",
+    "A": "Đạo đức mới, nếp sống mới và cách sống mới.",
+    "B": "Đạo đức mới, lối sống mới, nếp sống mới.",
+    "C": "Đạo đức mới và lối sống mới; cách sống mới.",
+    "D": "Nếp sống mới, lối sống mới và tư tưởng mới.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, cán bộ nhà nước là gì của nhân nhân?",
+    "A": "Người làm công.",
+    "B": "Người phục vụ.",
+    "C": "Công bộc.",
+    "D": "Người quản lý.",
+    "correct": "C"
+  },
+  {
+    "question": "Khái niệm tư tưởng Hồ Chí Minh được bổ sung và hoàn thiện tại:",
+    "A": "Đại hội đại biển toàn quốc lần thứ VII của Đảng.",
+    "B": "Đại hội đại biển toàn quốc lần thứ XI của Đảng.",
+    "C": "Đại hội đại biển toàn quốc lần thứ IX của Đảng.",
+    "D": "Đại hội đại biển toàn quốc lần thứ X của Đảng.",
+    "correct": "B"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Tôi chỉ có một ham muốn, ham muốn tột bậc, là làm sao cho nước ta được […]”.",
+    "A": "Nhanh chóng độc lập.",
+    "B": "Hoàn toàn độc lập.",
+    "C": "Thắng lợi nhanh chóng.",
+    "D": "Hoàn toàn giải phóng.",
+    "correct": "B"
+  },
+  {
+    "question": "Hạnh phúc đích thực của con người là gì?",
+    "A": "Sống và hoạt động để tạo ra giá trị vật chất.",
+    "B": "Sống và hoạt động để tạo ra giá trị vật chất, tinh thần nhằm thoả mãn nhu cầu cá nhân.",
+    "C": "Sống và hoạt động để tạo ra giá trị tinh thần.",
+    "D": "Sống và hoạt động để tạo ra giá trị vật chất, tinh thần nhằm thoả mãn nhu cầu xã hội.",
+    "correct": "B"
+  },
+  {
+    "question": "Đánh giá về cách mạng Tháng Mười Nga 1917, Hồ Chí Minh xác định:",
+    "A": "Cách mạng triệt để.",
+    "B": "Cách mạng thành công một nữa.",
+    "C": "Cách mạng đến nơi.",
+    "D": "Cách mạng thành công.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, trong quan hệ với quần chúng nhân dân, Đảng cần làm gì?",
+    "A": "Luôn luôn lắng nghe quần chúng.",
+    "B": "Lắng nghe và thực hiện theo yêu cầu của quần chúng.",
+    "C": "Không theo đuôi quần chúng.",
+    "D": "Thực hiện theo yêu cầu của nhân dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Đảng có vững, [...] mới thành công, cũng như người cầm lái có vững thì […]”.",
+    "A": "Cách mệnh; thuyền có thể chạy.",
+    "B": "Cách mệnh; thuyền mới chạy.",
+    "C": "Cách mạng; thuyền có thể chạy.",
+    "D": "Cách mạng; thuyền mới chạy",
+    "correct": "B"
+  }
+]

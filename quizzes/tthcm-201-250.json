@@ -1,0 +1,402 @@
+[
+  {
+    "question": "Yếu tố nào là một động lực lớn trong cuộc đấu tranh giải phóng dân tộc ở các nước thuộc địa?",
+    "A": "Chủ nghĩa dân tộc.",
+    "B": "Chủ nghĩa cộng sản.",
+    "C": "Chủ nghĩa yêu nước.",
+    "D": "Chủ nghĩa xã hội.",
+    "correct": "C"
+  },
+  {
+    "question": "Mục tiêu của chức năng giáo dục là gì?",
+    "A": "Hoàn thiện nhân cách con người.",
+    "B": "Trở thành người có ích cho xã hội.",
+    "C": "Nâng cao học thức.",
+    "D": "Giúp con người vươn đến CHÂN – THIỆN – MỸ.",
+    "correct": "D"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Mục đích phê bình cốt để […], giúp nhau tiến bộ”.",
+    "A": "Giúp nhau sữa chữa.",
+    "B": "Giúp nhau cải tạo.",
+    "C": "Sửa chữa sai lầm.",
+    "D": "Chỉ ra khuyết điểm.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Giải phóng dân tộc theo tư tưởng Hồ Chí Minh là:",
+    "A": "Đánh đổ ách áp bức, thống trị của đế quốc thực dân giành độc lập dân tộc.",
+    "B": "Lựa chọn con đường phát triển của dân tộc phù hợp với xu thế của thời đại.",
+    "C": "Đánh đổ địa chủ phong kiến đem lại ruộng đất cho nhân dân.",
+    "D": "Hình thành nhà nước dân tộc độc lập của dân, do dân, vì dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Hồ Chí Minh nhận nhiệm vụ quốc tế đầu tiên của Quốc tế III là ở đâu? Nhiệm vụ gì?",
+    "A": "Quảng Châu – Trung Quốc, giúp thành lập các tổ chức cộng sản.",
+    "B": "Hương Cảng – Trung Quốc, giúp thành lập các tổ chức cộng sản.",
+    "C": "Quảng Đông – Trung Quốc, giúp thành lập các tổ chức cộng sản.",
+    "D": "Quảng Tây – Trung Quốc, giúp thành lập các tổ chức cộng sản.",
+    "correct": "A"
+  },
+  {
+    "question": "Khi làm việc tại New York, Hồ Chí Minh đã thấy được điều quan trọng ảnh hưởng đến tư tưởng của Người là gì?",
+    "A": "Nhiều dân tộc nhập cư cùng sinh sống với nhau, đoàn kết giúp nhau cùng phát triển.",
+    "B": "Những người dân nhập cư mặc nhiên được hưởng những quyền hợp pháp mà người Việt Nam phải đi xin của Pháp.",
+    "C": "Không có sự phân biệt chủng tộc ở đây, Vàng, Đỏ, Trắng, Đen đều là anh em.",
+    "D": "Một khu phố ngự trị bởi người dân nhập cư.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, muốn xây dựng CNXH trước hết cần phải có:",
+    "A": "Khoa học - kỹ thuật tiên tiến.",
+    "B": "Văn hóa đậm đà bản sắc dân tộc.",
+    "C": "Nền kinh tế phát triển cao.",
+    "D": "Con người xã hội chủ nghĩa.",
+    "correct": "D"
+  },
+  {
+    "question": "Đảng Cộng sản Việt Nam trở thành Đảng cầm quyền ở Việt Nam từ thời gian nào?",
+    "A": "Ngày 03/02/1930.",
+    "B": "Ngày 30/04/1975.",
+    "C": "Ngày 24/02/1930.",
+    "D": "Ngày 06/01/1946.",
+    "correct": "D"
+  },
+  {
+    "question": "Yếu tố KHÔNG nằm trong cơ cấu Mặt trận Dân tộc thống nhất là gì?",
+    "A": "Đảng Cộng sản Việt Nam.",
+    "B": "Nhà nước xã hội chủ nghĩa.",
+    "C": "Các tổ chức chính trị - xã hội.",
+    "D": "Đoàn Thanh niên Cộng sản Hồ Chí Minh.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh độc lập, tự do là:",
+    "A": "Quyền thiêng liêng, bất khả xâm phạm của tất cả các dân tộc.",
+    "B": "Quyền tự quyết của tất cả các dân tộc trên thế giới.",
+    "C": "Quyền thiêng liêng của tất cả các dân tộc trên thế giới.",
+    "D": "Quyền bất khả xâm phạm của tất cả các dân tộc trên thế giới.",
+    "correct": "A"
+  },
+  {
+    "question": "Cơ sở thế giới quan và phương pháp luận của tư tưởng Hồ Chí Minh là:",
+    "A": "Chủ nghĩa yêu nước.",
+    "B": "Tinh hoa văn hoá người Việt Nam.",
+    "C": "Tinh hoa văn hóa nhân loại.",
+    "D": "Chủ nghĩa Mác – Lênin.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Nguyên tắc xây dựng Đảng Cộng sản Việt Nam theo tư tưởng Hồ Chí Minh là:",
+    "A": "Thiểu số phục tùng đa số.",
+    "B": "Kỷ luật nghiêm minh, tự giác.",
+    "C": "Đoàn kết, thống nhất trong Đảng.",
+    "D": "Tự phê bình và phê bình.",
+    "correct": "A"
+  },
+  {
+    "question": "“Công nông là gốc của cách mệnh, còn học trò, nhà buôn nhỏ, điền chủ nhỏ là bầu bạn cách mệnh của công nông” được Nguyễn Ái Quốc đưa ra để xác định:",
+    "A": "Phương pháp cách mạng.",
+    "B": "Vai trò của đoàn kết.",
+    "C": "Nhiệm vụ của cách mạng.",
+    "D": "Lực lượng cách mạng.",
+    "correct": "D"
+  },
+  {
+    "question": "Tinh thần quốc tế trong sáng trong tư tưởng đạo đức của Hồ Chí Minh đã tạo ra một kiểu quan hệ quốc tế mới, đó là:",
+    "A": "Đa phương hoá, đa dạng hoá các quan hệ hữu nghị, hợp tác với nhau cùng phát triển.",
+    "B": "Giải quyết tranh chấp, đối đầu bằng hội nghị hiệp thương song phương, đa phương.",
+    "C": "Chủ nghĩa yêu nước chân chính kết hợp nhuần nhuyễn với chủ nghĩa quốc tế vô sản.",
+    "D": "Đối thoại thay cho đối đầu, nhằm kiến tạo một nền văn hoá hoà bình cho nhân loại.",
+    "correct": "D"
+  },
+  {
+    "question": "“Đảng phải đặc biệt coi trọng việc tổ chức học tập một cách có hệ thống tư tưởng, đạo đức tác phong của Hồ Chí Minh trong toàn Đảng” được nhấn mạnh trong văn kiện tại:",
+    "A": "Đại hội đại biển toàn quốc lần thứ II của Đảng.",
+    "B": "Đại hội đại biển toàn quốc lần thứ XI của Đảng.",
+    "C": "Đại hội đại biển toàn quốc lần thứ IV của Đảng.",
+    "D": "Đại hội đại biển toàn quốc lần thứ V của Đảng.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh tiếp thu tư tưởng văn hoá phương Đông chủ yếu từ đâu?",
+    "A": "Nho giáo và Phật giáo.",
+    "B": "Chủ nghĩa Mác – Lênin.",
+    "C": "Nho giáo và Thiên Chúa giáo.",
+    "D": "Phật giáo và Thiên Chúa giáo.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Nguyên tắc xây dựng và hoạt động của Mặt trận Dân tộc thống nhất là:",
+    "A": "Lấy lợi ích tối cao của giai cấp công nhân, giai cấp vô sản làm mục tiêu phấn đấu.",
+    "B": "Đoàn kết lâu dài, chặt chẽ, đoàn kết thực sự, chân thành, thân ái giúp đỡ nhau tiến bộ.",
+    "C": "Xây dựng trên nền tảng liên minh công – nông – trí, dưới sự lãnh đạo của Đảng.",
+    "D": "Xuất phát từ mục tiêu vì nước, vì dân; hoạt động theo nguyên tắc hiệp thương dân chủ.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, ai là người chủ tương lai của nước nhà?",
+    "A": "Công nhân.",
+    "B": "Thanh niên.",
+    "C": "Thiếu niên.",
+    "D": "Nhi đồng.",
+    "correct": "B"
+  },
+  {
+    "question": "“Đưa hổ cửa trước, rước beo cửa sau” là câu đánh giá của ai?",
+    "A": "Phan Chu Trinh.",
+    "B": "Phan Bội Châu.",
+    "C": "Hồ Chí Minh.",
+    "D": "Hoàng Hoa Thám",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Cơ sở hình thành tư tưởng đại đoàn kết dân tộc của Hồ Chí Minh là:",
+    "A": "Truyền thống đoàn kết nhân ái, tinh thần gắn kết cộng đồng dân tộc Việt Nam.",
+    "B": "Thực tiễn thành công và thất bại của phong trào cách mạng Việt Nam và thế giới.",
+    "C": "Thực tiễn thất bại của phong trào cách mạng ở các nước phương Đông.",
+    "D": "Quan điểm của chủ nghĩa Mác –Lênin về vai trò của quần chúng nhân dân.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, nền tảng tư tưởng của Đảng phải dựa trên:",
+    "A": "Nguyên tắc tự phê bình và phê bình.",
+    "B": "Đại đoàn kết dân tộc.",
+    "C": "Nguyên tắc tập trung dân chủ.",
+    "D": "Chủ nghĩa Mác – Lênin.",
+    "correct": "D"
+  },
+  {
+    "question": "Trong khối đại đoàn kết dân tộc, đặc biệt chú trọng yếu tố hạt nhân là gì?",
+    "A": "Sự đoàn kết, thống nhất trong sáng.",
+    "B": "Sự đoàn kết, nhất trí trong nhân dân.",
+    "C": "Sự thống nhất, đồng sức, đồng lòng.",
+    "D": "Sự đoàn kết và thống nhất trong Đảng.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Độc lập dân tộc trong tư tưởng Hồ Chí Minh phải:",
+    "A": "Gắn liền với độc lập của các dân tộc thuộc địa.",
+    "B": "Gắn liền với thống nhất và toàn vẹn lãnh thổ.",
+    "C": "Gắn liền với tự do, hạnh phúc của nhân dân.",
+    "D": "Độc lập thật sự, hoàn toàn và triệt để.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, nếu lý luận và thực tiễn không thống nhất với nhau cần phải điều chỉnh một yếu tố thì trước hết phải điều chỉnh yếu tố nào?",
+    "A": "Điều chỉnh cả lý luận và thực tiễn.",
+    "B": "Điều chỉnh lý luận trước.",
+    "C": "Điều chỉnh thực tiễn trước.",
+    "D": "Thực hành phải nhắm theo lý luận.",
+    "correct": "B"
+  },
+  {
+    "question": "Phương thức xây dựng khối đại đoàn kết dân tộc là làm tốt công tác vận động quần chúng. Đây là phương thức công tác:",
+    "A": "Tuyên giáo.",
+    "B": "Tuyên truyền.",
+    "C": "Dân vận.",
+    "D": "Tuyên vận.",
+    "correct": "B"
+  },
+  {
+    "question": "Chuẩn mực xã hội là gì?",
+    "A": "Quy tắc (tường minh/ hàm ẩn) nhằm xác định kiểu hành vi nào là được chấp nhận trong một xã hội/cộng đồng/nhóm.",
+    "B": "Quy tắc ứng xử chung của xã hội.",
+    "C": "Chuẩn mực đạo đức trong đời sống.",
+    "D": "Những hành vi được chấp nhận.",
+    "correct": "A"
+  },
+  {
+    "question": "Tư tưởng cốt lõi trong tư tưởng Hồ Chí Minh về cách mạng Việt Nam là gì?",
+    "A": "Giải phóng dân tộc, giải phóng giai cấp.",
+    "B": "Độc lập dân tộc gắn liền với chủ nghĩa xã hội.",
+    "C": "Giải phóng dân tộc, giải phóng con người.",
+    "D": "Kết hợp sức mạnh dân tộc với sức mạnh thời đại.",
+    "correct": "B"
+  },
+  {
+    "question": "Sau khi lên tàu đi tìm đường cứu nước Hồ Chí Minh đến nước nào đầu tiên? Thời gian nào?",
+    "A": "Nước Pháp, ngày 05/06/1911.",
+    "B": "Nam phi, ngày 25/06/1911.",
+    "C": "Nước Pháp, ngày 06/07/1911.",
+    "D": "Châu Phi, ngày 06/07/1911.",
+    "correct": "C"
+  },
+  {
+    "question": "\"Người cách mạng phải học suốt đời, học lý luận, học quần chúng, học thực tế. Người không học thì như đi ban đêm không đèn, không gậy, dễ vấp té, có phải thế không?\". Đây là Hồ Chí Minh căn dặn ai?",
+    "A": "Nguyễn Thị Thập.",
+    "B": "Nguyễn Thị Định.",
+    "C": "Tạ Thị Kiều.",
+    "D": "Nguyễn Thị Chiến.",
+    "correct": "B"
+  },
+  {
+    "question": "Mâu thuẫn cơ bản và chủ yếu ở Việt Nam đầu thế kỷ XX là mâu thuẫn giữa:",
+    "A": "Giai cấp nông dân với giai cấp địa chủ phong kiến, tư sản Việt Nam và tư sản Pháp.",
+    "B": "Giai cấp công nhân và nông dân với đế quốc phong kiến và chính quyền thực dân.",
+    "C": "Giai cấp công nhân với giai cấp tư sản Pháp và tay sai của chúng.",
+    "D": "Dân tộc Việt Nam với đế quốc xâm lược và tay sai của chúng.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Điều kiện để xây dựng khối đại đoàn kết toàn dân tộc:",
+    "A": "Phải có lòng yêu thương con người, sống có hoài bão.",
+    "B": "Phải có niềm tin vào nhân dân.",
+    "C": "Phải kế thừa truyền thống yêu nước, nhân nghĩa, đoàn kết.",
+    "D": "Phải có lòng khoan dung, độ lượng với con người.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Hồ Chí Minh ra đi tìm đường cứu nước vào thời gian nào? Ở đâu?",
+    "A": "Năm 1911; Thành phố Hồ Chí Minh.",
+    "B": "Ngày 05/06/1911; Bến cảng Nhà rồng – Hương cảng.",
+    "C": "Ngày 05/06/1911; Bến cảng Nhà rồng - Sài gòn.",
+    "D": "Ngày 05/06/1911; Thành phố Sài gòn.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Con đường cách mạng cuối thế kỷ XIX đầu thế kỷ XX ở Việt Nam:",
+    "A": "Cách mạng Phong kiến.",
+    "B": "Cải cách dân chủ tư sản.",
+    "C": "Cách mạng dân chủ tư sản.",
+    "D": "Cách mạng vô sản.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh lấy tên là Nguyễn ái Quốc khi đang ở đâu? Thời gian nào?",
+    "A": "Ở Paris - Pháp, năm 1919.",
+    "B": "Ở Boston - Mỹ, năm 1917.",
+    "C": "Ở Pháp, năm 1920.",
+    "D": "Ở Paris - Pháp, năm 1920.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Chế độ ta là chế độ dân chủ, nghĩa là […] làm chủ”.",
+    "A": "Công nhân.",
+    "B": "Công- Nông.",
+    "C": "Công dân.",
+    "D": "Nhân dân.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án đúng nhất. Con người theo quan niệm của Hồ Chí Minh là:",
+    "A": "Vốn quý nhất, nhân tố quan trọng đến thành công của cách mạng.",
+    "B": "Nguồn vốn vô giá của xã hội, là động lực của cách mạng.",
+    "C": "Vốn quý nhất, nhân tố quyết định thành công của cách mạng.",
+    "D": "Vốn quý của cách mạng, là nguồn vốn quý giá của xã hội.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, cách mạng bạo lực là đấu tranh:",
+    "A": "Kết hợp chính trị quần chúng với vũ trang nhân dân.",
+    "B": "Kết hợp đấu tranh quân sự với đấu tranh ngoại giao.",
+    "C": "Kết hợp chính trị quần chúng với đấu tranh ngoại giao.",
+    "D": "Kết hợp vũ trang nhân dân với mặt trận ngoại giao.",
+    "correct": "B"
+  },
+  {
+    "question": "Luận điểm sáng tạo của Hồ Chí minh về con đường cách mạng Việt Nam được hình thành về cơ bản vào năm nào?",
+    "A": "Năm 1920.",
+    "B": "Năm 1930.",
+    "C": "Năm 1941.",
+    "D": "Năm 1925.",
+    "correct": "B"
+  },
+  {
+    "question": "Xét về tính giá trị, sự khác nhau giữa văn hóa và văn minh là:",
+    "A": "Văn hóa gắn với phương Đông nông nghiệp, văn minh gắn với phương tây đô thị.",
+    "B": "Văn hóa mang tính dân tộc còn văn minh mang tính quốc tế.",
+    "C": "Văn minh có trình độ phát triển còn văn hóa có bề dày lịch sử.",
+    "D": "Văn minh thiên về vật chất - kỹ thuật còn văn hóa thiên về vật chất tinh thần.",
+    "correct": "D"
+  },
+  {
+    "question": "Từ sau Cách mạng tháng Tám năm 1945, văn hóa được Hồ Chí Minh xác định là:",
+    "A": "Tổng hợp mọi phương thức sản xuất của con người.",
+    "B": "Các trường học, số người đi học, biết đọc, biết viết.",
+    "C": "Đời sống tinh thần của xã hội, thuộc về kiến trúc thượng tầng.",
+    "D": "Đời sống vật chất của xã hội, thuộc về cơ sở hạ tầng.",
+    "correct": "C"
+  },
+  {
+    "question": "Nguyễn Ái Quốc đã thành lập Hội Việt Nam cách mạng thanh niên tại đâu?",
+    "A": "Quảng Châu (Trung Quốc).",
+    "B": "Cao Bằng (Việt Nam).",
+    "C": "Hương Cảng (Trung Quốc).",
+    "D": "Thượng Hải (Trung Quốc).",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Ý nghĩa học tập môn học Tư tưởng Hồ Chí Minh:",
+    "A": "Góp phần nâng cao năng lực tư duy lý luận.",
+    "B": "Xây dựng bản lĩnh cách mạng, đấu tranh chống giặc ngoại xâm.",
+    "C": "Giáo dục và thực hành đạo đức cách mạng, củng cố niềm tin vào khoa học, bồi dưỡng lòng yêu nước.",
+    "D": "Xây dựng, rèn luyện phương pháp và phong cách công tác.",
+    "correct": "B"
+  },
+  {
+    "question": "Hành vi đạo đức gắn với:",
+    "A": "Ý thức trách nhiệm.",
+    "B": "Lòng nhân đạo.",
+    "C": "Lý trí.",
+    "D": "Ý thức đạo đức.",
+    "correct": "D"
+  },
+  {
+    "question": "\"Cũng như ngọc càng mài càng sáng, vàng càng luyện càng trong\". Luận điểm này được trích trong tác phẩm nào của Bác?",
+    "A": "Đường Kách mệnh.",
+    "B": "Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân.",
+    "C": "Liên Xô vĩ đại.",
+    "D": "Đạo đức cách mạng.",
+    "correct": "D"
+  },
+  {
+    "question": "Cuốn “Đường kách mệnh” của Nguyễn Ái Quốc được tái xuất bản tại:",
+    "A": "Pháp.",
+    "B": "Trung Quốc.",
+    "C": "Việt Nam.",
+    "D": "Liên Xô.",
+    "correct": "C"
+  },
+  {
+    "question": "“Toàn Đảng hãy ra sức học tập đường lối chính trị, tác phong và đạo đức cách mạng của Hồ Chủ tịch…” được viết trong văn kiện tại:",
+    "A": "Đại hội đại biển toàn quốc lần thứ II của Đảng.",
+    "B": "Đại hội đại biển toàn quốc lần thứ XI của Đảng.",
+    "C": "Đại hội đại biển toàn quốc lần thứ IV của Đảng.",
+    "D": "Đại hội đại biển toàn quốc lần thứ V của Đảng.",
+    "correct": "A"
+  },
+  {
+    "question": "Trong tư tưởng Hồ Chí Minh, bạo lực cách mạng luôn thống nhất với:",
+    "A": "Tư tưởng đấu tranh ngoại giao.",
+    "B": "Tư tưởng cách mạng không ngừng.",
+    "C": "Tư tưởng đấu tranh hoà bình.",
+    "D": "Tư tưởng nhân đạo hòa bình.",
+    "correct": "D"
+  },
+  {
+    "question": "Nguyễn Ái Quốc nhận nhiệm vụ quốc tế đầu tiên của Quốc tế III, lấy tên là gì?",
+    "A": "Lin.",
+    "B": "Hồ Chí Minh.",
+    "C": "Lý Thuỵ.",
+    "D": "Nguyễn Ba.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Theo Hồ Chí Minh, muốn tăng cường đoàn kết quốc tế, các đảng cộng sản trên thế giới phải:",
+    "A": "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa cơ hội.",
+    "B": "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa sôvanh.",
+    "C": "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa xét lại.",
+    "D": "Kiên trì chống lại khuynh hướng sai lầm của chủ nghĩa vị kỷ dân tộc.",
+    "correct": "C"
+  },
+  {
+    "question": "Nguyễn Ái Quốc đọc “Sơ thảo lần thứ nhất vấn đề dân tộc và thuộc địa” vào thời gian nào? Ở đâu?",
+    "A": "Tháng 07/1920 tại Moscow.",
+    "B": "Tháng 07/1920 tại London.",
+    "C": "Tháng 07/1920 tại Paris.",
+    "D": "Tháng 02/1917 tại New York.",
+    "correct": "C"
+  }
+]

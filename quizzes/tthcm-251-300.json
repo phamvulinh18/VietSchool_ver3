@@ -1,0 +1,282 @@
+[
+  {
+    "question": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam là sản phẩm của sự kết hợp của 3 yếu tố, là xác định:",
+    "A": "Nhiệm vụ lịch sử của Đảng.",
+    "B": "Bản chất ra đời của Đảng.",
+    "C": "Nguồn gốc ra đời của Đảng.",
+    "D": "Tiêu chuẩn ra đời của Đảng.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, sử dụng bạo lực cách mạng là để:",
+    "A": "Lật đổ chế độ cũ, xây dựng chế độ mới.",
+    "B": "Tiêu diệt các lực lượng phản cách mạng, lật đổ chính quyền phản động và tay sai.",
+    "C": "Xây dựng và bảo vệ chính quyền; xây dựng chế độ mới.",
+    "D": "Giành chính quyền và giữ chính quyền.",
+    "correct": "D"
+  },
+  {
+    "question": "Tiêu chí của đạo đức là gì?",
+    "A": "Ý thức đạo đức – Hành vi đạo đức – Quan hệ đạo đức.",
+    "B": "Hiểu đạo đức – Hành vi đạo đức – Quan hệ đạo đức.",
+    "C": "Nhận thức đạo đức – Hành vi đạo đức – Quan hệ đạo đức.",
+    "D": "Có đạo đức – Hành vi đạo đức – Quan hệ đạo đức.",
+    "correct": "A"
+  },
+  {
+    "question": "Xã hội chỉ phát triển bền vững khi các quy tắc, chuẩn mực đạo đức trong xã hội đó luôn được:",
+    "A": "Tạo điều kiện để phát triển thuận lợi.",
+    "B": "Thúc đẩy nhanh chóng để phát triển.",
+    "C": "Tôn trọng củng cố và phát triển.",
+    "D": "Phát triển mạnh mẽ.",
+    "correct": "C"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, ưu điểm lớn nhất của học thuyết Khổng Tử là gì?",
+    "A": "Tinh thần hiếu học.",
+    "B": "Sự tu dưỡng đạo đức cá nhân.",
+    "C": "Quản lý xã hội bằng đạo đức.",
+    "D": "Tinh thần lễ nghĩa.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, mọi việc thành công hay thất bại là do:",
+    "A": "Đường lối lãnh đạo đúng hay sai.",
+    "B": "Đường lối đúng hay sai.",
+    "C": "Cán bộ tốt hay kém.",
+    "D": "Công tác hoạch định cán bộ.",
+    "correct": "C"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Nông dân giàu thì nước ta giàu, […] thịnh thì nước ta thịnh”.",
+    "A": "Công nghiệp.",
+    "B": "Du lịch.",
+    "C": "Nông nghiệp.",
+    "D": "Thương nghiệp.",
+    "correct": "C"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Năm ngón tay cũng có […]. Nhưng đều hợp nhau nơi bàn tay”.",
+    "A": "Ngón ngắn, ngón dài.",
+    "B": "Ngắn, dài không đều.",
+    "C": "Ngón vắn, ngón dài.",
+    "D": "Dài, ngắn khác nhau.",
+    "correct": "C"
+  },
+  {
+    "question": "Người thầy giáo đầu tiên của Nguyễn Sinh Cung là ai?",
+    "A": "Vương Thúc Quý.",
+    "B": "Nguyễn Sinh Sắc.",
+    "C": "Lê Văn Miến.",
+    "D": "Phan Bội Châu.",
+    "correct": "B"
+  },
+  {
+    "question": "Hoạt động đấu tranh đầu tiên của Hồ Chí Minh là gì?",
+    "A": "Cùng đoàn biểu tình của nông dân ở Huế biểu tình chống chế độ tham nhũng và mức thuế cao.",
+    "B": "Phiên dịch ra tiếng pháp những đòi hỏi của cuộc biểu tình để các viên chức thực dân có thể đọc nó.",
+    "C": "Cùng học sinh trường Quốc học Huế biểu tình chống chế độ tham nhũng và mức thuế cao.",
+    "D": "Phiên dịch ra tiếng anh những đòi hỏi của cuộc biểu tình để các viên chức thực dân có thể đọc nó.",
+    "correct": "B"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, khát vọng lớn nhất của dân tộc thuộc địa là gì?",
+    "A": "Ruộng đất cho dân cày.",
+    "B": "Quyền bình đẳng.",
+    "C": "Hòa bình và ruộng đất.",
+    "D": "Độc lập và tự do.",
+    "correct": "D"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Người cách mạng phải có [...] thì mới gánh được nặng và đi được xa”.",
+    "A": "Trí tuệ và tài năng.",
+    "B": "Tài năng và đạo đức.",
+    "C": "Đạo đức cách mạng.",
+    "D": "Phương pháp cách mạng.",
+    "correct": "C"
+  },
+  {
+    "question": "Điểm đặc sắc nhất trong tư tưởng Hồ Chí Minh về nhà nước pháp quyền là gì?",
+    "A": "Coi trọng pháp luật trong quản lý xã hội, đặc biệt trong phát triển kinh tế.",
+    "B": "Đảm bảo tính nghiêm minh và hiệu lực của pháp luật trong quản lý xã hội.",
+    "C": "Đề cao đạo đức trong quản lý xã hội, đề cao tư tưởng nhân đạo hoà bình.",
+    "D": "Kết hợp nhuần nhuyễn cả pháp luật và đạo đức trong quản lý xã hội.",
+    "correct": "D"
+  },
+  {
+    "question": "Chủ trương trong quan hệ quốc tế của Việt Nam hiện nay là:",
+    "A": "Việt Nam sẵn sàng là bạn, là đối tác tin cậy của các nước trong cộng đồng quốc tế.",
+    "B": "Việt Nam sẵn sàng là bạn tin cậy của các nước trong cộng đồng quốc tế.",
+    "C": "Việt Nam sẵn sàng là bạn của các nước trong cộng đồng quốc tế.",
+    "D": "Việt Nam muốn là bạn, là đối tác của các nước trong cộng đồng quốc tế.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Ph. Ănghen, để có sự bình đẳng, đoàn kết thật sự, chặt chẽ và lâu dài giữa các dân tộc; cần phải làm gì?",
+    "A": "Phải đoàn kết với các nước vô sản, đoàn kết với Quốc tế Cộng sản",
+    "B": "Phải tự vươn lên thành giai cấp dân tộc, phải tự mình trở thành dân tộc.",
+    "C": "Phải giành lấy chính quyền.",
+    "D": "Xóa bỏ nguồn gốc sinh ra bất bình đẳng, áp bức dân tộc.",
+    "correct": "D"
+  },
+  {
+    "question": "Nguyễn ái Quốc viết câu mở đầu: “Dân ta phải biết sử ta. Cho tường gốc tích nước nhà Việt Nam”, trong tác phẩm nào?",
+    "A": "Bài ca du kích.",
+    "B": "Lịch sử nước nhà.",
+    "C": "Đường kách mệnh.",
+    "D": "Lịch sử nước ta.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Nhà nước do dân theo tư tưởng Hồ Chí Minh là:",
+    "A": "Đại biểu của nhà nước do dân lựa chọn, phải liên hệ chặt chẽ với dân.",
+    "B": "Dân có quyền làm những gì mà pháp luật không cấm và đạo đức cho phép.",
+    "C": "Dân ủng hộ, giúp đỡ, đóng thuế để nhà nước chi tiêu, hoạt động.",
+    "D": "Dân kiểm soát, giám sát, bãi miễn nếu đại biểu không làm tròn sự ủy thác của dân.",
+    "correct": "B"
+  },
+  {
+    "question": "Sau khi học trường Quốc tế Lênin, Hồ Chí Minh đã viết thư muốn ngỏ ý cống hiến cho Quốc tế Cộng sản. Lá thư được viết vào thời gian nào?",
+    "A": "Tháng 01/1938.",
+    "B": "Tháng 12/1939.",
+    "C": "Tháng 06/1938.",
+    "D": "Tháng 10/1938.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, Đảng Cộng sản Việt Nam lấy chủ nghĩa Mác – Lênin “làm cốt”, nghĩa là:",
+    "A": "Lấy chủ nghĩa Mác – Lênin làm nền tảng tư tưởng, kim chỉ nam cho hành động.",
+    "B": "Căn cứ hoàn toàn vào chủ nghĩa Mác – Lênin mới lãnh đạo cách mạng thắng lợi.",
+    "C": "Lấy chủ nghĩa Mác – Lênin làm chủ trương, đường lối, chính sách cho hành động.",
+    "D": "Dựa vào chủ nghĩa Mác – Lênin để xây dựng học thuyết, quan điểm của Đảng.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Toàn thể dân tộc Việt Nam quyết đem […] để giữ vững quyền tự do, độc lập ấy”.",
+    "A": "Tất cả tinh thần và lực lượng, tính mạng và của cải.",
+    "B": "Toàn bộ sinh mệnh và quyết tâm cao nhất.",
+    "C": "Tất cả tinh thần và lực lượng đang có và sẽ có.",
+    "D": "Toàn bộ sức lực và của cải, tinh thần và lực lượng.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn đáp án KHÔNG đúng. Sức mạnh của dân tộc Việt Nam là:",
+    "A": "Chủ nghĩa yêu nước.",
+    "B": "Đa dạng tộc người.",
+    "C": "Ý thức tự lực, tự cường.",
+    "D": "Tinh thần đoàn kết.",
+    "correct": "B"
+  },
+  {
+    "question": "Lênin coi phong trào giải phóng dân tộc là gì?",
+    "A": "Một bộ phận của cách mạng vô sản thế giới.",
+    "B": "Cơ sở của quyền tự do, dân chủ chân chính.",
+    "C": "Một bộ phận của vấn đề giai cấp.",
+    "D": "Kim chỉ nam cho các dân tộc bị áp bức trên thế giới.",
+    "correct": "A"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, ưu điểm lớn nhất của tôn giáo GiêSu là gì?",
+    "A": "Đức hy sinh.",
+    "B": "Lòng từ bi bác ái.",
+    "C": "Lòng cao thượng.",
+    "D": "Lòng nhân ái cao cả.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo Hồ Chí Minh, mục đích tiếp thu của văn hoá nhân loại là để:",
+    "A": "Làm giàu cho văn hoá Việt Nam, xây dựng nó phù hợp với tinh thần dân chủ.",
+    "B": "Mở rộng giá trị cho văn hoá Việt Nam, tiếp thu chọn lọc những nét tiến bộ mới.",
+    "C": "Làm giàu cho Việt Nam, xây dựng nền văn hoá phù hợp với tinh thần dân chủ.",
+    "D": "Làm giàu cho văn hoá Việt Nam, xây dựng nó phù hợp với tinh thần cách mạng.",
+    "correct": "A"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Việt Nam muốn làm bạn với […], không gây thù oán với một ai”.",
+    "A": "Mọi nước dân chủ.",
+    "B": "Các nước phát triển cao.",
+    "C": "Tất cả các nước dân chủ.",
+    "D": "Các nước xã hội chủ nghĩa.",
+    "correct": "A"
+  },
+  {
+    "question": "Nhận định: \"Đạo đức là pháp luật tối đa, pháp luật là đạo đức tối thiểu\", muốn đề cập đến điều gì?",
+    "A": "Phạm vi điều chỉnh của pháp luật rộng hơn.",
+    "B": "Tính quyết định của đạo đức đối với pháp luật.",
+    "C": "Phạm vi điều chỉnh của đạo đức rộng hơn.",
+    "D": "Tính phụ thuộc của đạo đức đối với pháp luật.",
+    "correct": "C"
+  },
+  {
+    "question": "Điền vào chỗ trống đúng theo Hồ Chí Minh, “Chính sách ngoại giao của Chính phủ thì chỉ có một điều tức là thân thiện với […] trên thế giới để giữ gìn hòa bình”.",
+    "A": "Các nước xã hội chủ nghĩa.",
+    "B": "Tất cả các nước dân chủ.",
+    "C": "Các nước cộng sản chủ nghĩa.",
+    "D": "Mọi nước dân chủ.",
+    "correct": "B"
+  },
+  {
+    "question": "Vấn đề dân tộc trong tư tưởng Hồ Chí Minh là sự kết hợp nhuần nhuyễn giữa:",
+    "A": "Vấn đề dân tộc và vấn đề giai cấp.",
+    "B": "Chủ nghĩa dân tộc và chủ nghía xã hội.",
+    "C": "Độc lập dân tộc với tự do, hạnh phúc.",
+    "D": "Chủ nghĩa yêu nước và chủ nghĩa quốc tế.",
+    "correct": "D"
+  },
+  {
+    "question": "Cuối thế kỷ XIX đầu thế kỷ XX ở thế giới, chủ nghĩa tư bản phát triển như thế nào?",
+    "A": "Phát triển mạnh thành các mạng lưới xuyên quốc gia.",
+    "B": "Phát triển từ tự do cạnh tranh sang đế quốc chủ nghĩa.",
+    "C": "Phát triển thành các loại hình: cacten, xanhdica, congxoocxiom.",
+    "D": "Phát triển thành các tổ chức độc quyền nhà nước.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn câu trả lời đúng nhất với tư tưởng Hồ Chí Minh:",
+    "A": "Đại đoàn kết dân tộc là vấn đề sách lược.",
+    "B": "Đại đoàn kết dân tộc là vấn đề sống còn.",
+    "C": "Đại đoàn kết dân tộc là thủ đoạn chính trị.",
+    "D": "Đại đoàn kết dân tộc là vấn đề chiến lược.",
+    "correct": "D"
+  },
+  {
+    "question": "Trong câu nói: \"Dân chủ là khát vọng muôn đời của con người\". Hồ Chí Minh đã nêu lên quan điểm dân chủ có nghĩa là:",
+    "A": "Dân là chủ.",
+    "B": "Dân làm chủ.",
+    "C": "Dân kiểm soát.",
+    "D": "Dân điều hành.",
+    "correct": "A"
+  },
+  {
+    "question": "Chọn cụm từ đúng với tư tưởng Hồ Chí Minh: \"Nông dân giàu thì nước ta giàu, […] thịnh thì nước ta thịnh\"",
+    "A": "Công nghiệp.",
+    "B": "Nhân tài.",
+    "C": "Thương nghiệp.",
+    "D": "Nông nghiệp.",
+    "correct": "D"
+  },
+  {
+    "question": "Tác phẩm “Bản án chế độ thực dân Pháp” của Nguyễn Ái Quốc được xuất bản lần đầu tiên vào năm nào?",
+    "A": "Năm 1924.",
+    "B": "Năm 1930.",
+    "C": "Năm 1925.",
+    "D": "Năm 1927.",
+    "correct": "C"
+  },
+  {
+    "question": "Khẳng định: \"Nhà nước là một tổ chức quyền lực đặc biệt, nó là tổ chức bạo lực dùng để trấn áp một giai cấp nào đó\", là của ai?",
+    "A": "Ănghen, Lênin.",
+    "B": "Ănghen, Hồ Chí Minh.",
+    "C": "Lênin, Hồ Chí Minh.",
+    "D": "C. Mác, Ănghen.",
+    "correct": "C"
+  },
+  {
+    "question": "\"Đảng viên đi trước, làng nước theo sau\", câu nói trên của Hồ Chí Minh được trích trong tác phẩm nào?",
+    "A": "Nâng cao đạo đức cách mạng, quét sạch chủ nghĩa cá nhân.",
+    "B": "Đạo đức cách mạng.",
+    "C": "Đường kách mệnh.",
+    "D": "Sửa đổi lối làm việc.",
+    "correct": "A"
+  }
+]
