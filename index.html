@@ -2230,8 +2230,13 @@
     <div id="page-bank" class="page">
       <div
         style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
-        <h2><i class="fas fa-book"></i> Ngân Hàng Câu Hỏi</h2><button class="btn btn-primary" onclick="openAddQ()"><i
-            class="fas fa-plus"></i> Thêm Câu Hỏi</button>
+        <h2><i class="fas fa-book"></i> Ngân Hàng Câu Hỏi</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-outline" id="btn-toggle-ans" onclick="toggleBankAnswers()">
+            <i class="fas fa-eye"></i> Xem đáp án
+          </button>
+          <button class="btn btn-primary" onclick="openAddQ()"><i class="fas fa-plus"></i> Thêm Câu Hỏi</button>
+        </div>
       </div>
       <div class="bank-header"><input class="search-input" id="bank-search" placeholder="Tìm kiếm câu hỏi..."
           oninput="renderBank()"><select class="filter-select" id="bank-filter" onchange="renderBank()">
@@ -2624,6 +2629,17 @@
     }
 
     // ===== BANK =====
+    let bankShowAns = false;
+    function toggleBankAnswers() {
+      bankShowAns = !bankShowAns;
+      const btn = document.getElementById('btn-toggle-ans');
+      btn.innerHTML = bankShowAns
+        ? '<i class="fas fa-eye-slash"></i> Ẩn đáp án'
+        : '<i class="fas fa-eye"></i> Xem đáp án';
+      btn.classList.toggle('btn-primary', bankShowAns);
+      btn.classList.toggle('btn-outline', !bankShowAns);
+      renderBank();
+    }
     function renderBank() {
       const search = document.getElementById('bank-search').value.toLowerCase();
       const filter = document.getElementById('bank-filter').value;
@@ -2639,8 +2655,18 @@
           if (search && !q.q.toLowerCase().includes(search)) return;
           count++;
           const letters = ['A', 'B', 'C', 'D'];
+          // Phần đáp án: nếu bankShowAns hiển thị đầy đủ A/B/C/D, nếu không chỉ hiển đáp án đúng
+          const ansBlock = bankShowAns
+            ? `<div class="bank-ans-full" style="margin-top:10px;font-size:.85rem">
+                ${q.opts.map((o, oi) => `<div style="padding:4px 8px;border-radius:6px;margin-bottom:3px;${
+                  oi === q.ans
+                    ? 'background:rgba(0,184,148,.12);color:var(--success);font-weight:700'
+                    : 'color:var(--text2)'
+                }"><strong>${letters[oi]}.</strong> ${o} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
+              </div>`
+            : `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>`;
           html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><p style="margin-top:8px">${q.q}</p></div></div>` +
-            `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>` +
+            ansBlock +
             `<div class="card-actions"><button class="btn btn-outline" onclick="openEditQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-pen"></i> Sửa</button>` +
             `<button class="btn btn-danger" onclick="deleteQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-trash"></i> Xóa</button></div></div>`;
         });
@@ -2682,18 +2708,24 @@
         exp: document.getElementById('m-explain').value.trim()
       };
       if (!q.q || q.opts.some(o => !o)) { alert('Vui lòng điền đầy đủ thông tin!'); return }
-      if (editQIdx !== -1 && editQIdx.qi !== undefined) {
+      const isEdit = editQIdx !== -1 && editQIdx.qi !== undefined;
+      if (isEdit) {
         quizzes[editQIdx.qi].questions.splice(editQIdx.qj, 1);
         quizzes[qi].questions.push(q);
       } else {
         quizzes[qi].questions.push(q);
       }
       saveQuizzes(); closeModal(); renderBank();
+      showAlert(isEdit ? '✏️ Đã cập nhật câu hỏi!' : '✅ Đã thêm câu hỏi mới!', 'success', 'Thành công');
     }
     function deleteQ(qi, qj) {
-      showConfirm('Xóa câu hỏi này?', 'Xóa Câu Hỏi', 'Xóa', 'warn').then(ok => {
+      const qText = quizzes[qi].questions[qj].q;
+      const preview = qText.length > 60 ? qText.substring(0, 60) + '…' : qText;
+      showConfirm(`Xóa câu hỏi:\n"${preview}"`, 'Xác Nhận Xóa', 'Xóa', 'warn').then(ok => {
         if (!ok) return;
-        quizzes[qi].questions.splice(qj, 1); saveQuizzes(); renderBank();
+        quizzes[qi].questions.splice(qj, 1);
+        saveQuizzes(); renderBank();
+        showAlert('Đã xóa câu hỏi!', 'success', 'Hoàn tất');
       });
     }
 
