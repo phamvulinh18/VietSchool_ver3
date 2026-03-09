@@ -1983,7 +1983,9 @@
     .test-banner {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 9000;
       background: linear-gradient(90deg, #f59e0b, #ef4444);
       color: #fff;
@@ -1992,10 +1994,16 @@
       font-size: .88rem;
       font-weight: 700;
       letter-spacing: .5px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.2)
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .2)
     }
-    .test-banner.show { display: block }
-    body.test-mode { padding-top: 44px }
+
+    .test-banner.show {
+      display: block
+    }
+
+    body.test-mode {
+      padding-top: 44px
+    }
 
     .profile-avatar-preview {
       font-size: .75rem;
@@ -2008,6 +2016,7 @@
       max-width: 600px;
       margin: 0 auto 20px;
     }
+
     .avatar-guide-toggle {
       width: 100%;
       display: flex;
@@ -2025,9 +2034,20 @@
       text-align: left;
       transition: .2s
     }
-    .avatar-guide-toggle:hover { border-color: var(--primary) }
-    .avatar-guide-toggle .ag-arrow { margin-left:auto; transition:.25s; }
-    .avatar-guide-toggle.open .ag-arrow { transform: rotate(180deg) }
+
+    .avatar-guide-toggle:hover {
+      border-color: var(--primary)
+    }
+
+    .avatar-guide-toggle .ag-arrow {
+      margin-left: auto;
+      transition: .25s;
+    }
+
+    .avatar-guide-toggle.open .ag-arrow {
+      transform: rotate(180deg)
+    }
+
     .avatar-guide-body {
       display: none;
       background: var(--card);
@@ -2039,25 +2059,41 @@
       line-height: 1.7;
       color: var(--text2)
     }
-    .avatar-guide-body.open { display: block }
-    .avatar-guide-body ol { padding-left: 18px; margin: 8px 0 0 }
-    .avatar-guide-body li { margin-bottom: 6px }
-    .avatar-guide-body a { color: var(--primary); text-decoration: underline }
+
+    .avatar-guide-body.open {
+      display: block
+    }
+
+    .avatar-guide-body ol {
+      padding-left: 18px;
+      margin: 8px 0 0
+    }
+
+    .avatar-guide-body li {
+      margin-bottom: 6px
+    }
+
+    .avatar-guide-body a {
+      color: var(--primary);
+      text-decoration: underline
+    }
+
     .avatar-guide-body .ag-tip {
-      background: rgba(70,187,223,.1);
+      background: rgba(70, 187, 223, .1);
       border-left: 3px solid var(--primary);
       padding: 8px 12px;
       border-radius: 0 8px 8px 0;
       margin-top: 10px;
       font-size: .82rem
     }
+
     .avatar-guide-body img {
       display: block;
       width: 100%;
       max-width: 100%;
       border-radius: 10px;
       border: 1.5px solid var(--border);
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
       margin: 10px 0 6px;
       object-fit: contain
     }
@@ -2065,7 +2101,8 @@
     /* ADMIN NOTIFICATIONS */
     .admin-notif-wrap {
       position: fixed;
-      top: 68px; right: 16px;
+      top: 68px;
+      right: 16px;
       z-index: 8900;
       display: flex;
       flex-direction: column;
@@ -2073,6 +2110,7 @@
       max-width: 360px;
       width: calc(100vw - 32px)
     }
+
     .admin-notif {
       display: flex;
       align-items: flex-start;
@@ -2081,131 +2119,376 @@
       border: 1.5px solid var(--border);
       border-radius: 14px;
       padding: 14px 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.13);
-      animation: notifSlide .35s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .13);
+      animation: notifSlide .35s cubic-bezier(.34, 1.56, .64, 1);
       position: relative
     }
+
     @keyframes notifSlide {
-      from { opacity:0; transform: translateX(60px) }
-      to   { opacity:1; transform: translateX(0) }
+      from {
+        opacity: 0;
+        transform: translateX(60px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
     }
-    .admin-notif.info    { border-left: 4px solid #46bbdf }
-    .admin-notif.success { border-left: 4px solid #00b894 }
-    .admin-notif.warn    { border-left: 4px solid #f59e0b }
-    .admin-notif.danger  { border-left: 4px solid #ef4444 }
-    .admin-notif .an-icon { font-size: 1.3rem; flex-shrink:0; margin-top:1px }
-    .admin-notif .an-body { flex: 1 }
-    .admin-notif .an-title { font-weight: 700; font-size: .9rem; margin-bottom: 3px }
-    .admin-notif .an-text  { font-size: .82rem; color: var(--text2); line-height: 1.5 }
+
+    .admin-notif.info {
+      border-left: 4px solid #46bbdf
+    }
+
+    .admin-notif.success {
+      border-left: 4px solid #00b894
+    }
+
+    .admin-notif.warn {
+      border-left: 4px solid #f59e0b
+    }
+
+    .admin-notif.danger {
+      border-left: 4px solid #ef4444
+    }
+
+    .admin-notif .an-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .admin-notif .an-body {
+      flex: 1
+    }
+
+    .admin-notif .an-title {
+      font-weight: 700;
+      font-size: .9rem;
+      margin-bottom: 3px
+    }
+
+    .admin-notif .an-text {
+      font-size: .82rem;
+      color: var(--text2);
+      line-height: 1.5
+    }
+
     .admin-notif .an-close {
-      background: none; border: none; cursor: pointer;
-      color: var(--text2); font-size: 1rem; padding: 0;
-      line-height: 1; flex-shrink: 0; transition: .2s
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text2);
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: .2s
     }
-    .admin-notif .an-close:hover { color: var(--text) }
+
+    .admin-notif .an-close:hover {
+      color: var(--text)
+    }
+
     .admin-notif.fade-out {
       animation: notifFade .3s ease forwards
     }
+
     @keyframes notifFade {
-      to { opacity:0; transform: translateX(60px); height:0; margin:0; padding:0 }
+      to {
+        opacity: 0;
+        transform: translateX(60px);
+        height: 0;
+        margin: 0;
+        padding: 0
+      }
     }
 
     /* ===== ADMIN PANEL ===== */
-    .admin-wrap { max-width:1000px; margin:0 auto; padding-bottom:40px }
+    .admin-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-bottom: 40px
+    }
+
     .admin-header {
-      display:flex; align-items:center; justify-content:space-between;
-      margin-bottom:24px; flex-wrap:wrap; gap:12px
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px
     }
-    .admin-header h2 { font-size:1.3rem; display:flex; align-items:center; gap:10px }
+
+    .admin-header h2 {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
     .admin-tabs {
-      display:flex; gap:6px; flex-wrap:wrap; margin-bottom:24px;
-      border-bottom:2px solid var(--border); padding-bottom:0
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0
     }
+
     .admin-tab {
-      padding:9px 18px; border-radius:10px 10px 0 0;
-      border:none; background:none; cursor:pointer;
-      font-family:var(--font); font-size:.88rem; font-weight:600;
-      color:var(--text2); transition:.2s; border-bottom:2px solid transparent;
-      margin-bottom:-2px
+      padding: 9px 18px;
+      border-radius: 10px 10px 0 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text2);
+      transition: .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px
     }
-    .admin-tab.active { color:var(--primary); border-bottom-color:var(--primary); background:rgba(70,187,223,.07) }
-    .admin-tab-content { display:none }
-    .admin-tab-content.active { display:block }
-    .admin-table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border) }
-    .admin-table { width:100%; border-collapse:collapse; font-size:.85rem }
+
+    .admin-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: rgba(70, 187, 223, .07)
+    }
+
+    .admin-tab-content {
+      display: none
+    }
+
+    .admin-tab-content.active {
+      display: block
+    }
+
+    .admin-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border)
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem
+    }
+
     .admin-table th {
-      background:var(--card); padding:10px 14px; text-align:left;
-      font-weight:700; color:var(--text2); font-size:.78rem;
-      border-bottom:1px solid var(--border); white-space:nowrap
+      background: var(--card);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text2);
+      font-size: .78rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap
     }
-    .admin-table td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:middle }
-    .admin-table tr:last-child td { border-bottom:none }
-    .admin-table tr:hover td { background:rgba(70,187,223,.04) }
+
+    .admin-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle
+    }
+
+    .admin-table tr:last-child td {
+      border-bottom: none
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(70, 187, 223, .04)
+    }
+
     .admin-badge {
-      display:inline-block; padding:2px 10px; border-radius:20px;
-      font-size:.75rem; font-weight:700
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: 700
     }
-    .admin-badge.locked  { background:#fee2e2; color:#ef4444 }
-    .admin-badge.active  { background:#d1fae5; color:#059669 }
-    .admin-badge.inactive{ background:#f3f4f6; color:#6b7280 }
-    .admin-badge.info    { background:#dbeafe; color:#2563eb }
-    .admin-badge.warn    { background:#fef3c7; color:#d97706 }
-    .admin-badge.success { background:#d1fae5; color:#059669 }
-    .admin-badge.danger  { background:#fee2e2; color:#ef4444 }
+
+    .admin-badge.locked {
+      background: #fee2e2;
+      color: #ef4444
+    }
+
+    .admin-badge.active {
+      background: #d1fae5;
+      color: #059669
+    }
+
+    .admin-badge.inactive {
+      background: #f3f4f6;
+      color: #6b7280
+    }
+
+    .admin-badge.info {
+      background: #dbeafe;
+      color: #2563eb
+    }
+
+    .admin-badge.warn {
+      background: #fef3c7;
+      color: #d97706
+    }
+
+    .admin-badge.success {
+      background: #d1fae5;
+      color: #059669
+    }
+
+    .admin-badge.danger {
+      background: #fee2e2;
+      color: #ef4444
+    }
+
     .admin-form {
-      background:var(--card); border:1px solid var(--border);
-      border-radius:14px; padding:20px; margin-bottom:20px
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px
     }
-    .admin-form h4 { margin-bottom:14px; font-size:.9rem }
-    .admin-form-row { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end }
-    .admin-form-row input, .admin-form-row select, .admin-form-row textarea {
-      flex:1; min-width:150px; padding:9px 12px;
-      border:1.5px solid var(--border); border-radius:9px;
-      background:var(--bg); color:var(--text); font-family:var(--font); font-size:.85rem
+
+    .admin-form h4 {
+      margin-bottom: 14px;
+      font-size: .9rem
     }
-    .admin-form-row textarea { min-height:60px; resize:vertical }
+
+    .admin-form-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: flex-end
+    }
+
+    .admin-form-row input,
+    .admin-form-row select,
+    .admin-form-row textarea {
+      flex: 1;
+      min-width: 150px;
+      padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: .85rem
+    }
+
+    .admin-form-row textarea {
+      min-height: 60px;
+      resize: vertical
+    }
+
     .admin-section-title {
-      font-size:.95rem; font-weight:700; margin:20px 0 12px;
-      display:flex; align-items:center; gap:8px
+      font-size: .95rem;
+      font-weight: 700;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px
     }
+
     .admin-avatar {
-      width:32px; height:32px; border-radius:50%; object-fit:cover;
-      background:var(--border)
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--border)
     }
+
     /* --- Mobile responsive --- */
     @media (max-width:600px) {
-      #page-admin .admin-wrap { padding:0 0 60px }
+      #page-admin .admin-wrap {
+        padding: 0 0 60px
+      }
+
       .admin-header {
-        margin-bottom:0; padding:8px 12px;
-        position:sticky; top:0; z-index:50;
-        background:var(--bg); border-bottom:1px solid var(--border)
+        margin-bottom: 0;
+        padding: 8px 12px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border)
       }
-      .admin-header h2 { font-size:.9rem }
+
+      .admin-header h2 {
+        font-size: .9rem
+      }
+
       /* Ẩn text tiêu đề, chỉ giữ icon + nút logout */
-      .admin-title-text { display:none }
+      .admin-title-text {
+        display: none
+      }
+
       .admin-tabs {
-        position:sticky; top:44px; z-index:49;
-        background:var(--bg); margin-bottom:0;
-        flex-wrap:nowrap; overflow-x:auto;
-        scrollbar-width:none; gap:0; padding:0 4px;
-        border-bottom:2px solid var(--border)
+        position: sticky;
+        top: 44px;
+        z-index: 49;
+        background: var(--bg);
+        margin-bottom: 0;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        gap: 0;
+        padding: 0 4px;
+        border-bottom: 2px solid var(--border)
       }
-      .admin-tabs::-webkit-scrollbar { display:none }
+
+      .admin-tabs::-webkit-scrollbar {
+        display: none
+      }
+
       .admin-tab {
-        padding:9px 12px; font-size:.78rem;
-        white-space:nowrap; flex-shrink:0;
-        border-radius:0; margin-bottom:-2px
+        padding: 9px 12px;
+        font-size: .78rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border-radius: 0;
+        margin-bottom: -2px
       }
-      .admin-tab-content.active { padding-top:12px }
-      .admin-form { border-radius:10px; padding:12px; margin-bottom:10px }
-      .admin-form-row { flex-direction:column }
+
+      .admin-tab-content.active {
+        padding-top: 12px
+      }
+
+      .admin-form {
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px
+      }
+
+      .admin-form-row {
+        flex-direction: column
+      }
+
       .admin-form-row input,
       .admin-form-row select,
-      .admin-form-row textarea { min-width:100%; width:100% }
-      .admin-table th, .admin-table td { padding:7px 9px; font-size:.76rem }
-      .admin-section-title { font-size:.82rem; margin:10px 0 6px }
+      .admin-form-row textarea {
+        min-width: 100%;
+        width: 100%
+      }
+
+      .admin-table th,
+      .admin-table td {
+        padding: 7px 9px;
+        font-size: .76rem
+      }
+
+      .admin-section-title {
+        font-size: .82rem;
+        margin: 10px 0 6px
+      }
+
       /* Ẩn cột ít quan trọng trên mobile */
-      .admin-table .hide-mobile { display:none }
+      .admin-table .hide-mobile {
+        display: none
+      }
     }
   </style>
 </head>
@@ -2295,6 +2578,20 @@
           <div class="gif-shine"></div>
         </div>
       </div>
+      <!-- PROFILE REMINDER BANNER -->
+      <div id="profile-reminder" style="display:none;margin:0 0 16px;padding:13px 18px;border-radius:14px;
+        background:linear-gradient(135deg,rgba(70,187,223,.12),rgba(109,40,217,.08));
+        border:1.5px solid rgba(70,187,223,.3);display:none;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-size:1.3rem">🪪</span>
+        <span style="flex:1;font-size:.88rem;color:var(--text)">
+          Vui lòng <strong>cập nhật ảnh và tên</strong> để hiển thị trên bảng xếp hạng!
+        </span>
+        <button onclick="showPage('settings')" style="padding:7px 16px;border-radius:9px;border:none;
+          background:var(--primary);color:#fff;font-weight:700;cursor:pointer;font-size:.83rem;
+          font-family:var(--font);white-space:nowrap">
+          <i class="fas fa-gear"></i> Cài đặt ngay
+        </button>
+      </div>
       <!-- LEADERBOARD -->
       <div class="lb-section" style="margin-top:0">
         <h2><i class="fas fa-trophy" style="color:#f59e0b"></i> Bảng Xếp Hạng</h2>
@@ -2324,7 +2621,7 @@
         </div>
       </div>
 
-     
+
       <div class="stats-grid" id="home-stats"></div>
       <h2 style="margin-bottom:16px"><i class="fas fa-clipboard-list"></i> Bộ Đề Luyện Thi</h2>
       <div class="card-grid" id="quiz-list"></div>
@@ -2425,7 +2722,8 @@
 
       <!-- HƯỚNG DẪN UPLOAD AVATAR -->
       <div class="avatar-guide">
-        <button class="avatar-guide-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        <button class="avatar-guide-toggle"
+          onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
           <i class="fas fa-circle-question" style="color:var(--primary)"></i>
           Hướng dẫn upload ảnh đại diện nếu bị lỗi
           <i class="fas fa-chevron-down ag-arrow"></i>
@@ -2441,7 +2739,7 @@
           </ol>
           <div class="ag-tip">⚠️ Link phải kết thúc bằng đuôi ảnh (.jpg .png .webp .gif) mới hiển thị được.</div>
 
-       
+
         </div>
       </div>
 
@@ -2467,13 +2765,45 @@
         <div class="setting-item"><label><i class="fas fa-rotate"></i> Khôi phục dữ liệu mẫu</label><button
             class="btn btn-outline" onclick="resetData()">Khôi phục</button></div>
       </div>
+
+      <!-- LIÊN HỆ ADMIN -->
+      <div class="settings-list" style="margin-top:12px">
+        <div style="padding:18px 20px;background:var(--card);border:1px solid var(--border);
+                  border-radius:16px">
+          <div style="font-weight:700;font-size:.95rem;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+            <i class="fas fa-headset" style="color:var(--primary)"></i> Liên hệ Quản trị viên
+          </div>
+          <p style="font-size:.83rem;color:var(--text2);margin-bottom:14px;line-height:1.5">
+            Gặp vấn đề hoặc cần hỗ trợ? Liên hệ admin để được giải quyết nhanh nhất.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="https://www.facebook.com/vu.linh.995027" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;
+                    background:#1877f2;color:#fff;font-weight:700;font-size:.83rem;text-decoration:none;
+                    transition:.2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://zalo.me/0373374624" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;
+                    background:#0068ff;color:#fff;font-weight:700;font-size:.83rem;text-decoration:none;
+                    transition:.2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              <i class="fas fa-comment-dots"></i> Zalo
+            </a>
+            <a href="mailto:nphan9633@gmail.com" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;
+                    background:var(--bg);border:1.5px solid var(--border);color:var(--text);
+                    font-weight:700;font-size:.83rem;text-decoration:none;transition:.2s"
+              onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+              <i class="fas fa-envelope" style="color:var(--primary)"></i> Email
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ADMIN PANEL -->
     <div id="page-admin" class="page">
       <div class="admin-wrap">
         <div class="admin-header">
-          <h2><i class="fas fa-shield-halved" style="color:var(--primary)"></i> <span class="admin-title-text">Quản Trị Hệ Thống</span></h2>
+          <h2><i class="fas fa-shield-halved" style="color:var(--primary)"></i> <span class="admin-title-text">Quản Trị
+              Hệ Thống</span></h2>
           <button class="btn btn-outline" onclick="adminLogout()" title="Đăng xuất">
             <i class="fas fa-right-from-bracket"></i> <span class="admin-title-text">Đăng xuất</span>
           </button>
@@ -2499,8 +2829,23 @@
           <div class="admin-section-title"><i class="fas fa-list"></i> Danh sách Key</div>
           <div class="admin-table-wrap">
             <table class="admin-table">
-              <thead><tr><th>#</th><th>Mã</th><th>Tên</th><th>Trạng thái</th><th>Thiết bị</th><th>Đăng nhập</th><th>Thao tác</th></tr></thead>
-              <tbody id="atbl-keys"><tr><td colspan="7" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Mã</th>
+                  <th>Tên</th>
+                  <th>Trạng thái</th>
+                  <th>Thiết bị</th>
+                  <th>Đăng nhập</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="atbl-keys">
+                <tr>
+                  <td colspan="7" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -2520,29 +2865,59 @@
             </div>
             <div class="admin-form-row">
               <textarea id="an-body" placeholder="Nội dung (tùy chọn)"></textarea>
-              <button class="btn btn-primary" onclick="adminAddNotif()" style="align-self:flex-end"><i class="fas fa-plus"></i> Thêm</button>
+              <button class="btn btn-primary" onclick="adminAddNotif()" style="align-self:flex-end"><i
+                  class="fas fa-plus"></i> Thêm</button>
             </div>
           </div>
           <div class="admin-section-title"><i class="fas fa-list"></i> Danh sách Thông báo</div>
           <div class="admin-table-wrap">
             <table class="admin-table">
-              <thead><tr><th>Tiêu đề</th><th>Loại</th><th>Hiển thị</th><th>Ngày tạo</th><th>Thao tác</th></tr></thead>
-              <tbody id="atbl-notifs"><tr><td colspan="5" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+              <thead>
+                <tr>
+                  <th>Tiêu đề</th>
+                  <th>Loại</th>
+                  <th>Hiển thị</th>
+                  <th>Ngày tạo</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="atbl-notifs">
+                <tr>
+                  <td colspan="5" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
 
         <!-- TAB: LEADERBOARD -->
         <div id="atab-lb" class="admin-tab-content">
-          <div id="atbl-lb" style="margin-top:4px"><div style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></div></div>
+          <div id="atbl-lb" style="margin-top:4px">
+            <div style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></div>
+          </div>
         </div>
 
         <!-- TAB: USERS -->
         <div id="atab-users" class="admin-tab-content">
           <div class="admin-table-wrap">
             <table class="admin-table">
-              <thead><tr><th>Avatar</th><th>Tên</th><th>Mã</th><th>Trạng thái</th><th>Số bài</th><th>TB%</th></tr></thead>
-              <tbody id="atbl-users"><tr><td colspan="6" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+              <thead>
+                <tr>
+                  <th>Avatar</th>
+                  <th>Tên</th>
+                  <th>Mã</th>
+                  <th>Trạng thái</th>
+                  <th>Số bài</th>
+                  <th>TB%</th>
+                </tr>
+              </thead>
+              <tbody id="atbl-users">
+                <tr>
+                  <td colspan="6" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -2550,16 +2925,20 @@
     </div>
   </div>
   <!-- ADMIN EDIT MODAL -->
-  <div id="admin-edit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
-    <div style="background:var(--card);border-radius:18px;padding:28px;width:min(480px,94vw);box-shadow:0 8px 40px rgba(0,0,0,.25)">
+  <div id="admin-edit-modal"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
+    <div
+      style="background:var(--card);border-radius:18px;padding:28px;width:min(480px,94vw);box-shadow:0 8px 40px rgba(0,0,0,.25)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
         <h3 id="aedit-title" style="font-size:1rem">Chỉnh sửa</h3>
-        <button onclick="closeAdminEdit()" style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text2)">✕</button>
+        <button onclick="closeAdminEdit()"
+          style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text2)">✕</button>
       </div>
       <div id="aedit-body"></div>
       <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end">
         <button class="btn btn-outline" onclick="closeAdminEdit()">Hủy</button>
-        <button class="btn btn-primary" id="aedit-save-btn" onclick="adminSaveEdit()"><i class="fas fa-floppy-disk"></i> Lưu</button>
+        <button class="btn btn-primary" id="aedit-save-btn" onclick="adminSaveEdit()"><i class="fas fa-floppy-disk"></i>
+          Lưu</button>
       </div>
     </div>
   </div>
@@ -2901,11 +3280,10 @@
           // Phần đáp án: nếu bankShowAns hiển thị đầy đủ A/B/C/D, nếu không chỉ hiển đáp án đúng
           const ansBlock = bankShowAns
             ? `<div class="bank-ans-full" style="margin-top:10px;font-size:.85rem">
-                ${q.opts.map((o, oi) => `<div style="padding:4px 8px;border-radius:6px;margin-bottom:3px;${
-                  oi === q.ans
-                    ? 'background:rgba(0,184,148,.12);color:var(--success);font-weight:700'
-                    : 'color:var(--text2)'
-                }"><strong>${letters[oi]}.</strong> ${o} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
+                ${q.opts.map((o, oi) => `<div style="padding:4px 8px;border-radius:6px;margin-bottom:3px;${oi === q.ans
+                ? 'background:rgba(0,184,148,.12);color:var(--success);font-weight:700'
+                : 'color:var(--text2)'
+              }"><strong>${letters[oi]}.</strong> ${o} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
               </div>`
             : `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>`;
           html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><p style="margin-top:8px">${q.q}</p></div></div>` +
@@ -3043,7 +3421,7 @@
       // Thêm nhãn TEST vào tất cả nút chức năng
       document.querySelectorAll('.btn-primary, .btn-danger, .profile-save-btn').forEach(b => {
         b.style.opacity = '0.45';
-        b.style.cursor  = 'not-allowed';
+        b.style.cursor = 'not-allowed';
       });
     }
 
@@ -3111,13 +3489,12 @@
           isAdmin: code === 'ADMINVULINH',
           exp: Date.now() + SESSION_HOURS * 3600000
         }));
-        // Lưu profile từ Sheet (name + avatarUrl) vào localStorage
+        // Lưu profile từ Sheet (name + avatarUrl) vào sessionStorage
         if (data && (data.name || data.avatarUrl)) {
-          const saved = JSON.parse(localStorage.getItem('vs_profile') || '{}');
-          const name      = data.name      || saved.name      || '';
-          const avatarUrl = data.avatarUrl || saved.avatarUrl || '';
-          const avatar    = avatarUrl || saved.avatar || '';
-          localStorage.setItem('vs_profile', JSON.stringify({ name, avatar, avatarUrl }));
+          const name = data.name || '';
+          const avatarUrl = data.avatarUrl || '';
+          const avatar = avatarUrl || '';
+          sessionStorage.setItem('vs_profile', JSON.stringify({ name, avatar, avatarUrl }));
         }
         btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang vào...';
         if (code === 'ADMINVULINH') {
@@ -3126,7 +3503,7 @@
             showAdminPage();
           }, 500);
         } else {
-          setTimeout(_showLoginOverlay, 500);
+          setTimeout(() => _fetchAndApplyProfile(code, _showLoginOverlay), 500);
         }
       };
 
@@ -3166,6 +3543,24 @@
           _showErr(); _resetBtn();
         });
     }
+
+    // ── Fetch name+avatarUrl từ Sheet cho key, lưu session, rồi callback ──
+    function _fetchAndApplyProfile(code, then) {
+      if (!SHEETS_API || !code) { if (then) then(); return; }
+      fetch(SHEETS_API + '?action=profile&code=' + encodeURIComponent(code))
+        .then(r => r.json())
+        .then(d => {
+          if (d.ok && (d.name || d.avatarUrl)) {
+            sessionStorage.setItem('vs_profile', JSON.stringify({
+              name: d.name || '',
+              avatarUrl: d.avatarUrl || '',
+              avatar: d.avatarUrl || ''
+            }));
+          }
+        })
+        .catch(() => { })
+        .finally(() => { loadProfile(); if (then) then(); });
+    }
     function toggleLoginEye() {
       const inp = document.getElementById('login-code');
       const icon = document.getElementById('login-eye-icon');
@@ -3178,17 +3573,21 @@
       try {
         const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '{}');
         if (s.isAdmin) {
-          showAdminPage(); // ← vào admin ngay sau reload
+          showAdminPage();
         } else {
           if (s.isTest) applyTestMode();
-          fetchAdminNotifs();
+          // Luôn fetch profile mới nhất từ Sheet khi reload
+          _fetchAndApplyProfile(s.code || '', () => {
+            fetchAdminNotifs();
+            checkProfileReminder();
+          });
         }
-      } catch(_) {}
+      } catch (_) { }
     }
 
     // ===== ADMIN NOTIFICATIONS =====
     const _NOTIF_KEY = 'vs_closed_notifs';
-    const _NOTIF_ICONS = { info:'\u2139\ufe0f', success:'\u2705', warn:'\u26a0\ufe0f', danger:'\ud83d\udd34' };
+    const _NOTIF_ICONS = { info: '\u2139\ufe0f', success: '\u2705', warn: '\u26a0\ufe0f', danger: '\ud83d\udd34' };
     function fetchAdminNotifs() {
       if (!SHEETS_API) return;
       const closed = JSON.parse(sessionStorage.getItem(_NOTIF_KEY) || '[]');
@@ -3199,7 +3598,7 @@
           const wrap = document.getElementById('admin-notifs');
           data.items.forEach(item => {
             if (closed.includes(item.id)) return;
-            const type = ['info','success','warn','danger'].includes(item.type) ? item.type : 'info';
+            const type = ['info', 'success', 'warn', 'danger'].includes(item.type) ? item.type : 'info';
             const el = document.createElement('div');
             el.className = `admin-notif ${type}`;
             el.dataset.id = item.id;
@@ -3212,7 +3611,7 @@
               <button class="an-close" onclick="_closeNotif(this,${item.id})" title="\u0110\u00f3ng">&times;</button>`;
             wrap.appendChild(el);
           });
-        }).catch(() => {});
+        }).catch(() => { });
     }
     function _closeNotif(btn, id) {
       const el = btn.closest('.admin-notif');
@@ -3242,8 +3641,8 @@
       const rankClass = ['gold', 'silver', 'bronze'];
       el.innerHTML = list.map((row, i) => {
         const displayName = (row.name && row.name.trim()) ? row.name.trim() : 'Ẩn danh';
-        const avatarSeed  = (row.name && row.name.trim()) ? row.name.trim() : '?';
-        const avatarUrl   = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
+        const avatarSeed = (row.name && row.name.trim()) ? row.name.trim() : '?';
+        const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
         return `<div class="lb-row">
           <div class="lb-rank ${rankClass[i] || ''}">${i + 1}</div>
           <img src="${row.avatarUrl || avatarUrl}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.src='${avatarUrl}'">
@@ -3257,7 +3656,7 @@
       if (!s || !SHEETS_API) return;
       try {
         const { code } = JSON.parse(s);
-        const prof = JSON.parse(localStorage.getItem('vs_profile') || '{}');
+        const prof = JSON.parse(sessionStorage.getItem('vs_profile') || '{}');
         const displayName = prof.name || '';
         const url = SHEETS_API
           + '?action=submit'
@@ -3272,7 +3671,7 @@
     }
     // ===== PROFILE =====
     function loadProfile() {
-      const p = JSON.parse(localStorage.getItem('vs_profile') || '{}');
+      const p = JSON.parse(sessionStorage.getItem('vs_profile') || '{}');
       const name = p.name || '';
       const avatar = p.avatar || '';
       // Settings form
@@ -3282,6 +3681,41 @@
       if (img) img.src = avatar || _avatarUrl(name);
       // Topnav badge
       _applyProfileNav(name, avatar);
+      // Cập nhật banner nhắc nhở
+      checkProfileReminder();
+    }
+    function checkProfileReminder() {
+      const el = document.getElementById('profile-reminder');
+      if (!el || !SHEETS_API) return;
+      // Lấy mã từ session
+      let code = '';
+      try { code = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '{}').code || ''; } catch (_) { }
+      if (!code) return;
+
+      fetch(SHEETS_API + '?action=profile&code=' + encodeURIComponent(code))
+        .then(r => r.json())
+        .then(d => {
+          if (!d.ok) return;
+          const hasName = (d.name || '').trim().length > 0;
+          const hasAvatar = (d.avatarUrl || '').trim().length > 0;
+          // Sync vào sessionStorage nếu Sheet có dữ liệu mới
+          if (hasName || hasAvatar) {
+            sessionStorage.setItem('vs_profile', JSON.stringify({
+              name: d.name || '',
+              avatarUrl: d.avatarUrl || '',
+              avatar: d.avatarUrl || ''
+            }));
+            loadProfile();
+          }
+          el.style.display = (hasName && hasAvatar) ? 'none' : 'flex';
+        })
+        .catch(() => {
+          // Fallback: dùng sessionStorage nếu mạng lỗi
+          const p = JSON.parse(sessionStorage.getItem('vs_profile') || '{}');
+          const hasName = (p.name || '').trim().length > 0;
+          const hasAvatar = (p.avatarUrl || p.avatar || '').trim().length > 0;
+          el.style.display = (hasName && hasAvatar) ? 'none' : 'flex';
+        });
     }
     function previewAvatar(e) {
       const file = e.target.files[0]; if (!file) return;
@@ -3299,11 +3733,11 @@
       img.src = url; // preview ngay
     }
     function saveProfile() {
-      const name      = document.getElementById('profile-name-input').value.trim();
+      const name = document.getElementById('profile-name-input').value.trim();
       const avatarUrl = document.getElementById('profile-avatar-url').value.trim();
       const avatarSrc = avatarUrl || document.getElementById('profile-avatar-img').src;
-      // Lưu localStorage (bao gồm cả base64 nếu có)
-      localStorage.setItem('vs_profile', JSON.stringify({ name, avatar: avatarSrc, avatarUrl }));
+      // Lưu vào sessionStorage (mỗi phiên riêng biệt)
+      sessionStorage.setItem('vs_profile', JSON.stringify({ name, avatar: avatarSrc, avatarUrl }));
       _applyProfileNav(name, avatarSrc);
       // Gửi tên + avatar URL lên Google Sheet
       const s = sessionStorage.getItem(SESSION_KEY);
@@ -3311,11 +3745,11 @@
         try {
           const { code } = JSON.parse(s);
           const url = SHEETS_API + '?action=profile'
-            + '&code='      + encodeURIComponent(code)
-            + '&name='      + encodeURIComponent(name)
+            + '&code=' + encodeURIComponent(code)
+            + '&name=' + encodeURIComponent(name)
             + '&avatarUrl=' + encodeURIComponent(avatarUrl);
-          fetch(url).catch(() => {});
-        } catch (_) {}
+          fetch(url).catch(() => { });
+        } catch (_) { }
       }
       showAlert('Đã lưu hồ sơ lên hệ thống!', 'success', 'Thành công');
     }
@@ -3357,16 +3791,16 @@
       document.querySelectorAll('.admin-tab-content').forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('atab-' + name).classList.add('active');
-      if (name === 'keys')   loadAdminKeys();
+      if (name === 'keys') loadAdminKeys();
       if (name === 'notifs') loadAdminNotifs();
-      if (name === 'lb')     loadAdminLB();
-      if (name === 'users')  loadAdminUsers();
+      if (name === 'lb') loadAdminLB();
+      if (name === 'users') loadAdminUsers();
     }
 
     function showAdminPage() {
       document.getElementById('page-admin').classList.add('active');
       // Ẩn các trang khác
-      ['home','config','quiz','result','bank','history','settings'].forEach(p => {
+      ['home', 'config', 'quiz', 'result', 'bank', 'history', 'settings'].forEach(p => {
         const el = document.getElementById('page-' + p);
         if (el) el.classList.remove('active');
       });
@@ -3415,9 +3849,9 @@
         <select id="aedit-n-type"
           style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;
                  background:var(--bg);color:var(--text);font-family:var(--font);font-size:.85rem">
-          ${['info','success','warn','danger'].map(t =>
-            `<option value="${t}" ${t===type?'selected':''}>${{info:'🔵',success:'🟢',warn:'🟡',danger:'🔴'}[t]} ${t}</option>`
-          ).join('')}
+          ${['info', 'success', 'warn', 'danger'].map(t =>
+        `<option value="${t}" ${t === type ? 'selected' : ''}>${{ info: '🔵', success: '🟢', warn: '🟡', danger: '🔴' }[t]} ${t}</option>`
+      ).join('')}
         </select>`;
       const m = document.getElementById('admin-edit-modal');
       m.style.display = 'flex';
@@ -3438,13 +3872,13 @@
           });
       } else if (_aeditCtx.type === 'notif') {
         const title = document.getElementById('aedit-n-title').value.trim();
-        const body  = document.getElementById('aedit-n-body').value.trim();
-        const type  = document.getElementById('aedit-n-type').value;
+        const body = document.getElementById('aedit-n-body').value.trim();
+        const type = document.getElementById('aedit-n-type').value;
         if (!title) { showAlert('Nhập tiêu đề!', 'warn'); return; }
         Promise.all([
           adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'title', value: encodeURIComponent(title) }),
-          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'body',  value: encodeURIComponent(body) }),
-          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'type',  value: type })
+          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'body', value: encodeURIComponent(body) }),
+          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'type', value: type })
         ]).then(() => {
           closeAdminEdit();
           showAlert('✅ Đã cập nhật thông báo!', 'success');
@@ -3470,7 +3904,7 @@
         tbody.innerHTML = d.keys.map((k, i) => {
           const badge = k.locked ? '<span class="admin-badge locked">🔒 Khóa</span>'
             : k.status.includes('✅') ? '<span class="admin-badge active">✅ Hoạt động</span>'
-            : '<span class="admin-badge inactive">Chưa kích hoạt</span>';
+              : '<span class="admin-badge inactive">Chưa kích hoạt</span>';
           return `<tr>
             <td style="color:var(--text2)">${i + 1}</td>
             <td><strong>${k.code}</strong></td>
@@ -3479,7 +3913,7 @@
             <td style="color:var(--text2)">${k.devices} thiết bị</td>
             <td style="color:var(--text2);font-size:.8rem">${k.lastLogin || '—'}</td>
             <td style="white-space:nowrap">
-              <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditKey(${k.row},'${k.code}','${(k.name||'').replace(/'/g,'')}')"><i class="fas fa-pen"></i></button>
+              <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditKey(${k.row},'${k.code}','${(k.name || '').replace(/'/g, '')}')"><i class="fas fa-pen"></i></button>
               ${k.locked ? `<button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminUnlockKey(${k.row})"><i class="fas fa-unlock"></i> Mở khóa</button>` : ''}
               <button class="btn btn-danger" style="font-size:.78rem;padding:5px 10px" onclick="adminDeleteKey(${k.row},'${k.code}')"><i class="fas fa-trash"></i></button>
             </td>
@@ -3528,7 +3962,7 @@
         if (!d.ok) { tbody.innerHTML = '<tr><td colspan="5">Lỗi</td></tr>'; return; }
         if (!d.items.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text2)">Chưa có thông báo</td></tr>'; return; }
         tbody.innerHTML = d.items.map(n => `<tr>
-          <td><strong>${n.title}</strong>${n.body ? `<div style="font-size:.78rem;color:var(--text2);margin-top:2px">${n.body.substring(0,60)}${n.body.length>60?'…':''}</div>` : ''}</td>
+          <td><strong>${n.title}</strong>${n.body ? `<div style="font-size:.78rem;color:var(--text2);margin-top:2px">${n.body.substring(0, 60)}${n.body.length > 60 ? '…' : ''}</div>` : ''}</td>
           <td><span class="admin-badge ${n.type}">${n.type}</span></td>
           <td>
             <label class="switch" style="transform:scale(.85)">
@@ -3538,7 +3972,7 @@
           </td>
           <td style="font-size:.8rem;color:var(--text2)">${n.created || '—'}</td>
           <td style="white-space:nowrap">
-            <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditNotif(${n.row},'${(n.title||'').replace(/'/g,'')}','${(n.body||'').replace(/'/g,'')}','${n.type}')"><i class="fas fa-pen"></i></button>
+            <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditNotif(${n.row},'${(n.title || '').replace(/'/g, '')}','${(n.body || '').replace(/'/g, '')}','${n.type}')"><i class="fas fa-pen"></i></button>
             <button class="btn btn-danger" style="font-size:.78rem;padding:5px 10px" onclick="adminDeleteNotif(${n.row})"><i class="fas fa-trash"></i></button>
           </td>
         </tr>`).join('');
@@ -3547,8 +3981,8 @@
 
     function adminAddNotif() {
       const title = document.getElementById('an-title').value.trim();
-      const body  = document.getElementById('an-body').value.trim();
-      const type  = document.getElementById('an-type').value;
+      const body = document.getElementById('an-body').value.trim();
+      const type = document.getElementById('an-type').value;
       if (!title) { showAlert('Nhập tiêu đề!', 'warn'); return; }
       adminApi({ sub: 'addNotif', title: encodeURIComponent(title), body: encodeURIComponent(body), type }).then(d => {
         if (d.ok) {
@@ -3583,18 +4017,18 @@
       adminApi({ sub: 'leaderboard' }).then(d => {
         if (!d.ok) { wrap.innerHTML = '<p>Lỗi tải</p>'; return; }
         const mostActive = d.mostActive || [];
-        const topScore   = d.topScore   || [];
+        const topScore = d.topScore || [];
         const renderList = (list, valKey, unit) => list.length
           ? list.map((r, i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
-              <span style="font-weight:700;color:var(--primary);min-width:24px">${i+1}</span>
+              <span style="font-weight:700;color:var(--primary);min-width:24px">${i + 1}</span>
               <span style="flex:1">${(r.name && r.name.trim()) ? r.name : 'Ẩn danh'}</span>
               <span style="font-weight:700">${r[valKey]}${unit}</span>
             </div>`).join('')
           : '<p style="color:var(--text2);text-align:center;padding:16px">Chưa có dữ liệu</p>';
         wrap.innerHTML = `
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex-wrap:wrap">
-            <div class="admin-form"><h4>🔥 Làm nhiều nhất</h4>${renderList(mostActive,'count',' bài')}</div>
-            <div class="admin-form"><h4>⭐ Điểm TB cao</h4>${renderList(topScore,'avgScore','%')}</div>
+            <div class="admin-form"><h4>🔥 Làm nhiều nhất</h4>${renderList(mostActive, 'count', ' bài')}</div>
+            <div class="admin-form"><h4>⭐ Điểm TB cao</h4>${renderList(topScore, 'avgScore', '%')}</div>
           </div>`;
       });
     }
@@ -3607,10 +4041,10 @@
         if (!d.ok) { tbody.innerHTML = '<tr><td colspan="6">Lỗi</td></tr>'; return; }
         tbody.innerHTML = d.users.map(u => {
           const avatarSeed = (u.name && u.name.trim()) ? u.name : '?';
-          const avatarUrl  = u.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
+          const avatarUrl = u.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
           const badge = u.locked ? '<span class="admin-badge locked">🔒 Khóa</span>'
             : u.status.includes('✅') ? '<span class="admin-badge active">✅</span>'
-            : '<span class="admin-badge inactive">—</span>';
+              : '<span class="admin-badge inactive">—</span>';
           return `<tr>
             <td><img src="${avatarUrl}" class="admin-avatar" onerror="this.src='${avatarUrl}'"></td>
             <td>${u.name || '<span style="color:var(--text2)">Ẩn danh</span>'}</td>
