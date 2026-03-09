@@ -3550,11 +3550,13 @@
       fetch(SHEETS_API + '?action=profile&code=' + encodeURIComponent(code))
         .then(r => r.json())
         .then(d => {
-          if (d.ok && (d.name || d.avatarUrl)) {
+          if (d.ok) {
+            // Merge: chỉ cập nhật field nào Sheet có, giữ nguyên dữ liệu local nếu Sheet trống
+            const cur = JSON.parse(sessionStorage.getItem('vs_profile') || '{}');
             sessionStorage.setItem('vs_profile', JSON.stringify({
-              name: d.name || '',
-              avatarUrl: d.avatarUrl || '',
-              avatar: d.avatarUrl || ''
+              name:      d.name      || cur.name      || '',
+              avatarUrl: d.avatarUrl || cur.avatarUrl || '',
+              avatar:    d.avatarUrl || cur.avatar    || ''
             }));
           }
         })
