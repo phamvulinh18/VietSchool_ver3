@@ -2061,10 +2061,159 @@
       margin: 10px 0 6px;
       object-fit: contain
     }
+
+    /* ADMIN NOTIFICATIONS */
+    .admin-notif-wrap {
+      position: fixed;
+      top: 68px; right: 16px;
+      z-index: 8900;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 360px;
+      width: calc(100vw - 32px)
+    }
+    .admin-notif {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.13);
+      animation: notifSlide .35s cubic-bezier(.34,1.56,.64,1);
+      position: relative
+    }
+    @keyframes notifSlide {
+      from { opacity:0; transform: translateX(60px) }
+      to   { opacity:1; transform: translateX(0) }
+    }
+    .admin-notif.info    { border-left: 4px solid #46bbdf }
+    .admin-notif.success { border-left: 4px solid #00b894 }
+    .admin-notif.warn    { border-left: 4px solid #f59e0b }
+    .admin-notif.danger  { border-left: 4px solid #ef4444 }
+    .admin-notif .an-icon { font-size: 1.3rem; flex-shrink:0; margin-top:1px }
+    .admin-notif .an-body { flex: 1 }
+    .admin-notif .an-title { font-weight: 700; font-size: .9rem; margin-bottom: 3px }
+    .admin-notif .an-text  { font-size: .82rem; color: var(--text2); line-height: 1.5 }
+    .admin-notif .an-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--text2); font-size: 1rem; padding: 0;
+      line-height: 1; flex-shrink: 0; transition: .2s
+    }
+    .admin-notif .an-close:hover { color: var(--text) }
+    .admin-notif.fade-out {
+      animation: notifFade .3s ease forwards
+    }
+    @keyframes notifFade {
+      to { opacity:0; transform: translateX(60px); height:0; margin:0; padding:0 }
+    }
+
+    /* ===== ADMIN PANEL ===== */
+    .admin-wrap { max-width:1000px; margin:0 auto; padding-bottom:40px }
+    .admin-header {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:24px; flex-wrap:wrap; gap:12px
+    }
+    .admin-header h2 { font-size:1.3rem; display:flex; align-items:center; gap:10px }
+    .admin-tabs {
+      display:flex; gap:6px; flex-wrap:wrap; margin-bottom:24px;
+      border-bottom:2px solid var(--border); padding-bottom:0
+    }
+    .admin-tab {
+      padding:9px 18px; border-radius:10px 10px 0 0;
+      border:none; background:none; cursor:pointer;
+      font-family:var(--font); font-size:.88rem; font-weight:600;
+      color:var(--text2); transition:.2s; border-bottom:2px solid transparent;
+      margin-bottom:-2px
+    }
+    .admin-tab.active { color:var(--primary); border-bottom-color:var(--primary); background:rgba(70,187,223,.07) }
+    .admin-tab-content { display:none }
+    .admin-tab-content.active { display:block }
+    .admin-table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border) }
+    .admin-table { width:100%; border-collapse:collapse; font-size:.85rem }
+    .admin-table th {
+      background:var(--card); padding:10px 14px; text-align:left;
+      font-weight:700; color:var(--text2); font-size:.78rem;
+      border-bottom:1px solid var(--border); white-space:nowrap
+    }
+    .admin-table td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:middle }
+    .admin-table tr:last-child td { border-bottom:none }
+    .admin-table tr:hover td { background:rgba(70,187,223,.04) }
+    .admin-badge {
+      display:inline-block; padding:2px 10px; border-radius:20px;
+      font-size:.75rem; font-weight:700
+    }
+    .admin-badge.locked  { background:#fee2e2; color:#ef4444 }
+    .admin-badge.active  { background:#d1fae5; color:#059669 }
+    .admin-badge.inactive{ background:#f3f4f6; color:#6b7280 }
+    .admin-badge.info    { background:#dbeafe; color:#2563eb }
+    .admin-badge.warn    { background:#fef3c7; color:#d97706 }
+    .admin-badge.success { background:#d1fae5; color:#059669 }
+    .admin-badge.danger  { background:#fee2e2; color:#ef4444 }
+    .admin-form {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:20px; margin-bottom:20px
+    }
+    .admin-form h4 { margin-bottom:14px; font-size:.9rem }
+    .admin-form-row { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end }
+    .admin-form-row input, .admin-form-row select, .admin-form-row textarea {
+      flex:1; min-width:150px; padding:9px 12px;
+      border:1.5px solid var(--border); border-radius:9px;
+      background:var(--bg); color:var(--text); font-family:var(--font); font-size:.85rem
+    }
+    .admin-form-row textarea { min-height:60px; resize:vertical }
+    .admin-section-title {
+      font-size:.95rem; font-weight:700; margin:20px 0 12px;
+      display:flex; align-items:center; gap:8px
+    }
+    .admin-avatar {
+      width:32px; height:32px; border-radius:50%; object-fit:cover;
+      background:var(--border)
+    }
+    /* --- Mobile responsive --- */
+    @media (max-width:600px) {
+      #page-admin .admin-wrap { padding:0 0 60px }
+      .admin-header {
+        margin-bottom:0; padding:8px 12px;
+        position:sticky; top:0; z-index:50;
+        background:var(--bg); border-bottom:1px solid var(--border)
+      }
+      .admin-header h2 { font-size:.9rem }
+      /* Ẩn text tiêu đề, chỉ giữ icon + nút logout */
+      .admin-title-text { display:none }
+      .admin-tabs {
+        position:sticky; top:44px; z-index:49;
+        background:var(--bg); margin-bottom:0;
+        flex-wrap:nowrap; overflow-x:auto;
+        scrollbar-width:none; gap:0; padding:0 4px;
+        border-bottom:2px solid var(--border)
+      }
+      .admin-tabs::-webkit-scrollbar { display:none }
+      .admin-tab {
+        padding:9px 12px; font-size:.78rem;
+        white-space:nowrap; flex-shrink:0;
+        border-radius:0; margin-bottom:-2px
+      }
+      .admin-tab-content.active { padding-top:12px }
+      .admin-form { border-radius:10px; padding:12px; margin-bottom:10px }
+      .admin-form-row { flex-direction:column }
+      .admin-form-row input,
+      .admin-form-row select,
+      .admin-form-row textarea { min-width:100%; width:100% }
+      .admin-table th, .admin-table td { padding:7px 9px; font-size:.76rem }
+      .admin-section-title { font-size:.82rem; margin:10px 0 6px }
+      /* Ẩn cột ít quan trọng trên mobile */
+      .admin-table .hide-mobile { display:none }
+    }
   </style>
 </head>
 
 <body>
+  <!-- ADMIN NOTIFICATIONS -->
+  <div id="admin-notifs" class="admin-notif-wrap"></div>
+
   <!-- TEST MODE BANNER -->
   <div id="test-banner" class="test-banner">
     🔒 CHẾ ĐỘ XEM THử — Bạn đang dùng mã TEST. Không thể làm bài hay thẩm định chức năng.
@@ -2317,6 +2466,100 @@
             onclick="clearHistory()">Xóa tất cả</button></div>
         <div class="setting-item"><label><i class="fas fa-rotate"></i> Khôi phục dữ liệu mẫu</label><button
             class="btn btn-outline" onclick="resetData()">Khôi phục</button></div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="page-admin" class="page">
+      <div class="admin-wrap">
+        <div class="admin-header">
+          <h2><i class="fas fa-shield-halved" style="color:var(--primary)"></i> <span class="admin-title-text">Quản Trị Hệ Thống</span></h2>
+          <button class="btn btn-outline" onclick="adminLogout()" title="Đăng xuất">
+            <i class="fas fa-right-from-bracket"></i> <span class="admin-title-text">Đăng xuất</span>
+          </button>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="adminTab('keys',this)">🔑 Quản lý Key</button>
+          <button class="admin-tab" onclick="adminTab('notifs',this)">🔔 Thông báo</button>
+          <button class="admin-tab" onclick="adminTab('lb',this)">🏆 Xếp hạng</button>
+          <button class="admin-tab" onclick="adminTab('users',this)">👥 Tài khoản</button>
+        </div>
+
+        <!-- TAB: KEYS -->
+        <div id="atab-keys" class="admin-tab-content active">
+          <div class="admin-form">
+            <h4>➕ Thêm Key mới</h4>
+            <div class="admin-form-row">
+              <input id="akey-new" placeholder="Mã key (VD: VS-ABC)" style="text-transform:uppercase">
+              <button class="btn btn-primary" onclick="adminAddKey()"><i class="fas fa-plus"></i> Thêm</button>
+            </div>
+          </div>
+          <div class="admin-section-title"><i class="fas fa-list"></i> Danh sách Key</div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>#</th><th>Mã</th><th>Tên</th><th>Trạng thái</th><th>Thiết bị</th><th>Đăng nhập</th><th>Thao tác</th></tr></thead>
+              <tbody id="atbl-keys"><tr><td colspan="7" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB: NOTIFICATIONS -->
+        <div id="atab-notifs" class="admin-tab-content">
+          <div class="admin-form">
+            <h4>➕ Thêm Thông báo</h4>
+            <div class="admin-form-row" style="margin-bottom:8px">
+              <input id="an-title" placeholder="Tiêu đề *">
+              <select id="an-type">
+                <option value="info">🔵 info</option>
+                <option value="success">🟢 success</option>
+                <option value="warn">🟡 warn</option>
+                <option value="danger">🔴 danger</option>
+              </select>
+            </div>
+            <div class="admin-form-row">
+              <textarea id="an-body" placeholder="Nội dung (tùy chọn)"></textarea>
+              <button class="btn btn-primary" onclick="adminAddNotif()" style="align-self:flex-end"><i class="fas fa-plus"></i> Thêm</button>
+            </div>
+          </div>
+          <div class="admin-section-title"><i class="fas fa-list"></i> Danh sách Thông báo</div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Tiêu đề</th><th>Loại</th><th>Hiển thị</th><th>Ngày tạo</th><th>Thao tác</th></tr></thead>
+              <tbody id="atbl-notifs"><tr><td colspan="5" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB: LEADERBOARD -->
+        <div id="atab-lb" class="admin-tab-content">
+          <div id="atbl-lb" style="margin-top:4px"><div style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></div></div>
+        </div>
+
+        <!-- TAB: USERS -->
+        <div id="atab-users" class="admin-tab-content">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Avatar</th><th>Tên</th><th>Mã</th><th>Trạng thái</th><th>Số bài</th><th>TB%</th></tr></thead>
+              <tbody id="atbl-users"><tr><td colspan="6" style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ADMIN EDIT MODAL -->
+  <div id="admin-edit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
+    <div style="background:var(--card);border-radius:18px;padding:28px;width:min(480px,94vw);box-shadow:0 8px 40px rgba(0,0,0,.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 id="aedit-title" style="font-size:1rem">Chỉnh sửa</h3>
+        <button onclick="closeAdminEdit()" style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--text2)">✕</button>
+      </div>
+      <div id="aedit-body"></div>
+      <div style="display:flex;gap:10px;margin-top:18px;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="closeAdminEdit()">Hủy</button>
+        <button class="btn btn-primary" id="aedit-save-btn" onclick="adminSaveEdit()"><i class="fas fa-floppy-disk"></i> Lưu</button>
       </div>
     </div>
   </div>
@@ -2825,7 +3068,11 @@
       const overlay = document.getElementById('login-overlay');
       overlay.style.transition = 'opacity .4s';
       overlay.style.opacity = '0';
-      setTimeout(() => overlay.classList.add('hidden'), 400);
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        loadProfile();        // ← áp dụng tên/ảnh từ Sheet vừa lưu
+        fetchAdminNotifs();
+      }, 400);
     }
     function doLogin() {
       const code = document.getElementById('login-code').value.trim().toUpperCase();
@@ -2858,10 +3105,29 @@
         btn.innerHTML = '<i class="fas fa-unlock-keyhole"></i> Vào Học Ngay';
         btn.disabled = false;
       };
-      const _enter = () => {
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ code, exp: Date.now() + SESSION_HOURS * 3600000 }));
+      const _enter = (data) => {
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+          code,
+          isAdmin: code === 'ADMINVULINH',
+          exp: Date.now() + SESSION_HOURS * 3600000
+        }));
+        // Lưu profile từ Sheet (name + avatarUrl) vào localStorage
+        if (data && (data.name || data.avatarUrl)) {
+          const saved = JSON.parse(localStorage.getItem('vs_profile') || '{}');
+          const name      = data.name      || saved.name      || '';
+          const avatarUrl = data.avatarUrl || saved.avatarUrl || '';
+          const avatar    = avatarUrl || saved.avatar || '';
+          localStorage.setItem('vs_profile', JSON.stringify({ name, avatar, avatarUrl }));
+        }
         btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang vào...';
-        setTimeout(_showLoginOverlay, 500);
+        if (code === 'ADMINVULINH') {
+          setTimeout(() => {
+            document.getElementById('login-overlay').classList.add('hidden');
+            showAdminPage();
+          }, 500);
+        } else {
+          setTimeout(_showLoginOverlay, 500);
+        }
       };
 
       // ―― Mã TEST — cho vào ngay, không cần API, chế độ chỉ xem ――
@@ -2886,7 +3152,7 @@
         .then(r => r.json())
         .then(data => {
           if (data.ok) {
-            _enter();
+            _enter(data);
           } else if (data.locked) {
             _showLock(); _resetBtn();
           } else {
@@ -2909,14 +3175,53 @@
     document.getElementById('login-code').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
     if (checkSession()) {
       document.getElementById('login-overlay').classList.add('hidden');
-      // Áp dụng TEST mode nếu cần
       try {
         const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '{}');
-        if (s.isTest) applyTestMode();
+        if (s.isAdmin) {
+          showAdminPage(); // ← vào admin ngay sau reload
+        } else {
+          if (s.isTest) applyTestMode();
+          fetchAdminNotifs();
+        }
       } catch(_) {}
     }
 
-    // ===== LEADERBOARD =====
+    // ===== ADMIN NOTIFICATIONS =====
+    const _NOTIF_KEY = 'vs_closed_notifs';
+    const _NOTIF_ICONS = { info:'\u2139\ufe0f', success:'\u2705', warn:'\u26a0\ufe0f', danger:'\ud83d\udd34' };
+    function fetchAdminNotifs() {
+      if (!SHEETS_API) return;
+      const closed = JSON.parse(sessionStorage.getItem(_NOTIF_KEY) || '[]');
+      fetch(SHEETS_API + '?action=notifications')
+        .then(r => r.json())
+        .then(data => {
+          if (!data.ok || !data.items.length) return;
+          const wrap = document.getElementById('admin-notifs');
+          data.items.forEach(item => {
+            if (closed.includes(item.id)) return;
+            const type = ['info','success','warn','danger'].includes(item.type) ? item.type : 'info';
+            const el = document.createElement('div');
+            el.className = `admin-notif ${type}`;
+            el.dataset.id = item.id;
+            el.innerHTML = `
+              <div class="an-icon">${_NOTIF_ICONS[type]}</div>
+              <div class="an-body">
+                <div class="an-title">${item.title}</div>
+                ${item.body ? `<div class="an-text">${item.body}</div>` : ''}
+              </div>
+              <button class="an-close" onclick="_closeNotif(this,${item.id})" title="\u0110\u00f3ng">&times;</button>`;
+            wrap.appendChild(el);
+          });
+        }).catch(() => {});
+    }
+    function _closeNotif(btn, id) {
+      const el = btn.closest('.admin-notif');
+      el.classList.add('fade-out');
+      setTimeout(() => el.remove(), 300);
+      const closed = JSON.parse(sessionStorage.getItem(_NOTIF_KEY) || '[]');
+      closed.push(id);
+      sessionStorage.setItem(_NOTIF_KEY, JSON.stringify(closed));
+    }
     function fetchLeaderboard() {
       if (!SHEETS_API) return;
       fetch(SHEETS_API + '?action=leaderboard')
@@ -3036,6 +3341,287 @@
 
     // ===== INIT =====
     loadData(); renderHome(); fetchLeaderboard(); loadProfile();
+
+    // ===== ADMIN PANEL =====
+    const ADMIN_CODE = 'ADMINVULINH';
+
+    // Helper gọi API admin
+    function adminApi(params) {
+      const qs = new URLSearchParams({ action: 'admin', adminKey: ADMIN_CODE, ...params }).toString();
+      return fetch(SHEETS_API + '?' + qs).then(r => r.json());
+    }
+
+    // Chuyển tab
+    function adminTab(name, btn) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-tab-content').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('atab-' + name).classList.add('active');
+      if (name === 'keys')   loadAdminKeys();
+      if (name === 'notifs') loadAdminNotifs();
+      if (name === 'lb')     loadAdminLB();
+      if (name === 'users')  loadAdminUsers();
+    }
+
+    function showAdminPage() {
+      document.getElementById('page-admin').classList.add('active');
+      // Ẩn các trang khác
+      ['home','config','quiz','result','bank','history','settings'].forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.classList.remove('active');
+      });
+      // Ẩn bottom-nav
+      const bn = document.querySelector('.bottom-nav');
+      if (bn) bn.style.display = 'none';
+      loadAdminKeys();
+    }
+
+    // ── ADMIN EDIT MODAL ────────────────────────────
+    let _aeditCtx = null; // { type:'key'|'notif', row, ... }
+
+    function closeAdminEdit() {
+      const m = document.getElementById('admin-edit-modal');
+      m.style.display = 'none';
+      _aeditCtx = null;
+    }
+
+    function adminEditKey(row, code, name) {
+      _aeditCtx = { type: 'key', row, code };
+      document.getElementById('aedit-title').textContent = '✏️ Sửa Key: ' + code;
+      document.getElementById('aedit-body').innerHTML = `
+        <label style="font-size:.85rem;color:var(--text2);display:block;margin-bottom:6px">Tên hiển thị</label>
+        <input id="aedit-key-name" value="${name || ''}" placeholder="Nhập tên người dùng..."
+          style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:9px;
+                 background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9rem;box-sizing:border-box">`;
+      const m = document.getElementById('admin-edit-modal');
+      m.style.display = 'flex';
+      setTimeout(() => document.getElementById('aedit-key-name').focus(), 100);
+    }
+
+    function adminEditNotif(row, title, body, type) {
+      _aeditCtx = { type: 'notif', row };
+      document.getElementById('aedit-title').textContent = '✏️ Sửa Thông báo';
+      document.getElementById('aedit-body').innerHTML = `
+        <label style="font-size:.85rem;color:var(--text2);display:block;margin-bottom:4px">Tiêu đề *</label>
+        <input id="aedit-n-title" value="${title || ''}"
+          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;
+                 background:var(--bg);color:var(--text);font-family:var(--font);font-size:.85rem;box-sizing:border-box;margin-bottom:10px">
+        <label style="font-size:.85rem;color:var(--text2);display:block;margin-bottom:4px">Nội dung</label>
+        <textarea id="aedit-n-body" rows="3"
+          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;
+                 background:var(--bg);color:var(--text);font-family:var(--font);font-size:.85rem;
+                 box-sizing:border-box;resize:vertical;margin-bottom:10px">${body || ''}</textarea>
+        <label style="font-size:.85rem;color:var(--text2);display:block;margin-bottom:4px">Loại</label>
+        <select id="aedit-n-type"
+          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;
+                 background:var(--bg);color:var(--text);font-family:var(--font);font-size:.85rem">
+          ${['info','success','warn','danger'].map(t =>
+            `<option value="${t}" ${t===type?'selected':''}>${{info:'🔵',success:'🟢',warn:'🟡',danger:'🔴'}[t]} ${t}</option>`
+          ).join('')}
+        </select>`;
+      const m = document.getElementById('admin-edit-modal');
+      m.style.display = 'flex';
+    }
+
+    function adminSaveEdit() {
+      if (!_aeditCtx) return;
+      if (_aeditCtx.type === 'key') {
+        const name = document.getElementById('aedit-key-name').value.trim();
+        // Cập nhật name → gọi updateNotif field=name... nhưng key dùng hàm updateKey
+        // Tạm dùng Apps Script addKey endpoint → thay vì đó gọi updateKey không có, dùng profile endpoint đặc biệt
+        // Cập nhật bằng cách gọi admin sub=updateKey
+        adminApi({ sub: 'updateKey', row: _aeditCtx.row, field: 'name', value: encodeURIComponent(name) })
+          .then(d => {
+            closeAdminEdit();
+            if (d.ok) { showAlert('✅ Đã cập nhật tên!', 'success'); loadAdminKeys(); }
+            else showAlert('Lỗi: ' + d.msg, 'warn');
+          });
+      } else if (_aeditCtx.type === 'notif') {
+        const title = document.getElementById('aedit-n-title').value.trim();
+        const body  = document.getElementById('aedit-n-body').value.trim();
+        const type  = document.getElementById('aedit-n-type').value;
+        if (!title) { showAlert('Nhập tiêu đề!', 'warn'); return; }
+        Promise.all([
+          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'title', value: encodeURIComponent(title) }),
+          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'body',  value: encodeURIComponent(body) }),
+          adminApi({ sub: 'updateNotif', row: _aeditCtx.row, field: 'type',  value: type })
+        ]).then(() => {
+          closeAdminEdit();
+          showAlert('✅ Đã cập nhật thông báo!', 'success');
+          loadAdminNotifs();
+        });
+      }
+    }
+
+    function adminLogout() {
+      sessionStorage.removeItem(SESSION_KEY);
+      location.reload();
+    }
+
+    // ── KEYS ──────────────────────────────────────────
+    let _adminKeysList = []; // cache để check trùng key
+    function loadAdminKeys() {
+      const tbody = document.getElementById('atbl-keys');
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px"><i class="fas fa-circle-notch fa-spin"></i></td></tr>';
+      adminApi({ sub: 'keys' }).then(d => {
+        if (!d.ok) { tbody.innerHTML = '<tr><td colspan="7">Lỗi tải dữ liệu</td></tr>'; return; }
+        _adminKeysList = d.keys.map(k => k.code.toUpperCase()); // cache danh sách code
+        if (!d.keys.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text2)">Chưa có key nào</td></tr>'; return; }
+        tbody.innerHTML = d.keys.map((k, i) => {
+          const badge = k.locked ? '<span class="admin-badge locked">🔒 Khóa</span>'
+            : k.status.includes('✅') ? '<span class="admin-badge active">✅ Hoạt động</span>'
+            : '<span class="admin-badge inactive">Chưa kích hoạt</span>';
+          return `<tr>
+            <td style="color:var(--text2)">${i + 1}</td>
+            <td><strong>${k.code}</strong></td>
+            <td>${k.name || '<span style="color:var(--text2)">—</span>'}</td>
+            <td>${badge}</td>
+            <td style="color:var(--text2)">${k.devices} thiết bị</td>
+            <td style="color:var(--text2);font-size:.8rem">${k.lastLogin || '—'}</td>
+            <td style="white-space:nowrap">
+              <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditKey(${k.row},'${k.code}','${(k.name||'').replace(/'/g,'')}')"><i class="fas fa-pen"></i></button>
+              ${k.locked ? `<button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminUnlockKey(${k.row})"><i class="fas fa-unlock"></i> Mở khóa</button>` : ''}
+              <button class="btn btn-danger" style="font-size:.78rem;padding:5px 10px" onclick="adminDeleteKey(${k.row},'${k.code}')"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>`;
+        }).join('');
+      });
+    }
+
+    function adminAddKey() {
+      const code = document.getElementById('akey-new').value.trim().toUpperCase();
+      if (!code) { showAlert('Nhập mã key!', 'warn'); return; }
+      // Check trùng phía client (nhanh)
+      if (_adminKeysList.includes(code)) {
+        showAlert(`⚠️ Key "${code}" đã tồn tại! Vui lòng đặt mã khác.`, 'warn');
+        document.getElementById('akey-new').select();
+        return;
+      }
+      adminApi({ sub: 'addKey', code }).then(d => {
+        if (d.ok) { showAlert('✅ Đã thêm key: ' + code, 'success'); document.getElementById('akey-new').value = ''; loadAdminKeys(); }
+        else showAlert('❌ ' + d.msg, 'warn'); // server-side check
+      });
+    }
+
+    function adminDeleteKey(row, code) {
+      showConfirm(`Xóa key "${code}"?`, 'Xác nhận xóa', 'Xóa', 'warn').then(ok => {
+        if (!ok) return;
+        adminApi({ sub: 'deleteKey', row }).then(d => {
+          if (d.ok) { showAlert('Đã xóa key!', 'success'); loadAdminKeys(); }
+          else showAlert('Lỗi: ' + d.msg, 'warn');
+        });
+      });
+    }
+
+    function adminUnlockKey(row) {
+      adminApi({ sub: 'unlockKey', row }).then(d => {
+        if (d.ok) { showAlert('✅ Đã mở khóa thiết bị!', 'success'); loadAdminKeys(); }
+        else showAlert('Lỗi: ' + d.msg, 'warn');
+      });
+    }
+
+    // ── NOTIFICATIONS ─────────────────────────────────
+    function loadAdminNotifs() {
+      const tbody = document.getElementById('atbl-notifs');
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px"><i class="fas fa-circle-notch fa-spin"></i></td></tr>';
+      adminApi({ sub: 'listNotifs' }).then(d => {
+        if (!d.ok) { tbody.innerHTML = '<tr><td colspan="5">Lỗi</td></tr>'; return; }
+        if (!d.items.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text2)">Chưa có thông báo</td></tr>'; return; }
+        tbody.innerHTML = d.items.map(n => `<tr>
+          <td><strong>${n.title}</strong>${n.body ? `<div style="font-size:.78rem;color:var(--text2);margin-top:2px">${n.body.substring(0,60)}${n.body.length>60?'…':''}</div>` : ''}</td>
+          <td><span class="admin-badge ${n.type}">${n.type}</span></td>
+          <td>
+            <label class="switch" style="transform:scale(.85)">
+              <input type="checkbox" ${n.active ? 'checked' : ''} onchange="adminToggleNotif(${n.row},this.checked)">
+              <span class="slider"></span>
+            </label>
+          </td>
+          <td style="font-size:.8rem;color:var(--text2)">${n.created || '—'}</td>
+          <td style="white-space:nowrap">
+            <button class="btn btn-outline" style="font-size:.78rem;padding:5px 10px;margin-right:4px" onclick="adminEditNotif(${n.row},'${(n.title||'').replace(/'/g,'')}','${(n.body||'').replace(/'/g,'')}','${n.type}')"><i class="fas fa-pen"></i></button>
+            <button class="btn btn-danger" style="font-size:.78rem;padding:5px 10px" onclick="adminDeleteNotif(${n.row})"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>`).join('');
+      });
+    }
+
+    function adminAddNotif() {
+      const title = document.getElementById('an-title').value.trim();
+      const body  = document.getElementById('an-body').value.trim();
+      const type  = document.getElementById('an-type').value;
+      if (!title) { showAlert('Nhập tiêu đề!', 'warn'); return; }
+      adminApi({ sub: 'addNotif', title: encodeURIComponent(title), body: encodeURIComponent(body), type }).then(d => {
+        if (d.ok) {
+          showAlert('✅ Đã thêm thông báo!', 'success');
+          document.getElementById('an-title').value = '';
+          document.getElementById('an-body').value = '';
+          loadAdminNotifs();
+        } else showAlert('Lỗi: ' + d.msg, 'warn');
+      });
+    }
+
+    function adminToggleNotif(row, active) {
+      adminApi({ sub: 'updateNotif', row, field: 'active', value: active ? 'TRUE' : 'FALSE' }).then(d => {
+        if (!d.ok) showAlert('Lỗi cập nhật!', 'warn');
+      });
+    }
+
+    function adminDeleteNotif(row) {
+      showConfirm('Xóa thông báo này?', 'Xác nhận xóa', 'Xóa', 'warn').then(ok => {
+        if (!ok) return;
+        adminApi({ sub: 'deleteNotif', row }).then(d => {
+          if (d.ok) { showAlert('Đã xóa!', 'success'); loadAdminNotifs(); }
+          else showAlert('Lỗi: ' + d.msg, 'warn');
+        });
+      });
+    }
+
+    // ── LEADERBOARD (admin view) ───────────────────────
+    function loadAdminLB() {
+      const wrap = document.getElementById('atbl-lb');
+      wrap.innerHTML = '<div style="text-align:center;padding:30px"><i class="fas fa-circle-notch fa-spin"></i></div>';
+      adminApi({ sub: 'leaderboard' }).then(d => {
+        if (!d.ok) { wrap.innerHTML = '<p>Lỗi tải</p>'; return; }
+        const mostActive = d.mostActive || [];
+        const topScore   = d.topScore   || [];
+        const renderList = (list, valKey, unit) => list.length
+          ? list.map((r, i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+              <span style="font-weight:700;color:var(--primary);min-width:24px">${i+1}</span>
+              <span style="flex:1">${(r.name && r.name.trim()) ? r.name : 'Ẩn danh'}</span>
+              <span style="font-weight:700">${r[valKey]}${unit}</span>
+            </div>`).join('')
+          : '<p style="color:var(--text2);text-align:center;padding:16px">Chưa có dữ liệu</p>';
+        wrap.innerHTML = `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex-wrap:wrap">
+            <div class="admin-form"><h4>🔥 Làm nhiều nhất</h4>${renderList(mostActive,'count',' bài')}</div>
+            <div class="admin-form"><h4>⭐ Điểm TB cao</h4>${renderList(topScore,'avgScore','%')}</div>
+          </div>`;
+      });
+    }
+
+    // ── USERS ─────────────────────────────────────────
+    function loadAdminUsers() {
+      const tbody = document.getElementById('atbl-users');
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px"><i class="fas fa-circle-notch fa-spin"></i></td></tr>';
+      adminApi({ sub: 'users' }).then(d => {
+        if (!d.ok) { tbody.innerHTML = '<tr><td colspan="6">Lỗi</td></tr>'; return; }
+        tbody.innerHTML = d.users.map(u => {
+          const avatarSeed = (u.name && u.name.trim()) ? u.name : '?';
+          const avatarUrl  = u.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
+          const badge = u.locked ? '<span class="admin-badge locked">🔒 Khóa</span>'
+            : u.status.includes('✅') ? '<span class="admin-badge active">✅</span>'
+            : '<span class="admin-badge inactive">—</span>';
+          return `<tr>
+            <td><img src="${avatarUrl}" class="admin-avatar" onerror="this.src='${avatarUrl}'"></td>
+            <td>${u.name || '<span style="color:var(--text2)">Ẩn danh</span>'}</td>
+            <td style="font-family:monospace;font-size:.8rem">${u.code}</td>
+            <td>${badge}</td>
+            <td style="text-align:center">${u.quizCount}</td>
+            <td style="text-align:center;font-weight:700;color:var(--primary)">${u.avgScore}%</td>
+          </tr>`;
+        }).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text2)">Chưa có dữ liệu</td></tr>';
+      });
+    }
   </script>
 </body>
 
