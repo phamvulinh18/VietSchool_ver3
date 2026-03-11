@@ -2640,6 +2640,18 @@
         <div class="form-group"><label>Chế độ</label>
           <div class="pill-group" id="config-mode"></div>
         </div>
+        <div class="form-group"><label><i class="fas fa-shuffle" style="color:var(--primary)"></i> Xáo trộn</label>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <label class="switch"><input type="checkbox" id="cfg-shuffle-q" checked><span class="slider"></span></label>
+              <span style="font-size:.9rem">Xáo trộn thứ tự câu hỏi</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <label class="switch"><input type="checkbox" id="cfg-shuffle-a"><span class="slider"></span></label>
+              <span style="font-size:.9rem">Xáo trộn đáp án (A/B/C/D)</span>
+            </label>
+          </div>
+        </div>
         <button class="btn btn-primary btn-block" onclick="startQuiz()" style="margin-top:12px"><i
             class="fas fa-rocket"></i> Bắt Đầu Làm Bài</button>
       </div>
@@ -3120,12 +3132,17 @@
       document.getElementById('config-count').innerHTML = counts.map(n =>
         `<label class="pill${n === configCount ? ' active' : ''}" onclick="pickPill(this,'count',${n})">${n} câu<input type="radio" name="count"></label>`
       ).join('');
-      document.getElementById('config-time').innerHTML = [5, 10, 15, 20, 30].map(n =>
+      document.getElementById('config-time').innerHTML = [5, 10, 15, 30, 60].map(n =>
         `<label class="pill${n === configTime ? ' active' : ''}" onclick="pickPill(this,'time',${n})">${n} phút<input type="radio" name="time"></label>`
       ).join('');
       document.getElementById('config-mode').innerHTML =
         `<label class="pill${configMode === 'practice' ? ' active' : ''}" onclick="pickPill(this,'mode','practice')">Luyện tập<input type="radio" name="mode"></label>` +
         `<label class="pill${configMode === 'exam' ? ' active' : ''}" onclick="pickPill(this,'mode','exam')">Thi thử<input type="radio" name="mode"></label>`;
+      // Khôi phục trạng thái shuffle
+      const sqEl = document.getElementById('cfg-shuffle-q');
+      const saEl = document.getElementById('cfg-shuffle-a');
+      if (sqEl) sqEl.checked = settings.shuffle !== false;
+      if (saEl) saEl.checked = false;
       showPage('config');
     }
     function pickPill(el, type, val) {
@@ -3138,9 +3155,24 @@
 
     // ===== QUIZ ENGINE =====
     function startQuiz() {
+      const shuffleQ = document.getElementById('cfg-shuffle-q')?.checked ?? settings.shuffle;
+      const shuffleA = document.getElementById('cfg-shuffle-a')?.checked ?? false;
       const qz = quizzes[configQuizIdx];
       let qs = JSON.parse(JSON.stringify(qz.questions));
-      if (settings.shuffle) qs.sort(() => Math.random() - 0.5);
+      // Xáo trộn đáp án trước, rồi xáo câu
+      if (shuffleA) {
+        qs = qs.map(q => {
+          const indices = [0, 1, 2, 3];
+          for (let i = indices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [indices[i], indices[j]] = [indices[j], indices[i]];
+          }
+          const newOpts = indices.map(i => q.opts[i]);
+          const newAns = indices.indexOf(q.ans);
+          return { ...q, opts: newOpts, ans: newAns };
+        });
+      }
+      if (shuffleQ) qs.sort(() => Math.random() - 0.5);
       qs = qs.slice(0, configCount);
       currentQuiz = { name: qz.name, icon: qz.icon, questions: qs, mode: configMode, startTime: Date.now() };
       currentQIdx = 0; answers = new Array(qs.length).fill(-1); flags = new Array(qs.length).fill(false);
@@ -3622,7 +3654,12 @@
 
     // ===== ADMIN NOTIFICATIONS =====
     const _NOTIF_KEY = 'vs_closed_notifs';
-    const _NOTIF_ICONS = { info: '\u2139\ufe0f', success: '\u2705', warn: '\u26a0\ufe0f', danger: '\ud83d\udd34' };
+    const _NOTIF_ICONS = {
+      info:    '<i class="fas fa-circle-info"           style="color:#4b9ef5;font-size:1.25rem"></i>',
+      success: '<i class="fas fa-circle-check"          style="color:#22c55e;font-size:1.25rem"></i>',
+      warn:    '<i class="fas fa-triangle-exclamation"  style="color:#f59e0b;font-size:1.25rem"></i>',
+      danger:  '<i class="fas fa-circle-xmark"          style="color:#ef4444;font-size:1.25rem"></i>'
+    };
     function fetchAdminNotifs() {
       if (!SHEETS_API) return;
       const closed = JSON.parse(sessionStorage.getItem(_NOTIF_KEY) || '[]');
@@ -3640,8 +3677,7 @@
             el.innerHTML = `
               <div class="an-icon">${_NOTIF_ICONS[type]}</div>
               <div class="an-body">
-                <div class="an-title">${item.title}</div>
-                ${item.body ? `<div class="an-text">${item.body}</div>` : ''}
+                <div class="an-text" style="color:var(--text)">${item.body || item.title}</div>
               </div>
               <button class="an-close" onclick="_closeNotif(this,${item.id})" title="\u0110\u00f3ng">&times;</button>`;
             wrap.appendChild(el);
