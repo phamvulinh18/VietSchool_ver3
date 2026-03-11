@@ -3218,13 +3218,19 @@
       // render result
       const pct = score / 100; const circ = 2 * Math.PI * 78; const offset = circ * (1 - pct);
       const skipped = answers.filter(a => a < 0).length;
+      const wrongCount = qs.length - correct - skipped;
+      // Lưu lại các câu sai/bỏ qua để có thể làm lại
+      _lastWrongQuestions = [];
+      qs.forEach((q, i) => {
+        if (answers[i] !== q.ans) _lastWrongQuestions.push(q);
+      });
       let html = `<div class="score-circle"><svg width="180" height="180"><circle cx="90" cy="90" r="78" stroke="var(--border)" stroke-width="10" fill="none"/>` +
         `<circle cx="90" cy="90" r="78" stroke="${gColor}" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="transition:stroke-dashoffset 1.5s ease"><animate attributeName="stroke-dashoffset" from="${circ}" to="${offset}" dur="1.5s" fill="freeze"/></circle></svg>` +
         `<div class="score-text"><span class="score-value">${score}%</span><span class="score-label">Điểm số</span></div></div>` +
         `<div class="grade-badge" style="background:${gColor}22;color:${gColor}">${grade}</div>` +
         `<div class="result-stats">` +
         `<div class="result-stat"><div class="rs-value" style="color:var(--success)">${correct}</div><div class="rs-label">Đúng</div></div>` +
-        `<div class="result-stat"><div class="rs-value" style="color:var(--danger)">${qs.length - correct - skipped}</div><div class="rs-label">Sai</div></div>` +
+        `<div class="result-stat"><div class="rs-value" style="color:var(--danger)">${wrongCount}</div><div class="rs-label">Sai</div></div>` +
         `<div class="result-stat"><div class="rs-value" style="color:var(--text2)">${skipped}</div><div class="rs-label">Bỏ qua</div></div>` +
         `<div class="result-stat"><div class="rs-value">${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, '0')}</div><div class="rs-label">Thời gian</div></div></div>` +
         `<h3 style="margin:20px 0 12px;text-align:left"><i class="fas fa-clipboard-list"></i> Chi tiết từng câu</h3><div class="review-list">`;
@@ -3243,11 +3249,38 @@
           }).join('')}</div>` +
           `<div class="explanation"><i class="fas fa-lightbulb"></i> ${q.exp}</div></div>`;
       });
-      html += `</div><div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">` +
-        `<button class="btn btn-primary btn-mobile-full" onclick="openConfig(${configQuizIdx})"><i class="fas fa-rotate-right"></i> Thi Lại</button>` +
+      html += `</div><div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">`;
+      // Nút làm lại câu sai (chỉ hiện khi có câu sai/bỏ qua)
+      if (_lastWrongQuestions.length > 0) {
+        html += `<button class="btn btn-danger btn-mobile-full" onclick="retryWrongAnswers()"><i class="fas fa-circle-xmark"></i> Làm lại ${_lastWrongQuestions.length} câu sai</button>`;
+      }
+      html += `<button class="btn btn-primary btn-mobile-full" onclick="openConfig(${configQuizIdx})"><i class="fas fa-rotate-right"></i> Thi Lại</button>` +
         `<button class="btn btn-outline btn-mobile-full" onclick="showPage('home')"><i class="fas fa-house"></i> Trang Chủ</button></div>`;
       document.getElementById('result-content').innerHTML = html;
       showPage('result');
+    }
+
+    // ===== LÀM LẠI CÂU SAI =====
+    let _lastWrongQuestions = [];
+    function retryWrongAnswers() {
+      if (!_lastWrongQuestions.length) { showAlert('Không có câu sai để làm lại!', 'info'); return; }
+      const wrongQs = JSON.parse(JSON.stringify(_lastWrongQuestions));
+      if (settings.shuffle) wrongQs.sort(() => Math.random() - 0.5);
+      currentQuiz = {
+        name: currentQuiz.name + ' (Câu sai)',
+        icon: currentQuiz.icon,
+        questions: wrongQs,
+        mode: currentQuiz.mode,
+        startTime: Date.now()
+      };
+      currentQIdx = 0;
+      answers = new Array(wrongQs.length).fill(-1);
+      flags = new Array(wrongQs.length).fill(false);
+      // Thời gian tỉ lệ: 30 giây/câu, tối thiểu 60 giây
+      timeLeft = Math.max(60, wrongQs.length * 30);
+      showPage('quiz');
+      renderQuiz();
+      startTimer();
     }
 
     // ===== BANK =====
@@ -3286,7 +3319,7 @@
               }"><strong>${letters[oi]}.</strong> ${o} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
               </div>`
             : `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>`;
-          html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><p style="margin-top:8px">${q.q}</p></div></div>` +
+          html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><span style="display:inline-block;margin-left:8px;padding:1px 8px;border-radius:12px;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;vertical-align:middle">Câu ${qj + 1}/${qz.questions.length}</span><p style="margin-top:8px">${q.q}</p></div></div>` +
             ansBlock +
             `<div class="card-actions"><button class="btn btn-outline" onclick="openEditQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-pen"></i> Sửa</button>` +
             `<button class="btn btn-danger" onclick="deleteQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-trash"></i> Xóa</button></div></div>`;
