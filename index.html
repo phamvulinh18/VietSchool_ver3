@@ -1278,7 +1278,7 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .12)
+      
     }
 
     .gif-img {
@@ -1289,26 +1289,8 @@
       border-radius: 20px
     }
 
-    .gif-shine {
-      position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .18), transparent);
-      z-index: 3;
-      animation: gif-shine 3s infinite
-    }
 
-    @keyframes gif-shine {
-      0% {
-        left: -75%
-      }
 
-      100% {
-        left: 125%
-      }
-    }
 
     /* ICON COLORS */
     .fa-house {
@@ -2625,6 +2607,18 @@
       <div class="stats-grid" id="home-stats"></div>
       <h2 style="margin-bottom:16px"><i class="fas fa-clipboard-list"></i> Bộ Đề Luyện Thi</h2>
       <div class="card-grid" id="quiz-list"></div>
+      <h2 style="margin-top:32px;margin-bottom:16px"><i class="fas fa-graduation-cap"></i> Chế Độ Thi Thử</h2>
+      <div class="card-grid">
+        <div class="card" onclick="startAutoExam()" style="border: 2px solid var(--primary); background: var(--primary-light)">
+          <div class="card-icon"><i class="fas fa-rocket" style="color:var(--primary)"></i></div>
+          <h3>Đề Thi Tổng Hợp</h3>
+
+          <div class="card-meta">
+            <span><i class="fas fa-pen-to-square"></i> 50 câu</span>
+            <span><i class="fas fa-clock"></i> 60 phút</span>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- CONFIG -->
     <div id="page-config" class="page">
@@ -3154,7 +3148,49 @@
     }
 
     // ===== QUIZ ENGINE =====
+    function startAutoExam() {
+      // Gom tất cả câu hỏi từ các bộ đề
+      let allQuestions = [];
+      quizzes.forEach(qz => {
+        allQuestions.push(...qz.questions);
+      });
+
+      // Xáo trộn toàn bộ
+      for (let i = allQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+      }
+
+      // Lấy 50 câu đầu tiên
+      const selectedQuestions = JSON.parse(JSON.stringify(allQuestions.slice(0, 50)));
+
+      // Giả lập một quiz object
+      currentQuiz = {
+        name: "Đề Thi Tổng Hợp",
+        icon: '<i class="fas fa-rocket"></i>',
+        questions: selectedQuestions,
+        mode: 'exam',
+        startTime: Date.now()
+      };
+
+      configCount = 50;
+      configTime = 60;
+      configMode = 'exam';
+      _isRetryMode = false;
+
+      currentQIdx = 0;
+      answers = new Array(50).fill(-1);
+      flags = new Array(50).fill(false);
+
+      // Chuyển trang và bắt đầu
+      timeLeft = 60 * 60;
+      showPage('quiz');
+      renderQuiz();
+      startTimer();
+    }
+
     function startQuiz() {
+      _isRetryMode = false; // reset: đây là bài thi thật
       const shuffleQ = document.getElementById('cfg-shuffle-q')?.checked ?? settings.shuffle;
       const shuffleA = document.getElementById('cfg-shuffle-a')?.checked ?? false;
       const qz = quizzes[configQuizIdx];
@@ -3242,11 +3278,12 @@
       else if (score >= 60) { grade = 'Khá'; gColor = '#46bbdf' }
       else if (score >= 45) { grade = 'Trung Bình'; gColor = '#fdcb6e' }
       else { grade = 'Yếu'; gColor = '#e17055' }
-      // save history
-      historyData.unshift({ name: currentQuiz.name, icon: currentQuiz.icon, date: new Date().toISOString(), score, correct, total: qs.length, time: elapsed, grade });
-      saveHistory();
-      // Gửi kết quả lên Sheet để hiển thị leaderboard
-      submitQuizResult(currentQuiz.name, score, correct, qs.length);
+      // Lưu lịch sử + gửi điểm lên Sheet (chỉ khi thi thật, không tính retry câu sai)
+      if (!_isRetryMode) {
+        historyData.unshift({ name: currentQuiz.name, icon: currentQuiz.icon, date: new Date().toISOString(), score, correct, total: qs.length, time: elapsed, grade });
+        saveHistory();
+        submitQuizResult(currentQuiz.name, score, correct, qs.length);
+      }
       // render result
       const pct = score / 100; const circ = 2 * Math.PI * 78; const offset = circ * (1 - pct);
       const skipped = answers.filter(a => a < 0).length;
@@ -3294,8 +3331,10 @@
 
     // ===== LÀM LẠI CÂU SAI =====
     let _lastWrongQuestions = [];
+    let _isRetryMode = false; // true khi đang làm lại câu sai → không tính lịch sử
     function retryWrongAnswers() {
       if (!_lastWrongQuestions.length) { showAlert('Không có câu sai để làm lại!', 'info'); return; }
+      _isRetryMode = true;
       const wrongQs = JSON.parse(JSON.stringify(_lastWrongQuestions));
       if (settings.shuffle) wrongQs.sort(() => Math.random() - 0.5);
       currentQuiz = {
@@ -3709,14 +3748,20 @@
     function _renderLb(elId, list, valFn) {
       const el = document.getElementById(elId);
       if (!list || !list.length) { el.innerHTML = '<div class="lb-empty">Chưa có dữ liệu</div>'; return; }
-      const rankClass = ['gold', 'silver', 'bronze'];
-      el.innerHTML = list.map((row, i) => {
+      const medals = [
+        `<img src="./img/vang.png" style="width:50px;height:56px;object-fit:contain;flex-shrink:0" alt="Hạng 1">`,
+        `<img src="./img/bac.png" style="width:50px;height:56px;object-fit:contain;flex-shrink:0" alt="Hạng 2">`,
+        `<img src="./img/dong.png" style="width:50px;height:56px;object-fit:contain;flex-shrink:0" alt="Hạng 3">`
+      ];
+      el.innerHTML = list.slice(0, 3).map((row, i) => {
         const displayName = (row.name && row.name.trim()) ? row.name.trim() : 'Ẩn danh';
         const avatarSeed = (row.name && row.name.trim()) ? row.name.trim() : '?';
         const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=46bbdf&color=fff&size=64`;
+        const rankEl = i < 3 ? medals[i]
+          : `<div class="lb-rank" style="min-width:44px;text-align:center">${i + 1}</div>`;
         return `<div class="lb-row">
-          <div class="lb-rank ${rankClass[i] || ''}">${i + 1}</div>
-          <img src="${row.avatarUrl || avatarUrl}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.src='${avatarUrl}'">
+          ${rankEl}
+          <img src="${row.avatarUrl || avatarUrl}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.src='${avatarUrl}'">
           <div class="lb-code" style="font-family:inherit">${displayName}</div>
           <div class="lb-val">${valFn(row)}</div>
         </div>`;
