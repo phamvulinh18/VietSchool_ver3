@@ -590,18 +590,31 @@
     }
 
     .progress-bar {
-      height: 6px;
+      height: 8px;
       background: var(--border);
-      border-radius: 3px;
-      margin-bottom: 16px;
-      overflow: hidden
+      border-radius: 10px;
+      margin-bottom: 24px;
+      position: relative
     }
 
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 3px;
-      transition: width .3s
+      border-radius: 10px;
+      transition: width .3s ease-out;
+      position: relative
+    }
+
+    .progress-icon {
+      position: absolute;
+      right: -22px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+      z-index: 10;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15))
     }
 
     .timer-box {
@@ -709,9 +722,11 @@
     }
 
     .question-card .q-text {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 20px
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: var(--text)
     }
 
     .options {
@@ -964,6 +979,14 @@
       margin-top: 12px
     }
 
+    .highlight {
+      background: var(--warning);
+      color: #000;
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: 600
+    }
+
     /* MODAL */
     .modal-overlay {
       position: fixed;
@@ -1080,6 +1103,66 @@
       border: 1px solid var(--border);
       margin-bottom: 10px;
       min-height: 56px
+    }
+
+    .daily-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px
+    }
+
+    .daily-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      transition: .2s;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .daily-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      background: var(--primary-light)
+    }
+
+    .daily-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(70, 187, 223, .2)
+    }
+
+    .daily-date {
+      font-size: .75rem;
+      color: var(--text2);
+      font-weight: 600;
+      margin-bottom: 8px
+    }
+
+    .daily-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary)
+    }
+
+    .daily-label {
+      font-size: .72rem;
+      color: var(--text2);
+      margin-top: 2px
+    }
+
+    .daily-count {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: .75rem;
+      font-weight: 700
     }
 
     .setting-item label {
@@ -2472,10 +2555,72 @@
         display: none
       }
     }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 4px 12px rgba(70, 187, 223, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .3s ease;
+      transform: translateY(10px)
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0)
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1)
+    }
+
+    /* SNOWFALL EFFECT */
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh);
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div id="snow-container"></div>
   <!-- ADMIN NOTIFICATIONS -->
   <div id="admin-notifs" class="admin-notif-wrap"></div>
 
@@ -2653,7 +2798,11 @@
     <!-- QUIZ -->
     <div id="page-quiz" class="page">
       <div class="progress-bar">
-        <div class="progress-fill" id="quiz-progress"></div>
+        <div class="progress-fill" id="quiz-progress">
+          <img
+            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTRtZXdwZTY2enRydHhuczlnOTk2aG8wcHJza3dsbjkzczNuMHI3dCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/bjE9JbNSckM0w/giphy.gif"
+            class="progress-icon">
+        </div>
       </div>
       <div class="quiz-layout">
         <div class="quiz-main">
@@ -2700,6 +2849,7 @@
     <div id="page-history" class="page">
       <h2 style="margin-bottom:20px"><i class="fas fa-chart-column"></i> Lịch Sử & Thống Kê</h2>
       <div class="chart-container"><canvas id="history-chart"></canvas></div>
+      <div id="history-daily-stats" class="daily-stats"></div>
       <div class="history-list" id="history-list"></div>
     </div>
     <!-- SETTINGS -->
@@ -3120,7 +3270,7 @@
       const qz = quizzes[idx];
       document.getElementById('config-title').innerHTML = '<i class="fas fa-gear"></i> ' + qz.name;
       const maxQ = qz.questions.length;
-      const counts = [5, 10, 15, 20].filter(n => n <= maxQ);
+      const counts = [10, 20, 30, 40, 50].filter(n => n <= maxQ);
       if (!counts.includes(maxQ)) counts.push(maxQ);
       configCount = Math.min(configCount, maxQ);
       document.getElementById('config-count').innerHTML = counts.map(n =>
@@ -3241,15 +3391,27 @@
         ).join('')}</div>`;
       // question numbers
       const isMobile = window.innerWidth < 768;
-      const numsHtml = qs.map((_, i) => {
-        let cls = 'q-num';
-        if (i === currentQIdx) cls += ' current';
-        if (answers[i] >= 0) cls += ' answered';
-        if (flags[i]) cls += ' flagged';
-        return `<div class="${cls}" onclick="goToQ(${i})">${i + 1}</div>`;
-      }).join('');
-      document.getElementById('q-numbers').innerHTML = isMobile ?
-        `<div class="q-numbers-scroll">${numsHtml}</div>` : `<div class="q-numbers">${numsHtml}</div>`;
+      const qnsContainer = document.getElementById('q-numbers');
+      let scrollWrap = qnsContainer.querySelector(isMobile ? '.q-numbers-scroll' : '.q-numbers');
+      
+      // Nếu chưa có hoặc sai số lượng, vẽ lại từ đầu
+      if (!scrollWrap || scrollWrap.children.length !== qs.length) {
+        const numsHtml = qs.map((_, i) => `<div class="q-num" onclick="goToQ(${i})">${i + 1}</div>`).join('');
+        qnsContainer.innerHTML = isMobile ? `<div class="q-numbers-scroll">${numsHtml}</div>` : `<div class="q-numbers">${numsHtml}</div>`;
+        scrollWrap = qnsContainer.firstChild;
+      }
+
+      // Cập nhật trạng thái từng ô
+      Array.from(scrollWrap.children).forEach((el, i) => {
+        el.className = 'q-num';
+        if (i === currentQIdx) {
+          el.classList.add('current');
+          // Tự động cuộn tới câu đang chọn trên mobile
+          if (isMobile) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+        if (answers[i] >= 0) el.classList.add('answered');
+        if (flags[i]) el.classList.add('flagged');
+      });
       // actions
       document.getElementById('quiz-actions').innerHTML =
         `<button class="btn btn-outline btn-mobile-full"${currentQIdx === 0 ? ' disabled' : ''} onclick="goToQ(${currentQIdx - 1})">← Câu Trước</button>` +
@@ -3367,13 +3529,20 @@
       renderBank();
     }
     function renderBank() {
-      const search = document.getElementById('bank-search').value.toLowerCase();
+      const search = document.getElementById('bank-search').value.toLowerCase().trim();
       const filter = document.getElementById('bank-filter').value;
       // populate filter
       const sel = document.getElementById('bank-filter');
       if (sel.options.length <= 1) {
         quizzes.forEach(qz => { const o = document.createElement('option'); o.value = qz.id; o.textContent = qz.name; sel.appendChild(o) });
       }
+
+      const highlight = (text, query) => {
+        if (!query) return text;
+        const parts = text.split(new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'));
+        return parts.map((part, i) => i % 2 === 1 ? `<span class="highlight">${part}</span>` : part).join('');
+      };
+
       let html = ''; let count = 0;
       quizzes.forEach((qz, qi) => {
         if (filter && qz.id !== filter) return;
@@ -3381,16 +3550,18 @@
           if (search && !q.q.toLowerCase().includes(search)) return;
           count++;
           const letters = ['A', 'B', 'C', 'D'];
-          // Phần đáp án: nếu bankShowAns hiển thị đầy đủ A/B/C/D, nếu không chỉ hiển đáp án đúng
+          const highlightedQ = highlight(q.q, search);
+
+          // Phần đáp án
           const ansBlock = bankShowAns
             ? `<div class="bank-ans-full" style="margin-top:10px;font-size:.85rem">
                 ${q.opts.map((o, oi) => `<div style="padding:4px 8px;border-radius:6px;margin-bottom:3px;${oi === q.ans
                 ? 'background:rgba(0,184,148,.12);color:var(--success);font-weight:700'
                 : 'color:var(--text2)'
-              }"><strong>${letters[oi]}.</strong> ${o} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
+              }"><strong>${letters[oi]}.</strong> ${highlight(o, search)} ${oi === q.ans ? '<i class="fas fa-check" style="margin-left:4px"></i>' : ''}</div>`).join('')}
               </div>`
             : `<div style="margin-top:10px;font-size:.85rem;color:var(--text2)">Đáp án đúng: <strong style="color:var(--success)">${letters[q.ans]}</strong></div>`;
-          html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><span style="display:inline-block;margin-left:8px;padding:1px 8px;border-radius:12px;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;vertical-align:middle">Câu ${qj + 1}/${qz.questions.length}</span><p style="margin-top:8px">${q.q}</p></div></div>` +
+          html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><strong style="color:var(--primary);font-size:.8rem">${qz.icon} ${qz.name}</strong><span style="display:inline-block;margin-left:8px;padding:1px 8px;border-radius:12px;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;vertical-align:middle">Câu ${qj + 1}/${qz.questions.length}</span><p style="margin-top:8px">${highlightedQ}</p></div></div>` +
             ansBlock +
             `<div class="card-actions"><button class="btn btn-outline" onclick="openEditQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-pen"></i> Sửa</button>` +
             `<button class="btn btn-danger" onclick="deleteQ(${qi},${qj})" style="font-size:.85rem;padding:8px 16px"><i class="fas fa-trash"></i> Xóa</button></div></div>`;
@@ -3456,12 +3627,21 @@
 
     // ===== HISTORY =====
     let historyChart = null;
-    function renderHistory() {
+    let currentFilterDate = null;
+    function renderHistory(filterDate = null) {
+      currentFilterDate = filterDate;
       const list = document.getElementById('history-list');
-      if (!historyData.length) {
+      
+      // Lọc dữ liệu theo ngày nếu có
+      let displayData = historyData;
+      if (filterDate) {
+        displayData = historyData.filter(h => h.date.startsWith(filterDate));
+      }
+
+      if (!displayData.length) {
         list.innerHTML = '<div class="empty-state"><div class="empty-icon"><i class="fas fa-chart-column"></i></div><p>Chưa có lịch sử thi</p></div>';
       } else {
-        list.innerHTML = historyData.map(h => {
+        list.innerHTML = displayData.map(h => {
           const d = new Date(h.date);
           const dateStr = d.toLocaleDateString('vi-VN') + ' ' + d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
           const mins = Math.floor(h.time / 60); const secs = h.time % 60;
@@ -3470,24 +3650,65 @@
           return `<div class="card"><div class="h-row"><div><strong>${h.icon} ${h.name}</strong><div style="font-size:.8rem;color:var(--text2);margin-top:4px"><i class="far fa-calendar"></i> ${dateStr} • <i class="far fa-clock"></i> ${mins}p${secs}s</div></div><div style="text-align:right"><div class="h-score">${h.score}%</div><span style="font-size:.75rem;padding:3px 10px;border-radius:50px;background:${gc}22;color:${gc};font-weight:600">${h.grade}</span></div></div><div style="margin-top:8px;font-size:.85rem;color:var(--text2)"><i class="fas fa-circle-check"></i> ${h.correct}/${h.total} câu đúng</div></div>`;
         }).join('');
       }
+
       // chart
       if (historyChart) { historyChart.destroy(); historyChart = null }
       const canvas = document.getElementById('history-chart');
       if (!historyData.length) return;
-      const last10 = historyData.slice(0, 10).reverse();
+
+      // Daily Stats calculation - Always base on full historyData
+      const dailyMap = {};
+      historyData.forEach(h => {
+        const d = h.date.split('T')[0];
+        if (!dailyMap[d]) dailyMap[d] = { count: 0, sum: 0 };
+        dailyMap[d].count++;
+        dailyMap[d].sum += h.score;
+      });
+      const dailyList = Object.keys(dailyMap).sort().reverse();
+      
+      let dailyHtml = `<div class="daily-card ${!filterDate ? 'active' : ''}" onclick="renderHistory(null)">
+        <div class="daily-date">Tất cả</div>
+        <div class="daily-val">${historyData.length}</div>
+        <div class="daily-label">Tổng số bài</div>
+        <div class="daily-count" style="background:var(--border);color:var(--text2)">Reset</div>
+      </div>`;
+      
+      dailyHtml += dailyList.slice(0, 10).map(date => {
+        const d = dailyMap[date];
+        const avg = Math.round(d.sum / d.count);
+        const dateObj = new Date(date);
+        const dateStr = dateObj.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+        const isActive = filterDate === date;
+        return `<div class="daily-card ${isActive ? 'active' : ''}" onclick="renderHistory('${date}')">
+          <div class="daily-date">${dateStr}</div>
+          <div class="daily-val">${avg}%</div>
+          <div class="daily-label">Điểm TB</div>
+          <div class="daily-count">${d.count} bài</div>
+        </div>`;
+      }).join('');
+      document.getElementById('history-daily-stats').innerHTML = dailyHtml;
+
+      // Line chart - Show filtered entries
+      const lastEntries = displayData.slice(0, 50).reverse();
       const isDark = settings.dark;
       historyChart = new Chart(canvas, {
         type: 'line',
         data: {
-          labels: last10.map((_, i) => 'Lần ' + (i + 1)),
-          datasets: [{ label: 'Điểm %', data: last10.map(h => h.score), borderColor: '#46bbdf', backgroundColor: 'rgba(70,187,223,0.1)', fill: true, tension: .4, pointRadius: 5, pointBackgroundColor: '#46bbdf' }]
+          labels: lastEntries.map((h, i) => {
+            if (filterDate) {
+              const d = new Date(h.date);
+              return d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            }
+            return lastEntries.length > 15 ? (i + 1) : 'Lần ' + (i + 1);
+          }),
+          datasets: [{ label: 'Điểm %', data: lastEntries.map(h => h.score), borderColor: '#46bbdf', backgroundColor: 'rgba(70,187,223,0.1)', fill: true, tension: .4, pointRadius: lastEntries.length > 20 ? 2 : 5, pointBackgroundColor: '#46bbdf' }]
         },
         options: {
           responsive: true, maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
             y: { min: 0, max: 100, ticks: { color: isDark ? '#aaa' : '#666' }, grid: { color: isDark ? '#2a2a3e' : '#eee' } },
-            x: { ticks: { color: isDark ? '#aaa' : '#666' }, grid: { display: false } }
+            x: { ticks: { color: isDark ? '#aaa' : '#666', maxRotation: 0, autoSkip: true, maxTicksLimit: 10 }, grid: { display: false } }
           }
         }
       });
@@ -4172,7 +4393,46 @@
         }).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text2)">Chưa có dữ liệu</td></tr>';
       });
     }
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('back-to-top');
+      if (btn) {
+        if (window.scrollY > 300) btn.classList.add('show');
+        else btn.classList.remove('show');
+      }
+    });
+  </script>
+  <button id="back-to-top" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Lên đầu trang">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  <script>
+    function createSnow() {
+      const container = document.getElementById('snow-container');
+      if (!container) return;
+      const count = 50;
+      for (let i = 0; i < count; i++) {
+        const snow = document.createElement('div');
+        snow.className = 'snowflake';
+        const size = (Math.random() * 4 + 2) + 'px';
+        const left = (Math.random() * 100) + '%';
+        const duration = (Math.random() * 8 + 5) + 's';
+        const delay = (Math.random() * 5) + 's';
+        const opacity = (Math.random() * 0.5 + 0.3);
+        
+        snow.style.width = size;
+        snow.style.height = size;
+        snow.style.left = left;
+        snow.style.animationDuration = duration;
+        snow.style.animationDelay = delay;
+        snow.style.opacity = opacity;
+        snow.style.filter = 'blur(1px)';
+        
+        container.appendChild(snow);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', createSnow);
   </script>
 </body>
+
 
 </html>
