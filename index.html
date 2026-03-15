@@ -696,8 +696,39 @@
       border-radius: var(--radius);
       padding: 28px;
       border: 1px solid var(--border);
-      margin-bottom: 20px
+      margin-bottom: 20px;
+      overflow: hidden;
     }
+
+    @keyframes qShake {
+      0%   { transform: translateX(0); }
+      20%  { transform: translateX(-5px); }
+      45%  { transform: translateX(4px); }
+      65%  { transform: translateX(-3px); }
+      82%  { transform: translateX(2px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes qExitLeft {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-70px); }
+    }
+    @keyframes qExitRight {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(70px); }
+    }
+    @keyframes qEnterRight {
+      from { opacity: 0; transform: translateX(65px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes qEnterLeft {
+      from { opacity: 0; transform: translateX(-65px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .q-shake      { animation: qShake      .27s ease both; }
+    .q-exit-left  { animation: qExitLeft   .18s ease-in both; }
+    .q-exit-right { animation: qExitRight  .18s ease-in both; }
+    .q-enter-right{ animation: qEnterRight .26s cubic-bezier(.25,.8,.25,1) both; }
+    .q-enter-left { animation: qEnterLeft  .26s cubic-bezier(.25,.8,.25,1) both; }
 
     .question-card .q-header {
       display: flex;
@@ -2612,15 +2643,28 @@
     }
 
     @keyframes fall {
-      to {
+     to {
         transform: translateY(105vh);
       }
     }
+    /* ===== FIREWORKS ===== */
+    #fireworks-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    #fireworks-canvas.active { opacity: 1; }
   </style>
 </head>
 
 <body>
   <div id="snow-container"></div>
+  <canvas id="fireworks-canvas"></canvas>
   <!-- ADMIN NOTIFICATIONS -->
   <div id="admin-notifs" class="admin-notif-wrap"></div>
 
@@ -3419,9 +3463,65 @@
           `<button class="btn btn-primary btn-mobile-full" onclick="goToQ(${currentQIdx + 1})">Câu Tiếp →</button>` :
           `<button class="btn btn-success btn-mobile-full" onclick="submitQuiz()"><i class="fas fa-paper-plane"></i> Nộp Bài</button>`);
     }
-    function pickAnswer(i) { answers[currentQIdx] = i; renderQuiz() }
+    let _autoAdvanceTimer = null;
+
+    // Hiệu ứng 3 bước: rung → trượt ra → câu mới trượt vào
+    function _transitionCard(direction, renderFn) {
+      const card = document.getElementById('question-card');
+      if (!card) { renderFn(); return; }
+      const SHAKE_MS = 270, EXIT_MS = 180;
+      const exitCls  = direction === 'prev' ? 'q-exit-right' : 'q-exit-left';
+      const enterCls = direction === 'prev' ? 'q-enter-left'  : 'q-enter-right';
+
+      // Bước 1: rung nhẹ
+      card.classList.remove('q-shake','q-exit-left','q-exit-right','q-enter-right','q-enter-left');
+      void card.offsetWidth;
+      card.classList.add('q-shake');
+
+      setTimeout(() => {
+        card.classList.remove('q-shake');
+        // Bước 2: trượt ra
+        void card.offsetWidth;
+        card.classList.add(exitCls);
+
+        setTimeout(() => {
+          card.classList.remove(exitCls);
+          // Bước 3: cập nhật nội dung + trượt vào
+          renderFn();
+          void card.offsetWidth;
+          card.classList.add(enterCls);
+          card.addEventListener('animationend', () => card.classList.remove(enterCls), { once: true });
+        }, EXIT_MS);
+      }, SHAKE_MS);
+    }
+
+    function pickAnswer(i) {
+      if (answers[currentQIdx] === i) return;
+      answers[currentQIdx] = i;
+      renderQuiz(); 
+      // Tự động chuyển sang câu tiếp (trừ câu cuối)
+      if (currentQIdx < currentQuiz.questions.length - 1) {
+        if (_autoAdvanceTimer) clearTimeout(_autoAdvanceTimer);
+        // Bắt đầu chuỗi hiệu ứng sớm hơn (sau 200ms) để cảm giác mượt hơn
+        _autoAdvanceTimer = setTimeout(() => {
+          _autoAdvanceTimer = null;
+          goToQ(currentQIdx + 1, 'next');
+        }, 200);
+      }
+    }
     function toggleFlag() { flags[currentQIdx] = !flags[currentQIdx]; renderQuiz() }
-    function goToQ(i) { if (i >= 0 && i < currentQuiz.questions.length) { currentQIdx = i; renderQuiz() } }
+    function goToQ(i, dir) {
+      if (_autoAdvanceTimer) { clearTimeout(_autoAdvanceTimer); _autoAdvanceTimer = null; }
+      if (i >= 0 && i < currentQuiz.questions.length) {
+        const direction = dir || (i > currentQIdx ? 'next' : i < currentQIdx ? 'prev' : null);
+        const nextIdx = i;
+        if (direction) {
+          _transitionCard(direction, () => { currentQIdx = nextIdx; renderQuiz(); });
+        } else {
+          currentQIdx = nextIdx; renderQuiz();
+        }
+      }
+    }
     function submitQuiz() {
       showConfirm('Bạn có chắc muốn nộp bài?', 'Nộp Bài', 'Nộp ngay', 'info').then(ok => {
         if (!ok) return;
@@ -3489,6 +3589,7 @@
         `<button class="btn btn-outline btn-mobile-full" onclick="showPage('home')"><i class="fas fa-house"></i> Trang Chủ</button></div>`;
       document.getElementById('result-content').innerHTML = html;
       showPage('result');
+      launchFireworks();
     }
 
     // ===== LÀM LẠI CÂU SAI =====
@@ -4431,6 +4532,121 @@
       }
     }
     document.addEventListener('DOMContentLoaded', createSnow);
+
+    // ===== PHÁO HOA =====
+    (function () {
+      const canvas = document.getElementById('fireworks-canvas');
+      const ctx    = canvas.getContext('2d');
+      let particles = [], rafId = null, running = false;
+
+      const COLORS = [
+        '#ff6b6b','#ffd93d','#6bcb77','#4d96ff',
+        '#f9a03f','#c77dff','#ff9ff3','#48dbfb',
+        '#ff6348','#2ed573','#eccc68','#a29bfe'
+      ];
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function createBurst(x, y) {
+        const count  = 90 + Math.random() * 50 | 0;
+        const color  = COLORS[Math.random() * COLORS.length | 0];
+        const color2 = COLORS[Math.random() * COLORS.length | 0];
+        for (let i = 0; i < count; i++) {
+          const angle  = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+          const speed  = 2.5 + Math.random() * 5.5;
+          const useC2  = Math.random() < 0.3;
+          particles.push({
+            x, y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            alpha: 1,
+            decay: 0.013 + Math.random() * 0.012,
+            size:  2.5 + Math.random() * 3.5,
+            color: useC2 ? color2 : color,
+            trail: [],
+            gravity: 0.06 + Math.random() * 0.04
+          });
+        }
+      }
+
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles = particles.filter(p => p.alpha > 0.02);
+
+        for (const p of particles) {
+          p.trail.push({ x: p.x, y: p.y });
+          if (p.trail.length > 6) p.trail.shift();
+
+          // vẽ trail mờ
+          for (let t = 0; t < p.trail.length - 1; t++) {
+            const a = (t / p.trail.length) * p.alpha * 0.4;
+            ctx.beginPath();
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = a;
+            ctx.lineWidth   = p.size * 0.5;
+            ctx.moveTo(p.trail[t].x, p.trail[t].y);
+            ctx.lineTo(p.trail[t + 1].x, p.trail[t + 1].y);
+            ctx.stroke();
+          }
+
+          // vẽ hạt
+          ctx.beginPath();
+          ctx.fillStyle   = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          p.x    += p.vx;
+          p.y    += p.vy;
+          p.vy   += p.gravity;
+          p.vx   *= 0.985;
+          p.alpha -= p.decay;
+        }
+
+        ctx.globalAlpha = 1;
+
+        if (particles.length > 0 || running) {
+          rafId = requestAnimationFrame(loop);
+        } else {
+          canvas.classList.remove('active');
+        }
+      }
+
+      window.launchFireworks = function () {
+        resize();
+        canvas.classList.add('active');
+        particles = [];
+        running   = true;
+        if (rafId) cancelAnimationFrame(rafId);
+
+        const W = canvas.width, H = canvas.height;
+
+        // bắn 7 loạt pháo hoa theo thời gian xen kẽ
+        const shots = [
+          { t:  0,   x: W * 0.5,  y: H * 0.25 },
+          { t:  180, x: W * 0.2,  y: H * 0.3  },
+          { t:  360, x: W * 0.8,  y: H * 0.2  },
+          { t:  540, x: W * 0.35, y: H * 0.15 },
+          { t:  720, x: W * 0.65, y: H * 0.18 },
+          { t:  900, x: W * 0.5,  y: H * 0.3  },
+          { t: 1200, x: W * 0.25, y: H * 0.2  },
+          { t: 1350, x: W * 0.75, y: H * 0.25 },
+          { t: 1600, x: W * 0.5,  y: H * 0.2  },
+        ];
+        shots.forEach(s => setTimeout(() => createBurst(s.x, s.y), s.t));
+
+        // dừng bắn mới sau 2.5s, để particle bay hết rồi tắt canvas
+        setTimeout(() => { running = false; }, 2500);
+
+        rafId = requestAnimationFrame(loop);
+      };
+    })();
   </script>
 </body>
 
