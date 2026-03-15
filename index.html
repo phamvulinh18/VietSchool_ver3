@@ -3266,7 +3266,21 @@
     }
 
     // ===== NAVIGATION =====
-    function showPage(page) {
+    function isQuizInProgress() {
+      // Đang ở trang quiz và timer vẫn đang chạy
+      return document.getElementById('page-quiz').classList.contains('active') && timer !== null;
+    }
+
+    async function showPage(page) {
+      // Nếu đang làm bài, hiện confirm trước khi thoát
+      if (isQuizInProgress() && page !== 'quiz' && page !== 'result') {
+        const ok = await showConfirm('Bạn đang trong quá trình làm bài. Thoát ra sẽ làm mất kết quả hiện tại. Bạn có chắc muốn thoát?', 'Thoát làm bài', 'Thoát ngay');
+        if (!ok) return;
+        // Dừng timer nếu thoát
+        clearInterval(timer);
+        timer = null;
+      }
+
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const el = document.getElementById('page-' + page);
       if (el) el.classList.add('active');
@@ -3278,12 +3292,25 @@
       if (page === 'bank') renderBank();
       if (page === 'history') renderHistory();
     }
+    
+    // Cảnh báo khi reload trang hoặc đóng tab
+    window.addEventListener('beforeunload', (e) => {
+      if (isQuizInProgress()) {
+        e.preventDefault();
+        e.returnValue = ''; // Một số trình duyệt yêu cầu gán giá trị này
+      }
+    });
+
     function toggleDrawer() {
       document.querySelector('.drawer').classList.toggle('open');
       document.querySelector('.drawer-overlay').classList.toggle('open');
     }
     document.querySelectorAll('[data-page]').forEach(a => {
-      a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page) });
+      a.addEventListener('click', e => { 
+        e.preventDefault(); 
+        const targetPage = a.dataset.page;
+        showPage(targetPage);
+      });
     });
 
     // ===== HOME =====
@@ -3383,11 +3410,16 @@
       startTimer();
     }
 
-    function startQuiz() {
+    async function startQuiz() {
+      const qz = quizzes[configQuizIdx];
+      if (!qz) return;
+      
+      await showPage('quiz');
+      if (isQuizInProgress()) return;
+
       _isRetryMode = false; // reset: đây là bài thi thật
       const shuffleQ = document.getElementById('cfg-shuffle-q')?.checked ?? settings.shuffle;
       const shuffleA = document.getElementById('cfg-shuffle-a')?.checked ?? false;
-      const qz = quizzes[configQuizIdx];
       let qs = JSON.parse(JSON.stringify(qz.questions));
       // Xáo trộn đáp án trước, rồi xáo câu
       if (shuffleA) {
@@ -3530,6 +3562,7 @@
     }
     function _doSubmit() {
       clearInterval(timer);
+      timer = null; // Mark quiz as not in progress
       const qs = currentQuiz.questions;
       let correct = 0; qs.forEach((q, i) => { if (answers[i] === q.ans) correct++ });
       const score = Math.round(correct / qs.length * 100);
@@ -3595,8 +3628,12 @@
     // ===== LÀM LẠI CÂU SAI =====
     let _lastWrongQuestions = [];
     let _isRetryMode = false; // true khi đang làm lại câu sai → không tính lịch sử
-    function retryWrongAnswers() {
+    async function retryWrongAnswers() {
       if (!_lastWrongQuestions.length) { showAlert('Không có câu sai để làm lại!', 'info'); return; }
+      
+      await showPage('quiz');
+      if (isQuizInProgress()) return;
+
       _isRetryMode = true;
       const wrongQs = JSON.parse(JSON.stringify(_lastWrongQuestions));
       if (settings.shuffle) wrongQs.sort(() => Math.random() - 0.5);
