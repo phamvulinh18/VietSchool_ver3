@@ -269,7 +269,7 @@
     "B": "Ănghen, Hồ Chí Minh.",
     "C": "Lênin, Hồ Chí Minh.",
     "D": "C. Mác, Ănghen.",
-    "correct": "C"
+    "correct": "D"
   },
   {
     "question": "\"Đảng viên đi trước, làng nước theo sau\", câu nói trên của Hồ Chí Minh được trích trong tác phẩm nào?",
@@ -278,5 +278,133 @@
     "C": "Đường kách mệnh.",
     "D": "Sửa đổi lối làm việc.",
     "correct": "A"
+  },
+  {
+    "question": "Hồ Chí Minh đã tham dự cuộc biểu tình chống thuế của nông dân tỉnh Thừa Thiên vào thời gian nào?",
+    "A": "Tháng 5/1906.",
+    "B": "Tháng 5/1908.",
+    "C": "Tháng 5/1905.",
+    "D": "Tháng 5/1911.",
+    "correct": "B"
+  },
+  {
+    "question": "Năm 1970, Đảng Cộng sản Việt Nam đưa ra khẩu hiệu tuyên truyền, cổ động về tư tưởng, tấm gương đạo đức Hồ Chí Minh là:",
+    "A": "Toàn Đảng hãy ra sức học tập đường lối chính trị, tác phong và đạo đức cách mạng của Hồ Chủ tịch.",
+    "B": "Sống, chiến đấu, lao động và học tập theo gương Bác Hồ vĩ đại.",
+    "C": "Toàn Đảng, toàn dân thực hiện cần, kiệm, liêm, chính, chí công, vô tư theo tấm gương của Chủ tịch Hồ Chí Minh vĩ đại.",
+    "D": "Sống và làm việc theo gương Bác Hồ vĩ đại.",
+    "correct": "B"
+  },
+  {
+    "question": "Lô-gíc phát triển của tư tưởng Hồ Chí Minh là:",
+    "A": "Giải phóng xã hội, giải phóng dân tộc, giải phóng con người.",
+    "B": "Giải phóng dân tộc, giải phóng giai cấp, giải phóng con người.",
+    "C": "Giải phóng xã hội, giải phóng con người, giải phóng dân tộc.",
+    "D": "Giải phóng con người, giải phóng dân tộc, giải phóng xã hội.",
+    "correct": "B"
+  },
+  {
+    "question": "Khái niệm “Tư tưởng Hồ Chí Minh” không bao gồm nội dung nào sau đây?",
+    "A": "Hệ thống các quan điểm lý luận, phản ánh những vấn đề có tính quy luật của cách mạng Việt Nam.",
+    "B": "Nguồn gốc tư tưởng, lý luận của tư tưởng Hồ Chí Minh: chủ nghĩa Mác – Lênin; giá trị văn hoá dân tộc, tinh hoa văn hoá nhân loại.",
+    "C": "Nội dung cơ bản nhất của tư tưởng Hồ Chí Minh, bao gồm những vấn đề có liên quan trực tiếp đến cách mạng Việt Nam.",
+    "D": "Bao gồm những vấn đề có liên quan đến cách mạng thế giới, tài sản tinh thần cho cách mạng thế giới.",
+    "correct": "D"
+  },
+  {
+    "question": "Theo tư tưởng Hồ Chí Minh, quan điểm: “Xác lập tất cả mọi quyền lực trong Nhà nước và trong xã hội đều thuộc về nhân dân” được thể hiện trong hiến pháp nào?",
+    "A": "Hiến pháp 1959 và Hiến pháp 1976.",
+    "B": "Hiến pháp 1946 và Hiến pháp 1959.",
+    "C": "Hiến pháp 1976 và Hiến pháp 1980.",
+    "D": "Hiến pháp 1980 và Hiến pháp 1992.",
+    "correct": "B"
+  },
+  {
+    "question": "Chọn đáp án đúng điền vào chỗ trống, theo Hồ Chí Minh: “[…] mà không tiết kiệm thì khác nào gió vào nhà trống”.",
+    "A": "Cần cù.",
+    "B": "Xây dựng chủ nghĩa xã hội.",
+    "C": "Tăng gia sản xuất.",
+    "D": "Sản xuất.",
+    "correct": "D"
+  },
+  {
+    "question": "Chọn phương án trả lời đúng theo tư tưởng Hồ Chí Minh:",
+    "A": "Pháp luật đúng là pháp luật thể hiện bảo vệ được quyền lợi ích của dân.",
+    "B": "Pháp luật đúng là pháp luật bảo vệ lợi ích của giai cấp cầm quyền.",
+    "C": "Pháp luật đúng là pháp luật duy trì sự cầm quyền của Đảng.",
+    "D": "Pháp luật đúng là công cụ thống trị của thế lực cầm quyền.",
+    "correct": "A"
+  },
+  {
+    "question": "Quan điểm nào sau đây không phải của Hồ Chí Minh?",
+    "A": "Trong cuộc đấu tranh chống chủ nghĩa đế quốc, chủ nghĩa thực dân, cách mạng thuộc địa có tầm quan trọng đặc biệt.",
+    "B": "Sự giải phóng của giai cấp công nhân phải là sự nghiệp của bản thân giai cấp công nhân.",
+    "C": "Công cuộc giải phóng anh em (tức nhân dân thuộc địa) chỉ có thể thực hiện được bằng sự nỗ lực của bản thân anh em.",
+    "D": "Cuộc đấu tranh của công nhân ở tất cả các nước để tự giải phóng, chỉ có thể thành công được, nếu công nhân cùng nhau đấu tranh chống lại tư bản quốc tế.",
+    "correct": "B"
+  },
+  {
+    "question": "Cống hiến lý luận lớn đầu tiên của Hồ Chí Minh là:",
+    "A": "Về cách mạng ruộng đất.",
+    "B": "Về cách mạng dân chủ.",
+    "C": "Về cách mạng giải phóng dân tộc.",
+    "D": "Về cách mạng XHCN.",
+    "correct": "C"
+  },
+  {
+    "question": "“Chúng ta tranh được tự do, độc lập rồi mà dân cứ chết đói, chết rét, thì tự do, độc lập cũng không làm gì” nói lên quan điểm nào của Hồ Chí Minh về độc lập dân tộc?",
+    "A": "Độc lập dân tộc phải là nền độc lập thật sự, hoàn toàn và triệt để.",
+    "B": "Độc lập dân tộc gắn liền với hòa bình, thống nhất và toàn vẹn lãnh thổ.",
+    "C": "Độc lập dân tộc phải gắn liền tự do và hạnh phúc của nhân dân.",
+    "D": "Độc lập dân tộc phải gắn liền tự do và tiến lên xây dựng CNXH.",
+    "correct": "C"
+  },
+  {
+    "question": "Chọn đáp án không đúng, tư tưởng Hồ Chí Minh đối với sự phát triển cách mạng thế giới:",
+    "A": "Phản ánh khát vọng thời đại.",
+    "B": "Tìm ra các giải pháp đấu tranh giải phóng các nước thuộc địa.",
+    "C": "Cổ vũ các dân tộc đấu tranh vì những mục tiêu cao cả.",
+    "D": "Giải phóng các nước thuộc địa.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh đã tiếp thu giá trị tích cực nào của văn hóa phương Tây?",
+    "A": "Tư tưởng dân tộc độc lập, dân quyền tự do, dân sinh hạnh phúc.",
+    "B": "Triết lý nhân sinh, tu thân, tề gia.",
+    "C": "Tư tưởng vị tha, từ bi, bác ái.",
+    "D": "Giá trị về quyền sống, quyền tự do và quyền mưu cầu hạnh phúc.",
+    "correct": "D"
+  },
+  {
+    "question": "Hồ Chí Minh thành lập “Hội Liên hiệp các dân tộc bị áp bức” năm nào? Tại đâu?",
+    "A": "Năm 1925, tại Quảng Châu (Trung Quốc).",
+    "B": "Năm 1923, tại Mátxcơva (Liên Xô).",
+    "C": "Năm 1926, tại Xiêm (Thái Lan).",
+    "D": "Năm 1920, tại Paris (Pháp).",
+    "correct": "A"
+  },
+  {
+    "question": "Nhận định sau đây của Chủ tịch Hồ Chí Minh trong tác phẩm nào: “Toàn Đảng, toàn dân ta đoàn kết phấn đấu, xây dựng một nước Việt Nam hòa bình, thống nhất, độc lập, dân chủ và giàu mạnh, và góp phần xứng đáng vào sự nghiệp cách mạng thế giới”?",
+    "A": "Di chúc (1965-1969).",
+    "B": "Ba mươi năm hoạt động của Đảng (1960).",
+    "C": "Đạo đức cách mạng (1958).",
+    "D": "Đường cách mệnh (1927).",
+    "correct": "A"
+  },
+  {
+    "question": "Khẳng định: \"Nhà nước là một tổ chức quyền lực đặc biệt, nó là tổ chức bạo lực dùng để trấn áp một giai cấp nào đó\", là của ai?",
+    "A": "Ănghen, Lênin.",
+    "B": "Ănghen, Hồ Chí Minh.",
+    "C": "Lênin, Hồ Chí Minh.",
+    "D": "C. Mác, Ănghen.",
+    "correct": "D"
+  },
+  {
+    "question": "Điền vào chỗ trống theo Hồ Chí Minh: “Cuối thế kỷ XIX chủ nghĩa đế quốc Pháp xâm lược Việt Nam. Bọn […] đê tiện và hèn nhát đầu hàng và câu kết với bọn đế quốc để tiếp tục nô dịch nhân dân Việt Nam nhiều hơn\".",
+    "A": "Vua quan và thực dân.",
+    "B": "Phong kiến và thực dân.",
+    "C": "Vua quan và phong kiến.",
+    "D": "Phong kiến và địa chủ.",
+    "correct": "C"
   }
 ]
