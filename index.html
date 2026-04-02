@@ -2659,6 +2659,189 @@
       transition: opacity .3s;
     }
     #fireworks-canvas.active { opacity: 1; }
+
+    /* ===== WRONG LIST PAGE ===== */
+    .wrong-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .wrong-summary {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap
+    }
+
+    .wrong-summary-card {
+      flex: 1;
+      min-width: 140px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
+      transition: .2s
+    }
+
+    .wrong-summary-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow)
+    }
+
+    .wrong-summary-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--danger)
+    }
+
+    .wrong-summary-label {
+      font-size: .78rem;
+      color: var(--text2);
+      margin-top: 4px
+    }
+
+    .wrong-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+      transition: .2s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .wrong-item:hover {
+      box-shadow: var(--shadow)
+    }
+
+    .wrong-item .wrong-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      background: rgba(225, 112, 85, .12);
+      color: var(--danger);
+      font-size: .78rem;
+      font-weight: 700
+    }
+
+    .wrong-item .wrong-q-text {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 10px 0;
+      line-height: 1.6
+    }
+
+    .wrong-item .wrong-answer {
+      font-size: .85rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(0, 184, 148, .1);
+      color: var(--success);
+      font-weight: 600;
+      display: inline-block
+    }
+
+    .wrong-item .wrong-remove {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--text2);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: .2s;
+      min-width: 32px;
+      min-height: 32px
+    }
+
+    .wrong-item .wrong-remove:hover {
+      background: rgba(225, 112, 85, .1);
+      color: var(--danger)
+    }
+
+    .wrong-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    /* Nav badge for wrong count */
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 50px;
+      background: var(--danger);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 800;
+      margin-left: 6px;
+      line-height: 1
+    }
+
+    .nav-badge:empty {
+      display: none
+    }
+
+    .bottom-nav .nav-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      margin-left: 0;
+      font-size: .6rem;
+      min-width: 16px;
+      height: 16px
+    }
+
+    .bottom-nav a {
+      position: relative
+    }
+
+    @keyframes wrongFadeOut {
+      to {
+        opacity: 0;
+        transform: translateX(60px);
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        overflow: hidden
+      }
+    }
+
+    .wrong-item.removing {
+      animation: wrongFadeOut .35s ease forwards
+    }
+
+    .wrong-sort-select {
+      padding: 8px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--text);
+      font-size: .85rem;
+      font-family: var(--font);
+      min-height: 40px
+    }
+
+    .wrong-sort-select:focus {
+      outline: none;
+      border-color: var(--primary)
+    }
   </style>
 </head>
 
@@ -2888,6 +3071,22 @@
         </select></div>
       <div class="bank-list" id="bank-list"></div>
     </div>
+    <!-- WRONG LIST -->
+    <div id="page-wrong" class="page">
+      <div class="wrong-header">
+        <h2><i class="fas fa-circle-xmark" style="color:var(--danger)"></i> Danh Sách Câu Sai</h2>
+        <div class="wrong-actions">
+          <select class="wrong-sort-select" id="wrong-sort" onchange="renderWrongList()">
+            <option value="count-desc">Sai nhiều nhất</option>
+            <option value="count-asc">Sai ít nhất</option>
+            <option value="recent">Gần đây nhất</option>
+          </select>
+        </div>
+      </div>
+      <div class="wrong-summary" id="wrong-summary"></div>
+      <div id="wrong-list-content"></div>
+      <div id="wrong-list-actions" style="margin-top:20px"></div>
+    </div>
     <!-- HISTORY -->
     <div id="page-history" class="page">
       <h2 style="margin-bottom:20px"><i class="fas fa-chart-column"></i> Lịch Sử & Thống Kê</h2>
@@ -2961,6 +3160,18 @@
         </div>
         <div class="setting-item"><label><i class="fas fa-trash"></i> Xóa lịch sử</label><button class="btn btn-danger"
             onclick="clearHistory()">Xóa tất cả</button></div>
+        <div class="setting-item">
+          <label style="display:flex;align-items:center;gap:8px">
+            <i class="fas fa-circle-xmark" style="color:var(--danger)"></i> Câu sai
+            <span id="settings-wrong-count" style="background:var(--danger);color:#fff;padding:2px 8px;border-radius:50px;font-size:.75rem;font-weight:800;min-width:22px;text-align:center">0</span>
+          </label>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-outline" onclick="showPage('wrong')" style="font-size:.85rem;padding:8px 14px">
+              <i class="fas fa-eye"></i> Xem
+            </button>
+            <button class="btn btn-danger" onclick="clearWrongList()" style="font-size:.85rem;padding:8px 14px">Xóa</button>
+          </div>
+        </div>
 
       </div>
 
@@ -3231,17 +3442,20 @@
 
     // ===== STATE =====
     let quizzes, historyData, settings, currentQuiz = null, currentQIdx = 0, answers = [], flags = [], timer = null, timeLeft = 0, editQIdx = -1;
+    let wrongList = {}; // { questionText: { q, opts, ans, exp, wrongCount, lastWrong } }
 
     async function loadData() {
       // Fetch dữ liệu từ file JSON
       quizzes = await fetchAllQuizzes();
       historyData = JSON.parse(localStorage.getItem('qm_history')) || [];
+      wrongList = JSON.parse(localStorage.getItem('qm_wrong_list')) || {};
       settings = JSON.parse(localStorage.getItem('qm_settings')) || { dark: false, sound: true, vibrate: true, fontSize: 'normal', shuffle: true };
       applySettings();
     }
 
     function saveQuizzes() { /* không lưu localStorage nữa */ }
     function saveHistory() { localStorage.setItem('qm_history', JSON.stringify(historyData)) }
+    function saveWrongList() { localStorage.setItem('qm_wrong_list', JSON.stringify(wrongList)); updateWrongBadges(); }
     function saveSetting() {
       settings.sound = document.getElementById('set-sound').checked;
       settings.vibrate = document.getElementById('set-vibrate').checked;
@@ -3292,6 +3506,7 @@
       });
       window.scrollTo(0, 0);
       if (page === 'home') renderHome();
+      if (page === 'wrong') renderWrongList();
       if (page === 'bank') renderBank();
       if (page === 'history') renderHistory();
     }
@@ -3582,6 +3797,32 @@
         saveHistory();
         submitQuizResult(currentQuiz.name, score, correct, qs.length);
       }
+      // === LƯU CÂU SAI VÀO WRONG LIST ===
+      qs.forEach((q, i) => {
+        const key = q.q; // dùng nội dung câu hỏi làm key
+        if (answers[i] !== q.ans) {
+          // Trả lời sai hoặc bỏ qua → thêm/cập nhật wrongList
+          if (wrongList[key]) {
+            wrongList[key].wrongCount++;
+            wrongList[key].lastWrong = new Date().toISOString();
+          } else {
+            wrongList[key] = {
+              q: q.q,
+              opts: q.opts,
+              ans: q.ans,
+              exp: q.exp,
+              wrongCount: 1,
+              lastWrong: new Date().toISOString()
+            };
+          }
+        } else {
+          // Trả lời đúng → xóa khỏi wrongList nếu có
+          if (wrongList[key]) {
+            delete wrongList[key];
+          }
+        }
+      });
+      saveWrongList();
       // render result
       const pct = score / 100; const circ = 2 * Math.PI * 78; const offset = circ * (1 - pct);
       const skipped = answers.filter(a => a < 0).length;
@@ -3651,6 +3892,144 @@
       answers = new Array(wrongQs.length).fill(-1);
       flags = new Array(wrongQs.length).fill(false);
       // Thời gian tỉ lệ: 30 giây/câu, tối thiểu 60 giây
+      timeLeft = Math.max(60, wrongQs.length * 30);
+      showPage('quiz');
+      renderQuiz();
+      startTimer();
+    }
+
+    // ===== WRONG LIST =====
+    function updateWrongBadges() {
+      const count = Object.keys(wrongList).length;
+      const text = count > 0 ? String(count) : '';
+      ['nav-wrong-badge', 'drawer-wrong-badge', 'bottom-wrong-badge'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      });
+      const settingsEl = document.getElementById('settings-wrong-count');
+      if (settingsEl) settingsEl.textContent = String(count);
+    }
+
+    function renderWrongList() {
+      const items = Object.values(wrongList);
+      const total = items.length;
+      const totalWrongCount = items.reduce((s, it) => s + it.wrongCount, 0);
+      const maxWrong = total ? Math.max(...items.map(it => it.wrongCount)) : 0;
+
+      // Summary cards
+      document.getElementById('wrong-summary').innerHTML = `
+        <div class="wrong-summary-card">
+          <div class="wrong-summary-val">${total}</div>
+          <div class="wrong-summary-label">Tổng câu sai</div>
+        </div>
+        <div class="wrong-summary-card">
+          <div class="wrong-summary-val">${totalWrongCount}</div>
+          <div class="wrong-summary-label">Tổng lần sai</div>
+        </div>
+        <div class="wrong-summary-card">
+          <div class="wrong-summary-val" style="color:var(--warning)">${maxWrong}</div>
+          <div class="wrong-summary-label">Sai nhiều nhất</div>
+        </div>
+      `;
+
+      if (!total) {
+        document.getElementById('wrong-list-content').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🎉</div>
+            <p style="font-size:1.05rem;font-weight:600;margin-bottom:6px">Chưa có câu sai nào!</p>
+            <p>Hãy làm bài để hệ thống ghi nhận các câu bạn cần ôn lại.</p>
+          </div>`;
+        document.getElementById('wrong-list-actions').innerHTML = '';
+        return;
+      }
+
+      // Sort
+      const sortBy = document.getElementById('wrong-sort')?.value || 'count-desc';
+      let sorted = [...items];
+      if (sortBy === 'count-desc') sorted.sort((a, b) => b.wrongCount - a.wrongCount);
+      else if (sortBy === 'count-asc') sorted.sort((a, b) => a.wrongCount - b.wrongCount);
+      else if (sortBy === 'recent') sorted.sort((a, b) => new Date(b.lastWrong) - new Date(a.lastWrong));
+
+      const letters = ['A', 'B', 'C', 'D'];
+      document.getElementById('wrong-list-content').innerHTML = sorted.map((item, idx) => {
+        const safeKey = item.q.replace(/'/g, '\\&#39;').replace(/"/g, '&quot;');
+        const wrongDate = new Date(item.lastWrong);
+        const dateStr = wrongDate.toLocaleDateString('vi-VN') + ' ' + wrongDate.toLocaleTimeString('vi-VN', {hour:'2-digit',minute:'2-digit'});
+        return `<div class="wrong-item" id="wrong-${idx}">
+          <button class="wrong-remove" onclick="removeWrongItem('${safeKey}', ${idx})" title="Xóa câu này">
+            <i class="fas fa-xmark"></i>
+          </button>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+            <span class="wrong-badge"><i class="fas fa-circle-xmark"></i> Sai ${item.wrongCount} lần</span>
+            <span style="font-size:.75rem;color:var(--text2)"><i class="far fa-clock"></i> ${dateStr}</span>
+          </div>
+          <div class="wrong-q-text">${item.q}</div>
+          <div class="wrong-answer"><i class="fas fa-check"></i> Đáp án: <strong>${letters[item.ans]}</strong>. ${item.opts[item.ans]}</div>
+        </div>`;
+      }).join('');
+
+      // Actions
+      document.getElementById('wrong-list-actions').innerHTML = `
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-danger btn-mobile-full" onclick="retryWrongList()">
+            <i class="fas fa-rotate-right"></i> Làm lại ${total} câu sai
+          </button>
+          <button class="btn btn-outline btn-mobile-full" onclick="clearWrongList()">
+            <i class="fas fa-trash"></i> Xóa tất cả
+          </button>
+        </div>`;
+    }
+
+    function removeWrongItem(qText, idx) {
+      // Decode back
+      const decoded = qText.replace(/\\&#39;/g, "'").replace(/&quot;/g, '"');
+      const el = document.getElementById('wrong-' + idx);
+      if (el) {
+        el.classList.add('removing');
+        setTimeout(() => {
+          delete wrongList[decoded];
+          saveWrongList();
+          renderWrongList();
+        }, 350);
+      } else {
+        delete wrongList[decoded];
+        saveWrongList();
+        renderWrongList();
+      }
+    }
+
+    async function clearWrongList() {
+      const ok = await showConfirm('Xóa toàn bộ danh sách câu sai?', 'Xóa Câu Sai', 'Xóa tất cả', 'warn');
+      if (!ok) return;
+      wrongList = {};
+      saveWrongList();
+      renderWrongList();
+      showAlert('Đã xóa danh sách câu sai!', 'success', 'Hoàn tất');
+    }
+
+    async function retryWrongList() {
+      const items = Object.values(wrongList);
+      if (!items.length) { showAlert('Không có câu sai để làm lại!', 'info'); return; }
+
+      await showPage('quiz');
+      if (isQuizInProgress()) return;
+
+      _isRetryMode = true; // Không lưu lịch sử, nhưng vẫn cập nhật wrongList (logic nằm ngoài _isRetryMode check)
+      const wrongQs = JSON.parse(JSON.stringify(items.map(it => ({
+        q: it.q, opts: it.opts, ans: it.ans, exp: it.exp
+      }))));
+      if (settings.shuffle) wrongQs.sort(() => Math.random() - 0.5);
+
+      currentQuiz = {
+        name: 'Ôn Câu Sai (' + wrongQs.length + ' câu)',
+        icon: '<i class="fas fa-circle-xmark" style="color:var(--danger)"></i>',
+        questions: wrongQs,
+        mode: 'practice',
+        startTime: Date.now()
+      };
+      currentQIdx = 0;
+      answers = new Array(wrongQs.length).fill(-1);
+      flags = new Array(wrongQs.length).fill(false);
       timeLeft = Math.max(60, wrongQs.length * 30);
       showPage('quiz');
       renderQuiz();
@@ -4187,7 +4566,7 @@
     }
 
     // ===== INIT =====
-    loadData().then(() => { renderHome(); fetchLeaderboard(); loadProfile(); });
+    loadData().then(() => { renderHome(); fetchLeaderboard(); loadProfile(); updateWrongBadges(); });
 
     // ===== ADMIN PANEL =====
     const ADMIN_CODE = 'ADMINVULINH';
