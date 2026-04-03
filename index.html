@@ -3063,6 +3063,9 @@
           <button class="btn btn-outline" id="btn-toggle-ans" onclick="toggleBankAnswers()">
             <i class="fas fa-eye"></i> Xem đáp án
           </button>
+          <button class="btn btn-success" onclick="exportBankToExcel()">
+            <i class="fas fa-file-excel"></i> Xuất Excel
+          </button>
         </div>
       </div>
       <div class="bank-header"><input class="search-input" id="bank-search" placeholder="Tìm kiếm câu hỏi..."
@@ -4088,6 +4091,93 @@
       });
       if (!count) html = '<div class="empty-state"><div class="empty-icon"><i class="fas fa-inbox"></i></div><p>Không tìm thấy câu hỏi nào</p></div>';
       document.getElementById('bank-list').innerHTML = html;
+    }
+
+    // ===== EXPORT EXCEL =====
+    function exportBankToExcel() {
+      const filter = document.getElementById('bank-filter').value;
+      const letters = ['A', 'B', 'C', 'D'];
+      let rows = [];
+
+      quizzes.forEach(qz => {
+        if (filter && qz.id !== filter) return;
+        qz.questions.forEach((q, qi) => {
+          rows.push({
+            set: qz.name,
+            num: qi + 1,
+            question: q.q,
+            A: q.opts[0],
+            B: q.opts[1],
+            C: q.opts[2],
+            D: q.opts[3],
+            correct: letters[q.ans],
+            correctText: q.opts[q.ans]
+          });
+        });
+      });
+
+      if (!rows.length) {
+        showAlert('Không có câu hỏi nào để xuất!', 'warn');
+        return;
+      }
+
+      // Build HTML table for Excel
+      let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8">
+<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+<x:Name>Ngan Hang Cau Hoi</x:Name>
+<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
+</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+<style>
+  td, th { mso-number-format:\\@; }
+</style>
+</head><body>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:11pt;">
+<thead>
+<tr style="background:#2563eb;color:#fff;font-weight:bold;font-size:12pt;">
+  <th>STT</th>
+  <th>Bộ Đề</th>
+  <th style="min-width:350px">Câu Hỏi</th>
+  <th>A</th>
+  <th>B</th>
+  <th>C</th>
+  <th>D</th>
+  <th>Đáp Án</th>
+</tr>
+</thead><tbody>`;
+
+      rows.forEach((r, i) => {
+        html += `<tr>
+  <td style="text-align:center;font-weight:bold;">${i + 1}</td>
+  <td>${r.set}</td>
+  <td>${r.question}</td>`;
+        ['A', 'B', 'C', 'D'].forEach(letter => {
+          const isCorrect = r.correct === letter;
+          const style = isCorrect
+            ? 'background:#c6efce;color:#006100;font-weight:bold;'
+            : '';
+          html += `\n  <td style="${style}">${r[letter]}</td>`;
+        });
+        html += `\n  <td style="text-align:center;background:#c6efce;color:#006100;font-weight:bold;font-size:13pt;">${r.correct}</td>
+</tr>`;
+      });
+
+      html += `</tbody></table></body></html>`;
+
+      // Download
+      const blob = new Blob(['\ufeff' + html], { type: 'application/vnd.ms-excel;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const fileName = filter
+        ? quizzes.find(q => q.id === filter)?.name || 'NganHang'
+        : 'NganHang_TatCa';
+      a.href = url;
+      a.download = fileName.replace(/\s+/g, '_') + '.xls';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showAlert('Xuất file Excel thành công! Đáp án đúng được tô màu xanh.', 'success', 'Hoàn tất');
     }
 
 
