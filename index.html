@@ -4193,19 +4193,38 @@
       showAlert('\u0110\u00e3 xu\u1ea5t file XLSX! \u0110\u00e1p \u00e1n \u0111\u00fang \u0111\u01b0\u1ee3c t\u00f4 m\u00e0u xanh.', 'success', 'Ho\u00e0n t\u1ea5t');
     }
 
-    function exportBankPDF() {
+    async function exportBankPDF() {
       const { rows, fileName } = _getBankExportData();
       if (!rows.length) { showAlert('Kh\u00f4ng c\u00f3 c\u00e2u h\u1ecfi n\u00e0o!', 'warn'); return; }
+
+      showAlert('\u0110ang t\u1ea1o file PDF...', 'info', 'Vui l\u00f2ng ch\u1edd');
 
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
 
+      // Load Roboto font for Vietnamese support
+      try {
+        const [regularBuf, boldBuf] = await Promise.all([
+          fetch('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Regular.ttf').then(r => r.arrayBuffer()),
+          fetch('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Medium.ttf').then(r => r.arrayBuffer())
+        ]);
+        doc.addFileToVFS('Roboto-Regular.ttf', _arrayBufToBase64(regularBuf));
+        doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+        doc.addFileToVFS('Roboto-Medium.ttf', _arrayBufToBase64(boldBuf));
+        doc.addFont('Roboto-Medium.ttf', 'Roboto', 'bold');
+        doc.setFont('Roboto');
+      } catch (e) {
+        console.warn('Could not load Roboto font, Vietnamese may not display correctly', e);
+      }
+
       // Title
       doc.setFontSize(16);
       doc.setTextColor(37, 99, 235);
+      doc.setFont('Roboto', 'bold');
       doc.text('Ng\u00e2n H\u00e0ng C\u00e2u H\u1ecfi', doc.internal.pageSize.getWidth() / 2, 15, { align: 'center' });
       doc.setFontSize(10);
       doc.setTextColor(100);
+      doc.setFont('Roboto', 'normal');
       doc.text('Xu\u1ea5t ng\u00e0y: ' + new Date().toLocaleDateString('vi-VN'), doc.internal.pageSize.getWidth() / 2, 21, { align: 'center' });
 
       const letters = ['A', 'B', 'C', 'D'];
@@ -4216,6 +4235,7 @@
         head: [['STT', 'B\u1ed9 \u0110\u1ec1', 'C\u00e2u H\u1ecfi', 'A', 'B', 'C', 'D', '\u0110\u00e1p \u00c1n']],
         body: tableData,
         styles: {
+          font: 'Roboto',
           fontSize: 7,
           cellPadding: 2,
           lineColor: [200, 200, 200],
@@ -4262,7 +4282,16 @@
       });
 
       doc.save(fileName + '.pdf');
-      showAlert('\u0110\u00e3 xu\u1ea5t file PDF! \u0110\u00e1p \u00e1n \u0111\u00fang \u0111\u01b0\u1ee3c t\u00f4 m\u00e0u xanh.', 'success', 'Ho\u00e0n t\u1ea5t');
+      showAlert('\u0110\u00e3 xu\u1ea5t file PDF th\u00e0nh c\u00f4ng!', 'success', 'Ho\u00e0n t\u1ea5t');
+    }
+
+    function _arrayBufToBase64(buffer) {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
     }
 
 
