@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <style>
     :root {
       --bg: #f0f2f5;
@@ -3063,8 +3066,11 @@
           <button class="btn btn-outline" id="btn-toggle-ans" onclick="toggleBankAnswers()">
             <i class="fas fa-eye"></i> Xem đáp án
           </button>
-          <button class="btn btn-success" onclick="exportBankToExcel()">
-            <i class="fas fa-file-excel"></i> Xuất Excel
+          <button class="btn btn-success" onclick="exportBankXLSX()" style="font-size:.85rem">
+            <i class="fas fa-file-excel"></i> XLSX
+          </button>
+          <button class="btn btn-danger" onclick="exportBankPDF()" style="font-size:.85rem">
+            <i class="fas fa-file-pdf"></i> PDF
           </button>
         </div>
       </div>
@@ -4093,91 +4099,170 @@
       document.getElementById('bank-list').innerHTML = html;
     }
 
-    // ===== EXPORT EXCEL =====
-    function exportBankToExcel() {
+    // ===== EXPORT XLSX & PDF =====
+    function _getBankExportData() {
       const filter = document.getElementById('bank-filter').value;
       const letters = ['A', 'B', 'C', 'D'];
       let rows = [];
-
       quizzes.forEach(qz => {
         if (filter && qz.id !== filter) return;
         qz.questions.forEach((q, qi) => {
           rows.push({
-            set: qz.name,
-            num: qi + 1,
-            question: q.q,
-            A: q.opts[0],
-            B: q.opts[1],
-            C: q.opts[2],
-            D: q.opts[3],
-            correct: letters[q.ans],
-            correctText: q.opts[q.ans]
+            set: qz.name, num: qi + 1, question: q.q,
+            A: q.opts[0], B: q.opts[1], C: q.opts[2], D: q.opts[3],
+            ans: q.ans, correct: letters[q.ans]
           });
         });
       });
+      const fileName = filter
+        ? (quizzes.find(q => q.id === filter)?.name || 'NganHang')
+        : 'NganHang_TatCa';
+      return { rows, fileName: fileName.replace(/\s+/g, '_'), filter };
+    }
 
-      if (!rows.length) {
-        showAlert('Không có câu hỏi nào để xuất!', 'warn');
-        return;
-      }
+    function exportBankXLSX() {
+      const { rows, fileName } = _getBankExportData();
+      if (!rows.length) { showAlert('Kh\u00f4ng c\u00f3 c\u00e2u h\u1ecfi n\u00e0o!', 'warn'); return; }
 
-      // Build HTML table for Excel
-      let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
-<head><meta charset="utf-8">
-<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
-<x:Name>Ngan Hang Cau Hoi</x:Name>
-<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
-</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
-<style>
-  td, th { mso-number-format:\\@; }
-</style>
-</head><body>
-<table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:11pt;">
-<thead>
-<tr style="background:#2563eb;color:#fff;font-weight:bold;font-size:12pt;">
-  <th>STT</th>
-  <th>Bộ Đề</th>
-  <th style="min-width:350px">Câu Hỏi</th>
-  <th>A</th>
-  <th>B</th>
-  <th>C</th>
-  <th>D</th>
-  <th>Đáp Án</th>
-</tr>
-</thead><tbody>`;
+      const letters = ['A', 'B', 'C', 'D'];
+      const headerStyle = {
+        font: { bold: true, color: { rgb: 'FFFFFF' }, sz: 12 },
+        fill: { fgColor: { rgb: '2563EB' } },
+        alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+        border: { top: {style:'thin'}, bottom: {style:'thin'}, left: {style:'thin'}, right: {style:'thin'} }
+      };
+      const greenStyle = {
+        font: { bold: true, color: { rgb: '006100' } },
+        fill: { fgColor: { rgb: 'C6EFCE' } },
+        border: { top: {style:'thin'}, bottom: {style:'thin'}, left: {style:'thin'}, right: {style:'thin'} }
+      };
+      const normalStyle = {
+        alignment: { wrapText: true, vertical: 'center' },
+        border: { top: {style:'thin'}, bottom: {style:'thin'}, left: {style:'thin'}, right: {style:'thin'} }
+      };
+      const centerStyle = { ...normalStyle, alignment: { ...normalStyle.alignment, horizontal: 'center' } };
 
+      // Header row
+      const headers = ['STT', 'B\u1ed9 \u0110\u1ec1', 'C\u00e2u H\u1ecfi', 'A', 'B', 'C', 'D', '\u0110\u00e1p \u00c1n'];
+      const wsData = [headers];
       rows.forEach((r, i) => {
-        html += `<tr>
-  <td style="text-align:center;font-weight:bold;">${i + 1}</td>
-  <td>${r.set}</td>
-  <td>${r.question}</td>`;
-        ['A', 'B', 'C', 'D'].forEach(letter => {
-          const isCorrect = r.correct === letter;
-          const style = isCorrect
-            ? 'background:#c6efce;color:#006100;font-weight:bold;'
-            : '';
-          html += `\n  <td style="${style}">${r[letter]}</td>`;
-        });
-        html += `\n  <td style="text-align:center;background:#c6efce;color:#006100;font-weight:bold;font-size:13pt;">${r.correct}</td>
-</tr>`;
+        wsData.push([i + 1, r.set, r.question, r.A, r.B, r.C, r.D, r.correct]);
       });
 
-      html += `</tbody></table></body></html>`;
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-      // Download
-      const blob = new Blob(['\ufeff' + html], { type: 'application/vnd.ms-excel;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      const fileName = filter
-        ? quizzes.find(q => q.id === filter)?.name || 'NganHang'
-        : 'NganHang_TatCa';
-      a.href = url;
-      a.download = fileName.replace(/\s+/g, '_') + '.xls';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showAlert('Xuất file Excel thành công! Đáp án đúng được tô màu xanh.', 'success', 'Hoàn tất');
+      // Column widths
+      ws['!cols'] = [
+        { wch: 5 },  // STT
+        { wch: 20 }, // Bo De
+        { wch: 55 }, // Cau Hoi
+        { wch: 30 }, // A
+        { wch: 30 }, // B
+        { wch: 30 }, // C
+        { wch: 30 }, // D
+        { wch: 8 }   // Dap An
+      ];
+
+      // Apply styles
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      for (let R = range.s.r; R <= range.e.r; R++) {
+        for (let C = range.s.c; C <= range.e.c; C++) {
+          const addr = XLSX.utils.encode_cell({ r: R, c: C });
+          if (!ws[addr]) ws[addr] = { v: '', t: 's' };
+          if (R === 0) {
+            ws[addr].s = headerStyle;
+          } else {
+            const row = rows[R - 1];
+            const colLetter = letters[C - 3]; // columns 3-6 = A-D
+            if (C >= 3 && C <= 6 && row.correct === colLetter) {
+              ws[addr].s = greenStyle;
+            } else if (C === 7) {
+              ws[addr].s = { ...greenStyle, alignment: { horizontal: 'center', vertical: 'center' } };
+            } else if (C === 0) {
+              ws[addr].s = centerStyle;
+            } else {
+              ws[addr].s = normalStyle;
+            }
+          }
+        }
+      }
+
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Ng\u00e2n H\u00e0ng');
+      XLSX.writeFile(wb, fileName + '.xlsx');
+      showAlert('\u0110\u00e3 xu\u1ea5t file XLSX! \u0110\u00e1p \u00e1n \u0111\u00fang \u0111\u01b0\u1ee3c t\u00f4 m\u00e0u xanh.', 'success', 'Ho\u00e0n t\u1ea5t');
+    }
+
+    function exportBankPDF() {
+      const { rows, fileName } = _getBankExportData();
+      if (!rows.length) { showAlert('Kh\u00f4ng c\u00f3 c\u00e2u h\u1ecfi n\u00e0o!', 'warn'); return; }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+      // Title
+      doc.setFontSize(16);
+      doc.setTextColor(37, 99, 235);
+      doc.text('Ng\u00e2n H\u00e0ng C\u00e2u H\u1ecfi', doc.internal.pageSize.getWidth() / 2, 15, { align: 'center' });
+      doc.setFontSize(10);
+      doc.setTextColor(100);
+      doc.text('Xu\u1ea5t ng\u00e0y: ' + new Date().toLocaleDateString('vi-VN'), doc.internal.pageSize.getWidth() / 2, 21, { align: 'center' });
+
+      const letters = ['A', 'B', 'C', 'D'];
+      const tableData = rows.map((r, i) => [i + 1, r.set, r.question, r.A, r.B, r.C, r.D, r.correct]);
+
+      doc.autoTable({
+        startY: 26,
+        head: [['STT', 'B\u1ed9 \u0110\u1ec1', 'C\u00e2u H\u1ecfi', 'A', 'B', 'C', 'D', '\u0110\u00e1p \u00c1n']],
+        body: tableData,
+        styles: {
+          fontSize: 7,
+          cellPadding: 2,
+          lineColor: [200, 200, 200],
+          lineWidth: 0.3,
+          overflow: 'linebreak'
+        },
+        headStyles: {
+          fillColor: [37, 99, 235],
+          textColor: 255,
+          fontStyle: 'bold',
+          fontSize: 8,
+          halign: 'center'
+        },
+        columnStyles: {
+          0: { halign: 'center', cellWidth: 10 },
+          1: { cellWidth: 28 },
+          2: { cellWidth: 60 },
+          3: { cellWidth: 35 },
+          4: { cellWidth: 35 },
+          5: { cellWidth: 35 },
+          6: { cellWidth: 35 },
+          7: { halign: 'center', cellWidth: 12, fontStyle: 'bold' }
+        },
+        didParseCell: function(data) {
+          if (data.section === 'body') {
+            const rowIdx = data.row.index;
+            const col = data.column.index;
+            const row = rows[rowIdx];
+            if (col === 7) {
+              data.cell.styles.fillColor = [198, 239, 206];
+              data.cell.styles.textColor = [0, 97, 0];
+            }
+            if (col >= 3 && col <= 6) {
+              const colLetter = letters[col - 3];
+              if (row.correct === colLetter) {
+                data.cell.styles.fillColor = [198, 239, 206];
+                data.cell.styles.textColor = [0, 97, 0];
+                data.cell.styles.fontStyle = 'bold';
+              }
+            }
+          }
+        },
+        margin: { top: 26, left: 10, right: 10 }
+      });
+
+      doc.save(fileName + '.pdf');
+      showAlert('\u0110\u00e3 xu\u1ea5t file PDF! \u0110\u00e1p \u00e1n \u0111\u00fang \u0111\u01b0\u1ee3c t\u00f4 m\u00e0u xanh.', 'success', 'Ho\u00e0n t\u1ea5t');
     }
 
 
